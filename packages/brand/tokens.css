@@ -1,0 +1,18 @@
+/* Material Logiq brand tokens, from guide/MaterialLogiq_BrandGuide_2023-09-13.pdf.
+   Concepts may add their own derived tokens (tints, surfaces) but should build on these. */
+:root {
+  --ml-black: #000000;
+  --ml-deep-green: #00574F;
+  --ml-teal: #2B8F92;
+  --ml-sky: #8BD3DD;
+  --ml-orange: #E1663B;
+
+  /* Indivisible is a licensed typeface; until web font files are added under
+     fonts/, concepts fall back to a free lookalike loaded from Google Fonts. */
+  --ml-font: "Indivisible", "Inter Tight", "Inter", system-ui, sans-serif;
+  --ml-weight-regular: 400;
+  --ml-weight-medium: 500;
+  --ml-weight-semibold: 600;
+  --ml-weight-bold: 700;
+  --ml-tracking-subhead: -0.01em; /* guide: -10 tracking */
+}

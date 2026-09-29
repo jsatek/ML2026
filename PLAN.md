@@ -15,6 +15,32 @@ reinventing content, tooling, or deployment.
 4. **Each concept states its hypothesis.** A short brief explains what the
    concept is trying to prove, so reviews stay focused.
 
+## Inputs we have
+
+- **Current site:** https://www.materiallogiq.com
+- **Brand guide** (color, type, logo only; no voice/messaging), now in `packages/brand/`:
+  - Primary: black `#000000`, deep green `#00574F`, teal `#2B8F92`
+  - Secondary: sky `#8BD3DD`, orange `#E1663B`
+  - Type: Indivisible (Bold headlines; Regular/Medium subheads and body); single-underline style for headlines, quotes, links
+- **Constraints:** none. The goal is exploring concepts rooted in an exceptional user experience.
+
+## Pages every concept mocks up
+
+Each concept builds the same six pages so directions can be compared page by page.
+
+| # | Page | Route | UX job to be done |
+|---|------|-------|-------------------|
+| 1 | Home | `/` | Say what Material Logiq is in seconds; route people to products, projects, samples |
+| 2 | Product navigation | `/products` | Browse and filter the full line (category, application, finish, attributes); compare |
+| 3 | Product page | `/products/[slug]` | Visuals, colors/finishes, specs, documents, related projects, "request sample" |
+| 4 | Project portfolio | `/projects` (+ detail) | Inspiration: filter by sector/product; show products used in each project |
+| 5 | Resources | `/resources` | One searchable library of spec sheets, installation guides, warranties, CAD/BIM, filterable by product and doc type |
+| 6 | Sample request | `/samples` | Fast, low-friction flow: pick products/colors into a "sample cart", then contact and shipping details, then confirmation |
+
+Shared expectations: responsive down to phone width, accessible (WCAG AA contrast with
+the brand palette, keyboard navigable), and a sample cart that persists across pages
+(localStorage is fine for mockups).
+
 ## Proposed structure
 
 ```
@@ -27,9 +53,9 @@ ML2026/
 │       ├── package.json
 │       └── src/
 ├── packages/
-│   ├── content/               # shared copy, nav, products, case studies (MD/JSON)
-│   ├── tokens/                # optional shared brand tokens (colors, type, logo)
-│   └── assets/                # logos, product imagery, photography
+│   ├── brand/                 # ✅ tokens.css/json, logos, brand guide PDF
+│   ├── content/               # shared copy + sample data for the 6 pages (MD/JSON)
+│   └── assets/                # product imagery, project photography
 ├── gallery/                   # index site that links/embeds every concept
 ├── research/                  # current-site audit, competitor notes, screenshots
 ├── scripts/
@@ -66,9 +92,13 @@ as they build to static files in `dist/`.
 - [ ] `CLAUDE.md` + updated `README.md` explaining the workflow
 
 ### Phase 1 — Content & research
-- [ ] Audit the current site: sitemap, page types, key messages, CTAs → `research/`
-- [ ] Extract real copy into `packages/content` (home, products/services, about, contact, case studies)
-- [ ] Collect brand assets (logo, colors, fonts) into `packages/assets` / `packages/tokens`
+- [x] Brand tokens, logos, and guide in `packages/brand`
+- [ ] Audit the current site: sitemap, product taxonomy, document types, sample flow, pain points → `research/current-site.md`
+      (blocked: this cloud environment's network policy denies `www.materiallogiq.com`; allow the domain or paste the content)
+- [ ] Build `packages/content` data model: `products.json` (category, attributes, colors, specs, docs),
+      `projects.json` (sector, location, products used, images), `resources.json` (doc type, product, file)
+- [ ] Fill it with real products/projects from the current site (placeholders until the audit is unblocked)
+- [ ] Get a vector master of the full logo; confirm Indivisible web-font licensing (fallback: Inter Tight)
 - [ ] Note 5–10 reference sites (competitors + inspiration) with screenshots
 
 ### Phase 2 — First concepts (3–4 divergent directions)
@@ -78,7 +108,7 @@ Suggested starting set — deliberately different so the comparison is useful:
 - **03-product-led** — interactive product/material explorer front and center
 - **04-bold-motion** — immersive hero, scroll-driven animation
 
-Each gets a home page + one interior page first; expand only the winners.
+Each builds all six pages at mockup fidelity (real layout and interactions, sample data).
 
 ### Phase 3 — Review & converge
 - [ ] Screenshot script + gallery comparison view
@@ -88,7 +118,7 @@ Each gets a home page + one interior page first; expand only the winners.
 
 ## Open questions
 
-1. What is Material Logiq's current site URL/platform, and is there a brand guide?
-2. Who reviews concepts (internal team, leadership, clients)? Does the gallery need to be private?
-3. Any stack constraints for the eventual production site (CMS, hosting, existing team skills)?
-4. Which pages matter most — home, product/service pages, case studies, careers?
+1. Who reviews concepts? Does the gallery need to be private? (A standard GitHub Pages site is public.)
+2. Access to current-site content: allow `www.materiallogiq.com` in this environment, or share an export of products, projects, and documents.
+3. Is there product/project photography we can use, or should concepts use placeholders?
+4. Do you have a voice/messaging direction, or should concepts explore that too?
