@@ -1,0 +1,26 @@
+---
+import { getProduct } from '@ml/content';
+import Placeholder from './Placeholder.astro';
+import { url } from '../lib/utils';
+
+interface Props { project: any; index?: number; dark?: boolean; }
+const { project: p, index = 0, dark = false } = Astro.props;
+const lead = getProduct(p.products[0]);
+---
+<article
+  class="group relative"
+  data-project-card
+  data-sector={p.sector}
+  data-products={p.products.join('|')}
+>
+  <Placeholder color={lead?.finishes[1]?.hex ?? '#2B8F92'} seed={index + 1} class="aspect-[4/3] rounded-2xl" label="Project photo" />
+  <div class="mt-4">
+    <p class:list={['text-sm font-medium', dark ? 'text-sky' : 'text-teal-ink']}>{p.sector} · {p.location}</p>
+    <h3 class="mt-1 text-xl">
+      <a href={url(`/projects/${p.slug}`)} class="after:absolute after:inset-0 group-hover:ml-underline">{p.name}</a>
+    </h3>
+    <p class:list={['mt-1 text-sm', dark ? 'text-white/75' : 'text-muted']}>
+      {p.products.map((s: string) => getProduct(s)?.name).join(', ')}
+    </p>
+  </div>
+</article>

@@ -1,0 +1,216 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site, products, getCategory, sectors } from '@ml/content';
+import { url } from '../lib/utils';
+
+const catalog = Object.fromEntries(
+  products.map((p) => [p.slug, { name: p.name, category: getCategory(p.category)?.name, finishes: p.finishes }]),
+);
+---
+<Layout title="Request samples" description="Order free Material Logiq samples.">
+  <section class="border-b border-line bg-paper">
+    <div class="container-x py-12">
+      <p class="eyebrow">Free samples</p>
+      <h1 class="mt-2 text-4xl sm:text-5xl">Request samples</h1>
+      <p class="mt-3 max-w-2xl text-muted">Choose up to {site.sampleLimit} samples, tell us where to send them, and we'll ship within one business day.</p>
+    </div>
+  </section>
+
+  <div class="container-x py-10" data-flow>
+    <div class="grid gap-10 lg:grid-cols-12">
+      <!-- Cart -->
+      <section class="lg:col-span-5" aria-labelledby="cart-heading">
+        <div class="lg:sticky lg:top-28">
+          <div class="flex items-baseline justify-between">
+            <h2 id="cart-heading" class="text-2xl">Your samples</h2>
+            <p class="text-sm text-muted"><span data-n>0</span> / {site.sampleLimit}</p>
+          </div>
+          <div class="mt-2 h-1.5 overflow-hidden rounded-full bg-line" aria-hidden="true"><div class="h-full bg-teal transition-all" data-bar style="width:0"></div></div>
+
+          <ul class="mt-6 space-y-3" data-cart-list aria-live="polite"></ul>
+          <div data-cart-empty class="mt-6 rounded-2xl border border-dashed border-line p-8 text-center">
+            <p class="font-semibold">No samples yet</p>
+            <p class="mt-1 text-sm text-muted">Add some below, or <a href={url('/products')} class="link">browse products</a>.</p>
+          </div>
+
+          <!-- Quick add -->
+          <div class="mt-6 rounded-2xl bg-paper p-5">
+            <h3 class="font-semibold">Add a sample</h3>
+            <label for="qa-product" class="sr-only">Product</label>
+            <select id="qa-product" class="field mt-3" data-qa-product>
+              <option value="">Choose a product…</option>
+              {products.map((p) => <option value={p.slug}>{p.name}</option>)}
+            </select>
+            <fieldset class="mt-4" data-qa-finishes hidden>
+              <legend class="text-sm">Finish: <span class="font-semibold" data-qa-finish-name></span></legend>
+              <div class="mt-2 flex flex-wrap gap-2" data-qa-swatches></div>
+            </fieldset>
+            <button type="button" class="btn btn-primary btn-sm mt-4 w-full" data-qa-add disabled>Add to samples</button>
+            <p class="mt-2 text-sm text-[#b3261e]" data-qa-msg></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Form -->
+      <section class="lg:col-span-7" aria-labelledby="form-heading">
+        <h2 id="form-heading" class="text-2xl">Shipping and project details</h2>
+        <form class="mt-6 space-y-8" data-form novalidate>
+          <fieldset class="grid gap-4 sm:grid-cols-2">
+            <legend class="mb-3 text-sm font-semibold uppercase tracking-wider text-muted">Contact</legend>
+            <div><label class="text-sm font-medium" for="f-name">Full name</label><input id="f-name" name="name" required autocomplete="name" class="field mt-1" /></div>
+            <div><label class="text-sm font-medium" for="f-email">Email</label><input id="f-email" name="email" type="email" required autocomplete="email" class="field mt-1" /></div>
+            <div><label class="text-sm font-medium" for="f-company">Company</label><input id="f-company" name="company" autocomplete="organization" class="field mt-1" /></div>
+            <div>
+              <label class="text-sm font-medium" for="f-role">I am a…</label>
+              <select id="f-role" name="role" class="field mt-1">
+                {['Architect', 'Interior designer', 'Contractor', 'Distributor', 'Owner / developer', 'Other'].map((r) => <option>{r}</option>)}
+              </select>
+            </div>
+          </fieldset>
+
+          <fieldset class="grid gap-4 sm:grid-cols-6">
+            <legend class="mb-3 text-sm font-semibold uppercase tracking-wider text-muted">Ship to</legend>
+            <div class="sm:col-span-6"><label class="text-sm font-medium" for="f-addr">Street address</label><input id="f-addr" name="address" required autocomplete="street-address" class="field mt-1" /></div>
+            <div class="sm:col-span-3"><label class="text-sm font-medium" for="f-city">City</label><input id="f-city" name="city" required autocomplete="address-level2" class="field mt-1" /></div>
+            <div class="sm:col-span-1"><label class="text-sm font-medium" for="f-state">State</label><input id="f-state" name="state" required autocomplete="address-level1" class="field mt-1" /></div>
+            <div class="sm:col-span-2"><label class="text-sm font-medium" for="f-zip">ZIP</label><input id="f-zip" name="zip" required autocomplete="postal-code" inputmode="numeric" class="field mt-1" /></div>
+          </fieldset>
+
+          <fieldset class="grid gap-4 sm:grid-cols-2">
+            <legend class="mb-3 text-sm font-semibold uppercase tracking-wider text-muted">Project <span class="font-normal normal-case tracking-normal">(optional, helps us support you)</span></legend>
+            <div><label class="text-sm font-medium" for="f-project">Project name</label><input id="f-project" name="project" class="field mt-1" /></div>
+            <div>
+              <label class="text-sm font-medium" for="f-sector">Sector</label>
+              <select id="f-sector" name="sector" class="field mt-1"><option value="">Select…</option>{sectors.map((s) => <option>{s}</option>)}</select>
+            </div>
+            <div class="sm:col-span-2"><label class="text-sm font-medium" for="f-notes">Notes</label><textarea id="f-notes" name="notes" rows="3" class="field mt-1"></textarea></div>
+          </fieldset>
+
+          <div class="rounded-2xl border border-line p-5">
+            <p class="text-sm text-[#b3261e]" data-form-error role="alert"></p>
+            <button type="submit" class="btn btn-primary w-full text-base">Submit request</button>
+            <p class="mt-3 text-center text-xs text-muted">Mockup only: nothing is sent.</p>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+
+  <!-- Confirmation -->
+  <section class="container-x py-16" data-done hidden tabindex="-1">
+    <div class="mx-auto max-w-xl rounded-3xl bg-paper p-10 text-center">
+      <span class="mx-auto grid size-14 place-items-center rounded-full bg-green text-white">
+        <svg class="size-7" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M4 10.5l4 4 8-9" /></svg>
+      </span>
+      <h2 class="mt-6 text-3xl">Request received</h2>
+      <p class="mt-3 text-muted">Thanks, <span data-done-name></span>. <span data-done-count></span> samples will ship within one business day. We've emailed a confirmation with spec sheets for each product.</p>
+      <ul class="mt-6 space-y-1 text-left text-sm" data-done-list></ul>
+      <div class="mt-8 flex justify-center gap-3">
+        <a href={url('/products')} class="btn btn-primary">Keep browsing</a>
+        <a href={url('/resources')} class="btn btn-outline text-green">Resources</a>
+      </div>
+    </div>
+  </section>
+
+  <script type="application/json" id="catalog" set:html={JSON.stringify(catalog)}></script>
+
+  <script>
+    import * as cart from '@ml/content/cart';
+
+    type Finish = { name: string; hex: string };
+    const catalog: Record<string, { name: string; category: string; finishes: Finish[] }> = JSON.parse(document.getElementById('catalog')!.textContent!);
+    const hexOf = (slug: string, finish: string) => catalog[slug]?.finishes.find((f) => f.name === finish)?.hex ?? '#ccc';
+    const esc = (s: string) => s.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
+
+    const list = document.querySelector<HTMLUListElement>('[data-cart-list]')!;
+    const empty = document.querySelector<HTMLElement>('[data-cart-empty]')!;
+
+    cart.onChange((items) => {
+      list.innerHTML = items
+        .map(
+          (i) => `
+        <li class="flex items-center gap-4 rounded-2xl border border-line p-3">
+          <span class="size-14 shrink-0 rounded-xl ring-1 ring-black/10" style="background:${hexOf(i.product, i.finish)}"></span>
+          <span class="min-w-0 flex-1">
+            <span class="block font-semibold">${esc(catalog[i.product]?.name ?? i.product)}</span>
+            <span class="text-sm text-muted">${esc(i.finish)} · ${esc(catalog[i.product]?.category ?? '')}</span>
+          </span>
+          <button type="button" class="rounded-full p-2 text-muted hover:bg-paper hover:text-ink" data-remove="${esc(i.product)}" data-finish="${esc(i.finish)}" aria-label="Remove ${esc(catalog[i.product]?.name ?? '')} ${esc(i.finish)}">
+            <svg class="size-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg>
+          </button>
+        </li>`,
+        )
+        .join('');
+      empty.hidden = items.length > 0;
+      document.querySelector('[data-n]')!.textContent = String(items.length);
+      document.querySelector<HTMLElement>('[data-bar]')!.style.width = `${(items.length / cart.LIMIT) * 100}%`;
+    });
+
+    list.addEventListener('click', (e) => {
+      const b = (e.target as Element).closest<HTMLButtonElement>('[data-remove]');
+      if (b) cart.remove({ product: b.dataset.remove!, finish: b.dataset.finish! });
+    });
+
+    // Quick add
+    const sel = document.querySelector<HTMLSelectElement>('[data-qa-product]')!;
+    const fs = document.querySelector<HTMLFieldSetElement>('[data-qa-finishes]')!;
+    const sw = document.querySelector<HTMLElement>('[data-qa-swatches]')!;
+    const addBtn = document.querySelector<HTMLButtonElement>('[data-qa-add]')!;
+    const msg = document.querySelector<HTMLElement>('[data-qa-msg]')!;
+    let finish = '';
+    sel.addEventListener('change', () => {
+      const p = catalog[sel.value];
+      fs.hidden = !p;
+      addBtn.disabled = !p;
+      msg.textContent = '';
+      if (!p) return;
+      finish = p.finishes[0].name;
+      sw.innerHTML = p.finishes
+        .map(
+          (f, i) => `<label class="cursor-pointer" title="${esc(f.name)}"><input type="radio" name="qa-finish" value="${esc(f.name)}" class="peer sr-only" ${i === 0 ? 'checked' : ''}><span class="block size-9 rounded-full ring-1 ring-black/15 ring-offset-2 peer-checked:ring-2 peer-checked:ring-green peer-focus-visible:outline-3 peer-focus-visible:outline-orange" style="background:${f.hex}"><span class="sr-only">${esc(f.name)}</span></span></label>`,
+        )
+        .join('');
+      document.querySelector('[data-qa-finish-name]')!.textContent = finish;
+    });
+    sw.addEventListener('change', (e) => {
+      finish = (e.target as HTMLInputElement).value;
+      document.querySelector('[data-qa-finish-name]')!.textContent = finish;
+    });
+    addBtn.addEventListener('click', () => {
+      const r = cart.add({ product: sel.value, finish });
+      msg.textContent = r === 'full' ? `You've reached the ${cart.LIMIT}-sample limit.` : r === 'exists' ? 'That sample is already in your list.' : '';
+    });
+
+    // Submit
+    const form = document.querySelector<HTMLFormElement>('[data-form]')!;
+    const err = document.querySelector<HTMLElement>('[data-form-error]')!;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const items = cart.getCart();
+      if (!items.length) {
+        err.textContent = 'Add at least one sample before submitting.';
+        sel.focus();
+        return;
+      }
+      if (!form.checkValidity()) {
+        err.textContent = 'Please complete the highlighted fields.';
+        form.querySelectorAll<HTMLInputElement>('input, select, textarea').forEach((el) => el.setAttribute('aria-invalid', String(!el.checkValidity())));
+        form.querySelector<HTMLElement>(':invalid')?.focus();
+        form.reportValidity();
+        return;
+      }
+      const name = String(new FormData(form).get('name')).split(' ')[0];
+      document.querySelector('[data-done-name]')!.textContent = name;
+      document.querySelector('[data-done-count]')!.textContent = String(items.length);
+      document.querySelector('[data-done-list]')!.innerHTML = items
+        .map((i) => `<li class="flex items-center gap-2"><span class="size-3 rounded-full" style="background:${hexOf(i.product, i.finish)}"></span>${esc(catalog[i.product]?.name ?? '')} · ${esc(i.finish)}</li>`)
+        .join('');
+      cart.clear();
+      document.querySelector<HTMLElement>('[data-flow]')!.hidden = true;
+      const done = document.querySelector<HTMLElement>('[data-done]')!;
+      done.hidden = false;
+      done.focus();
+      window.scrollTo({ top: 0 });
+    });
+  </script>
+</Layout>

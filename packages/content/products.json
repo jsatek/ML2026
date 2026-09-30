@@ -1,0 +1,850 @@
+{
+  "_note": "PLACEHOLDER: fictional sample data for design exploration. Replace with real Material Logiq content.",
+  "categories": [
+    {
+      "slug": "wall-panels",
+      "name": "Wall Panels",
+      "summary": "Interior and exterior panel systems for durable, expressive walls."
+    },
+    {
+      "slug": "acoustic",
+      "name": "Acoustic Solutions",
+      "summary": "Felt, slat, and baffle systems that tame noise without hiding design."
+    },
+    {
+      "slug": "ceilings",
+      "name": "Ceiling Systems",
+      "summary": "Grids, clouds, and linear ceilings for open, calm spaces."
+    },
+    {
+      "slug": "surfaces",
+      "name": "Surface Materials",
+      "summary": "Laminates, solid surfaces, and veneers for counters, casework, and furniture."
+    }
+  ],
+  "products": [
+    {
+      "slug": "strata-panel",
+      "name": "Strata Panel",
+      "category": "wall-panels",
+      "tagline": "Layered mineral wall panel with a subtle horizontal grain.",
+      "description": "Strata Panel is a placeholder product used to explore how product information, finishes, and documentation are presented. Layered mineral wall panel with a subtle horizontal grain. Replace this paragraph with real positioning and benefits.",
+      "applications": [
+        "Commercial",
+        "Hospitality",
+        "Healthcare"
+      ],
+      "featured": true,
+      "specs": {
+        "Fire rating": "Class A (ASTM E84)",
+        "Thickness": "12 mm",
+        "Sizes": [
+          "1220 x 2440 mm",
+          "1220 x 3050 mm"
+        ],
+        "Recycled content": "30%",
+        "Warranty": "10 years"
+      },
+      "attributes": {
+        "fireRating": "A",
+        "acoustic": false,
+        "exterior": false,
+        "leadTimeWeeks": 6
+      },
+      "features": [
+        "Low-VOC, third-party certified",
+        "Cut and install with standard tools",
+        "Available in custom sizes"
+      ],
+      "finishes": [
+        {
+          "name": "Chalk",
+          "hex": "#EDEBE6"
+        },
+        {
+          "name": "Stone",
+          "hex": "#C9C4BA"
+        },
+        {
+          "name": "Graphite",
+          "hex": "#4A4A48"
+        },
+        {
+          "name": "Carbon",
+          "hex": "#1F1F1F"
+        },
+        {
+          "name": "Clay",
+          "hex": "#B5694A"
+        },
+        {
+          "name": "Sand",
+          "hex": "#D8C3A0"
+        },
+        {
+          "name": "Moss",
+          "hex": "#6E7B55"
+        },
+        {
+          "name": "Slate",
+          "hex": "#56606A"
+        }
+      ]
+    },
+    {
+      "slug": "ridge-cladding",
+      "name": "Ridge Cladding",
+      "category": "wall-panels",
+      "tagline": "Ribbed exterior cladding that throws crisp shadow lines.",
+      "description": "Ridge Cladding is a placeholder product used to explore how product information, finishes, and documentation are presented. Ribbed exterior cladding that throws crisp shadow lines. Replace this paragraph with real positioning and benefits.",
+      "applications": [
+        "Commercial",
+        "Residential",
+        "Civic"
+      ],
+      "featured": true,
+      "specs": {
+        "Fire rating": "Class A (ASTM E84)",
+        "Thickness": "16 mm",
+        "Sizes": [
+          "300 x 3000 mm"
+        ],
+        "Recycled content": "14%",
+        "Warranty": "25 years"
+      },
+      "attributes": {
+        "fireRating": "A",
+        "acoustic": false,
+        "exterior": true,
+        "leadTimeWeeks": 2
+      },
+      "features": [
+        "Low-VOC, third-party certified",
+        "Cut and install with standard tools",
+        "Available in custom sizes",
+        "Recyclable at end of life"
+      ],
+      "finishes": [
+        {
+          "name": "Chalk",
+          "hex": "#EDEBE6"
+        },
+        {
+          "name": "Stone",
+          "hex": "#C9C4BA"
+        },
+        {
+          "name": "Graphite",
+          "hex": "#4A4A48"
+        },
+        {
+          "name": "Carbon",
+          "hex": "#1F1F1F"
+        },
+        {
+          "name": "Deep Green",
+          "hex": "#00574F"
+        },
+        {
+          "name": "Lagoon",
+          "hex": "#2B8F92"
+        },
+        {
+          "name": "Sky",
+          "hex": "#8BD3DD"
+        },
+        {
+          "name": "Ember",
+          "hex": "#E1663B"
+        }
+      ]
+    },
+    {
+      "slug": "grain-veneer",
+      "name": "Grain Veneer Panel",
+      "category": "wall-panels",
+      "tagline": "Real-wood veneer panels, pre-finished and ready to install.",
+      "description": "Grain Veneer Panel is a placeholder product used to explore how product information, finishes, and documentation are presented. Real-wood veneer panels, pre-finished and ready to install. Replace this paragraph with real positioning and benefits.",
+      "applications": [
+        "Hospitality",
+        "Workplace",
+        "Residential"
+      ],
+      "featured": false,
+      "specs": {
+        "Fire rating": "Class B (ASTM E84)",
+        "Thickness": "19 mm",
+        "Sizes": [
+          "1220 x 2440 mm"
+        ],
+        "Recycled content": "47%",
+        "Warranty": "10 years"
+      },
+      "attributes": {
+        "fireRating": "B",
+        "acoustic": false,
+        "exterior": false,
+        "leadTimeWeeks": 3
+      },
+      "features": [
+        "Low-VOC, third-party certified",
+        "Cut and install with standard tools",
+        "Available in custom sizes"
+      ],
+      "finishes": [
+        {
+          "name": "Natural Oak",
+          "hex": "#C8A97E"
+        },
+        {
+          "name": "Smoked Oak",
+          "hex": "#7A5C3E"
+        },
+        {
+          "name": "Walnut",
+          "hex": "#5A3E2B"
+        },
+        {
+          "name": "Ash White",
+          "hex": "#E4DCCD"
+        }
+      ]
+    },
+    {
+      "slug": "linea-slat",
+      "name": "Linea Slat",
+      "category": "acoustic",
+      "tagline": "Timber slats on acoustic felt backing for warm, quiet rooms.",
+      "description": "Linea Slat is a placeholder product used to explore how product information, finishes, and documentation are presented. Timber slats on acoustic felt backing for warm, quiet rooms. Replace this paragraph with real positioning and benefits.",
+      "applications": [
+        "Workplace",
+        "Education",
+        "Hospitality"
+      ],
+      "featured": true,
+      "specs": {
+        "Fire rating": "Class B (ASTM E84)",
+        "Thickness": "22 mm",
+        "Sizes": [
+          "600 x 2400 mm",
+          "600 x 2700 mm"
+        ],
+        "NRC": "0.65",
+        "Recycled content": "37%",
+        "Warranty": "15 years"
+      },
+      "attributes": {
+        "fireRating": "B",
+        "acoustic": true,
+        "exterior": false,
+        "leadTimeWeeks": 2
+      },
+      "features": [
+        "Low-VOC, third-party certified",
+        "Cut and install with standard tools",
+        "Available in custom sizes"
+      ],
+      "finishes": [
+        {
+          "name": "Natural Oak",
+          "hex": "#C8A97E"
+        },
+        {
+          "name": "Smoked Oak",
+          "hex": "#7A5C3E"
+        },
+        {
+          "name": "Walnut",
+          "hex": "#5A3E2B"
+        },
+        {
+          "name": "Ash White",
+          "hex": "#E4DCCD"
+        },
+        {
+          "name": "Chalk",
+          "hex": "#EDEBE6"
+        },
+        {
+          "name": "Stone",
+          "hex": "#C9C4BA"
+        },
+        {
+          "name": "Graphite",
+          "hex": "#4A4A48"
+        },
+        {
+          "name": "Carbon",
+          "hex": "#1F1F1F"
+        }
+      ]
+    },
+    {
+      "slug": "quiet-felt-tile",
+      "name": "Quiet Felt Tile",
+      "category": "acoustic",
+      "tagline": "Recycled PET felt tiles in geometric shapes and bold colors.",
+      "description": "Quiet Felt Tile is a placeholder product used to explore how product information, finishes, and documentation are presented. Recycled PET felt tiles in geometric shapes and bold colors. Replace this paragraph with real positioning and benefits.",
+      "applications": [
+        "Workplace",
+        "Education"
+      ],
+      "featured": false,
+      "specs": {
+        "Fire rating": "Class B (ASTM E84)",
+        "Thickness": "12 mm",
+        "Sizes": [
+          "600 x 600 mm",
+          "Hexagon 400 mm"
+        ],
+        "NRC": "0.65",
+        "Recycled content": "45%",
+        "Warranty": "15 years"
+      },
+      "attributes": {
+        "fireRating": "B",
+        "acoustic": true,
+        "exterior": false,
+        "leadTimeWeeks": 2
+      },
+      "features": [
+        "Low-VOC, third-party certified",
+        "Cut and install with standard tools",
+        "Available in custom sizes"
+      ],
+      "finishes": [
+        {
+          "name": "Deep Green",
+          "hex": "#00574F"
+        },
+        {
+          "name": "Lagoon",
+          "hex": "#2B8F92"
+        },
+        {
+          "name": "Sky",
+          "hex": "#8BD3DD"
+        },
+        {
+          "name": "Ember",
+          "hex": "#E1663B"
+        },
+        {
+          "name": "Chalk",
+          "hex": "#EDEBE6"
+        },
+        {
+          "name": "Stone",
+          "hex": "#C9C4BA"
+        },
+        {
+          "name": "Graphite",
+          "hex": "#4A4A48"
+        },
+        {
+          "name": "Carbon",
+          "hex": "#1F1F1F"
+        },
+        {
+          "name": "Clay",
+          "hex": "#B5694A"
+        },
+        {
+          "name": "Sand",
+          "hex": "#D8C3A0"
+        },
+        {
+          "name": "Moss",
+          "hex": "#6E7B55"
+        },
+        {
+          "name": "Slate",
+          "hex": "#56606A"
+        }
+      ]
+    },
+    {
+      "slug": "echo-baffle",
+      "name": "Echo Baffle",
+      "category": "acoustic",
+      "tagline": "Suspended vertical baffles that absorb sound in tall spaces.",
+      "description": "Echo Baffle is a placeholder product used to explore how product information, finishes, and documentation are presented. Suspended vertical baffles that absorb sound in tall spaces. Replace this paragraph with real positioning and benefits.",
+      "applications": [
+        "Education",
+        "Civic",
+        "Retail"
+      ],
+      "featured": false,
+      "specs": {
+        "Fire rating": "Class B (ASTM E84)",
+        "Thickness": "50 mm",
+        "Sizes": [
+          "300 x 1200 mm",
+          "300 x 2400 mm"
+        ],
+        "NRC": "0.74",
+        "Recycled content": "50%",
+        "Warranty": "25 years"
+      },
+      "attributes": {
+        "fireRating": "B",
+        "acoustic": true,
+        "exterior": false,
+        "leadTimeWeeks": 2
+      },
+      "features": [
+        "Low-VOC, third-party certified",
+        "Cut and install with standard tools",
+        "Available in custom sizes",
+        "Recyclable at end of life"
+      ],
+      "finishes": [
+        {
+          "name": "Deep Green",
+          "hex": "#00574F"
+        },
+        {
+          "name": "Lagoon",
+          "hex": "#2B8F92"
+        },
+        {
+          "name": "Sky",
+          "hex": "#8BD3DD"
+        },
+        {
+          "name": "Ember",
+          "hex": "#E1663B"
+        },
+        {
+          "name": "Chalk",
+          "hex": "#EDEBE6"
+        },
+        {
+          "name": "Stone",
+          "hex": "#C9C4BA"
+        },
+        {
+          "name": "Graphite",
+          "hex": "#4A4A48"
+        },
+        {
+          "name": "Carbon",
+          "hex": "#1F1F1F"
+        }
+      ]
+    },
+    {
+      "slug": "weave-panel",
+      "name": "Weave Acoustic Panel",
+      "category": "acoustic",
+      "tagline": "Fabric-wrapped panels with a woven texture and NRC 0.85.",
+      "description": "Weave Acoustic Panel is a placeholder product used to explore how product information, finishes, and documentation are presented. Fabric-wrapped panels with a woven texture and NRC 0.85. Replace this paragraph with real positioning and benefits.",
+      "applications": [
+        "Workplace",
+        "Healthcare",
+        "Hospitality"
+      ],
+      "featured": false,
+      "specs": {
+        "Fire rating": "Class A (ASTM E84)",
+        "Thickness": "25 mm",
+        "Sizes": [
+          "1200 x 600 mm",
+          "1200 x 1200 mm"
+        ],
+        "NRC": "0.63",
+        "Recycled content": "24%",
+        "Warranty": "10 years"
+      },
+      "attributes": {
+        "fireRating": "A",
+        "acoustic": true,
+        "exterior": false,
+        "leadTimeWeeks": 3
+      },
+      "features": [
+        "Low-VOC, third-party certified",
+        "Cut and install with standard tools",
+        "Available in custom sizes",
+        "Recyclable at end of life"
+      ],
+      "finishes": [
+        {
+          "name": "Clay",
+          "hex": "#B5694A"
+        },
+        {
+          "name": "Sand",
+          "hex": "#D8C3A0"
+        },
+        {
+          "name": "Moss",
+          "hex": "#6E7B55"
+        },
+        {
+          "name": "Slate",
+          "hex": "#56606A"
+        },
+        {
+          "name": "Chalk",
+          "hex": "#EDEBE6"
+        },
+        {
+          "name": "Stone",
+          "hex": "#C9C4BA"
+        },
+        {
+          "name": "Graphite",
+          "hex": "#4A4A48"
+        },
+        {
+          "name": "Carbon",
+          "hex": "#1F1F1F"
+        }
+      ]
+    },
+    {
+      "slug": "arc-grid",
+      "name": "Arc Ceiling Grid",
+      "category": "ceilings",
+      "tagline": "Concealed grid ceiling with curved, seamless panels.",
+      "description": "Arc Ceiling Grid is a placeholder product used to explore how product information, finishes, and documentation are presented. Concealed grid ceiling with curved, seamless panels. Replace this paragraph with real positioning and benefits.",
+      "applications": [
+        "Retail",
+        "Civic",
+        "Workplace"
+      ],
+      "featured": false,
+      "specs": {
+        "Fire rating": "Class A (ASTM E84)",
+        "Thickness": "15 mm",
+        "Sizes": [
+          "600 x 600 mm",
+          "600 x 1200 mm"
+        ],
+        "Recycled content": "36%",
+        "Warranty": "10 years"
+      },
+      "attributes": {
+        "fireRating": "A",
+        "acoustic": false,
+        "exterior": false,
+        "leadTimeWeeks": 2
+      },
+      "features": [
+        "Low-VOC, third-party certified",
+        "Cut and install with standard tools",
+        "Available in custom sizes",
+        "Recyclable at end of life"
+      ],
+      "finishes": [
+        {
+          "name": "Chalk",
+          "hex": "#EDEBE6"
+        },
+        {
+          "name": "Stone",
+          "hex": "#C9C4BA"
+        },
+        {
+          "name": "Graphite",
+          "hex": "#4A4A48"
+        },
+        {
+          "name": "Carbon",
+          "hex": "#1F1F1F"
+        }
+      ]
+    },
+    {
+      "slug": "vela-cloud",
+      "name": "Vela Cloud",
+      "category": "ceilings",
+      "tagline": "Floating acoustic clouds that define zones in open plans.",
+      "description": "Vela Cloud is a placeholder product used to explore how product information, finishes, and documentation are presented. Floating acoustic clouds that define zones in open plans. Replace this paragraph with real positioning and benefits.",
+      "applications": [
+        "Workplace",
+        "Education",
+        "Hospitality"
+      ],
+      "featured": true,
+      "specs": {
+        "Fire rating": "Class B (ASTM E84)",
+        "Thickness": "40 mm",
+        "Sizes": [
+          "1200 x 1200 mm",
+          "Circle 1500 mm"
+        ],
+        "NRC": "0.95",
+        "Recycled content": "62%",
+        "Warranty": "25 years"
+      },
+      "attributes": {
+        "fireRating": "B",
+        "acoustic": true,
+        "exterior": false,
+        "leadTimeWeeks": 3
+      },
+      "features": [
+        "Low-VOC, third-party certified",
+        "Cut and install with standard tools",
+        "Available in custom sizes"
+      ],
+      "finishes": [
+        {
+          "name": "Deep Green",
+          "hex": "#00574F"
+        },
+        {
+          "name": "Lagoon",
+          "hex": "#2B8F92"
+        },
+        {
+          "name": "Sky",
+          "hex": "#8BD3DD"
+        },
+        {
+          "name": "Ember",
+          "hex": "#E1663B"
+        },
+        {
+          "name": "Chalk",
+          "hex": "#EDEBE6"
+        },
+        {
+          "name": "Stone",
+          "hex": "#C9C4BA"
+        },
+        {
+          "name": "Graphite",
+          "hex": "#4A4A48"
+        },
+        {
+          "name": "Carbon",
+          "hex": "#1F1F1F"
+        }
+      ]
+    },
+    {
+      "slug": "plane-metal",
+      "name": "Plane Metal Ceiling",
+      "category": "ceilings",
+      "tagline": "Perforated aluminum linear ceiling with integrated lighting slots.",
+      "description": "Plane Metal Ceiling is a placeholder product used to explore how product information, finishes, and documentation are presented. Perforated aluminum linear ceiling with integrated lighting slots. Replace this paragraph with real positioning and benefits.",
+      "applications": [
+        "Civic",
+        "Retail",
+        "Healthcare"
+      ],
+      "featured": false,
+      "specs": {
+        "Fire rating": "Class A (ASTM E84)",
+        "Thickness": "0.7 mm",
+        "Sizes": [
+          "150 x 3000 mm",
+          "300 x 3000 mm"
+        ],
+        "NRC": "0.72",
+        "Recycled content": "33%",
+        "Warranty": "10 years"
+      },
+      "attributes": {
+        "fireRating": "A",
+        "acoustic": true,
+        "exterior": false,
+        "leadTimeWeeks": 2
+      },
+      "features": [
+        "Low-VOC, third-party certified",
+        "Cut and install with standard tools",
+        "Available in custom sizes"
+      ],
+      "finishes": [
+        {
+          "name": "Chalk",
+          "hex": "#EDEBE6"
+        },
+        {
+          "name": "Stone",
+          "hex": "#C9C4BA"
+        },
+        {
+          "name": "Graphite",
+          "hex": "#4A4A48"
+        },
+        {
+          "name": "Carbon",
+          "hex": "#1F1F1F"
+        },
+        {
+          "name": "Natural Oak",
+          "hex": "#C8A97E"
+        },
+        {
+          "name": "Smoked Oak",
+          "hex": "#7A5C3E"
+        },
+        {
+          "name": "Walnut",
+          "hex": "#5A3E2B"
+        },
+        {
+          "name": "Ash White",
+          "hex": "#E4DCCD"
+        }
+      ]
+    },
+    {
+      "slug": "terra-laminate",
+      "name": "Terra Laminate",
+      "category": "surfaces",
+      "tagline": "High-pressure laminate with a matte, fingerprint-resistant finish.",
+      "description": "Terra Laminate is a placeholder product used to explore how product information, finishes, and documentation are presented. High-pressure laminate with a matte, fingerprint-resistant finish. Replace this paragraph with real positioning and benefits.",
+      "applications": [
+        "Residential",
+        "Retail",
+        "Hospitality"
+      ],
+      "featured": false,
+      "specs": {
+        "Fire rating": "Class B (ASTM E84)",
+        "Thickness": "0.8 mm",
+        "Sizes": [
+          "1300 x 3050 mm"
+        ],
+        "Recycled content": "49%",
+        "Warranty": "10 years"
+      },
+      "attributes": {
+        "fireRating": "B",
+        "acoustic": false,
+        "exterior": false,
+        "leadTimeWeeks": 6
+      },
+      "features": [
+        "Low-VOC, third-party certified",
+        "Cut and install with standard tools",
+        "Available in custom sizes",
+        "Recyclable at end of life"
+      ],
+      "finishes": [
+        {
+          "name": "Clay",
+          "hex": "#B5694A"
+        },
+        {
+          "name": "Sand",
+          "hex": "#D8C3A0"
+        },
+        {
+          "name": "Moss",
+          "hex": "#6E7B55"
+        },
+        {
+          "name": "Slate",
+          "hex": "#56606A"
+        },
+        {
+          "name": "Chalk",
+          "hex": "#EDEBE6"
+        },
+        {
+          "name": "Stone",
+          "hex": "#C9C4BA"
+        },
+        {
+          "name": "Graphite",
+          "hex": "#4A4A48"
+        },
+        {
+          "name": "Carbon",
+          "hex": "#1F1F1F"
+        },
+        {
+          "name": "Natural Oak",
+          "hex": "#C8A97E"
+        },
+        {
+          "name": "Smoked Oak",
+          "hex": "#7A5C3E"
+        },
+        {
+          "name": "Walnut",
+          "hex": "#5A3E2B"
+        },
+        {
+          "name": "Ash White",
+          "hex": "#E4DCCD"
+        }
+      ]
+    },
+    {
+      "slug": "mono-solid",
+      "name": "Mono Solid Surface",
+      "category": "surfaces",
+      "tagline": "Seamless, repairable solid surface for counters and wet areas.",
+      "description": "Mono Solid Surface is a placeholder product used to explore how product information, finishes, and documentation are presented. Seamless, repairable solid surface for counters and wet areas. Replace this paragraph with real positioning and benefits.",
+      "applications": [
+        "Healthcare",
+        "Hospitality",
+        "Residential"
+      ],
+      "featured": true,
+      "specs": {
+        "Fire rating": "Class B (ASTM E84)",
+        "Thickness": "12 mm",
+        "Sizes": [
+          "760 x 3660 mm"
+        ],
+        "Recycled content": "59%",
+        "Warranty": "15 years"
+      },
+      "attributes": {
+        "fireRating": "B",
+        "acoustic": false,
+        "exterior": false,
+        "leadTimeWeeks": 6
+      },
+      "features": [
+        "Low-VOC, third-party certified",
+        "Cut and install with standard tools",
+        "Available in custom sizes",
+        "Recyclable at end of life"
+      ],
+      "finishes": [
+        {
+          "name": "Chalk",
+          "hex": "#EDEBE6"
+        },
+        {
+          "name": "Stone",
+          "hex": "#C9C4BA"
+        },
+        {
+          "name": "Graphite",
+          "hex": "#4A4A48"
+        },
+        {
+          "name": "Carbon",
+          "hex": "#1F1F1F"
+        },
+        {
+          "name": "Deep Green",
+          "hex": "#00574F"
+        },
+        {
+          "name": "Lagoon",
+          "hex": "#2B8F92"
+        },
+        {
+          "name": "Sky",
+          "hex": "#8BD3DD"
+        },
+        {
+          "name": "Ember",
+          "hex": "#E1663B"
+        }
+      ]
+    }
+  ]
+}

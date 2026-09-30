@@ -1,0 +1,150 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Placeholder from '../components/Placeholder.astro';
+import ProductCard from '../components/ProductCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { site, categories, products, projects, productsInCategory, resources } from '@ml/content';
+import { url } from '../lib/utils';
+
+const featured = products.filter((p) => p.featured).slice(0, 4);
+const featuredProjects = projects.filter((p) => p.featured);
+const heroColors = ['#8BD3DD', '#2B8F92', '#00574F'];
+---
+<Layout>
+  <!-- Hero -->
+  <section class="overflow-hidden">
+    <div class="container-x grid items-center gap-12 py-16 lg:grid-cols-12 lg:py-24">
+      <div class="lg:col-span-6">
+        <p class="eyebrow">Architectural materials</p>
+        <h1 class="mt-4 text-5xl leading-[1.02] sm:text-6xl lg:text-7xl">
+          Materials, engineered with <span class="ml-underline decoration-orange">intent.</span>
+        </h1>
+        <p class="mt-6 max-w-xl text-lg text-muted">{site.intro}</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={url('/products')} class="btn btn-primary">Explore products</a>
+          <a href={url('/samples')} class="btn btn-outline text-green">Order free samples</a>
+        </div>
+        <dl class="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-line pt-6">
+          {site.stats.map((s) => (
+            <div>
+              <dt class="text-sm text-muted">{s.label}</dt>
+              <dd class="order-first text-2xl font-bold text-green sm:text-3xl">{s.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+      <!-- Logo-derived band composition -->
+      <div class="relative lg:col-span-6" aria-hidden="true">
+        <div class="relative mx-auto aspect-[5/4] max-w-xl">
+          {heroColors.map((c, i) => (
+            <div
+              class="absolute inset-y-0 w-[38%] overflow-hidden"
+              style={`left:${i * 31}%; clip-path: polygon(${i === 0 ? '0 100%, 60% 100%, 100% 0, 40% 0' : '0 0, 60% 0, 100% 100%, 40% 100%'}); background:${c}`}
+            >
+              <Placeholder color={c} seed={i} class="h-full w-full opacity-90" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="bg-paper py-20" aria-labelledby="cat-heading">
+    <div class="container-x">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p class="eyebrow">Product families</p>
+          <h2 id="cat-heading" class="mt-2 text-3xl sm:text-4xl">Start with what you're building</h2>
+        </div>
+        <a href={url('/products')} class="link">View all products</a>
+      </div>
+      <ul class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {categories.map((c, i) => {
+          const items = productsInCategory(c.slug);
+          return (
+            <li class="group relative flex flex-col overflow-hidden rounded-2xl bg-white">
+              <Placeholder color={items[0].finishes[i % items[0].finishes.length].hex} seed={i} class="aspect-[3/2]" />
+              <div class="flex flex-1 flex-col p-5">
+                <h3 class="text-xl">
+                  <a href={url(`/products?category=${c.slug}`)} class="after:absolute after:inset-0 group-hover:ml-underline">{c.name}</a>
+                </h3>
+                <p class="mt-2 text-sm text-muted">{c.summary}</p>
+                <p class="mt-auto pt-4 text-sm font-semibold text-green">{items.length} products →</p>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Featured products -->
+  <section class="py-20" aria-labelledby="featured-heading">
+    <div class="container-x">
+      <p class="eyebrow">Specified often</p>
+      <h2 id="featured-heading" class="mt-2 text-3xl sm:text-4xl">Featured products</h2>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {featured.map((p, i) => <ProductCard product={p} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="bg-green py-20 text-white" aria-labelledby="proj-heading">
+    <div class="container-x">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p class="eyebrow !text-sky">Portfolio</p>
+          <h2 id="proj-heading" class="mt-2 text-3xl sm:text-4xl">See it in the built world</h2>
+        </div>
+        <a href={url('/projects')} class="font-semibold text-white underline decoration-sky decoration-2 underline-offset-4">All projects</a>
+      </div>
+      <div class="mt-10 grid gap-8 md:grid-cols-3">
+        {featuredProjects.map((p, i) => <ProjectCard project={p} index={i} dark />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Samples how-to -->
+  <section class="py-20" aria-labelledby="samples-heading">
+    <div class="container-x grid gap-12 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+        <p class="eyebrow">Free samples</p>
+        <h2 id="samples-heading" class="mt-2 text-3xl sm:text-4xl">Touch it before you specify it</h2>
+        <p class="mt-4 text-muted">Order up to {site.sampleLimit} samples at a time. We ship within one business day.</p>
+        <a href={url('/samples')} class="btn btn-primary mt-6">Start a sample request</a>
+      </div>
+      <ol class="grid gap-6 sm:grid-cols-3 lg:col-span-8">
+        {[
+          ['Browse', 'Pick products and finishes. Tap “Sample” anywhere to add it.'],
+          ['Review', 'Check your sample cart and tell us about your project.'],
+          ['Receive', 'Samples ship fast, with spec sheets for everything you ordered.'],
+        ].map(([t, d], i) => (
+          <li class="rounded-2xl border border-line p-6">
+            <span class="grid size-10 place-items-center rounded-full bg-sky font-bold text-green">{i + 1}</span>
+            <h3 class="mt-4 text-lg">{t}</h3>
+            <p class="mt-1 text-sm text-muted">{d}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Resources search -->
+  <section class="container-x" aria-labelledby="res-heading">
+    <div class="rounded-3xl bg-paper px-6 py-12 sm:px-12">
+      <div class="grid items-center gap-8 lg:grid-cols-2">
+        <div>
+          <h2 id="res-heading" class="text-3xl">Spec sheets, CAD, BIM and more</h2>
+          <p class="mt-2 text-muted">{resources.length} documents across every product, in one searchable library.</p>
+        </div>
+        <form action={url('/resources')} method="get" role="search" class="flex gap-2">
+          <label for="home-res-q" class="sr-only">Search resources</label>
+          <input id="home-res-q" name="q" type="search" placeholder="e.g. Linea Slat installation" class="field" />
+          <button class="btn btn-primary shrink-0">Search</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</Layout>

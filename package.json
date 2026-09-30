@@ -1,0 +1,13 @@
+{
+  "name": "ml2026",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.33.0",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "new-concept": "node scripts/new-concept.mjs",
+    "build": "node scripts/build-all.mjs",
+    "preview": "npx http-server _site -p 4321 -c-1"
+  }
+}

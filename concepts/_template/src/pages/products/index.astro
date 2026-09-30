@@ -1,0 +1,16 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { products, getCategory } from '@ml/content';
+import { url } from '../../lib/utils';
+---
+<Layout title="Products">
+  <h1 class="text-3xl font-bold">Products</h1>
+  <ul class="mt-4 space-y-2">
+    {products.map((p) => (
+      <li>
+        <a href={url(`/products/${p.slug}`)}>{p.name}</a>, {getCategory(p.category)?.name}
+        <button data-add-sample data-product={p.slug} data-finish={p.finishes[0].name}>+ sample</button>
+      </li>
+    ))}
+  </ul>
+</Layout>

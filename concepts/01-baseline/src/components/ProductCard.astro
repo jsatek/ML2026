@@ -1,0 +1,47 @@
+---
+import { getCategory } from '@ml/content';
+import Placeholder from './Placeholder.astro';
+import Swatches from './Swatches.astro';
+import SampleButton from './SampleButton.astro';
+import { url } from '../lib/utils';
+
+interface Props { product: any; index?: number; compare?: boolean; }
+const { product: p, index = 0, compare = false } = Astro.props;
+const category = getCategory(p.category);
+---
+<article
+  class="group flex flex-col overflow-hidden rounded-2xl border border-line bg-white transition hover:shadow-lg"
+  data-product-card
+  data-slug={p.slug}
+  data-name={p.name}
+  data-category={p.category}
+  data-applications={p.applications.join('|')}
+  data-fire={p.attributes.fireRating}
+  data-acoustic={String(p.attributes.acoustic)}
+  data-featured={String(p.featured)}
+  data-search={`${p.name} ${p.tagline} ${category?.name} ${p.applications.join(' ')} ${p.finishes.map((f: any) => f.name).join(' ')}`.toLowerCase()}
+>
+  <a href={url(`/products/${p.slug}`)} class="block" tabindex="-1" aria-hidden="true">
+    <Placeholder color={p.finishes[0].hex} seed={index} class="aspect-[4/3] transition duration-300 group-hover:scale-[1.02]" />
+  </a>
+  <div class="flex flex-1 flex-col gap-3 p-5">
+    <div>
+      <p class="eyebrow">{category?.name}</p>
+      <h3 class="mt-1 text-lg">
+        <a href={url(`/products/${p.slug}`)} class="hover:ml-underline">{p.name}</a>
+      </h3>
+      <p class="mt-1 text-sm text-muted">{p.tagline}</p>
+    </div>
+    <div class="mt-auto flex flex-wrap items-center justify-between gap-3 pt-2">
+      <Swatches finishes={p.finishes} />
+      <div class="flex items-center gap-2">
+        {compare && (
+          <label class="flex cursor-pointer items-center gap-1.5 text-sm text-muted">
+            <input type="checkbox" class="size-4 accent-(--ml-deep-green)" data-compare value={p.slug} /> Compare
+          </label>
+        )}
+        <SampleButton product={p.slug} name={p.name} finish={p.finishes[0].name} label="Sample" />
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,9 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { projects } from '@ml/content';
+import { url } from '../../lib/utils';
+---
+<Layout title="Projects">
+  <h1 class="text-3xl font-bold">Projects</h1>
+  <ul class="mt-4">{projects.map((p) => <li><a href={url(`/projects/${p.slug}`)}>{p.name}</a>, {p.sector}, {p.location}</li>)}</ul>
+</Layout>

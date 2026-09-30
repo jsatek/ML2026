@@ -1,0 +1,11 @@
+---
+// Toggles a {product, finish} in the shared sample cart. Wired up in Layout.
+interface Props { product: string; name: string; finish: string; label?: string; class?: string; }
+const { product, name, finish, label = 'Add sample', class: cls = 'btn btn-outline btn-sm text-green' } = Astro.props;
+---
+<button type="button" class={cls} data-add-sample data-product={product} data-name={name} data-finish={finish} data-label-add={label} aria-pressed="false">
+  <svg class="size-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+    <path data-icon-add d="M10 4v12M4 10h12" /><path data-icon-added d="M4 10.5l4 4 8-9" hidden />
+  </svg>
+  <span data-label>{label}</span>
+</button>

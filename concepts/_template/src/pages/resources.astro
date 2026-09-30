@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { resources, getResourceType, getProduct } from '@ml/content';
+---
+<Layout title="Resources">
+  <h1 class="text-3xl font-bold">Resources</h1>
+  <ul class="mt-4">
+    {resources.map((r) => <li><a href={r.href}>{r.title}</a>, {getResourceType(r.type)?.name}, {r.product ? getProduct(r.product)?.name : 'General'}</li>)}
+  </ul>
+</Layout>

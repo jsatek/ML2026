@@ -1,0 +1,11 @@
+{
+  "name": "@ml/content",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./cart": "./cart.js",
+    "./*.json": "./*.json"
+  }
+}

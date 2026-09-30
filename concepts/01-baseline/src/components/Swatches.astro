@@ -1,0 +1,12 @@
+---
+interface Props { finishes: { name: string; hex: string }[]; max?: number; }
+const { finishes, max = 6 } = Astro.props;
+const shown = finishes.slice(0, max);
+const extra = finishes.length - shown.length;
+---
+<div class="flex items-center gap-1" aria-label={`${finishes.length} finishes`}>
+  {shown.map((f) => (
+    <span class="size-4 rounded-full ring-1 ring-black/10" style={`background:${f.hex}`} title={f.name}></span>
+  ))}
+  {extra > 0 && <span class="ml-1 text-xs text-muted">+{extra}</span>}
+</div>

@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site, categories, products, projects } from '@ml/content';
+import { url } from '../lib/utils';
+---
+<Layout>
+  <h1 class="text-4xl font-bold">{site.tagline}</h1>
+  <p class="mt-2">{site.intro}</p>
+  <h2 class="mt-8 text-xl font-bold">Categories</h2>
+  <ul>{categories.map((c) => <li><a href={url(`/products?category=${c.slug}`)}>{c.name}</a></li>)}</ul>
+  <h2 class="mt-8 text-xl font-bold">Featured products</h2>
+  <ul>{products.filter((p) => p.featured).map((p) => <li><a href={url(`/products/${p.slug}`)}>{p.name}</a></li>)}</ul>
+  <h2 class="mt-8 text-xl font-bold">Featured projects</h2>
+  <ul>{projects.filter((p) => p.featured).map((p) => <li><a href={url(`/projects/${p.slug}`)}>{p.name}</a></li>)}</ul>
+</Layout>
