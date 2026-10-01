@@ -1,18 +1,22 @@
 ---
-// Stand-in for product/project photography: a color field (--c) with the
-// logo's three diagonal bands. Swap for real imagery once it exists.
-interface Props { color: string; label?: string; seed?: number; class?: string; }
-const { color, label, seed = 0, class: cls = '' } = Astro.props;
+// Media slot: shows a real photo when `src` is given, otherwise a color field
+// (--c) with the logo's three diagonal bands as a stand-in.
+interface Props { color?: string; src?: string | null; alt?: string; label?: string; seed?: number; class?: string; eager?: boolean; }
+const { color = '#2B8F92', src, alt = '', label, seed = 0, class: cls = '', eager = false } = Astro.props;
 const x = [-120, -40, 40, 120][seed % 4];
 ---
 <div class:list={['relative overflow-hidden bg-(--c) transition-colors duration-300', cls]} style={`--c:${color}`} data-placeholder>
-  <svg class="absolute inset-0 h-full w-full" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <g transform={`translate(${x} 0)`}>
-      <polygon points="110,300 170,300 238,0 178,0" fill="#fff" opacity="0.14" />
-      <polygon points="178,0 238,0 306,300 246,300" fill="#000" opacity="0.08" />
-      <polygon points="280,0 340,0 408,300 348,300" fill="#000" opacity="0.14" />
-    </g>
-  </svg>
+  {src ? (
+    <img src={src} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" class="absolute inset-0 h-full w-full object-cover" />
+  ) : (
+    <svg class="absolute inset-0 h-full w-full" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <g transform={`translate(${x} 0)`}>
+        <polygon points="110,300 170,300 238,0 178,0" fill="#fff" opacity="0.14" />
+        <polygon points="178,0 238,0 306,300 246,300" fill="#000" opacity="0.08" />
+        <polygon points="280,0 340,0 408,300 348,300" fill="#000" opacity="0.14" />
+      </g>
+    </svg>
+  )}
   {label && (
     <span class="absolute bottom-2 left-2 rounded-full bg-white/85 px-2 py-0.5 text-[11px] font-medium text-ink">{label}</span>
   )}

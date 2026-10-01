@@ -10,9 +10,10 @@ const { project: p } = Astro.props;
 ---
 <Layout title={p.name}>
   <h1 class="text-3xl font-bold">{p.name}</h1>
-  <p>{p.sector} · {p.location} · {p.year} · {p.architect}</p>
+  <p>{[p.sector, p.location, p.year].filter(Boolean).join(' · ')}{p.placeholder && ' (sample project)'}</p>
+  {p.images[0] && <img src={p.images[0]} alt="" class="mt-4 w-full max-w-2xl" />}
   {p.story.map((s) => <p class="mt-3">{s}</p>)}
-  <blockquote class="mt-4 italic">“{p.quote.text}” ({p.quote.by})</blockquote>
+  {p.quote && <blockquote class="mt-4 italic">“{p.quote.text}” ({p.quote.by})</blockquote>}
   <h2 class="mt-6 font-bold">Products used</h2>
   <ul>{p.products.map((s) => <li><a href={url(`/products/${s}`)}>{getProduct(s)?.name}</a></li>)}</ul>
 </Layout>

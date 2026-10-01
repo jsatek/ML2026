@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { products, getCategory } from '@ml/content';
+import { products, getCategory, getMaterial } from '@ml/content';
 import { url } from '../../lib/utils';
 ---
 <Layout title="Products">
@@ -8,7 +8,7 @@ import { url } from '../../lib/utils';
   <ul class="mt-4 space-y-2">
     {products.map((p) => (
       <li>
-        <a href={url(`/products/${p.slug}`)}>{p.name}</a>, {getCategory(p.category)?.name}
+        <a href={url(`/products/${p.slug}`)}>{p.name}</a>, {getMaterial(p.material)?.name} {getCategory(p.category)?.name}
         <button data-add-sample data-product={p.slug} data-finish={p.finishes[0].name}>+ sample</button>
       </li>
     ))}

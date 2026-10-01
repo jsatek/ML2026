@@ -4,7 +4,7 @@ import Placeholder from '../../components/Placeholder.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import SampleButton from '../../components/SampleButton.astro';
-import { products, getCategory, getResourceType, resourcesForProduct, projectsUsingProduct } from '@ml/content';
+import { products, getCategory, getMaterial, getResourceType, resourceTypes, resourcesForProduct, projectsUsingProduct, relatedProducts } from '@ml/content';
 import { url } from '../../lib/utils';
 
 export function getStaticPaths() {
@@ -13,79 +13,108 @@ export function getStaticPaths() {
 
 const { product: p } = Astro.props;
 const category = getCategory(p.category)!;
+const material = getMaterial(p.material)!;
 const docs = resourcesForProduct(p.slug);
-const specSheet = docs.find((d) => d.type === 'spec-sheet');
+const docGroups = resourceTypes.map((t) => ({ ...t, docs: docs.filter((d) => d.type === t.slug) })).filter((g) => g.docs.length);
+const dataSheet = docs.find((d) => d.type === 'data-sheet');
 const usedIn = projectsUsingProduct(p.slug);
-const related = products.filter((o) => o.category === p.category && o.slug !== p.slug).slice(0, 3);
+const related = relatedProducts(p);
 const first = p.finishes[0];
+const finishGroups = [...new Set(p.finishes.map((f) => f.group))].map((g) => ({ name: g, finishes: p.finishes.filter((f) => f.group === g) }));
+const gallery = p.images.gallery;
+const quick = [
+  ['Material', material.name],
+  ['NRC', p.attributes.nrc != null ? `Up to ${p.attributes.nrc.toFixed(2)}` : 'See data sheet'],
+  ['Fire rating', p.attributes.fireRating ? `Class ${p.attributes.fireRating}` : '—'],
+];
 ---
 <Layout title={p.name} description={p.tagline}>
   <div class="container-x pt-6">
     <nav aria-label="Breadcrumb" class="text-sm text-muted">
       <ol class="flex flex-wrap gap-2">
         <li><a href={url('/products')} class="hover:underline">Products</a> /</li>
-        <li><a href={url(`/products?category=${category.slug}`)} class="hover:underline">{category.name}</a> /</li>
+        <li><a href={url(`/products?type=${category.slug}`)} class="hover:underline">{category.name}</a> /</li>
         <li aria-current="page" class="text-ink">{p.name}</li>
       </ol>
     </nav>
   </div>
 
   <!-- Overview -->
-  <section class="container-x grid gap-10 py-8 lg:grid-cols-12">
+  <section class="container-x grid grid-cols-1 gap-10 py-8 lg:grid-cols-12">
     <div class="lg:col-span-7">
-      <Placeholder color={first.hex} seed={0} class="aspect-[4/3] rounded-3xl" label="Product photo" />
-      <div class="mt-3 grid grid-cols-3 gap-3">
-        {[1, 2, 3].map((s) => <Placeholder color={first.hex} seed={s} class="aspect-square rounded-xl" />)}
-      </div>
+      <div data-main-image><Placeholder src={gallery[0]} alt={`${p.name} installed`} color={first?.hex} class="aspect-[4/3] rounded-3xl" eager /></div>
+      {gallery.length > 1 && (
+        <ul class="mt-3 grid grid-cols-4 gap-3 sm:grid-cols-5" aria-label="More photos">
+          {gallery.slice(0, 10).map((src, i) => (
+            <li>
+              <button type="button" class="block w-full overflow-hidden rounded-xl ring-offset-2 aria-pressed:ring-2 aria-pressed:ring-green" aria-pressed={i === 0 ? 'true' : 'false'} data-thumb={src} aria-label={`Show photo ${i + 1}`}>
+                <Placeholder src={src} class="aspect-square" />
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
 
     <div class="lg:col-span-5 lg:pt-4">
-      <p class="eyebrow">{category.name}</p>
+      <p class="eyebrow">{material.name} · {category.name}</p>
       <h1 class="mt-2 text-4xl sm:text-5xl">{p.name}</h1>
-      <p class="mt-3 text-lg text-muted">{p.tagline}</p>
+      {p.name !== p.fullName && <p class="mt-1 font-medium text-muted">{p.fullName}</p>}
+      <p class="mt-4 text-lg">{p.tagline}</p>
 
-      <fieldset class="mt-8">
-        <legend class="text-sm font-semibold">Finish: <span class="font-normal" data-finish-name>{first.name}</span></legend>
-        <div class="mt-3 flex flex-wrap gap-2" role="radiogroup">
-          {p.finishes.map((f, i) => (
-            <label class="cursor-pointer" title={f.name}>
-              <input type="radio" name="finish" value={f.name} data-hex={f.hex} checked={i === 0} class="peer sr-only" />
-              <span class="block size-11 rounded-full ring-1 ring-black/15 ring-offset-2 transition peer-checked:ring-2 peer-checked:ring-green peer-focus-visible:outline-3 peer-focus-visible:outline-orange" style={`background:${f.hex}`}>
-                <span class="sr-only">{f.name}</span>
-              </span>
-            </label>
-          ))}
-        </div>
-      </fieldset>
+      {first && (
+        <fieldset class="mt-8">
+          <legend class="text-sm font-semibold">Finish: <span class="font-normal" data-finish-name>{first.name}</span> <span class="font-normal text-muted">({p.finishes.length} options)</span></legend>
+          <div class="mt-3 max-h-64 space-y-4 overflow-y-auto pr-1">
+            {finishGroups.map((g) => (
+              <div>
+                <p class="mb-2 text-xs font-medium uppercase tracking-wider text-muted">{g.name}</p>
+                <div class="flex flex-wrap gap-2">
+                  {g.finishes.map((f) => (
+                    <label class="cursor-pointer" title={f.name}>
+                      <input type="radio" name="finish" value={f.name} checked={f === first} class="peer sr-only" />
+                      <span class="block size-10 rounded-full bg-cover bg-center ring-1 ring-black/15 ring-offset-2 transition peer-checked:ring-2 peer-checked:ring-green peer-focus-visible:outline-3 peer-focus-visible:outline-orange" style={`background-color:${f.hex}`} data-swatch-image={f.image ?? ''}>
+                        <span class="sr-only">{f.name}</span>
+                      </span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </fieldset>
+      )}
 
       <div class="mt-8 flex flex-wrap gap-3">
-        <SampleButton product={p.slug} name={p.name} finish={first.name} label={`Add ${first.name} sample`} class="btn btn-primary" />
-        {specSheet && <a href={specSheet.href} class="btn btn-outline text-green">Spec sheet <span class="text-xs font-normal">PDF {specSheet.size}</span></a>}
+        {first && <SampleButton product={p.slug} name={p.name} finish={first.name} label={`Add ${first.name} sample`} class="btn btn-primary" />}
+        {dataSheet && <a href={dataSheet.href} target="_blank" rel="noopener" class="btn btn-outline text-green">Data sheet <span class="text-xs font-normal">{dataSheet.format}</span></a>}
       </div>
 
-      <dl class="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line text-sm sm:grid-cols-3">
-        {[
-          ['Fire rating', p.specs['Fire rating'].split(' (')[0]],
-          ['Thickness', p.specs.Thickness],
-          ['Lead time', `${p.attributes.leadTimeWeeks} weeks`],
-        ].map(([k, v]) => (
+      <dl class="mt-8 grid grid-cols-3 gap-px overflow-hidden rounded-2xl border border-line bg-line text-sm">
+        {quick.map(([k, v]) => (
           <div class="bg-white p-4"><dt class="text-muted">{k}</dt><dd class="mt-1 font-semibold">{v}</dd></div>
         ))}
       </dl>
-      <p class="mt-6 text-sm text-muted">Applications: {p.applications.join(' · ')}</p>
+      <p class="mt-6 text-sm text-muted">Also used as: {p.types.map((t) => getCategory(t)?.name).join(' · ')}</p>
     </div>
   </section>
 
   <!-- In-page nav -->
   <nav aria-label="On this page" class="sticky top-16 z-20 border-y border-line bg-white/95 backdrop-blur lg:top-20">
     <ul class="container-x flex gap-6 overflow-x-auto text-sm font-medium">
-      {[['overview', 'Overview'], ['specs', 'Specifications'], ['documents', `Documents (${docs.length})`], ['projects', `Projects (${usedIn.length})`]].map(([id, label]) => (
+      {[
+        ['overview', 'Overview'],
+        ...(p.designOptions.length ? [['options', `Design options (${p.designOptions.length})`]] : []),
+        ['specs', 'Specifications'],
+        ['documents', `Documents (${docs.length})`],
+        ...(usedIn.length ? [['projects', `Projects (${usedIn.length})`]] : []),
+      ].map(([id, label]) => (
         <li><a href={`#${id}`} class="block whitespace-nowrap py-4 hover:text-green">{label}</a></li>
       ))}
     </ul>
   </nav>
 
-  <section id="overview" class="container-x grid scroll-mt-40 gap-10 py-16 lg:grid-cols-12">
+  <section id="overview" class="container-x grid grid-cols-1 scroll-mt-40 gap-10 py-16 lg:grid-cols-12">
     <h2 class="text-2xl lg:col-span-4">Overview</h2>
     <div class="lg:col-span-8">
       <p class="text-lg">{p.description}</p>
@@ -100,41 +129,58 @@ const first = p.finishes[0];
     </div>
   </section>
 
-  <section id="specs" class="container-x grid scroll-mt-40 gap-10 border-t border-line py-16 lg:grid-cols-12">
+  {p.designOptions.length > 0 && (
+    <section id="options" class="container-x grid grid-cols-1 scroll-mt-40 gap-10 border-t border-line py-16 lg:grid-cols-12">
+      <h2 class="text-2xl lg:col-span-4">Design options</h2>
+      <ul class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:col-span-8">
+        {p.designOptions.map((o) => (
+          <li>
+            <Placeholder src={o.image} alt={o.name} class="aspect-[4/3] rounded-xl border border-line bg-white [&>img]:object-contain" color="#ffffff" />
+            <p class="mt-2 text-sm font-medium">{o.name}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <section id="specs" class="container-x grid grid-cols-1 scroll-mt-40 gap-10 border-t border-line py-16 lg:grid-cols-12">
     <h2 class="text-2xl lg:col-span-4">Specifications</h2>
     <dl class="divide-y divide-line lg:col-span-8">
       {Object.entries(p.specs).map(([k, v]) => (
         <div class="grid grid-cols-2 gap-4 py-3">
           <dt class="text-muted">{k}</dt>
-          <dd class="font-medium">{Array.isArray(v) ? v.join(', ') : v}</dd>
+          <dd class="font-medium">{Array.isArray(v) ? v.map((line) => <span class="block">{line}</span>) : v}</dd>
         </div>
       ))}
-      <div class="grid grid-cols-2 gap-4 py-3">
-        <dt class="text-muted">Finishes</dt>
-        <dd class="font-medium">{p.finishes.map((f) => f.name).join(', ')}</dd>
-      </div>
     </dl>
   </section>
 
-  <section id="documents" class="container-x grid scroll-mt-40 gap-10 border-t border-line py-16 lg:grid-cols-12">
+  <section id="documents" class="container-x grid grid-cols-1 scroll-mt-40 gap-10 border-t border-line py-16 lg:grid-cols-12">
     <div class="lg:col-span-4">
       <h2 class="text-2xl">Documents</h2>
       <a href={url(`/resources?product=${p.slug}`)} class="link mt-3 inline-block text-sm">Open in resource library</a>
     </div>
-    <ul class="grid gap-3 sm:grid-cols-2 lg:col-span-8">
-      {docs.map((d) => (
-        <li>
-          <a href={d.href} class="flex items-center gap-4 rounded-xl border border-line p-4 hover:border-teal">
-            <span class="grid size-11 shrink-0 place-items-center rounded-lg bg-sky/40 text-xs font-bold text-green">{d.format}</span>
-            <span class="min-w-0 flex-1">
-              <span class="block truncate font-medium">{getResourceType(d.type)?.name}</span>
-              <span class="text-sm text-muted">{d.size} · Updated {d.updated}</span>
-            </span>
-            <svg class="size-5 text-muted" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 3v10m0 0l-4-4m4 4l4-4M4 16h12" /></svg>
-          </a>
-        </li>
+    <div class="space-y-8 lg:col-span-8">
+      {docGroups.map((g) => (
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-wider text-muted">{g.name}</h3>
+          <ul class="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {g.docs.map((d) => (
+              <li>
+                <a href={d.href} target="_blank" rel="noopener" class="flex items-center gap-4 rounded-xl border border-line p-4 hover:border-teal">
+                  <span class="grid size-11 shrink-0 place-items-center rounded-lg bg-sky/40 text-xs font-bold text-green">{d.format}</span>
+                  <span class="min-w-0 flex-1">
+                    <span class="block truncate font-medium">{d.title}</span>
+                    {d.updated && <span class="text-sm text-muted">Updated {d.updated}</span>}
+                  </span>
+                  <svg class="size-5 text-muted" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 3v10m0 0l-4-4m4 4l4-4M4 16h12" /></svg>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       ))}
-    </ul>
+    </div>
   </section>
 
   {usedIn.length > 0 && (
@@ -142,7 +188,7 @@ const first = p.finishes[0];
       <div class="container-x">
         <h2 class="text-2xl">Projects using {p.name}</h2>
         <div class="mt-8 grid gap-8 md:grid-cols-3">
-          {usedIn.map((proj, i) => <ProjectCard project={proj} index={i} />)}
+          {usedIn.slice(0, 3).map((proj, i) => <ProjectCard project={proj} index={i} />)}
         </div>
       </div>
     </section>
@@ -150,7 +196,7 @@ const first = p.finishes[0];
 
   {related.length > 0 && (
     <section class="container-x py-16">
-      <h2 class="text-2xl">More {category.name.toLowerCase()}</h2>
+      <h2 class="text-2xl">Related products</h2>
       <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {related.map((r, i) => <ProductCard product={r} index={i + 1} />)}
       </div>
@@ -158,18 +204,33 @@ const first = p.finishes[0];
   )}
 
   <script>
-    // Finish picker: recolor the imagery and retarget the sample button.
-    const btn = document.querySelector<HTMLButtonElement>('.btn-primary[data-add-sample]')!;
-    const nameEl = document.querySelector('[data-finish-name]')!;
+    // Finish picker retargets the sample button; thumbnails swap the main photo.
+    const btn = document.querySelector<HTMLButtonElement>('.btn-primary[data-add-sample]');
+    const nameEl = document.querySelector('[data-finish-name]');
     document.querySelectorAll<HTMLInputElement>('input[name=finish]').forEach((input) =>
       input.addEventListener('change', () => {
-        nameEl.textContent = input.value;
-        btn.dataset.finish = input.value;
-        btn.dataset.labelAdd = `Add ${input.value} sample`;
-        document.querySelectorAll<HTMLElement>('main section:first-of-type [data-placeholder]').forEach((el) => {
-          el.style.setProperty('--c', input.dataset.hex!);
-        });
+        if (nameEl) nameEl.textContent = input.value;
+        if (btn) {
+          btn.dataset.finish = input.value;
+          btn.dataset.labelAdd = `Add ${input.value} sample`;
+        }
         window.dispatchEvent(new CustomEvent('ml:cart'));
+      }),
+    );
+    // Load swatch textures lazily, once the picker is near the viewport.
+    const swatches = document.querySelectorAll<HTMLElement>('[data-swatch-image]');
+    const io = new IntersectionObserver((entries) => {
+      if (!entries.some((e) => e.isIntersecting)) return;
+      swatches.forEach((s) => s.dataset.swatchImage && (s.style.backgroundImage = `url("${s.dataset.swatchImage}")`));
+      io.disconnect();
+    });
+    if (swatches[0]) io.observe(swatches[0]);
+
+    const main = document.querySelector<HTMLImageElement>('[data-main-image] img');
+    document.querySelectorAll<HTMLButtonElement>('[data-thumb]').forEach((t, _, all) =>
+      t.addEventListener('click', () => {
+        if (main) main.src = t.dataset.thumb!;
+        all.forEach((o) => o.setAttribute('aria-pressed', String(o === t)));
       }),
     );
   </script>

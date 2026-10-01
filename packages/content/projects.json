@@ -1,237 +1,311 @@
 {
-  "_note": "PLACEHOLDER: fictional sample data for design exploration. Replace with real Material Logiq content.",
+  "_note": "Content scraped from materiallogiq.com (see research/). Images and documents link to the live site. Projects with \"placeholder\": true are invented from inspiration photos.",
   "sectors": [
-    "Workplace",
     "Education",
+    "Government",
     "Hospitality",
-    "Healthcare",
-    "Civic",
-    "Retail"
+    "Office",
+    "Transportation"
   ],
   "projects": [
     {
-      "slug": "harbor-commons",
-      "name": "Harbor Commons Offices",
-      "sector": "Workplace",
-      "location": "Portland, OR",
-      "year": 2025,
-      "architect": "Sample & Partners",
-      "size": "96,000 sq ft",
-      "summary": "A placeholder workplace project showing how case studies connect inspiration to the products used.",
-      "story": [
-        "Placeholder narrative: describe the design challenge, the client's goals, and the constraints the team worked within.",
-        "Explain how the specified materials solved acoustic, durability, or aesthetic problems, with a quote from the architect.",
-        "Close with outcomes: occupant feedback, certifications, awards, or measurable performance."
-      ],
-      "quote": {
-        "text": "The materials let us hit our acoustic targets without compromising the look we wanted.",
-        "by": "Project Architect (placeholder)"
-      },
-      "products": [
-        "linea-slat",
-        "vela-cloud",
-        "strata-panel"
-      ],
-      "featured": true
-    },
-    {
-      "slug": "northfield-library",
-      "name": "Northfield Public Library",
-      "sector": "Civic",
-      "location": "Madison, WI",
-      "year": 2024,
-      "architect": "Studio Example",
-      "size": "66,000 sq ft",
-      "summary": "A placeholder civic project showing how case studies connect inspiration to the products used.",
-      "story": [
-        "Placeholder narrative: describe the design challenge, the client's goals, and the constraints the team worked within.",
-        "Explain how the specified materials solved acoustic, durability, or aesthetic problems, with a quote from the architect.",
-        "Close with outcomes: occupant feedback, certifications, awards, or measurable performance."
-      ],
-      "quote": {
-        "text": "The materials let us hit our acoustic targets without compromising the look we wanted.",
-        "by": "Project Architect (placeholder)"
-      },
-      "products": [
-        "echo-baffle",
-        "arc-grid",
-        "grain-veneer"
-      ],
-      "featured": true
-    },
-    {
-      "slug": "alder-hotel",
-      "name": "The Alder Hotel",
+      "slug": "16-prime-steakhouse",
+      "name": "16 Prime Steakhouse",
       "sector": "Hospitality",
-      "location": "Austin, TX",
-      "year": 2025,
-      "architect": "Studio Example",
-      "size": "40,000 sq ft",
-      "summary": "A placeholder hospitality project showing how case studies connect inspiration to the products used.",
+      "location": "Kansas City, MO",
+      "year": 2024,
+      "architect": null,
+      "size": null,
+      "summary": "Custom PET felt clouds that shape an intimate, luxurious dining room.",
       "story": [
-        "Placeholder narrative: describe the design challenge, the client's goals, and the constraints the team worked within.",
-        "Explain how the specified materials solved acoustic, durability, or aesthetic problems, with a quote from the architect.",
-        "Close with outcomes: occupant feedback, certifications, awards, or measurable performance."
+        "16 Prime Steakhouse sought to create an intimate, luxurious dining experience where acoustics played a crucial role in the atmosphere. The custom PET Felt clouds not only provide exceptional sound absorption but also serve as a striking visual centerpiece, echoing the sophisticated aesthetic of the restaurant while maintaining a comfortable conversational environment for guests."
       ],
-      "quote": {
-        "text": "The materials let us hit our acoustic targets without compromising the look we wanted.",
-        "by": "Project Architect (placeholder)"
-      },
-      "products": [
-        "grain-veneer",
-        "weave-panel",
-        "mono-solid"
+      "quote": null,
+      "products": [],
+      "materials": [
+        "pet-felt"
       ],
-      "featured": true
+      "applications": [
+        "Clouds"
+      ],
+      "custom": true,
+      "images": [
+        "https://materiallogiq.com/wp-content/uploads/2026/08/Arktura-Atmosphera-Analog-3D-1587-Prime-Steakhouse-Kansas-City-MO_WEB_3-1600x1078-1.jpg",
+        "https://materiallogiq.com/wp-content/uploads/2026/08/Arktura-Atmosphera-Analog-3D-1587-Prime-Steakhouse-Kansas-City-MO_WEB_2-1600x1078-1.jpg"
+      ],
+      "featured": true,
+      "placeholder": false,
+      "source": "https://materiallogiq.com/blog/portfolio/16-prime-steakhouse/"
     },
     {
-      "slug": "riverside-clinic",
-      "name": "Riverside Family Clinic",
-      "sector": "Healthcare",
-      "location": "Raleigh, NC",
-      "year": 2023,
-      "architect": "Sample & Partners",
-      "size": "154,000 sq ft",
-      "summary": "A placeholder healthcare project showing how case studies connect inspiration to the products used.",
-      "story": [
-        "Placeholder narrative: describe the design challenge, the client's goals, and the constraints the team worked within.",
-        "Explain how the specified materials solved acoustic, durability, or aesthetic problems, with a quote from the architect.",
-        "Close with outcomes: occupant feedback, certifications, awards, or measurable performance."
-      ],
-      "quote": {
-        "text": "The materials let us hit our acoustic targets without compromising the look we wanted.",
-        "by": "Project Architect (placeholder)"
-      },
-      "products": [
-        "mono-solid",
-        "plane-metal",
-        "weave-panel"
-      ],
-      "featured": false
-    },
-    {
-      "slug": "summit-academy",
-      "name": "Summit STEM Academy",
+      "slug": "middle-school-remodel-mn",
+      "name": "Middle School Remodel",
       "sector": "Education",
-      "location": "Denver, CO",
-      "year": 2024,
-      "architect": "Demo Design Group",
-      "size": "107,000 sq ft",
-      "summary": "A placeholder education project showing how case studies connect inspiration to the products used.",
+      "location": "Minnesota",
+      "year": null,
+      "architect": null,
+      "size": null,
+      "summary": "A featured Materialize project combining PET felt clouds, baffles, and ceiling tiles.",
       "story": [
-        "Placeholder narrative: describe the design challenge, the client's goals, and the constraints the team worked within.",
-        "Explain how the specified materials solved acoustic, durability, or aesthetic problems, with a quote from the architect.",
-        "Close with outcomes: occupant feedback, certifications, awards, or measurable performance."
+        "Featured on the Materialize page as an example of the Listen, Explore, Filter, Realize, Fulfill process. Project details to come."
       ],
-      "quote": {
-        "text": "The materials let us hit our acoustic targets without compromising the look we wanted.",
-        "by": "Project Architect (placeholder)"
-      },
-      "products": [
-        "quiet-felt-tile",
-        "echo-baffle",
-        "vela-cloud"
+      "quote": null,
+      "products": [],
+      "materials": [
+        "pet-felt"
       ],
-      "featured": false
+      "applications": [
+        "Clouds",
+        "Baffles",
+        "Ceiling Tiles"
+      ],
+      "custom": true,
+      "images": [
+        "https://materiallogiq.com/wp-content/uploads/2023/11/Materialize-Middle-School-MN.jpg"
+      ],
+      "featured": true,
+      "placeholder": false,
+      "source": "https://materiallogiq.com/materialize/"
     },
     {
-      "slug": "meridian-market",
-      "name": "Meridian Market Hall",
-      "sector": "Retail",
-      "location": "Minneapolis, MN",
-      "year": 2025,
-      "architect": "Demo Design Group",
-      "size": "93,000 sq ft",
-      "summary": "A placeholder retail project showing how case studies connect inspiration to the products used.",
+      "slug": "open-office-planq",
+      "name": "Open Office with PLANQ",
+      "sector": "Office",
+      "location": "Sample project",
+      "year": null,
+      "architect": null,
+      "size": null,
+      "summary": "Placeholder case study built from a real PLANQ inspiration photo. Replace with a real project.",
       "story": [
         "Placeholder narrative: describe the design challenge, the client's goals, and the constraints the team worked within.",
-        "Explain how the specified materials solved acoustic, durability, or aesthetic problems, with a quote from the architect.",
-        "Close with outcomes: occupant feedback, certifications, awards, or measurable performance."
+        "Explain how the specified materials solved acoustic, durability, or aesthetic problems."
       ],
-      "quote": {
-        "text": "The materials let us hit our acoustic targets without compromising the look we wanted.",
-        "by": "Project Architect (placeholder)"
-      },
+      "quote": null,
       "products": [
-        "ridge-cladding",
-        "plane-metal",
-        "terra-laminate"
+        "acoustic-panel-planq",
+        "engraved-acoustic-panel-vee"
       ],
-      "featured": false
+      "materials": [
+        "pet-felt"
+      ],
+      "applications": [],
+      "custom": false,
+      "images": [
+        "https://materiallogiq.com/wp-content/uploads/2023/10/slatta-KS_Polygrill_office-1.1689.jpg"
+      ],
+      "featured": false,
+      "placeholder": true,
+      "source": null
     },
     {
-      "slug": "lumen-hq",
-      "name": "Lumen Studio HQ",
-      "sector": "Workplace",
-      "location": "Seattle, WA",
-      "year": 2023,
-      "architect": "Placeholder Architects",
-      "size": "50,000 sq ft",
-      "summary": "A placeholder workplace project showing how case studies connect inspiration to the products used.",
+      "slug": "lobby-grilla",
+      "name": "Lobby with GRILLA",
+      "sector": "Office",
+      "location": "Sample project",
+      "year": null,
+      "architect": null,
+      "size": null,
+      "summary": "Placeholder case study built from a real GRILLA inspiration photo. Replace with a real project.",
       "story": [
         "Placeholder narrative: describe the design challenge, the client's goals, and the constraints the team worked within.",
-        "Explain how the specified materials solved acoustic, durability, or aesthetic problems, with a quote from the architect.",
-        "Close with outcomes: occupant feedback, certifications, awards, or measurable performance."
+        "Explain how the specified materials solved acoustic, durability, or aesthetic problems."
       ],
-      "quote": {
-        "text": "The materials let us hit our acoustic targets without compromising the look we wanted.",
-        "by": "Project Architect (placeholder)"
-      },
+      "quote": null,
       "products": [
-        "quiet-felt-tile",
-        "linea-slat",
-        "terra-laminate"
+        "pet-felt-acoustic-panel-grilla",
+        "silk-metal-grille"
       ],
-      "featured": false
+      "materials": [
+        "pet-felt"
+      ],
+      "applications": [],
+      "custom": false,
+      "images": [
+        "https://materiallogiq.com/wp-content/uploads/2026/04/ML_Grilla_HospitalityLobby_16x9_Evergreen.jpg"
+      ],
+      "featured": false,
+      "placeholder": true,
+      "source": null
     },
     {
-      "slug": "cedar-transit",
-      "name": "Cedar Street Transit Center",
-      "sector": "Civic",
-      "location": "Columbus, OH",
-      "year": 2024,
-      "architect": "Demo Design Group",
-      "size": "62,000 sq ft",
-      "summary": "A placeholder civic project showing how case studies connect inspiration to the products used.",
+      "slug": "airport-concourse-gryd",
+      "name": "Airport Concourse with GRYD",
+      "sector": "Transportation",
+      "location": "Sample project",
+      "year": null,
+      "architect": null,
+      "size": null,
+      "summary": "Placeholder case study built from a real GRYD inspiration photo. Replace with a real project.",
       "story": [
         "Placeholder narrative: describe the design challenge, the client's goals, and the constraints the team worked within.",
-        "Explain how the specified materials solved acoustic, durability, or aesthetic problems, with a quote from the architect.",
-        "Close with outcomes: occupant feedback, certifications, awards, or measurable performance."
+        "Explain how the specified materials solved acoustic, durability, or aesthetic problems."
       ],
-      "quote": {
-        "text": "The materials let us hit our acoustic targets without compromising the look we wanted.",
-        "by": "Project Architect (placeholder)"
-      },
+      "quote": null,
       "products": [
-        "ridge-cladding",
-        "arc-grid"
+        "pet-felt-ceiling-system-gryd",
+        "silk-metal-squell"
       ],
-      "featured": false
+      "materials": [
+        "pet-felt"
+      ],
+      "applications": [],
+      "custom": false,
+      "images": [
+        "https://materiallogiq.com/wp-content/uploads/2025/05/ML_GRYD_PETfelt_AirportCafe_S64-2_16x9-1.jpg"
+      ],
+      "featured": false,
+      "placeholder": true,
+      "source": null
     },
     {
-      "slug": "bay-residences",
-      "name": "Bayview Residences",
+      "slug": "restaurant-coffa",
+      "name": "Restaurant with COFFA",
       "sector": "Hospitality",
-      "location": "San Diego, CA",
-      "year": 2023,
-      "architect": "Sample & Partners",
-      "size": "58,000 sq ft",
-      "summary": "A placeholder hospitality project showing how case studies connect inspiration to the products used.",
+      "location": "Sample project",
+      "year": null,
+      "architect": null,
+      "size": null,
+      "summary": "Placeholder case study built from a real COFFA inspiration photo. Replace with a real project.",
       "story": [
         "Placeholder narrative: describe the design challenge, the client's goals, and the constraints the team worked within.",
-        "Explain how the specified materials solved acoustic, durability, or aesthetic problems, with a quote from the architect.",
-        "Close with outcomes: occupant feedback, certifications, awards, or measurable performance."
+        "Explain how the specified materials solved acoustic, durability, or aesthetic problems."
       ],
-      "quote": {
-        "text": "The materials let us hit our acoustic targets without compromising the look we wanted.",
-        "by": "Project Architect (placeholder)"
-      },
+      "quote": null,
       "products": [
-        "terra-laminate",
-        "strata-panel",
-        "mono-solid"
+        "pet-felt-ceiling-tiles-coffa",
+        "pet-felt-ceiling-tiles-hollo"
       ],
-      "featured": false
+      "materials": [
+        "pet-felt"
+      ],
+      "applications": [],
+      "custom": false,
+      "images": [
+        "https://materiallogiq.com/wp-content/uploads/2026/08/ML_PETFelt_Coffa_Restaurant_P4_Brown.jpg"
+      ],
+      "featured": false,
+      "placeholder": true,
+      "source": null
+    },
+    {
+      "slug": "library-hollo",
+      "name": "Library with HOLLO",
+      "sector": "Education",
+      "location": "Sample project",
+      "year": null,
+      "architect": null,
+      "size": null,
+      "summary": "Placeholder case study built from a real HOLLO inspiration photo. Replace with a real project.",
+      "story": [
+        "Placeholder narrative: describe the design challenge, the client's goals, and the constraints the team worked within.",
+        "Explain how the specified materials solved acoustic, durability, or aesthetic problems."
+      ],
+      "quote": null,
+      "products": [
+        "pet-felt-ceiling-tiles-hollo",
+        "pet-felt-ceiling-tiles-coffa"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "applications": [],
+      "custom": false,
+      "images": [
+        "https://materiallogiq.com/wp-content/uploads/2026/08/ML_PETFelt_Hollo_SchoolLibrary_P2_DeepLake.jpg"
+      ],
+      "featured": false,
+      "placeholder": true,
+      "source": null
+    },
+    {
+      "slug": "reception-classiq",
+      "name": "Reception with CLASSIQ",
+      "sector": "Office",
+      "location": "Sample project",
+      "year": null,
+      "architect": null,
+      "size": null,
+      "summary": "Placeholder case study built from a real CLASSIQ inspiration photo. Replace with a real project.",
+      "story": [
+        "Placeholder narrative: describe the design challenge, the client's goals, and the constraints the team worked within.",
+        "Explain how the specified materials solved acoustic, durability, or aesthetic problems."
+      ],
+      "quote": null,
+      "products": [
+        "pet-felt-linear-acoustic-system-classiq",
+        "pet-felt-acoustic-panel-grilla"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "applications": [],
+      "custom": false,
+      "images": [
+        "https://materiallogiq.com/wp-content/uploads/2025/01/52-reception-classiQ.jpg"
+      ],
+      "featured": false,
+      "placeholder": true,
+      "source": null
+    },
+    {
+      "slug": "conference-room-silk-metal-baffles",
+      "name": "Conference Room with Silk Metal Baffles",
+      "sector": "Office",
+      "location": "Sample project",
+      "year": null,
+      "architect": null,
+      "size": null,
+      "summary": "Placeholder case study built from a real Silk Metal Baffles inspiration photo. Replace with a real project.",
+      "story": [
+        "Placeholder narrative: describe the design challenge, the client's goals, and the constraints the team worked within.",
+        "Explain how the specified materials solved acoustic, durability, or aesthetic problems."
+      ],
+      "quote": null,
+      "products": [
+        "silk-metal-baffles",
+        "pet-felt-baffles-blaffe"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "applications": [],
+      "custom": false,
+      "images": [
+        "https://materiallogiq.com/wp-content/uploads/2025/07/ML_InvisiPerfMetal_Baffle_BeigeWhite_ConferenceRoom2.jpg"
+      ],
+      "featured": false,
+      "placeholder": true,
+      "source": null
+    },
+    {
+      "slug": "transit-station-silk-metal-baffles",
+      "name": "Transit Station with Silk Metal Baffles",
+      "sector": "Transportation",
+      "location": "Sample project",
+      "year": null,
+      "architect": null,
+      "size": null,
+      "summary": "Placeholder case study built from a real Silk Metal Baffles inspiration photo. Replace with a real project.",
+      "story": [
+        "Placeholder narrative: describe the design challenge, the client's goals, and the constraints the team worked within.",
+        "Explain how the specified materials solved acoustic, durability, or aesthetic problems."
+      ],
+      "quote": null,
+      "products": [
+        "silk-metal-baffles",
+        "pet-felt-baffles-blaffe"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "applications": [],
+      "custom": false,
+      "images": [
+        "https://materiallogiq.com/wp-content/uploads/2023/10/ML_MicroperforatedAluminum_Baffle_Station.jpg"
+      ],
+      "featured": false,
+      "placeholder": true,
+      "source": null
     }
   ]
 }

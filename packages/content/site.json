@@ -1,27 +1,67 @@
 {
-  "_note": "PLACEHOLDER: fictional sample data for design exploration. Replace with real Material Logiq content.",
+  "_note": "Content scraped from materiallogiq.com (see research/). Images and documents link to the live site.",
   "name": "Material Logiq",
-  "tagline": "Architectural materials, engineered with intent.",
-  "intro": "We help architects, designers, and builders specify surfaces, panels, and acoustic systems that perform as well as they look.",
+  "tagline": "Where fabrication meets imagination.",
+  "intro": "With a 40-year history of delivering best-in-class acoustical and architectural products and solutions, we are proving what's possible when you pair deep industry expertise with a genuine desire to solve everyday design challenges.",
   "stats": [
     {
-      "value": "12",
-      "label": "product families"
+      "value": "40 yrs",
+      "label": "acoustical and architectural expertise"
     },
     {
-      "value": "140+",
-      "label": "colors and finishes"
+      "value": "26",
+      "label": "product systems"
     },
     {
-      "value": "3 days",
-      "label": "typical sample delivery"
+      "value": "4",
+      "label": "core materials"
     }
   ],
+  "values": [
+    {
+      "title": "Experienced, yet scrappy",
+      "text": "Loaded with knowledge, curiosity, and a passion for tackling your project's unique challenges."
+    },
+    {
+      "title": "Imaginative and collaborative",
+      "text": "With a true spirit to solve the unsolvable and discover what's next."
+    },
+    {
+      "title": "Practical ingenuity",
+      "text": "Designing products that are long on purpose and aesthetics, short on wasteful, tedious processes."
+    }
+  ],
+  "process": [
+    {
+      "step": "Listen",
+      "text": "Clarify your vision and constraints."
+    },
+    {
+      "step": "Explore",
+      "text": "Create solution options."
+    },
+    {
+      "step": "Filter",
+      "text": "Construct a quote."
+    },
+    {
+      "step": "Realize",
+      "text": "Craft your vision."
+    },
+    {
+      "step": "Fulfill",
+      "text": "Deliver on site, on time, on budget."
+    }
+  ],
+  "materialize": {
+    "title": "Materialize",
+    "text": "Our process starts by saying “Yes,” then we solve. We listen and understand what needs to be accomplished and customize solutions to your specification. Then we build it. That's Materialize."
+  },
   "sampleLimit": 8,
   "contact": {
-    "email": "hello@example.com",
-    "phone": "(555) 010-0000",
-    "address": "123 Placeholder Ave, Suite 100, Anytown, USA"
+    "email": "sales@materiallogiq.com",
+    "phone": "800.220.8412",
+    "address": "123 Columbia Ct North, Chaska, MN 55318"
   },
   "nav": [
     {

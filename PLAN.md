@@ -94,12 +94,12 @@ as they build to static files in `dist/`.
 
 ### Phase 1 — Content & research
 - [x] Brand tokens, logos, and guide in `packages/brand`
-- [ ] Audit the current site: sitemap, product taxonomy, document types, sample flow, pain points → `research/current-site.md`
-      (blocked: this cloud environment's network policy denies `www.materiallogiq.com`; allow the domain or paste the content)
+- [x] Audit the current site: sitemap, product taxonomy, document types, sample flow, pain points → `research/current-site.md`
 - [x] Build `packages/content` data model: `products.json` (category, attributes, colors, specs, docs),
       `projects.json` (sector, location, products used), `resources.json` (doc type, product, file)
 - [x] Fill it with placeholder products/projects/documents (12 products, 9 projects, 79 documents)
-- [ ] Replace placeholders with real content once the audit is unblocked
+- [x] Replace placeholders with real content: 26 products, 4 materials, 6 product types, 277 documents, real photos (hotlinked)
+- [ ] Real project case studies (site has only 2; 8 sample projects are flagged `placeholder: true`)
 - [ ] Get a vector master of the full logo; confirm Indivisible web-font licensing (fallback: Inter Tight)
 - [ ] Note 5–10 reference sites (competitors + inspiration) with screenshots
 
@@ -121,6 +121,6 @@ Each builds all six pages at mockup fidelity (real layout and interactions, samp
 ## Open questions
 
 1. Who reviews concepts? Does the gallery need to be private? (A standard GitHub Pages site is public.)
-2. Access to current-site content: allow `www.materiallogiq.com` in this environment, or share an export of products, projects, and documents.
-3. ~~Photography?~~ Placeholders for now (color fields from finish hex values).
+2. ~~Access to current-site content~~ Done: content scraped from materiallogiq.com (see `research/current-site.md`).
+3. Project case studies: can we get names, photos, and stories for real installations to replace the 8 sample projects?
 4. Do you have a voice/messaging direction, or should concepts explore that too?
