@@ -1,0 +1,829 @@
+{
+  "_note": "PLACEHOLDER: fictional sample data for design exploration. Replace with real Material Logiq content.",
+  "types": [
+    {
+      "slug": "spec-sheet",
+      "name": "Spec Sheet"
+    },
+    {
+      "slug": "install-guide",
+      "name": "Installation Guide"
+    },
+    {
+      "slug": "warranty",
+      "name": "Warranty"
+    },
+    {
+      "slug": "sds",
+      "name": "Safety Data Sheet"
+    },
+    {
+      "slug": "cad",
+      "name": "CAD Details"
+    },
+    {
+      "slug": "bim",
+      "name": "BIM Object"
+    },
+    {
+      "slug": "epd",
+      "name": "EPD / Sustainability"
+    },
+    {
+      "slug": "brochure",
+      "name": "Brochure"
+    }
+  ],
+  "resources": [
+    {
+      "id": "strata-panel-spec-sheet",
+      "title": "Strata Panel Spec Sheet",
+      "type": "spec-sheet",
+      "product": "strata-panel",
+      "format": "PDF",
+      "size": "7.5 MB",
+      "updated": "2026-07-02",
+      "href": "#"
+    },
+    {
+      "id": "strata-panel-install-guide",
+      "title": "Strata Panel Installation Guide",
+      "type": "install-guide",
+      "product": "strata-panel",
+      "format": "PDF",
+      "size": "7.7 MB",
+      "updated": "2026-02-25",
+      "href": "#"
+    },
+    {
+      "id": "strata-panel-warranty",
+      "title": "Strata Panel Warranty",
+      "type": "warranty",
+      "product": "strata-panel",
+      "format": "PDF",
+      "size": "4.6 MB",
+      "updated": "2026-06-11",
+      "href": "#"
+    },
+    {
+      "id": "strata-panel-sds",
+      "title": "Strata Panel Safety Data Sheet",
+      "type": "sds",
+      "product": "strata-panel",
+      "format": "PDF",
+      "size": "5.7 MB",
+      "updated": "2026-08-19",
+      "href": "#"
+    },
+    {
+      "id": "strata-panel-cad",
+      "title": "Strata Panel CAD Details",
+      "type": "cad",
+      "product": "strata-panel",
+      "format": "DWG",
+      "size": "20.1 MB",
+      "updated": "2026-02-27",
+      "href": "#"
+    },
+    {
+      "id": "ridge-cladding-spec-sheet",
+      "title": "Ridge Cladding Spec Sheet",
+      "type": "spec-sheet",
+      "product": "ridge-cladding",
+      "format": "PDF",
+      "size": "5.7 MB",
+      "updated": "2026-02-02",
+      "href": "#"
+    },
+    {
+      "id": "ridge-cladding-install-guide",
+      "title": "Ridge Cladding Installation Guide",
+      "type": "install-guide",
+      "product": "ridge-cladding",
+      "format": "PDF",
+      "size": "5.9 MB",
+      "updated": "2026-05-21",
+      "href": "#"
+    },
+    {
+      "id": "ridge-cladding-warranty",
+      "title": "Ridge Cladding Warranty",
+      "type": "warranty",
+      "product": "ridge-cladding",
+      "format": "PDF",
+      "size": "4.8 MB",
+      "updated": "2026-08-10",
+      "href": "#"
+    },
+    {
+      "id": "ridge-cladding-sds",
+      "title": "Ridge Cladding Safety Data Sheet",
+      "type": "sds",
+      "product": "ridge-cladding",
+      "format": "PDF",
+      "size": "5.8 MB",
+      "updated": "2026-06-01",
+      "href": "#"
+    },
+    {
+      "id": "ridge-cladding-cad",
+      "title": "Ridge Cladding CAD Details",
+      "type": "cad",
+      "product": "ridge-cladding",
+      "format": "DWG",
+      "size": "23.6 MB",
+      "updated": "2026-06-06",
+      "href": "#"
+    },
+    {
+      "id": "ridge-cladding-bim",
+      "title": "Ridge Cladding BIM Object",
+      "type": "bim",
+      "product": "ridge-cladding",
+      "format": "RVT",
+      "size": "12.8 MB",
+      "updated": "2026-04-25",
+      "href": "#"
+    },
+    {
+      "id": "grain-veneer-spec-sheet",
+      "title": "Grain Veneer Panel Spec Sheet",
+      "type": "spec-sheet",
+      "product": "grain-veneer",
+      "format": "PDF",
+      "size": "6.0 MB",
+      "updated": "2026-07-13",
+      "href": "#"
+    },
+    {
+      "id": "grain-veneer-install-guide",
+      "title": "Grain Veneer Panel Installation Guide",
+      "type": "install-guide",
+      "product": "grain-veneer",
+      "format": "PDF",
+      "size": "7.4 MB",
+      "updated": "2026-08-03",
+      "href": "#"
+    },
+    {
+      "id": "grain-veneer-warranty",
+      "title": "Grain Veneer Panel Warranty",
+      "type": "warranty",
+      "product": "grain-veneer",
+      "format": "PDF",
+      "size": "1.6 MB",
+      "updated": "2026-07-18",
+      "href": "#"
+    },
+    {
+      "id": "grain-veneer-sds",
+      "title": "Grain Veneer Panel Safety Data Sheet",
+      "type": "sds",
+      "product": "grain-veneer",
+      "format": "PDF",
+      "size": "2.4 MB",
+      "updated": "2026-03-27",
+      "href": "#"
+    },
+    {
+      "id": "grain-veneer-cad",
+      "title": "Grain Veneer Panel CAD Details",
+      "type": "cad",
+      "product": "grain-veneer",
+      "format": "DWG",
+      "size": "11.3 MB",
+      "updated": "2026-09-09",
+      "href": "#"
+    },
+    {
+      "id": "grain-veneer-bim",
+      "title": "Grain Veneer Panel BIM Object",
+      "type": "bim",
+      "product": "grain-veneer",
+      "format": "RVT",
+      "size": "24.7 MB",
+      "updated": "2026-07-08",
+      "href": "#"
+    },
+    {
+      "id": "linea-slat-spec-sheet",
+      "title": "Linea Slat Spec Sheet",
+      "type": "spec-sheet",
+      "product": "linea-slat",
+      "format": "PDF",
+      "size": "1.7 MB",
+      "updated": "2026-04-22",
+      "href": "#"
+    },
+    {
+      "id": "linea-slat-install-guide",
+      "title": "Linea Slat Installation Guide",
+      "type": "install-guide",
+      "product": "linea-slat",
+      "format": "PDF",
+      "size": "2.1 MB",
+      "updated": "2026-08-27",
+      "href": "#"
+    },
+    {
+      "id": "linea-slat-warranty",
+      "title": "Linea Slat Warranty",
+      "type": "warranty",
+      "product": "linea-slat",
+      "format": "PDF",
+      "size": "4.8 MB",
+      "updated": "2026-05-10",
+      "href": "#"
+    },
+    {
+      "id": "linea-slat-sds",
+      "title": "Linea Slat Safety Data Sheet",
+      "type": "sds",
+      "product": "linea-slat",
+      "format": "PDF",
+      "size": "0.3 MB",
+      "updated": "2026-07-18",
+      "href": "#"
+    },
+    {
+      "id": "linea-slat-cad",
+      "title": "Linea Slat CAD Details",
+      "type": "cad",
+      "product": "linea-slat",
+      "format": "DWG",
+      "size": "9.9 MB",
+      "updated": "2026-06-05",
+      "href": "#"
+    },
+    {
+      "id": "linea-slat-bim",
+      "title": "Linea Slat BIM Object",
+      "type": "bim",
+      "product": "linea-slat",
+      "format": "RVT",
+      "size": "13.4 MB",
+      "updated": "2026-01-15",
+      "href": "#"
+    },
+    {
+      "id": "linea-slat-epd",
+      "title": "Linea Slat EPD / Sustainability",
+      "type": "epd",
+      "product": "linea-slat",
+      "format": "PDF",
+      "size": "6.3 MB",
+      "updated": "2026-09-13",
+      "href": "#"
+    },
+    {
+      "id": "quiet-felt-tile-spec-sheet",
+      "title": "Quiet Felt Tile Spec Sheet",
+      "type": "spec-sheet",
+      "product": "quiet-felt-tile",
+      "format": "PDF",
+      "size": "3.4 MB",
+      "updated": "2026-07-04",
+      "href": "#"
+    },
+    {
+      "id": "quiet-felt-tile-install-guide",
+      "title": "Quiet Felt Tile Installation Guide",
+      "type": "install-guide",
+      "product": "quiet-felt-tile",
+      "format": "PDF",
+      "size": "4.0 MB",
+      "updated": "2026-07-02",
+      "href": "#"
+    },
+    {
+      "id": "quiet-felt-tile-warranty",
+      "title": "Quiet Felt Tile Warranty",
+      "type": "warranty",
+      "product": "quiet-felt-tile",
+      "format": "PDF",
+      "size": "1.8 MB",
+      "updated": "2026-04-15",
+      "href": "#"
+    },
+    {
+      "id": "quiet-felt-tile-sds",
+      "title": "Quiet Felt Tile Safety Data Sheet",
+      "type": "sds",
+      "product": "quiet-felt-tile",
+      "format": "PDF",
+      "size": "1.5 MB",
+      "updated": "2026-06-20",
+      "href": "#"
+    },
+    {
+      "id": "quiet-felt-tile-cad",
+      "title": "Quiet Felt Tile CAD Details",
+      "type": "cad",
+      "product": "quiet-felt-tile",
+      "format": "DWG",
+      "size": "2.3 MB",
+      "updated": "2026-01-19",
+      "href": "#"
+    },
+    {
+      "id": "echo-baffle-spec-sheet",
+      "title": "Echo Baffle Spec Sheet",
+      "type": "spec-sheet",
+      "product": "echo-baffle",
+      "format": "PDF",
+      "size": "3.1 MB",
+      "updated": "2026-01-03",
+      "href": "#"
+    },
+    {
+      "id": "echo-baffle-install-guide",
+      "title": "Echo Baffle Installation Guide",
+      "type": "install-guide",
+      "product": "echo-baffle",
+      "format": "PDF",
+      "size": "7.0 MB",
+      "updated": "2026-07-05",
+      "href": "#"
+    },
+    {
+      "id": "echo-baffle-warranty",
+      "title": "Echo Baffle Warranty",
+      "type": "warranty",
+      "product": "echo-baffle",
+      "format": "PDF",
+      "size": "5.2 MB",
+      "updated": "2026-06-20",
+      "href": "#"
+    },
+    {
+      "id": "echo-baffle-sds",
+      "title": "Echo Baffle Safety Data Sheet",
+      "type": "sds",
+      "product": "echo-baffle",
+      "format": "PDF",
+      "size": "3.1 MB",
+      "updated": "2026-02-04",
+      "href": "#"
+    },
+    {
+      "id": "echo-baffle-cad",
+      "title": "Echo Baffle CAD Details",
+      "type": "cad",
+      "product": "echo-baffle",
+      "format": "DWG",
+      "size": "21.4 MB",
+      "updated": "2026-08-16",
+      "href": "#"
+    },
+    {
+      "id": "echo-baffle-bim",
+      "title": "Echo Baffle BIM Object",
+      "type": "bim",
+      "product": "echo-baffle",
+      "format": "RVT",
+      "size": "3.1 MB",
+      "updated": "2026-02-24",
+      "href": "#"
+    },
+    {
+      "id": "weave-panel-spec-sheet",
+      "title": "Weave Acoustic Panel Spec Sheet",
+      "type": "spec-sheet",
+      "product": "weave-panel",
+      "format": "PDF",
+      "size": "2.3 MB",
+      "updated": "2026-03-17",
+      "href": "#"
+    },
+    {
+      "id": "weave-panel-install-guide",
+      "title": "Weave Acoustic Panel Installation Guide",
+      "type": "install-guide",
+      "product": "weave-panel",
+      "format": "PDF",
+      "size": "0.5 MB",
+      "updated": "2026-09-12",
+      "href": "#"
+    },
+    {
+      "id": "weave-panel-warranty",
+      "title": "Weave Acoustic Panel Warranty",
+      "type": "warranty",
+      "product": "weave-panel",
+      "format": "PDF",
+      "size": "1.4 MB",
+      "updated": "2026-09-01",
+      "href": "#"
+    },
+    {
+      "id": "weave-panel-sds",
+      "title": "Weave Acoustic Panel Safety Data Sheet",
+      "type": "sds",
+      "product": "weave-panel",
+      "format": "PDF",
+      "size": "6.1 MB",
+      "updated": "2026-05-21",
+      "href": "#"
+    },
+    {
+      "id": "weave-panel-cad",
+      "title": "Weave Acoustic Panel CAD Details",
+      "type": "cad",
+      "product": "weave-panel",
+      "format": "DWG",
+      "size": "21.7 MB",
+      "updated": "2026-05-17",
+      "href": "#"
+    },
+    {
+      "id": "weave-panel-bim",
+      "title": "Weave Acoustic Panel BIM Object",
+      "type": "bim",
+      "product": "weave-panel",
+      "format": "RVT",
+      "size": "5.0 MB",
+      "updated": "2026-04-18",
+      "href": "#"
+    },
+    {
+      "id": "weave-panel-epd",
+      "title": "Weave Acoustic Panel EPD / Sustainability",
+      "type": "epd",
+      "product": "weave-panel",
+      "format": "PDF",
+      "size": "4.2 MB",
+      "updated": "2026-04-20",
+      "href": "#"
+    },
+    {
+      "id": "arc-grid-spec-sheet",
+      "title": "Arc Ceiling Grid Spec Sheet",
+      "type": "spec-sheet",
+      "product": "arc-grid",
+      "format": "PDF",
+      "size": "6.5 MB",
+      "updated": "2026-04-26",
+      "href": "#"
+    },
+    {
+      "id": "arc-grid-install-guide",
+      "title": "Arc Ceiling Grid Installation Guide",
+      "type": "install-guide",
+      "product": "arc-grid",
+      "format": "PDF",
+      "size": "2.1 MB",
+      "updated": "2026-07-24",
+      "href": "#"
+    },
+    {
+      "id": "arc-grid-warranty",
+      "title": "Arc Ceiling Grid Warranty",
+      "type": "warranty",
+      "product": "arc-grid",
+      "format": "PDF",
+      "size": "6.5 MB",
+      "updated": "2026-04-17",
+      "href": "#"
+    },
+    {
+      "id": "arc-grid-sds",
+      "title": "Arc Ceiling Grid Safety Data Sheet",
+      "type": "sds",
+      "product": "arc-grid",
+      "format": "PDF",
+      "size": "4.1 MB",
+      "updated": "2026-01-01",
+      "href": "#"
+    },
+    {
+      "id": "arc-grid-cad",
+      "title": "Arc Ceiling Grid CAD Details",
+      "type": "cad",
+      "product": "arc-grid",
+      "format": "DWG",
+      "size": "20.0 MB",
+      "updated": "2026-08-09",
+      "href": "#"
+    },
+    {
+      "id": "arc-grid-epd",
+      "title": "Arc Ceiling Grid EPD / Sustainability",
+      "type": "epd",
+      "product": "arc-grid",
+      "format": "PDF",
+      "size": "3.0 MB",
+      "updated": "2026-06-12",
+      "href": "#"
+    },
+    {
+      "id": "vela-cloud-spec-sheet",
+      "title": "Vela Cloud Spec Sheet",
+      "type": "spec-sheet",
+      "product": "vela-cloud",
+      "format": "PDF",
+      "size": "0.9 MB",
+      "updated": "2026-02-08",
+      "href": "#"
+    },
+    {
+      "id": "vela-cloud-install-guide",
+      "title": "Vela Cloud Installation Guide",
+      "type": "install-guide",
+      "product": "vela-cloud",
+      "format": "PDF",
+      "size": "3.9 MB",
+      "updated": "2026-06-07",
+      "href": "#"
+    },
+    {
+      "id": "vela-cloud-warranty",
+      "title": "Vela Cloud Warranty",
+      "type": "warranty",
+      "product": "vela-cloud",
+      "format": "PDF",
+      "size": "4.0 MB",
+      "updated": "2026-01-16",
+      "href": "#"
+    },
+    {
+      "id": "vela-cloud-sds",
+      "title": "Vela Cloud Safety Data Sheet",
+      "type": "sds",
+      "product": "vela-cloud",
+      "format": "PDF",
+      "size": "7.3 MB",
+      "updated": "2026-06-26",
+      "href": "#"
+    },
+    {
+      "id": "vela-cloud-cad",
+      "title": "Vela Cloud CAD Details",
+      "type": "cad",
+      "product": "vela-cloud",
+      "format": "DWG",
+      "size": "16.4 MB",
+      "updated": "2026-02-13",
+      "href": "#"
+    },
+    {
+      "id": "vela-cloud-bim",
+      "title": "Vela Cloud BIM Object",
+      "type": "bim",
+      "product": "vela-cloud",
+      "format": "RVT",
+      "size": "19.0 MB",
+      "updated": "2026-08-06",
+      "href": "#"
+    },
+    {
+      "id": "vela-cloud-epd",
+      "title": "Vela Cloud EPD / Sustainability",
+      "type": "epd",
+      "product": "vela-cloud",
+      "format": "PDF",
+      "size": "5.2 MB",
+      "updated": "2026-02-26",
+      "href": "#"
+    },
+    {
+      "id": "plane-metal-spec-sheet",
+      "title": "Plane Metal Ceiling Spec Sheet",
+      "type": "spec-sheet",
+      "product": "plane-metal",
+      "format": "PDF",
+      "size": "7.6 MB",
+      "updated": "2026-07-15",
+      "href": "#"
+    },
+    {
+      "id": "plane-metal-install-guide",
+      "title": "Plane Metal Ceiling Installation Guide",
+      "type": "install-guide",
+      "product": "plane-metal",
+      "format": "PDF",
+      "size": "3.4 MB",
+      "updated": "2026-02-24",
+      "href": "#"
+    },
+    {
+      "id": "plane-metal-warranty",
+      "title": "Plane Metal Ceiling Warranty",
+      "type": "warranty",
+      "product": "plane-metal",
+      "format": "PDF",
+      "size": "1.5 MB",
+      "updated": "2026-03-01",
+      "href": "#"
+    },
+    {
+      "id": "plane-metal-sds",
+      "title": "Plane Metal Ceiling Safety Data Sheet",
+      "type": "sds",
+      "product": "plane-metal",
+      "format": "PDF",
+      "size": "1.5 MB",
+      "updated": "2026-08-26",
+      "href": "#"
+    },
+    {
+      "id": "plane-metal-cad",
+      "title": "Plane Metal Ceiling CAD Details",
+      "type": "cad",
+      "product": "plane-metal",
+      "format": "DWG",
+      "size": "16.7 MB",
+      "updated": "2026-08-22",
+      "href": "#"
+    },
+    {
+      "id": "plane-metal-bim",
+      "title": "Plane Metal Ceiling BIM Object",
+      "type": "bim",
+      "product": "plane-metal",
+      "format": "RVT",
+      "size": "4.7 MB",
+      "updated": "2026-09-05",
+      "href": "#"
+    },
+    {
+      "id": "terra-laminate-spec-sheet",
+      "title": "Terra Laminate Spec Sheet",
+      "type": "spec-sheet",
+      "product": "terra-laminate",
+      "format": "PDF",
+      "size": "6.5 MB",
+      "updated": "2026-02-17",
+      "href": "#"
+    },
+    {
+      "id": "terra-laminate-install-guide",
+      "title": "Terra Laminate Installation Guide",
+      "type": "install-guide",
+      "product": "terra-laminate",
+      "format": "PDF",
+      "size": "6.1 MB",
+      "updated": "2026-03-14",
+      "href": "#"
+    },
+    {
+      "id": "terra-laminate-warranty",
+      "title": "Terra Laminate Warranty",
+      "type": "warranty",
+      "product": "terra-laminate",
+      "format": "PDF",
+      "size": "7.9 MB",
+      "updated": "2026-04-27",
+      "href": "#"
+    },
+    {
+      "id": "terra-laminate-sds",
+      "title": "Terra Laminate Safety Data Sheet",
+      "type": "sds",
+      "product": "terra-laminate",
+      "format": "PDF",
+      "size": "7.0 MB",
+      "updated": "2026-01-09",
+      "href": "#"
+    },
+    {
+      "id": "terra-laminate-cad",
+      "title": "Terra Laminate CAD Details",
+      "type": "cad",
+      "product": "terra-laminate",
+      "format": "DWG",
+      "size": "6.1 MB",
+      "updated": "2026-09-08",
+      "href": "#"
+    },
+    {
+      "id": "terra-laminate-bim",
+      "title": "Terra Laminate BIM Object",
+      "type": "bim",
+      "product": "terra-laminate",
+      "format": "RVT",
+      "size": "8.8 MB",
+      "updated": "2026-09-14",
+      "href": "#"
+    },
+    {
+      "id": "terra-laminate-epd",
+      "title": "Terra Laminate EPD / Sustainability",
+      "type": "epd",
+      "product": "terra-laminate",
+      "format": "PDF",
+      "size": "0.8 MB",
+      "updated": "2026-06-15",
+      "href": "#"
+    },
+    {
+      "id": "mono-solid-spec-sheet",
+      "title": "Mono Solid Surface Spec Sheet",
+      "type": "spec-sheet",
+      "product": "mono-solid",
+      "format": "PDF",
+      "size": "5.4 MB",
+      "updated": "2026-09-14",
+      "href": "#"
+    },
+    {
+      "id": "mono-solid-install-guide",
+      "title": "Mono Solid Surface Installation Guide",
+      "type": "install-guide",
+      "product": "mono-solid",
+      "format": "PDF",
+      "size": "6.7 MB",
+      "updated": "2026-09-05",
+      "href": "#"
+    },
+    {
+      "id": "mono-solid-warranty",
+      "title": "Mono Solid Surface Warranty",
+      "type": "warranty",
+      "product": "mono-solid",
+      "format": "PDF",
+      "size": "4.4 MB",
+      "updated": "2026-09-17",
+      "href": "#"
+    },
+    {
+      "id": "mono-solid-sds",
+      "title": "Mono Solid Surface Safety Data Sheet",
+      "type": "sds",
+      "product": "mono-solid",
+      "format": "PDF",
+      "size": "0.4 MB",
+      "updated": "2026-08-25",
+      "href": "#"
+    },
+    {
+      "id": "mono-solid-cad",
+      "title": "Mono Solid Surface CAD Details",
+      "type": "cad",
+      "product": "mono-solid",
+      "format": "DWG",
+      "size": "5.4 MB",
+      "updated": "2026-01-25",
+      "href": "#"
+    },
+    {
+      "id": "mono-solid-bim",
+      "title": "Mono Solid Surface BIM Object",
+      "type": "bim",
+      "product": "mono-solid",
+      "format": "RVT",
+      "size": "5.1 MB",
+      "updated": "2026-08-20",
+      "href": "#"
+    },
+    {
+      "id": "mono-solid-epd",
+      "title": "Mono Solid Surface EPD / Sustainability",
+      "type": "epd",
+      "product": "mono-solid",
+      "format": "PDF",
+      "size": "4.6 MB",
+      "updated": "2026-06-22",
+      "href": "#"
+    },
+    {
+      "id": "material-logiq-product-catalog-2026",
+      "title": "Material Logiq Product Catalog 2026",
+      "type": "brochure",
+      "product": null,
+      "format": "PDF",
+      "size": "8.7 MB",
+      "updated": "2026-06-01",
+      "href": "#"
+    },
+    {
+      "id": "acoustic-design-guide",
+      "title": "Acoustic Design Guide",
+      "type": "brochure",
+      "product": null,
+      "format": "PDF",
+      "size": "9.2 MB",
+      "updated": "2026-06-01",
+      "href": "#"
+    },
+    {
+      "id": "general-terms-and-warranty-policy",
+      "title": "General Terms & Warranty Policy",
+      "type": "warranty",
+      "product": null,
+      "format": "PDF",
+      "size": "12.2 MB",
+      "updated": "2026-06-01",
+      "href": "#"
+    },
+    {
+      "id": "sustainability-overview",
+      "title": "Sustainability Overview",
+      "type": "epd",
+      "product": null,
+      "format": "PDF",
+      "size": "3.4 MB",
+      "updated": "2026-06-01",
+      "href": "#"
+    }
+  ]
+}

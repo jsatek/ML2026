@@ -1,0 +1,45 @@
+---
+// Starter layout: wired to shared content and the sample cart, deliberately unstyled.
+import '../styles/global.css';
+import { site } from '@ml/content';
+import wordmark from '@ml/brand/logo/materiallogiq-wordmark.webp';
+import { url } from '../lib/utils';
+
+interface Props { title?: string; }
+const { title } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>{title ? `${title} | ${site.name}` : site.name}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body class="mx-auto max-w-5xl p-6 font-sans">
+    <header class="flex flex-wrap items-center gap-6 border-b pb-4">
+      <a href={url('/')}><img src={wordmark.src} alt={site.name} class="h-5 w-auto" /></a>
+      <nav class="ml-auto flex gap-4">
+        {site.nav.map((n) => <a href={url(n.href)}>{n.label}</a>)}
+        <a href={url('/samples')}>Samples (<span data-cart-count>0</span>)</a>
+      </nav>
+    </header>
+    <main class="py-8"><slot /></main>
+    <footer class="border-t pt-4 text-sm">{site.contact.email} · {site.contact.phone}</footer>
+
+    <script>
+      import * as cart from '@ml/content/cart';
+      cart.onChange((items) => {
+        document.querySelectorAll('[data-cart-count]').forEach((el) => (el.textContent = String(items.length)));
+      });
+      // Any element with data-add-sample data-product data-finish adds that sample.
+      document.addEventListener('click', (e) => {
+        const b = (e.target as Element).closest<HTMLElement>('[data-add-sample]');
+        if (b) cart.add({ product: b.dataset.product!, finish: b.dataset.finish! });
+      });
+    </script>
+  </body>
+</html>

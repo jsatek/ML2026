@@ -1,0 +1,40 @@
+{
+  "_note": "PLACEHOLDER: fictional sample data for design exploration. Replace with real Material Logiq content.",
+  "name": "Material Logiq",
+  "tagline": "Architectural materials, engineered with intent.",
+  "intro": "We help architects, designers, and builders specify surfaces, panels, and acoustic systems that perform as well as they look.",
+  "stats": [
+    {
+      "value": "12",
+      "label": "product families"
+    },
+    {
+      "value": "140+",
+      "label": "colors and finishes"
+    },
+    {
+      "value": "3 days",
+      "label": "typical sample delivery"
+    }
+  ],
+  "sampleLimit": 8,
+  "contact": {
+    "email": "hello@example.com",
+    "phone": "(555) 010-0000",
+    "address": "123 Placeholder Ave, Suite 100, Anytown, USA"
+  },
+  "nav": [
+    {
+      "label": "Products",
+      "href": "/products"
+    },
+    {
+      "label": "Projects",
+      "href": "/projects"
+    },
+    {
+      "label": "Resources",
+      "href": "/resources"
+    }
+  ]
+}

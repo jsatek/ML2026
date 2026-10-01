@@ -1,0 +1,237 @@
+{
+  "_note": "PLACEHOLDER: fictional sample data for design exploration. Replace with real Material Logiq content.",
+  "sectors": [
+    "Workplace",
+    "Education",
+    "Hospitality",
+    "Healthcare",
+    "Civic",
+    "Retail"
+  ],
+  "projects": [
+    {
+      "slug": "harbor-commons",
+      "name": "Harbor Commons Offices",
+      "sector": "Workplace",
+      "location": "Portland, OR",
+      "year": 2025,
+      "architect": "Sample & Partners",
+      "size": "96,000 sq ft",
+      "summary": "A placeholder workplace project showing how case studies connect inspiration to the products used.",
+      "story": [
+        "Placeholder narrative: describe the design challenge, the client's goals, and the constraints the team worked within.",
+        "Explain how the specified materials solved acoustic, durability, or aesthetic problems, with a quote from the architect.",
+        "Close with outcomes: occupant feedback, certifications, awards, or measurable performance."
+      ],
+      "quote": {
+        "text": "The materials let us hit our acoustic targets without compromising the look we wanted.",
+        "by": "Project Architect (placeholder)"
+      },
+      "products": [
+        "linea-slat",
+        "vela-cloud",
+        "strata-panel"
+      ],
+      "featured": true
+    },
+    {
+      "slug": "northfield-library",
+      "name": "Northfield Public Library",
+      "sector": "Civic",
+      "location": "Madison, WI",
+      "year": 2024,
+      "architect": "Studio Example",
+      "size": "66,000 sq ft",
+      "summary": "A placeholder civic project showing how case studies connect inspiration to the products used.",
+      "story": [
+        "Placeholder narrative: describe the design challenge, the client's goals, and the constraints the team worked within.",
+        "Explain how the specified materials solved acoustic, durability, or aesthetic problems, with a quote from the architect.",
+        "Close with outcomes: occupant feedback, certifications, awards, or measurable performance."
+      ],
+      "quote": {
+        "text": "The materials let us hit our acoustic targets without compromising the look we wanted.",
+        "by": "Project Architect (placeholder)"
+      },
+      "products": [
+        "echo-baffle",
+        "arc-grid",
+        "grain-veneer"
+      ],
+      "featured": true
+    },
+    {
+      "slug": "alder-hotel",
+      "name": "The Alder Hotel",
+      "sector": "Hospitality",
+      "location": "Austin, TX",
+      "year": 2025,
+      "architect": "Studio Example",
+      "size": "40,000 sq ft",
+      "summary": "A placeholder hospitality project showing how case studies connect inspiration to the products used.",
+      "story": [
+        "Placeholder narrative: describe the design challenge, the client's goals, and the constraints the team worked within.",
+        "Explain how the specified materials solved acoustic, durability, or aesthetic problems, with a quote from the architect.",
+        "Close with outcomes: occupant feedback, certifications, awards, or measurable performance."
+      ],
+      "quote": {
+        "text": "The materials let us hit our acoustic targets without compromising the look we wanted.",
+        "by": "Project Architect (placeholder)"
+      },
+      "products": [
+        "grain-veneer",
+        "weave-panel",
+        "mono-solid"
+      ],
+      "featured": true
+    },
+    {
+      "slug": "riverside-clinic",
+      "name": "Riverside Family Clinic",
+      "sector": "Healthcare",
+      "location": "Raleigh, NC",
+      "year": 2023,
+      "architect": "Sample & Partners",
+      "size": "154,000 sq ft",
+      "summary": "A placeholder healthcare project showing how case studies connect inspiration to the products used.",
+      "story": [
+        "Placeholder narrative: describe the design challenge, the client's goals, and the constraints the team worked within.",
+        "Explain how the specified materials solved acoustic, durability, or aesthetic problems, with a quote from the architect.",
+        "Close with outcomes: occupant feedback, certifications, awards, or measurable performance."
+      ],
+      "quote": {
+        "text": "The materials let us hit our acoustic targets without compromising the look we wanted.",
+        "by": "Project Architect (placeholder)"
+      },
+      "products": [
+        "mono-solid",
+        "plane-metal",
+        "weave-panel"
+      ],
+      "featured": false
+    },
+    {
+      "slug": "summit-academy",
+      "name": "Summit STEM Academy",
+      "sector": "Education",
+      "location": "Denver, CO",
+      "year": 2024,
+      "architect": "Demo Design Group",
+      "size": "107,000 sq ft",
+      "summary": "A placeholder education project showing how case studies connect inspiration to the products used.",
+      "story": [
+        "Placeholder narrative: describe the design challenge, the client's goals, and the constraints the team worked within.",
+        "Explain how the specified materials solved acoustic, durability, or aesthetic problems, with a quote from the architect.",
+        "Close with outcomes: occupant feedback, certifications, awards, or measurable performance."
+      ],
+      "quote": {
+        "text": "The materials let us hit our acoustic targets without compromising the look we wanted.",
+        "by": "Project Architect (placeholder)"
+      },
+      "products": [
+        "quiet-felt-tile",
+        "echo-baffle",
+        "vela-cloud"
+      ],
+      "featured": false
+    },
+    {
+      "slug": "meridian-market",
+      "name": "Meridian Market Hall",
+      "sector": "Retail",
+      "location": "Minneapolis, MN",
+      "year": 2025,
+      "architect": "Demo Design Group",
+      "size": "93,000 sq ft",
+      "summary": "A placeholder retail project showing how case studies connect inspiration to the products used.",
+      "story": [
+        "Placeholder narrative: describe the design challenge, the client's goals, and the constraints the team worked within.",
+        "Explain how the specified materials solved acoustic, durability, or aesthetic problems, with a quote from the architect.",
+        "Close with outcomes: occupant feedback, certifications, awards, or measurable performance."
+      ],
+      "quote": {
+        "text": "The materials let us hit our acoustic targets without compromising the look we wanted.",
+        "by": "Project Architect (placeholder)"
+      },
+      "products": [
+        "ridge-cladding",
+        "plane-metal",
+        "terra-laminate"
+      ],
+      "featured": false
+    },
+    {
+      "slug": "lumen-hq",
+      "name": "Lumen Studio HQ",
+      "sector": "Workplace",
+      "location": "Seattle, WA",
+      "year": 2023,
+      "architect": "Placeholder Architects",
+      "size": "50,000 sq ft",
+      "summary": "A placeholder workplace project showing how case studies connect inspiration to the products used.",
+      "story": [
+        "Placeholder narrative: describe the design challenge, the client's goals, and the constraints the team worked within.",
+        "Explain how the specified materials solved acoustic, durability, or aesthetic problems, with a quote from the architect.",
+        "Close with outcomes: occupant feedback, certifications, awards, or measurable performance."
+      ],
+      "quote": {
+        "text": "The materials let us hit our acoustic targets without compromising the look we wanted.",
+        "by": "Project Architect (placeholder)"
+      },
+      "products": [
+        "quiet-felt-tile",
+        "linea-slat",
+        "terra-laminate"
+      ],
+      "featured": false
+    },
+    {
+      "slug": "cedar-transit",
+      "name": "Cedar Street Transit Center",
+      "sector": "Civic",
+      "location": "Columbus, OH",
+      "year": 2024,
+      "architect": "Demo Design Group",
+      "size": "62,000 sq ft",
+      "summary": "A placeholder civic project showing how case studies connect inspiration to the products used.",
+      "story": [
+        "Placeholder narrative: describe the design challenge, the client's goals, and the constraints the team worked within.",
+        "Explain how the specified materials solved acoustic, durability, or aesthetic problems, with a quote from the architect.",
+        "Close with outcomes: occupant feedback, certifications, awards, or measurable performance."
+      ],
+      "quote": {
+        "text": "The materials let us hit our acoustic targets without compromising the look we wanted.",
+        "by": "Project Architect (placeholder)"
+      },
+      "products": [
+        "ridge-cladding",
+        "arc-grid"
+      ],
+      "featured": false
+    },
+    {
+      "slug": "bay-residences",
+      "name": "Bayview Residences",
+      "sector": "Hospitality",
+      "location": "San Diego, CA",
+      "year": 2023,
+      "architect": "Sample & Partners",
+      "size": "58,000 sq ft",
+      "summary": "A placeholder hospitality project showing how case studies connect inspiration to the products used.",
+      "story": [
+        "Placeholder narrative: describe the design challenge, the client's goals, and the constraints the team worked within.",
+        "Explain how the specified materials solved acoustic, durability, or aesthetic problems, with a quote from the architect.",
+        "Close with outcomes: occupant feedback, certifications, awards, or measurable performance."
+      ],
+      "quote": {
+        "text": "The materials let us hit our acoustic targets without compromising the look we wanted.",
+        "by": "Project Architect (placeholder)"
+      },
+      "products": [
+        "terra-laminate",
+        "strata-panel",
+        "mono-solid"
+      ],
+      "featured": false
+    }
+  ]
+}

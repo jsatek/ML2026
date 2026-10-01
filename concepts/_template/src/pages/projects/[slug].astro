@@ -1,0 +1,18 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { projects, getProduct } from '@ml/content';
+import { url } from '../../lib/utils';
+
+export function getStaticPaths() {
+  return projects.map((p) => ({ params: { slug: p.slug }, props: { project: p } }));
+}
+const { project: p } = Astro.props;
+---
+<Layout title={p.name}>
+  <h1 class="text-3xl font-bold">{p.name}</h1>
+  <p>{p.sector} · {p.location} · {p.year} · {p.architect}</p>
+  {p.story.map((s) => <p class="mt-3">{s}</p>)}
+  <blockquote class="mt-4 italic">“{p.quote.text}” ({p.quote.by})</blockquote>
+  <h2 class="mt-6 font-bold">Products used</h2>
+  <ul>{p.products.map((s) => <li><a href={url(`/products/${s}`)}>{getProduct(s)?.name}</a></li>)}</ul>
+</Layout>

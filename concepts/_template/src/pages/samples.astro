@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Request samples">
+  <h1 class="text-3xl font-bold">Request samples</h1>
+  <ul class="mt-4" data-list></ul>
+  <form class="mt-6 grid max-w-md gap-2" data-form>
+    <input name="name" placeholder="Name" required class="border p-2" />
+    <input name="email" type="email" placeholder="Email" required class="border p-2" />
+    <input name="address" placeholder="Shipping address" required class="border p-2" />
+    <button class="bg-green p-2 text-white">Submit</button>
+  </form>
+  <script>
+    import * as cart from '@ml/content/cart';
+    const list = document.querySelector('[data-list]')!;
+    cart.onChange((items) => {
+      list.innerHTML = '';
+      for (const i of items) {
+        const li = document.createElement('li');
+        li.textContent = `${i.product}: ${i.finish}`;
+        list.append(li);
+      }
+    });
+    document.querySelector('[data-form]')!.addEventListener('submit', (e) => {
+      e.preventDefault();
+      cart.clear();
+      alert('Mockup: request submitted');
+    });
+  </script>
+</Layout>

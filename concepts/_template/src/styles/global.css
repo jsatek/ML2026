@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@import "@ml/brand/tokens.css";
+
+/* Map brand tokens into Tailwind (bg-green, text-teal, font-sans, ...). Restyle freely. */
+@theme inline {
+  --font-sans: var(--ml-font);
+  --color-green: var(--ml-deep-green);
+  --color-teal: var(--ml-teal);
+  --color-sky: var(--ml-sky);
+  --color-orange: var(--ml-orange);
+}

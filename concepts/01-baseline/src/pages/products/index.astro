@@ -1,0 +1,210 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { categories, products, applications, productsInCategory } from '@ml/content';
+
+const specRows = ['Fire rating', 'Thickness', 'NRC', 'Recycled content', 'Warranty'];
+const compareData = Object.fromEntries(
+  products.map((p) => [p.slug, { name: p.name, specs: p.specs, leadTimeWeeks: p.attributes.leadTimeWeeks, finishes: p.finishes.length }]),
+);
+---
+<Layout title="Products" description="Browse and filter every Material Logiq product.">
+  <section class="border-b border-line bg-paper">
+    <div class="container-x py-12">
+      <p class="eyebrow">Products</p>
+      <h1 class="mt-2 text-4xl sm:text-5xl">Find the right material</h1>
+      <p class="mt-3 max-w-2xl text-muted">Filter by product family, application, and performance. Add samples as you go, or compare up to three products side by side.</p>
+    </div>
+  </section>
+
+  <div class="container-x grid gap-10 py-10 lg:grid-cols-[16rem_1fr]">
+    <!-- Filters -->
+    <aside aria-label="Filters">
+      <details class="group rounded-2xl border border-line lg:border-0" open data-filter-panel>
+        <summary class="flex cursor-pointer items-center justify-between p-4 font-semibold lg:hidden">
+          Filters <span class="text-sm font-normal text-muted" data-active-count></span>
+        </summary>
+        <form class="space-y-8 p-4 pt-0 lg:p-0" data-filters>
+          <div>
+            <label for="q" class="text-sm font-semibold">Search</label>
+            <input id="q" name="q" type="search" placeholder="Name, color, application…" class="field mt-2" />
+          </div>
+          <fieldset>
+            <legend class="text-sm font-semibold">Product family</legend>
+            <div class="mt-3 space-y-2">
+              {categories.map((c) => (
+                <label class="flex items-center gap-3 text-sm">
+                  <input type="checkbox" name="category" value={c.slug} class="size-4 accent-(--ml-deep-green)" />
+                  <span class="flex-1">{c.name}</span>
+                  <span class="text-muted">{productsInCategory(c.slug).length}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend class="text-sm font-semibold">Application</legend>
+            <div class="mt-3 flex flex-wrap gap-2">
+              {applications.map((a) => (
+                <label class="chip cursor-pointer">
+                  <input type="checkbox" name="application" value={a} class="sr-only" />{a}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend class="text-sm font-semibold">Performance</legend>
+            <div class="mt-3 space-y-2 text-sm">
+              <label class="flex items-center gap-3"><input type="checkbox" name="fire" value="A" class="size-4 accent-(--ml-deep-green)" /> Class A fire rated</label>
+              <label class="flex items-center gap-3"><input type="checkbox" name="acoustic" value="true" class="size-4 accent-(--ml-deep-green)" /> Acoustic (NRC rated)</label>
+            </div>
+          </fieldset>
+          <button type="reset" class="link text-sm">Clear all filters</button>
+        </form>
+      </details>
+    </aside>
+
+    <!-- Results -->
+    <section aria-labelledby="results-heading">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <h2 id="results-heading" class="text-lg font-semibold" aria-live="polite"><span data-count>{products.length}</span> products</h2>
+        <label class="flex items-center gap-2 text-sm">
+          Sort
+          <select class="field !w-auto !py-2" data-sort>
+            <option value="featured">Featured</option>
+            <option value="az">Name A–Z</option>
+            <option value="lead">Fastest lead time</option>
+          </select>
+        </label>
+      </div>
+      <div class="mt-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-3" data-grid>
+        {products.map((p, i) => (
+          <div data-lead={p.attributes.leadTimeWeeks} data-index={i}><ProductCard product={p} index={i} compare /></div>
+        ))}
+      </div>
+      <div data-empty hidden class="mt-6 rounded-2xl border border-dashed border-line p-12 text-center">
+        <p class="font-semibold">No products match those filters.</p>
+        <button type="button" class="link mt-2" data-clear>Clear filters</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Compare tray -->
+  <div data-compare-tray hidden class="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-white/95 shadow-[0_-8px_24px_rgba(0,0,0,.08)] backdrop-blur">
+    <div class="container-x flex items-center justify-between gap-4 py-3">
+      <p class="text-sm"><strong data-compare-count>0</strong> of 3 selected <span class="hidden text-muted sm:inline" data-compare-names></span></p>
+      <div class="flex gap-2">
+        <button type="button" class="btn btn-sm" data-compare-clear>Clear</button>
+        <button type="button" class="btn btn-primary btn-sm" data-compare-open>Compare</button>
+      </div>
+    </div>
+  </div>
+
+  <dialog data-compare-dialog class="m-auto w-[min(56rem,calc(100%-2rem))] rounded-2xl p-0 backdrop:bg-black/50">
+    <div class="flex items-center justify-between border-b border-line p-5">
+      <h2 class="text-xl">Compare products</h2>
+      <button type="button" class="rounded p-2 hover:bg-paper" data-compare-close aria-label="Close">✕</button>
+    </div>
+    <div class="overflow-x-auto p-5"><table class="w-full text-left text-sm" data-compare-table></table></div>
+  </dialog>
+
+  <script type="application/json" id="compare-data" set:html={JSON.stringify({ rows: specRows, products: compareData })}></script>
+
+  <script>
+    const form = document.querySelector<HTMLFormElement>('[data-filters]')!;
+    const grid = document.querySelector<HTMLElement>('[data-grid]')!;
+    const wrappers = [...grid.children] as HTMLElement[];
+    const countEl = document.querySelector('[data-count]')!;
+    const empty = document.querySelector<HTMLElement>('[data-empty]')!;
+    const sortEl = document.querySelector<HTMLSelectElement>('[data-sort]')!;
+    const activeCount = document.querySelector('[data-active-count]')!;
+
+    // Restore filters from the URL (e.g. /products?category=acoustic from the home page).
+    const params = new URLSearchParams(location.search);
+    form.querySelectorAll<HTMLInputElement>('input[type=checkbox]').forEach((i) => {
+      i.checked = params.getAll(i.name).includes(i.value);
+    });
+    (form.elements.namedItem('q') as HTMLInputElement).value = params.get('q') ?? '';
+    sortEl.value = params.get('sort') ?? 'featured';
+    if (window.matchMedia('(max-width: 1023px)').matches) document.querySelector('[data-filter-panel]')?.removeAttribute('open');
+
+    function apply() {
+      const data = new FormData(form);
+      const q = String(data.get('q') ?? '').trim().toLowerCase();
+      const cats = data.getAll('category') as string[];
+      const apps = data.getAll('application') as string[];
+      const fire = data.get('fire');
+      const acoustic = data.get('acoustic');
+      let shown = 0;
+      for (const w of wrappers) {
+        const c = w.querySelector<HTMLElement>('[data-product-card]')!.dataset;
+        const ok =
+          (!q || c.search!.includes(q)) &&
+          (!cats.length || cats.includes(c.category!)) &&
+          (!apps.length || apps.some((a) => c.applications!.split('|').includes(a))) &&
+          (!fire || c.fire === fire) &&
+          (!acoustic || c.acoustic === 'true');
+        w.hidden = !ok;
+        if (ok) shown++;
+      }
+      countEl.textContent = String(shown);
+      empty.hidden = shown > 0;
+
+      const sorted = [...wrappers].sort((a, b) => {
+        const ca = a.querySelector<HTMLElement>('[data-product-card]')!.dataset;
+        const cb = b.querySelector<HTMLElement>('[data-product-card]')!.dataset;
+        if (sortEl.value === 'az') return ca.name!.localeCompare(cb.name!);
+        if (sortEl.value === 'lead') return Number(a.dataset.lead) - Number(b.dataset.lead);
+        return (cb.featured === 'true' ? 1 : 0) - (ca.featured === 'true' ? 1 : 0) || Number(a.dataset.index) - Number(b.dataset.index);
+      });
+      grid.append(...sorted);
+
+      const next = new URLSearchParams();
+      for (const [k, v] of data) if (v) next.append(k, String(v));
+      if (sortEl.value !== 'featured') next.set('sort', sortEl.value);
+      const n = cats.length + apps.length + (fire ? 1 : 0) + (acoustic ? 1 : 0) + (q ? 1 : 0);
+      activeCount.textContent = n ? `${n} active` : '';
+      history.replaceState(null, '', `${location.pathname}${next.size ? `?${next}` : ''}`);
+    }
+
+    form.addEventListener('input', apply);
+    form.addEventListener('submit', (e) => e.preventDefault());
+    form.addEventListener('reset', () => setTimeout(apply));
+    sortEl.addEventListener('change', apply);
+    document.querySelector('[data-clear]')?.addEventListener('click', () => form.reset());
+    apply();
+
+    // Compare
+    const { rows, products } = JSON.parse(document.getElementById('compare-data')!.textContent!);
+    const tray = document.querySelector<HTMLElement>('[data-compare-tray]')!;
+    const dialog = document.querySelector<HTMLDialogElement>('[data-compare-dialog]')!;
+    const boxes = [...document.querySelectorAll<HTMLInputElement>('[data-compare]')];
+    const selected = () => boxes.filter((b) => b.checked).map((b) => b.value);
+
+    function updateCompare() {
+      const sel = selected();
+      tray.hidden = sel.length === 0;
+      tray.querySelector('[data-compare-count]')!.textContent = String(sel.length);
+      tray.querySelector('[data-compare-names]')!.textContent = sel.map((s) => products[s].name).join(', ');
+      boxes.forEach((b) => (b.disabled = !b.checked && sel.length >= 3));
+    }
+    boxes.forEach((b) => b.addEventListener('change', updateCompare));
+    tray.querySelector('[data-compare-clear]')!.addEventListener('click', () => {
+      boxes.forEach((b) => (b.checked = false));
+      updateCompare();
+    });
+    tray.querySelector('[data-compare-open]')!.addEventListener('click', () => {
+      const sel = selected().map((s) => products[s]);
+      const esc = (v: unknown) => String(v ?? '—').replace(/[&<>]/g, (ch) => `&#${ch.charCodeAt(0)};`);
+      const cell = (v: unknown) => `<td class="border-t border-line p-3 align-top">${esc(Array.isArray(v) ? v.join(', ') : v)}</td>`;
+      const table = dialog.querySelector('[data-compare-table]')!;
+      table.innerHTML =
+        `<thead><tr><th class="p-3"></th>${sel.map((p) => `<th class="p-3 text-base">${esc(p.name)}</th>`).join('')}</tr></thead><tbody>` +
+        [...rows, 'Sizes'].map((r: string) => `<tr><th class="border-t border-line p-3 font-medium text-muted">${r}</th>${sel.map((p) => cell(p.specs[r])).join('')}</tr>`).join('') +
+        `<tr><th class="border-t border-line p-3 font-medium text-muted">Lead time</th>${sel.map((p) => cell(`${p.leadTimeWeeks} weeks`)).join('')}</tr>` +
+        `<tr><th class="border-t border-line p-3 font-medium text-muted">Finishes</th>${sel.map((p) => cell(p.finishes)).join('')}</tr></tbody>`;
+      dialog.showModal();
+    });
+    dialog.querySelector('[data-compare-close]')!.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (e) => e.target === dialog && dialog.close());
+  </script>
+</Layout>
