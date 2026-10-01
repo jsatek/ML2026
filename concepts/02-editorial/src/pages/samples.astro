@@ -1,0 +1,157 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site, products, sectors, getMaterial } from '@ml/content';
+import { url } from '../lib/utils';
+
+const catalog = Object.fromEntries(products.map((p) => [p.slug, { name: p.name, material: getMaterial(p.material)?.name, image: p.images.hero, finishes: p.finishes.map((f) => ({ name: f.name, hex: f.hex })) }]));
+const sortedProducts = [...products].sort((a, b) => a.name.localeCompare(b.name));
+---
+<Layout title="Samples" description="Request Material Logiq samples.">
+  <section class="wrap pt-10">
+    <h1 class="display">Samples</h1>
+    <p class="lede mt-6 max-w-3xl">Three short steps. Up to {site.sampleLimit} samples per request, shipped with their data sheets.</p>
+  </section>
+
+  <form class="wrap mt-12 max-w-4xl" data-form novalidate>
+    <!-- Step 1 -->
+    <section class="border-t border-ink" data-step="1">
+      <h2 class="flex items-baseline gap-4 py-6 text-4xl"><span class="text-teal">1</span> Your selection</h2>
+      <div data-body>
+        <ul class="divide-y divide-ink/25 border-y border-ink/25" data-list aria-live="polite"></ul>
+        <p data-empty class="py-6 text-lg text-muted">Nothing selected yet. Add from any product page, or pick below.</p>
+        <div class="mt-6 grid gap-4 sm:grid-cols-[1fr_1fr_auto] sm:items-end">
+          <label class="block"><span class="kicker">Product</span>
+            <select class="field mt-1" data-qa-product><option value="">Choose…</option>{sortedProducts.map((p) => <option value={p.slug}>{p.name}</option>)}</select>
+          </label>
+          <label class="block"><span class="kicker">Finish</span>
+            <select class="field mt-1" data-qa-finish disabled><option value="">—</option></select>
+          </label>
+          <button type="button" class="btn" data-qa-add disabled>Add</button>
+        </div>
+        <p class="mt-2 text-sm text-[#b3261e]" data-qa-msg role="alert"></p>
+        <button type="button" class="btn btn-solid mt-8" data-next="2">Continue to shipping <span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+
+    <!-- Step 2 -->
+    <section class="border-t border-ink" data-step="2">
+      <h2 class="flex items-baseline gap-4 py-6 text-4xl"><span class="text-teal">2</span> Where should we send them?</h2>
+      <div data-body hidden>
+        <div class="grid gap-8 sm:grid-cols-2">
+          <label class="block"><span class="kicker">Full name</span><input name="name" required autocomplete="name" class="field mt-1" /></label>
+          <label class="block"><span class="kicker">Email</span><input name="email" type="email" required autocomplete="email" class="field mt-1" /></label>
+          <label class="block"><span class="kicker">Company</span><input name="company" autocomplete="organization" class="field mt-1" /></label>
+          <label class="block"><span class="kicker">Market</span><select name="sector" class="field mt-1"><option value="">—</option>{sectors.map((s) => <option>{s}</option>)}</select></label>
+          <label class="block sm:col-span-2"><span class="kicker">Street address</span><input name="address" required autocomplete="street-address" class="field mt-1" /></label>
+          <label class="block"><span class="kicker">City</span><input name="city" required autocomplete="address-level2" class="field mt-1" /></label>
+          <div class="grid grid-cols-2 gap-6">
+            <label class="block"><span class="kicker">State</span><input name="state" required autocomplete="address-level1" class="field mt-1" /></label>
+            <label class="block"><span class="kicker">ZIP</span><input name="zip" required autocomplete="postal-code" inputmode="numeric" class="field mt-1" /></label>
+          </div>
+          <label class="block sm:col-span-2"><span class="kicker">Tell us about the project (optional)</span><textarea name="notes" rows="2" class="field mt-1"></textarea></label>
+        </div>
+        <p class="mt-4 text-sm text-[#b3261e]" data-step-error role="alert"></p>
+        <button type="button" class="btn btn-solid mt-8" data-next="3">Review request <span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+
+    <!-- Step 3 -->
+    <section class="border-y border-ink" data-step="3">
+      <h2 class="flex items-baseline gap-4 py-6 text-4xl"><span class="text-teal">3</span> Review</h2>
+      <div data-body hidden>
+        <div class="grid gap-8 sm:grid-cols-2" data-review></div>
+        <button type="submit" class="btn btn-solid mt-8">Send request <span aria-hidden="true">→</span></button>
+        <p class="mt-3 pb-8 text-sm text-muted">Mockup only: nothing is sent.</p>
+      </div>
+    </section>
+  </form>
+
+  <section class="wrap mt-12 max-w-4xl" data-done hidden tabindex="-1">
+    <p class="kicker text-teal-ink">Request received</p>
+    <p class="headline mt-4">Thank you, <span data-done-name></span>.</p>
+    <p class="lede mt-6">Your <span data-done-count></span> samples will ship within one business day, with data sheets for each product. Questions? Call {site.contact.phone}.</p>
+    <a href={url('/products')} class="btn mt-8">Back to the index <span aria-hidden="true">→</span></a>
+  </section>
+
+  <script type="application/json" id="catalog" set:html={JSON.stringify(catalog)}></script>
+  <script>
+    import * as cart from '@ml/content/cart';
+    type P = { name: string; material: string; image: string | null; finishes: { name: string; hex: string }[] };
+    const catalog: Record<string, P> = JSON.parse(document.getElementById('catalog')!.textContent!);
+    const esc = (s: string) => s.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
+    const hex = (s: string, f: string) => catalog[s]?.finishes.find((x) => x.name === f)?.hex ?? '#ccc';
+    const form = document.querySelector<HTMLFormElement>('[data-form]')!;
+    const steps = [...document.querySelectorAll<HTMLElement>('[data-step]')];
+
+    cart.onChange((items) => {
+      document.querySelector('[data-list]')!.innerHTML = items.map((i) => `
+        <li class="flex items-center gap-4 py-4">
+          <span class="size-12 shrink-0" style="background:${hex(i.product, i.finish)}"></span>
+          <span class="flex-1"><span class="block text-xl font-bold">${esc(catalog[i.product]?.name ?? i.product)}</span><span class="text-sm text-muted">${esc(i.finish)} · ${esc(catalog[i.product]?.material ?? '')}</span></span>
+          <button type="button" class="link text-sm" data-remove="${esc(i.product)}" data-finish="${esc(i.finish)}">Remove</button>
+        </li>`).join('');
+      document.querySelector<HTMLElement>('[data-empty]')!.hidden = items.length > 0;
+    });
+    document.querySelector('[data-list]')!.addEventListener('click', (e) => {
+      const b = (e.target as Element).closest<HTMLButtonElement>('[data-remove]');
+      if (b) cart.remove({ product: b.dataset.remove!, finish: b.dataset.finish! });
+    });
+
+    const prod = document.querySelector<HTMLSelectElement>('[data-qa-product]')!;
+    const fin = document.querySelector<HTMLSelectElement>('[data-qa-finish]')!;
+    const add = document.querySelector<HTMLButtonElement>('[data-qa-add]')!;
+    const msg = document.querySelector<HTMLElement>('[data-qa-msg]')!;
+    prod.addEventListener('change', () => {
+      const p = catalog[prod.value];
+      fin.innerHTML = p ? p.finishes.map((f) => `<option>${esc(f.name)}</option>`).join('') : '<option value="">—</option>';
+      fin.disabled = add.disabled = !p;
+    });
+    add.addEventListener('click', () => {
+      const r = cart.add({ product: prod.value, finish: fin.value });
+      msg.textContent = r === 'full' ? `That's the ${cart.LIMIT}-sample limit.` : r === 'exists' ? 'Already in your selection.' : '';
+    });
+
+    function open(n: number) {
+      steps.forEach((s) => (s.querySelector<HTMLElement>('[data-body]')!.hidden = Number(s.dataset.step) !== n));
+      steps[n - 1].querySelector('h2')!.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      (steps[n - 1].querySelector<HTMLElement>('input, select, button'))?.focus({ preventScroll: true });
+    }
+    function valid(n: number): boolean {
+      if (n >= 2 && !cart.getCart().length) { open(1); msg.textContent = 'Add at least one sample first.'; return false; }
+      if (n >= 3) {
+        const fields = [...steps[1].querySelectorAll<HTMLInputElement>('input, select, textarea')];
+        const bad = fields.find((f) => !f.checkValidity());
+        const err = document.querySelector('[data-step-error]')!;
+        if (bad) { open(2); err.textContent = 'Please complete the required fields.'; bad.focus(); bad.reportValidity(); return false; }
+        err.textContent = '';
+      }
+      return true;
+    }
+    document.querySelectorAll<HTMLButtonElement>('[data-next]').forEach((b) => b.addEventListener('click', () => {
+      const n = Number(b.dataset.next);
+      if (!valid(n)) return;
+      if (n === 3) {
+        const d = new FormData(form);
+        document.querySelector('[data-review]')!.innerHTML = `
+          <div><p class="kicker">Samples</p><ul class="mt-2 space-y-1">${cart.getCart().map((i) => `<li>${esc(catalog[i.product]?.name ?? '')} · ${esc(i.finish)}</li>`).join('')}</ul></div>
+          <div><p class="kicker">Ship to</p><p class="mt-2">${esc(String(d.get('name')))}<br>${esc(String(d.get('address')))}<br>${esc(`${d.get('city')}, ${d.get('state')} ${d.get('zip')}`)}</p></div>`;
+      }
+      open(n);
+    }));
+    steps.forEach((s) => s.querySelector('h2')!.addEventListener('click', () => {
+      const n = Number(s.dataset.step);
+      if (n === 1 || valid(n)) open(n);
+    }));
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!valid(3)) return;
+      document.querySelector('[data-done-name]')!.textContent = String(new FormData(form).get('name')).split(' ')[0];
+      document.querySelector('[data-done-count]')!.textContent = String(cart.getCart().length);
+      cart.clear();
+      form.hidden = true;
+      const done = document.querySelector<HTMLElement>('[data-done]')!;
+      done.hidden = false;
+      done.focus();
+    });
+  </script>
+</Layout>

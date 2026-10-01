@@ -1,0 +1,68 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Media from '../../components/Media.astro';
+import { products, categories, materials, getMaterial, getCategory } from '@ml/content';
+import { url } from '../../lib/utils';
+---
+<Layout title="Products" description="Every Material Logiq product.">
+  <section class="stage pt-36">
+    <p class="tag">{products.length} systems</p>
+    <h1 class="mega rise mt-4"><span><span>Products</span></span></h1>
+    <div class="mt-10 flex flex-wrap gap-2" role="group" aria-label="Material">
+      <button type="button" class="pill" data-k="material" data-v="" aria-pressed="true">All</button>
+      {materials.map((m) => <button type="button" class="pill" data-k="material" data-v={m.slug} aria-pressed="false">{m.name}</button>)}
+    </div>
+    <div class="mt-3 flex flex-wrap gap-2" role="group" aria-label="Product type">
+      <button type="button" class="pill !py-1.5 text-sm" data-k="type" data-v="" aria-pressed="true">Any type</button>
+      {categories.map((c) => <button type="button" class="pill !py-1.5 text-sm" data-k="type" data-v={c.slug} aria-pressed="false">{c.name}</button>)}
+    </div>
+    <p class="mt-6 text-dim" aria-live="polite"><span data-n>{products.length}</span> shown</p>
+  </section>
+
+  <section class="stage mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-3" data-grid>
+    {products.map((p, i) => (
+      <a href={url(`/products/${p.slug}`)} class="reveal group relative block overflow-hidden rounded-3xl" style={`--i:${i % 3}; view-transition-name: card-${i}`} data-card data-material={p.material} data-types={p.types.join('|')}>
+        <Media src={p.images.hero} class="aspect-[3/4]" eager={i < 3} imgClass="transition duration-700 group-hover:scale-110" />
+        <div class="absolute inset-0 bg-gradient-to-t from-night via-night/20 to-transparent"></div>
+        <div class="absolute inset-x-0 bottom-0 p-6">
+          <p class="tag">{getMaterial(p.material)?.name} · {getCategory(p.category)?.name}</p>
+          <p class="mt-2 text-4xl font-extrabold uppercase leading-none tracking-tighter">{p.name}</p>
+          <div class="mt-3 flex gap-3 text-sm text-dim opacity-0 transition duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+            {p.attributes.nrc != null && <span>NRC {p.attributes.nrc.toFixed(2)}</span>}
+            {p.attributes.fireRating && <span>Class {p.attributes.fireRating}</span>}
+            <span>{p.finishes.length} finishes</span>
+          </div>
+        </div>
+      </a>
+    ))}
+  </section>
+  <p data-none hidden class="stage py-24 text-center text-2xl text-dim">Nothing in that combination yet. <a href={`mailto:sales@materiallogiq.com`} class="underline">Ask about a custom build.</a></p>
+
+  <script>
+    const cards = [...document.querySelectorAll<HTMLElement>('[data-card]')];
+    const btns = [...document.querySelectorAll<HTMLButtonElement>('[data-k]')];
+    const params = new URLSearchParams(location.search);
+    const state: Record<string, string> = { material: params.get('material') ?? '', type: params.get('type') ?? '' };
+    const render = () => {
+      btns.forEach((b) => b.setAttribute('aria-pressed', String(state[b.dataset.k!] === b.dataset.v)));
+      let n = 0;
+      cards.forEach((c) => {
+        const ok = (!state.material || c.dataset.material === state.material) && (!state.type || c.dataset.types!.split('|').includes(state.type));
+        c.hidden = !ok;
+        if (ok) { n++; c.classList.add('in'); }
+      });
+      document.querySelector('[data-n]')!.textContent = String(n);
+      document.querySelector<HTMLElement>('[data-none]')!.hidden = n > 0;
+      const q = new URLSearchParams(Object.entries(state).filter(([, v]) => v));
+      history.replaceState(null, '', `${location.pathname}${q.size ? `?${q}` : ''}`);
+    };
+    btns.forEach((b) => b.addEventListener('click', () => {
+      state[b.dataset.k!] = b.dataset.v!;
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      // Animate the reflow with the View Transitions API where available.
+      if ('startViewTransition' in document && !reduce) (document as any).startViewTransition(render);
+      else render();
+    }));
+    render();
+  </script>
+</Layout>

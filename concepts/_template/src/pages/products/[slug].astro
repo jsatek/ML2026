@@ -9,7 +9,10 @@ const { product: p } = Astro.props;
 ---
 <Layout title={p.name}>
   <h1 class="text-3xl font-bold">{p.name}</h1>
-  <p>{p.description}</p>
+  <p>{p.fullName}</p>
+  {p.images.hero && <img src={p.images.hero} alt="" class="mt-4 w-full max-w-2xl" />}
+  <p class="mt-4">{p.description}</p>
+  <ul class="list-disc pl-5">{p.features.map((f) => <li>{f}</li>)}</ul>
   <h2 class="mt-6 font-bold">Finishes</h2>
   <ul class="flex flex-wrap gap-2">
     {p.finishes.map((f) => (
@@ -19,7 +22,7 @@ const { product: p } = Astro.props;
   <h2 class="mt-6 font-bold">Specs</h2>
   <dl>{Object.entries(p.specs).map(([k, v]) => <><dt class="font-semibold">{k}</dt><dd>{Array.isArray(v) ? v.join(', ') : v}</dd></>)}</dl>
   <h2 class="mt-6 font-bold">Documents</h2>
-  <ul>{resourcesForProduct(p.slug).map((r) => <li><a href={r.href}>{r.title}</a> ({r.format}, {r.size})</li>)}</ul>
+  <ul>{resourcesForProduct(p.slug).map((r) => <li><a href={r.href}>{r.title}</a> ({r.format})</li>)}</ul>
   <h2 class="mt-6 font-bold">Used in</h2>
   <ul>{projectsUsingProduct(p.slug).map((pr) => <li>{pr.name}</li>)}</ul>
 </Layout>

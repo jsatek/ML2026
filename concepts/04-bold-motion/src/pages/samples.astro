@@ -1,0 +1,98 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site, products, getMaterial } from '@ml/content';
+import { url } from '../lib/utils';
+
+const catalog = Object.fromEntries(products.map((p) => [p.slug, { n: p.name, m: getMaterial(p.material)?.name, f: p.finishes.map((f) => ({ n: f.name, h: f.hex, i: f.image })) }]));
+const sorted = [...products].sort((a, b) => a.name.localeCompare(b.name));
+---
+<Layout title="Samples" description="Request Material Logiq samples.">
+  <section class="stage pt-36">
+    <p class="tag">Up to {site.sampleLimit} per request</p>
+    <h1 class="mega rise mt-4"><span><span>Feel it</span></span><span><span style="--i:1">first</span></span></h1>
+  </section>
+
+  <div data-flow>
+    <section class="stage mt-12" aria-labelledby="wall-h">
+      <h2 id="wall-h" class="tag">Your swatch wall · <span data-cart-count>0</span>/{site.sampleLimit}</h2>
+      <ul class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4" data-wall aria-live="polite"></ul>
+      <p data-empty class="mt-4 rounded-3xl border border-dashed border-edge p-12 text-center text-dim">Empty for now. Add finishes from any product, or pick one below.</p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <label class="sr-only" for="s-p">Product</label>
+        <select id="s-p" class="field sm:max-w-xs" data-p><option value="">Add a product…</option>{sorted.map((p) => <option value={p.slug}>{p.name}</option>)}</select>
+        <div class="flex flex-wrap gap-2" data-sw></div>
+      </div>
+      <p class="mt-2 text-sm text-orange" data-msg role="alert"></p>
+    </section>
+
+    <form class="stage mt-24 grid gap-10 lg:grid-cols-12" data-form novalidate>
+      <h2 class="big lg:col-span-4">Ship to</h2>
+      <div class="grid gap-4 sm:grid-cols-2 lg:col-span-8">
+        <label class="text-sm text-dim">Name<input name="name" required autocomplete="name" class="field mt-1" /></label>
+        <label class="text-sm text-dim">Email<input name="email" type="email" required autocomplete="email" class="field mt-1" /></label>
+        <label class="text-sm text-dim sm:col-span-2">Company<input name="company" autocomplete="organization" class="field mt-1" /></label>
+        <label class="text-sm text-dim sm:col-span-2">Street address<input name="address" required autocomplete="street-address" class="field mt-1" /></label>
+        <label class="text-sm text-dim">City<input name="city" required autocomplete="address-level2" class="field mt-1" /></label>
+        <div class="grid grid-cols-2 gap-4">
+          <label class="text-sm text-dim">State<input name="state" required autocomplete="address-level1" class="field mt-1" /></label>
+          <label class="text-sm text-dim">ZIP<input name="zip" required inputmode="numeric" autocomplete="postal-code" class="field mt-1" /></label>
+        </div>
+        <p class="text-sm text-orange sm:col-span-2" data-err role="alert"></p>
+        <div class="sm:col-span-2"><button class="pill pill-solid !px-8 !py-4 text-lg">Send request →</button><p class="mt-3 text-xs text-dim">Mockup only: nothing is sent.</p></div>
+      </div>
+    </form>
+  </div>
+
+  <section class="stage py-24" data-done hidden tabindex="-1">
+    <p class="big">On its way.</p>
+    <p class="mt-6 text-xl text-dim"><span data-done-n></span> samples ship within one business day. Questions? {site.contact.phone}.</p>
+    <a href={url('/products')} class="pill pill-solid mt-8">Keep exploring →</a>
+  </section>
+
+  <script type="application/json" id="cat" set:html={JSON.stringify(catalog)}></script>
+  <script>
+    import * as cart from '@ml/content/cart';
+    type F = { n: string; h: string; i: string | null };
+    const cat: Record<string, { n: string; m: string; f: F[] }> = JSON.parse(document.getElementById('cat')!.textContent!);
+    const esc = (s: string) => s.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
+    const wall = document.querySelector<HTMLElement>('[data-wall]')!;
+    cart.onChange((items) => {
+      wall.innerHTML = items.map((it, k) => {
+        const f = cat[it.product]?.f.find((x) => x.n === it.finish);
+        return `<li class="group relative aspect-square overflow-hidden rounded-3xl" style="background:${f?.h ?? '#333'} ${f?.i ? `url('${f.i}') center/cover` : ''}">
+          <div class="absolute inset-0 bg-gradient-to-t from-night/90 to-transparent"></div>
+          <div class="absolute inset-x-0 bottom-0 p-4"><p class="text-xl font-extrabold uppercase tracking-tighter">${esc(cat[it.product]?.n ?? '')}</p><p class="text-sm text-bone/80">${esc(it.finish)}</p></div>
+          <button type="button" class="absolute right-3 top-3 grid size-9 place-items-center rounded-full bg-night/70 hover:bg-night" data-rm="${k}" aria-label="Remove ${esc(cat[it.product]?.n ?? '')} ${esc(it.finish)}">✕</button>
+        </li>`;
+      }).join('');
+      document.querySelector<HTMLElement>('[data-empty]')!.hidden = items.length > 0;
+    });
+    wall.addEventListener('click', (e) => { const b = (e.target as Element).closest<HTMLButtonElement>('[data-rm]'); if (b) cart.remove(cart.getCart()[Number(b.dataset.rm)]); });
+
+    const sel = document.querySelector<HTMLSelectElement>('[data-p]')!;
+    const sw = document.querySelector<HTMLElement>('[data-sw]')!;
+    const msg = document.querySelector<HTMLElement>('[data-msg]')!;
+    sel.addEventListener('change', () => {
+      sw.innerHTML = (cat[sel.value]?.f ?? []).map((f) => `<button type="button" class="size-10 rounded-xl ring-1 ring-white/10 transition hover:scale-110" style="background:${f.h}" title="${esc(f.n)}" aria-label="Add ${esc(f.n)}" data-f="${esc(f.n)}"></button>`).join('');
+    });
+    sw.addEventListener('click', (e) => {
+      const b = (e.target as Element).closest<HTMLButtonElement>('[data-f]');
+      if (!b) return;
+      const r = cart.add({ product: sel.value, finish: b.dataset.f! });
+      msg.textContent = r === 'full' ? `That's the ${cart.LIMIT}-sample limit.` : r === 'exists' ? 'Already on your wall.' : '';
+    });
+
+    const form = document.querySelector<HTMLFormElement>('[data-form]')!;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const err = document.querySelector('[data-err]')!;
+      if (!cart.getCart().length) { err.textContent = 'Add at least one sample to your wall.'; sel.focus(); return; }
+      if (!form.checkValidity()) { err.textContent = 'Please complete the required fields.'; form.querySelector<HTMLElement>(':invalid')?.focus(); form.reportValidity(); return; }
+      document.querySelector('[data-done-n]')!.textContent = String(cart.getCart().length);
+      cart.clear();
+      document.querySelector<HTMLElement>('[data-flow]')!.hidden = true;
+      const done = document.querySelector<HTMLElement>('[data-done]')!;
+      done.hidden = false; done.focus(); scrollTo({ top: 0 });
+    });
+  </script>
+</Layout>

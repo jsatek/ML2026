@@ -1,0 +1,167 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Media from '../../components/Media.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import SampleButton from '../../components/SampleButton.astro';
+import { products, getCategory, getMaterial, resourcesForProduct, resourceTypes, projectsUsingProduct, relatedProducts, productsInCategory } from '@ml/content';
+import { url } from '../../lib/utils';
+
+export function getStaticPaths() {
+  return products.map((p) => ({ params: { slug: p.slug }, props: { product: p } }));
+}
+const { product: p } = Astro.props;
+const material = getMaterial(p.material)!;
+const category = getCategory(p.category)!;
+const docs = resourcesForProduct(p.slug);
+const groups = resourceTypes.map((t) => ({ ...t, docs: docs.filter((d) => d.type === t.slug) })).filter((g) => g.docs.length);
+const kit = docs.filter((d) => ['data-sheet', 'csi-spec', 'installation'].includes(d.type) || (d.type === 'cad' && ['DWG', 'RFA'].includes(d.format)));
+const finishGroups = [...new Set(p.finishes.map((f) => f.group))];
+const first = p.finishes[0];
+const used = projectsUsingProduct(p.slug);
+const alternatives = [...new Map([...relatedProducts(p), ...productsInCategory(p.category)].filter((o) => o.slug !== p.slug).map((o) => [o.slug, o])).values()].slice(0, 4);
+const gallery = p.images.gallery;
+---
+<Layout title={p.name} description={p.tagline}>
+  <div class="shell py-4 text-sm text-muted">
+    <a href={url('/products')} class="hover:underline">Explore</a> / <a href={url(`/products?type=${category.slug}`)} class="hover:underline">{category.name}</a> / <span class="text-ink">{p.name}</span>
+  </div>
+
+  <section class="shell grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_26rem]">
+    <!-- Viewer -->
+    <div>
+      <div class="flex gap-1 rounded-lg bg-panel p-1 text-sm sm:w-fit" role="tablist" aria-label="Viewer">
+        <button type="button" role="tab" class="flex-1 whitespace-nowrap rounded-md px-3 py-1.5 aria-selected:bg-white aria-selected:font-semibold aria-selected:shadow-sm" aria-selected="true" data-tab="photos">Photos ({gallery.length})</button>
+        {p.designOptions.length > 0 && <button type="button" role="tab" class="flex-1 whitespace-nowrap rounded-md px-3 py-1.5 aria-selected:bg-white aria-selected:font-semibold aria-selected:shadow-sm" aria-selected="false" data-tab="options">Design options ({p.designOptions.length})</button>}
+      </div>
+      <div class="mt-3" data-panel="photos">
+        <div data-main><Media src={gallery[0]} alt={`${p.name} installed`} class="aspect-[4/3] rounded-2xl" eager /></div>
+        <div class="mt-3 flex gap-2 overflow-x-auto pb-1">
+          {gallery.map((src, i) => <button type="button" class="w-24 shrink-0 overflow-hidden rounded-lg ring-offset-2 aria-pressed:ring-2 aria-pressed:ring-green" aria-pressed={i === 0 ? 'true' : 'false'} data-thumb={src} aria-label={`Photo ${i + 1}`}><Media src={src} class="aspect-[4/3]" /></button>)}
+        </div>
+      </div>
+      {p.designOptions.length > 0 && (
+        <div class="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3" data-panel="options" hidden>
+          {p.designOptions.map((o) => <figure class="card overflow-hidden"><Media src={o.image} alt={o.name} fit="contain" color="#fff" class="aspect-[4/3]" /><figcaption class="border-t border-line px-3 py-2 text-sm font-medium">{o.name}</figcaption></figure>)}
+        </div>
+      )}
+    </div>
+
+    <!-- Configurator -->
+    <aside class="lg:sticky lg:top-20 lg:h-fit">
+      <p class="label text-teal-ink">{material.name} · {category.name}</p>
+      <h1 class="mt-1 text-4xl">{p.name}</h1>
+      <p class="mt-2 text-muted">{p.tagline}</p>
+      <dl class="mt-4 grid grid-cols-3 gap-2 text-center text-sm">
+        <div class="rounded-lg bg-panel p-2"><dt class="text-xs text-muted">NRC</dt><dd class="font-bold">{p.attributes.nrc?.toFixed(2) ?? 'n/a'}</dd></div>
+        <div class="rounded-lg bg-panel p-2"><dt class="text-xs text-muted">Fire</dt><dd class="font-bold">{p.attributes.fireRating ? `Class ${p.attributes.fireRating}` : '—'}</dd></div>
+        <div class="rounded-lg bg-panel p-2"><dt class="text-xs text-muted">Finishes</dt><dd class="font-bold">{p.finishes.length}</dd></div>
+      </dl>
+
+      {first && (
+        <div class="card mt-5 p-4">
+          <p class="label">Choose a finish</p>
+          {finishGroups.length > 1 && (
+            <div class="mt-2 flex flex-wrap gap-1" role="tablist" aria-label="Finish groups">
+              {finishGroups.map((g, i) => <button type="button" role="tab" class="chip" aria-pressed={i === 0 ? 'true' : 'false'} data-fgroup={g}>{g}</button>)}
+            </div>
+          )}
+          {finishGroups.map((g, i) => (
+            <div class="mt-3 grid grid-cols-7 gap-2" data-fpanel={g} hidden={i > 0}>
+              {p.finishes.filter((f) => f.group === g).map((f) => (
+                <label class="cursor-pointer" title={f.name}>
+                  <input type="radio" name="finish" value={f.name} data-hex={f.hex} data-img={f.image ?? ''} checked={f === first} class="peer sr-only" />
+                  <span class="block aspect-square rounded-lg bg-cover ring-1 ring-black/15 ring-offset-2 peer-checked:ring-2 peer-checked:ring-green peer-focus-visible:outline-3 peer-focus-visible:outline-orange" style={`background-color:${f.hex}`} data-texture={f.image ?? ''}><span class="sr-only">{f.name}</span></span>
+                </label>
+              ))}
+            </div>
+          ))}
+          <div class="mt-4 flex items-center gap-3 rounded-lg bg-panel p-3">
+            <span class="size-14 shrink-0 rounded-lg bg-cover ring-1 ring-black/10" data-preview style={`background-color:${first.hex}`}></span>
+            <div class="min-w-0 flex-1"><p class="text-xs text-muted">Selected</p><p class="truncate font-semibold" data-finish-name>{first.name}</p></div>
+          </div>
+          <SampleButton product={p.slug} name={p.name} finish={first.name} label={`Add ${first.name} sample`} class="btn btn-primary mt-3 w-full" />
+        </div>
+      )}
+
+      {kit.length > 0 && (
+        <details class="card mt-3 p-4">
+          <summary class="cursor-pointer font-semibold">Spec kit · {kit.length} files</summary>
+          <ul class="mt-3 space-y-1 text-sm">{kit.map((d) => <li><a href={d.href} target="_blank" rel="noopener" class="flex justify-between gap-2 hover:underline"><span>{d.title}</span><span class="text-muted">{d.format}</span></a></li>)}</ul>
+          <a href={url(`/resources?product=${p.slug}`)} class="mt-3 inline-block text-sm font-semibold text-green underline">All {docs.length} documents →</a>
+        </details>
+      )}
+    </aside>
+  </section>
+
+  <!-- Details tabs -->
+  <section class="shell mt-12">
+    <div class="flex gap-6 overflow-x-auto border-b border-line" role="tablist" aria-label="Product details">
+      {[['overview', 'Overview'], ['specs', 'Specifications'], ['docs', `Documents (${docs.length})`], ...(used.length ? [['projects', `Projects (${used.length})`]] : [])].map(([id, label], i) => (
+        <button type="button" role="tab" class="-mb-px whitespace-nowrap border-b-2 border-transparent py-3 font-medium text-muted aria-selected:border-green aria-selected:text-ink" aria-selected={i === 0 ? 'true' : 'false'} data-dtab={id}>{label}</button>
+      ))}
+    </div>
+    <div class="py-8" data-dpanel="overview">
+      <div class="grid gap-8 lg:grid-cols-2">
+        <p class="text-lg">{p.description}</p>
+        <ul class="space-y-2">{p.features.map((f) => <li class="flex gap-3 rounded-lg bg-panel p-3"><span class="text-teal-ink" aria-hidden="true">✓</span>{f}</li>)}</ul>
+      </div>
+    </div>
+    <div class="py-8" data-dpanel="specs" hidden>
+      <dl class="grid gap-x-10 sm:grid-cols-2">
+        {Object.entries(p.specs).map(([k, v]) => <div class="grid grid-cols-2 gap-4 border-b border-line py-2.5 text-sm"><dt class="text-muted">{k}</dt><dd class="font-medium">{Array.isArray(v) ? v.join(', ') : v}</dd></div>)}
+      </dl>
+    </div>
+    <div class="py-8" data-dpanel="docs" hidden>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {groups.map((g) => <div><p class="label">{g.name}</p><ul class="mt-2 space-y-1 text-sm">{g.docs.map((d) => <li><a href={d.href} target="_blank" rel="noopener" class="flex justify-between gap-2 rounded-md p-1.5 hover:bg-panel"><span>{d.title}</span><span class="text-muted">{d.format}</span></a></li>)}</ul></div>)}
+      </div>
+    </div>
+    {used.length > 0 && (
+      <div class="py-8" data-dpanel="projects" hidden>
+        <ul class="grid gap-4 sm:grid-cols-3">{used.map((u) => <li><a href={url(`/projects/${u.slug}`)} class="card block overflow-hidden hover:border-ink"><Media src={u.images[0]} class="aspect-[4/3]" /><p class="p-3 font-semibold">{u.name}{u.placeholder && <span class="ml-2 text-xs font-normal text-muted">Sample</span>}</p></a></li>)}</ul>
+      </div>
+    )}
+  </section>
+
+  {alternatives.length > 0 && (
+    <section class="shell mt-6" aria-labelledby="alt-h">
+      <h2 id="alt-h" class="text-xl">Alternatives &amp; companions</h2>
+      <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{alternatives.map((a) => <ProductCard product={a} />)}</div>
+    </section>
+  )}
+
+  <script>
+    const tabs = (btnSel: string, attr: string, panelAttr: string, pressAttr = 'aria-selected') => {
+      const btns = [...document.querySelectorAll<HTMLButtonElement>(btnSel)];
+      btns.forEach((b) => b.addEventListener('click', () => {
+        btns.forEach((o) => o.setAttribute(pressAttr, String(o === b)));
+        document.querySelectorAll<HTMLElement>(`[${panelAttr}]`).forEach((p) => (p.hidden = p.getAttribute(panelAttr) !== b.getAttribute(attr)));
+      }));
+    };
+    tabs('[data-tab]', 'data-tab', 'data-panel');
+    tabs('[data-dtab]', 'data-dtab', 'data-dpanel');
+    tabs('[data-fgroup]', 'data-fgroup', 'data-fpanel', 'aria-pressed');
+
+    const main = document.querySelector<HTMLImageElement>('[data-main] img');
+    document.querySelectorAll<HTMLButtonElement>('[data-thumb]').forEach((t, _, all) => t.addEventListener('click', () => {
+      if (main) main.src = t.dataset.thumb!;
+      all.forEach((o) => o.setAttribute('aria-pressed', String(o === t)));
+    }));
+
+    const btn = document.querySelector<HTMLButtonElement>('aside [data-add-sample]');
+    const preview = document.querySelector<HTMLElement>('[data-preview]');
+    const texture = (el: HTMLElement, img?: string) => img && (el.style.backgroundImage = `url("${img}")`);
+    // Swatch textures load only once their group is shown (hidden elements never intersect).
+    const io = new IntersectionObserver((es) => es.forEach((e) => {
+      if (e.isIntersecting) { texture(e.target as HTMLElement, (e.target as HTMLElement).dataset.texture); io.unobserve(e.target); }
+    }));
+    document.querySelectorAll<HTMLElement>('[data-texture]').forEach((el) => io.observe(el));
+    document.querySelectorAll<HTMLInputElement>('input[name=finish]').forEach((i) => i.addEventListener('change', () => {
+      document.querySelector('[data-finish-name]')!.textContent = i.value;
+      if (preview) { preview.style.backgroundColor = i.dataset.hex!; preview.style.backgroundImage = i.dataset.img ? `url("${i.dataset.img}")` : ''; }
+      if (btn) { btn.dataset.finish = i.value; btn.dataset.labelAdd = `Add ${i.value} sample`; }
+      window.dispatchEvent(new CustomEvent('ml:cart'));
+    }));
+    if (preview) texture(preview, document.querySelector<HTMLInputElement>('input[name=finish]:checked')?.dataset.img);
+  </script>
+</Layout>

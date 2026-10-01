@@ -1,0 +1,8 @@
+---
+interface Props { src?: string | null; alt?: string; color?: string; class?: string; eager?: boolean; fit?: 'cover' | 'contain'; imgClass?: string; }
+const { src, alt = '', color = '#1a2220', class: cls = '', eager = false, fit = 'cover', imgClass = '' } = Astro.props;
+---
+<div class:list={[/\babsolute\b/.test(cls) ? '' : 'relative', 'overflow-hidden', cls]} style={`background:${color}`}>
+  {src && <img src={src} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" class:list={['absolute inset-0 h-full w-full', fit === 'cover' ? 'object-cover' : 'object-contain p-4', imgClass]} />}
+  <slot />
+</div>

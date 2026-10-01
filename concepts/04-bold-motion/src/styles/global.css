@@ -1,0 +1,66 @@
+@import "tailwindcss";
+@import "@ml/brand/tokens.css";
+
+@theme inline {
+  --font-sans: var(--ml-font);
+  --color-night: #0a0e0d;
+  --color-night-2: #121917;
+  --color-bone: #f2f1ec;
+  --color-dim: #a3aba8;
+  --color-edge: #26302d;
+  --color-green: var(--ml-deep-green);
+  --color-teal: var(--ml-teal);
+  --color-sky: var(--ml-sky);
+  --color-orange: var(--ml-orange);
+}
+
+@layer base {
+  html { background: var(--color-night); color: var(--color-bone); -webkit-font-smoothing: antialiased; color-scheme: dark; }
+  body { font-family: var(--font-sans); }
+  h1, h2, h3 { font-weight: 700; letter-spacing: -0.04em; line-height: 0.92; }
+  :focus-visible { outline: 3px solid var(--ml-orange); outline-offset: 3px; }
+  ::selection { background: var(--ml-teal); color: #fff; }
+}
+
+@layer components {
+  .stage { width: 100%; max-width: 100rem; margin-inline: auto; padding-inline: 1rem; }
+  @media (min-width: 768px) { .stage { padding-inline: 2.5rem; } }
+  .mega { font-size: clamp(3.25rem, 11vw, 12rem); text-transform: uppercase; }
+  .big { font-size: clamp(2.25rem, 6vw, 6rem); text-transform: uppercase; }
+  .tag { font-size: .72rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--color-sky); }
+  .pill { display: inline-flex; align-items: center; gap: .5rem; border-radius: 999px; border: 1px solid var(--color-edge); padding: .55rem 1.1rem; font-weight: 600; transition: background .2s, color .2s, border-color .2s; }
+  .pill:hover { border-color: var(--color-bone); }
+  .pill[aria-pressed="true"], .pill-solid { background: var(--color-bone); color: var(--color-night); border-color: var(--color-bone); }
+  .pill-solid:hover { background: var(--ml-sky); border-color: var(--ml-sky); }
+  .field { width: 100%; background: var(--color-night-2); border: 1px solid var(--color-edge); border-radius: .75rem; padding: .8rem 1rem; color: var(--color-bone); }
+  .field:focus { outline: 2px solid var(--ml-sky); outline-offset: -1px; }
+  .field:user-invalid { border-color: var(--ml-orange); }
+  .underline-o { text-decoration: underline; text-decoration-color: var(--ml-orange); text-decoration-thickness: .08em; text-underline-offset: .12em; }
+}
+
+/* ---- Motion ------------------------------------------------------------ */
+/* Content is visible by default; motion classes only apply once JS marks <html class="motion">. */
+.motion .reveal { opacity: 0; transform: translateY(40px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); transition-delay: calc(var(--i, 0) * 90ms); }
+.motion .reveal.in { opacity: 1; transform: none; }
+
+.motion .rise > span { display: block; overflow: hidden; }
+.motion .rise > span > span { display: block; transform: translateY(105%); animation: rise 1s cubic-bezier(.2,.8,.2,1) forwards; animation-delay: calc(.25s + var(--i, 0) * .12s); }
+@keyframes rise { to { transform: none; } }
+
+.motion .band { animation: band-in 1.2s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(var(--i, 0) * .15s); }
+@keyframes band-in { from { transform: translateY(var(--from, -110%)); } }
+
+@supports (animation-timeline: scroll()) {
+  .motion .drift { animation: drift linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
+  @keyframes drift { to { translate: var(--dx, 0) 0; } }
+}
+
+.marquee { display: flex; width: max-content; animation: marquee 40s linear infinite; }
+.marquee:hover { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .motion .reveal, .motion .rise > span > span, .motion .band, .motion .drift { opacity: 1 !important; transform: none !important; translate: none !important; animation: none !important; transition: none !important; }
+  .marquee { animation: none; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}

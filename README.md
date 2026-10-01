@@ -21,9 +21,13 @@ pnpm build && pnpm preview   # build all concepts + gallery into _site/
 | Path | Purpose |
 |------|---------|
 | `concepts/01-baseline/` | Concept 01: conventional, best-practice structure (the control) |
+| `concepts/02-editorial/` | Concept 02: story-led magazine layout with a typographic product index |
+| `concepts/03-product-led/` | Concept 03: explorer-first, with faceted finder, shop by color, configurator, and document picker |
+| `concepts/04-bold-motion/` | Concept 04: dark, kinetic, scroll-driven |
 | `concepts/_template/` | Unstyled starter with all six pages wired to data |
 | `packages/brand/` | Brand tokens, logos, and brand guide |
-| `packages/content/` | Shared placeholder products, projects, resources, and the sample cart |
+| `packages/content/` | Shared content from materiallogiq.com (26 products, 277 documents, projects) and the sample cart |
+| `research/` | Current-site audit and the scrape → content scripts |
 | `scripts/` | Dev, scaffold, and build-all/gallery scripts |
 | `PLAN.md` | Goals, pages, and phased plan |
 

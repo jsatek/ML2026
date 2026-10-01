@@ -7,7 +7,7 @@ import { url } from '../lib/utils';
   <h1 class="text-4xl font-bold">{site.tagline}</h1>
   <p class="mt-2">{site.intro}</p>
   <h2 class="mt-8 text-xl font-bold">Categories</h2>
-  <ul>{categories.map((c) => <li><a href={url(`/products?category=${c.slug}`)}>{c.name}</a></li>)}</ul>
+  <ul>{categories.map((c) => <li><a href={url(`/products?type=${c.slug}`)}>{c.name}</a></li>)}</ul>
   <h2 class="mt-8 text-xl font-bold">Featured products</h2>
   <ul>{products.filter((p) => p.featured).map((p) => <li><a href={url(`/products/${p.slug}`)}>{p.name}</a></li>)}</ul>
   <h2 class="mt-8 text-xl font-bold">Featured projects</h2>

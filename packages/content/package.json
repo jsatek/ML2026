@@ -6,6 +6,7 @@
   "exports": {
     ".": "./index.js",
     "./cart": "./cart.js",
-    "./*.json": "./*.json"
+    "./*.json": "./*.json",
+    "./sample-ui": "./sample-ui.js"
   }
 }

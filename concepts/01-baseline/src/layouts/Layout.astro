@@ -26,10 +26,10 @@ const isActive = (href: string) => path === url(href) || path.startsWith(`${url(
   </head>
   <body class="flex min-h-screen flex-col">
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-white focus:px-4 focus:py-2">Skip to content</a>
-    <div class="bg-green text-center text-xs text-white/90 py-1.5">Concept 01 · Baseline · placeholder content</div>
+    <div class="bg-green text-center text-xs text-white/90 py-1.5">Concept 01 · Baseline · content from materiallogiq.com</div>
 
     <header class="sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur">
-      <div class="container-x flex h-16 items-center gap-6 lg:h-20">
+      <div class="container-x flex h-16 items-center gap-3 md:gap-6 lg:h-20">
         <a href={url('/')} class="shrink-0" aria-label={`${site.name} home`}>
           <img src={wordmark.src} alt="" class="h-5 w-auto lg:h-6" width="200" height="21" />
         </a>
@@ -50,7 +50,7 @@ const isActive = (href: string) => path === url(href) || path.startsWith(`${url(
           Samples
           <span data-cart-count hidden class="grid min-w-5 place-items-center rounded-full bg-sky px-1.5 text-xs font-bold text-green">0</span>
         </a>
-        <button type="button" class="-mr-2 rounded p-2 md:hidden" aria-controls="mobile-nav" aria-expanded="false" data-menu-toggle>
+        <button type="button" class="rounded p-2 md:hidden" aria-controls="mobile-nav" aria-expanded="false" data-menu-toggle>
           <span class="sr-only">Menu</span>
           <svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
         </button>

@@ -1,8 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { resources, resourceTypes, products, getProduct, getResourceType } from '@ml/content';
+import { resources, resourceTypes, products, materials, getProduct, getMaterial, getResourceType } from '@ml/content';
 
-const sorted = [...resources].sort((a, b) => (a.product ?? '').localeCompare(b.product ?? '') || a.title.localeCompare(b.title));
+const typeOrder = resourceTypes.map((t) => t.slug);
+const sorted = [...resources].sort((a, b) => a.title.localeCompare(b.title) || typeOrder.indexOf(a.type) - typeOrder.indexOf(b.type));
+const appliesTo = (r: (typeof resources)[number]) =>
+  r.products.length === 1 ? getProduct(r.products[0])?.name : `${r.products.length} ${r.materials.map((m) => getMaterial(m)?.name).join(' & ')} products`;
 const typeCounts = Object.fromEntries(resourceTypes.map((t) => [t.slug, resources.filter((r) => r.type === t.slug).length]));
 ---
 <Layout title="Resources" description="Spec sheets, installation guides, warranties, CAD and BIM files for every product.">
@@ -10,7 +13,7 @@ const typeCounts = Object.fromEntries(resourceTypes.map((t) => [t.slug, resource
     <div class="container-x py-12">
       <p class="eyebrow">Resource library</p>
       <h1 class="mt-2 text-4xl sm:text-5xl">Resources</h1>
-      <p class="mt-3 max-w-2xl text-muted">Every spec sheet, installation guide, warranty, CAD detail, and BIM object, searchable in one place.</p>
+      <p class="mt-3 max-w-2xl text-muted">All {resources.length} data sheets, CSI specs, installation guides, CAD and BIM files, test reports, and sustainability documents, searchable in one place.</p>
       <form role="search" class="mt-8 flex max-w-2xl gap-2" data-search-form>
         <label for="res-q" class="sr-only">Search documents</label>
         <input id="res-q" type="search" placeholder="Search by product or document…" class="field !py-3.5 text-lg" data-q />
@@ -28,14 +31,22 @@ const typeCounts = Object.fromEntries(resourceTypes.map((t) => [t.slug, resource
           </label>
         ))}
       </div>
-      <label class="flex shrink-0 items-center gap-2 text-sm">
-        Product
-        <select class="field !w-auto !py-2" data-product>
-          <option value="">All products</option>
-          <option value="general">General (all products)</option>
-          {products.map((p) => <option value={p.slug}>{p.name}</option>)}
-        </select>
-      </label>
+      <div class="flex shrink-0 flex-wrap gap-3">
+        <label class="flex items-center gap-2 text-sm">
+          Material
+          <select class="field !w-auto !py-2" data-material>
+            <option value="">All</option>
+            {materials.map((m) => <option value={m.slug}>{m.name}</option>)}
+          </select>
+        </label>
+        <label class="flex items-center gap-2 text-sm">
+          Product
+          <select class="field !w-auto !py-2" data-product>
+            <option value="">All products</option>
+            {[...products].sort((a, b) => a.name.localeCompare(b.name)).map((p) => <option value={p.slug}>{p.name}</option>)}
+          </select>
+        </label>
+      </div>
     </div>
 
     <div class="mt-8 flex items-center justify-between">
@@ -45,23 +56,23 @@ const typeCounts = Object.fromEntries(resourceTypes.map((t) => [t.slug, resource
 
     <ul class="mt-4 divide-y divide-line border-y border-line" data-list>
       {sorted.map((r) => {
-        const product = r.product ? getProduct(r.product) : null;
         return (
           <li
             class="grid grid-cols-[auto_1fr_auto] items-center gap-4 py-4 md:grid-cols-[auto_2fr_1fr_1fr_auto]"
             data-row
             data-type={r.type}
-            data-product={r.product ?? 'general'}
-            data-search={`${r.title} ${product?.name ?? ''} ${getResourceType(r.type)?.name}`.toLowerCase()}
+            data-products={r.products.join('|')}
+            data-materials={r.materials.join('|')}
+            data-search={`${r.title} ${r.products.map((s) => getProduct(s)?.name).join(' ')} ${getResourceType(r.type)?.name} ${r.format}`.toLowerCase()}
           >
             <span class="grid size-11 place-items-center rounded-lg bg-sky/40 text-xs font-bold text-green">{r.format}</span>
             <div class="min-w-0">
               <p class="font-medium">{r.title}</p>
-              <p class="text-sm text-muted md:hidden">{getResourceType(r.type)?.name} · {r.size}</p>
+              <p class="text-sm text-muted md:hidden">{getResourceType(r.type)?.name} · {appliesTo(r)}</p>
             </div>
             <p class="hidden text-sm md:block">{getResourceType(r.type)?.name}</p>
-            <p class="hidden text-sm text-muted md:block">{r.size} · {r.updated}</p>
-            <a href={r.href} class="btn btn-outline btn-sm text-green" aria-label={`Download ${r.title}`}>
+            <p class="hidden text-sm text-muted md:block">{appliesTo(r)}{r.updated && ` · ${r.updated}`}</p>
+            <a href={r.href} target="_blank" rel="noopener" class="btn btn-outline btn-sm text-green" aria-label={`Download ${r.title}`}>
               <svg class="size-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 3v10m0 0l-4-4m4 4l4-4M4 16h12" /></svg>
               <span class="hidden sm:inline">Download</span>
             </a>
@@ -75,6 +86,7 @@ const typeCounts = Object.fromEntries(resourceTypes.map((t) => [t.slug, resource
   <script>
     const q = document.querySelector<HTMLInputElement>('[data-q]')!;
     const product = document.querySelector<HTMLSelectElement>('[data-product]')!;
+    const material = document.querySelector<HTMLSelectElement>('[data-material]')!;
     const types = [...document.querySelectorAll<HTMLInputElement>('[data-type]')];
     const rows = [...document.querySelectorAll<HTMLElement>('[data-row]')];
     const clear = document.querySelector<HTMLButtonElement>('[data-clear]')!;
@@ -82,6 +94,7 @@ const typeCounts = Object.fromEntries(resourceTypes.map((t) => [t.slug, resource
     const params = new URLSearchParams(location.search);
     q.value = params.get('q') ?? '';
     product.value = params.get('product') ?? '';
+    material.value = params.get('material') ?? '';
     const initialTypes = params.getAll('type');
     types.forEach((t) => (t.checked = initialTypes.includes(t.value)));
 
@@ -94,26 +107,30 @@ const typeCounts = Object.fromEntries(resourceTypes.map((t) => [t.slug, resource
         const ok =
           terms.every((t) => d.search!.includes(t)) &&
           (!selTypes.length || selTypes.includes(d.type!)) &&
-          (!product.value || d.product === product.value);
+          (!product.value || d.products!.split('|').includes(product.value)) &&
+          (!material.value || d.materials!.split('|').includes(material.value));
         row.hidden = !ok;
         if (ok) n++;
       }
       document.querySelector('[data-count]')!.textContent = String(n);
       document.querySelector<HTMLElement>('[data-empty]')!.hidden = n > 0;
-      clear.hidden = !(q.value || selTypes.length || product.value);
+      clear.hidden = !(q.value || selTypes.length || product.value || material.value);
       const next = new URLSearchParams();
       if (q.value) next.set('q', q.value);
       if (product.value) next.set('product', product.value);
+      if (material.value) next.set('material', material.value);
       selTypes.forEach((t) => next.append('type', t));
       history.replaceState(null, '', `${location.pathname}${next.size ? `?${next}` : ''}`);
     }
     q.addEventListener('input', apply);
     product.addEventListener('change', apply);
+    material.addEventListener('change', apply);
     types.forEach((t) => t.addEventListener('change', apply));
     document.querySelector('[data-search-form]')!.addEventListener('submit', (e) => e.preventDefault());
     clear.addEventListener('click', () => {
       q.value = '';
       product.value = '';
+      material.value = '';
       types.forEach((t) => (t.checked = false));
       apply();
     });

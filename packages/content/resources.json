@@ -1,829 +1,4275 @@
 {
-  "_note": "PLACEHOLDER: fictional sample data for design exploration. Replace with real Material Logiq content.",
+  "_note": "Content scraped from materiallogiq.com (see research/). Images and documents link to the live site. File sizes are not published on the site.",
   "types": [
     {
-      "slug": "spec-sheet",
-      "name": "Spec Sheet"
+      "slug": "data-sheet",
+      "name": "Data Sheets"
     },
     {
-      "slug": "install-guide",
-      "name": "Installation Guide"
+      "slug": "csi-spec",
+      "name": "CSI Specs"
+    },
+    {
+      "slug": "installation",
+      "name": "Installation"
+    },
+    {
+      "slug": "cad",
+      "name": "CAD & BIM"
+    },
+    {
+      "slug": "details",
+      "name": "Standard Details"
+    },
+    {
+      "slug": "tests",
+      "name": "Test Reports"
+    },
+    {
+      "slug": "sustainability",
+      "name": "Sustainability"
+    },
+    {
+      "slug": "sds",
+      "name": "Safety Data Sheets"
+    },
+    {
+      "slug": "care",
+      "name": "Cleaning & Care"
     },
     {
       "slug": "warranty",
       "name": "Warranty"
-    },
-    {
-      "slug": "sds",
-      "name": "Safety Data Sheet"
-    },
-    {
-      "slug": "cad",
-      "name": "CAD Details"
-    },
-    {
-      "slug": "bim",
-      "name": "BIM Object"
-    },
-    {
-      "slug": "epd",
-      "name": "EPD / Sustainability"
-    },
-    {
-      "slug": "brochure",
-      "name": "Brochure"
     }
   ],
   "resources": [
     {
-      "id": "strata-panel-spec-sheet",
-      "title": "Strata Panel Spec Sheet",
-      "type": "spec-sheet",
-      "product": "strata-panel",
+      "id": "ml-petfelt-planq-datasheet",
+      "title": "PLANQ Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "acoustic-panel-planq"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "7.5 MB",
-      "updated": "2026-07-02",
-      "href": "#"
+      "size": null,
+      "updated": "2025-03",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/03/ML_PETFelt_PLANQ_DataSheet.pdf"
     },
     {
-      "id": "strata-panel-install-guide",
-      "title": "Strata Panel Installation Guide",
-      "type": "install-guide",
-      "product": "strata-panel",
-      "format": "PDF",
-      "size": "7.7 MB",
-      "updated": "2026-02-25",
-      "href": "#"
+      "id": "planq-csi-specs",
+      "title": "PLANQ CSI Spec",
+      "type": "csi-spec",
+      "products": [
+        "acoustic-panel-planq"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "ZIP",
+      "size": null,
+      "updated": "2024-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/11/Planq_CSI_Specs.zip"
     },
     {
-      "id": "strata-panel-warranty",
-      "title": "Strata Panel Warranty",
+      "id": "ml-petfelt-planq-install",
+      "title": "PLANQ Installation Instructions",
+      "type": "installation",
+      "products": [
+        "acoustic-panel-planq"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2024-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/11/ML_PETFelt_PLANQ_Install.pdf"
+    },
+    {
+      "id": "ml-petfelt-cleaningguide",
+      "title": "PET Felt Care & Maintenance",
+      "type": "care",
+      "products": [
+        "acoustic-panel-planq",
+        "pet-felt-acoustic-baffle-blade"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2024-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/11/ML_PETFelt_CleaningGuide.pdf"
+    },
+    {
+      "id": "ml-warranty-1yearlimited",
+      "title": "PET Felt Warranty",
       "type": "warranty",
-      "product": "strata-panel",
+      "products": [
+        "acoustic-panel-planq",
+        "pet-felt-acoustic-baffle-blade"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "4.6 MB",
-      "updated": "2026-06-11",
-      "href": "#"
+      "size": null,
+      "updated": "2024-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/11/ML_Warranty_1YearLimited.pdf"
     },
     {
-      "id": "strata-panel-sds",
-      "title": "Strata Panel Safety Data Sheet",
-      "type": "sds",
-      "product": "strata-panel",
-      "format": "PDF",
-      "size": "5.7 MB",
-      "updated": "2026-08-19",
-      "href": "#"
-    },
-    {
-      "id": "strata-panel-cad",
-      "title": "Strata Panel CAD Details",
+      "id": "planq-dwg",
+      "title": "PLANQ DWG files",
       "type": "cad",
-      "product": "strata-panel",
+      "products": [
+        "acoustic-panel-planq"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "DWG",
-      "size": "20.1 MB",
-      "updated": "2026-02-27",
-      "href": "#"
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Planq_-_DWG.zip"
     },
     {
-      "id": "ridge-cladding-spec-sheet",
-      "title": "Ridge Cladding Spec Sheet",
-      "type": "spec-sheet",
-      "product": "ridge-cladding",
-      "format": "PDF",
-      "size": "5.7 MB",
-      "updated": "2026-02-02",
-      "href": "#"
-    },
-    {
-      "id": "ridge-cladding-install-guide",
-      "title": "Ridge Cladding Installation Guide",
-      "type": "install-guide",
-      "product": "ridge-cladding",
-      "format": "PDF",
-      "size": "5.9 MB",
-      "updated": "2026-05-21",
-      "href": "#"
-    },
-    {
-      "id": "ridge-cladding-warranty",
-      "title": "Ridge Cladding Warranty",
-      "type": "warranty",
-      "product": "ridge-cladding",
-      "format": "PDF",
-      "size": "4.8 MB",
-      "updated": "2026-08-10",
-      "href": "#"
-    },
-    {
-      "id": "ridge-cladding-sds",
-      "title": "Ridge Cladding Safety Data Sheet",
-      "type": "sds",
-      "product": "ridge-cladding",
-      "format": "PDF",
-      "size": "5.8 MB",
-      "updated": "2026-06-01",
-      "href": "#"
-    },
-    {
-      "id": "ridge-cladding-cad",
-      "title": "Ridge Cladding CAD Details",
+      "id": "planq-skp",
+      "title": "PLANQ SKP files",
       "type": "cad",
-      "product": "ridge-cladding",
-      "format": "DWG",
-      "size": "23.6 MB",
-      "updated": "2026-06-06",
-      "href": "#"
+      "products": [
+        "acoustic-panel-planq"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "SKP",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Planq_-_SKP.zip"
     },
     {
-      "id": "ridge-cladding-bim",
-      "title": "Ridge Cladding BIM Object",
-      "type": "bim",
-      "product": "ridge-cladding",
-      "format": "RVT",
-      "size": "12.8 MB",
-      "updated": "2026-04-25",
-      "href": "#"
-    },
-    {
-      "id": "grain-veneer-spec-sheet",
-      "title": "Grain Veneer Panel Spec Sheet",
-      "type": "spec-sheet",
-      "product": "grain-veneer",
-      "format": "PDF",
-      "size": "6.0 MB",
-      "updated": "2026-07-13",
-      "href": "#"
-    },
-    {
-      "id": "grain-veneer-install-guide",
-      "title": "Grain Veneer Panel Installation Guide",
-      "type": "install-guide",
-      "product": "grain-veneer",
-      "format": "PDF",
-      "size": "7.4 MB",
-      "updated": "2026-08-03",
-      "href": "#"
-    },
-    {
-      "id": "grain-veneer-warranty",
-      "title": "Grain Veneer Panel Warranty",
-      "type": "warranty",
-      "product": "grain-veneer",
-      "format": "PDF",
-      "size": "1.6 MB",
-      "updated": "2026-07-18",
-      "href": "#"
-    },
-    {
-      "id": "grain-veneer-sds",
-      "title": "Grain Veneer Panel Safety Data Sheet",
-      "type": "sds",
-      "product": "grain-veneer",
-      "format": "PDF",
-      "size": "2.4 MB",
-      "updated": "2026-03-27",
-      "href": "#"
-    },
-    {
-      "id": "grain-veneer-cad",
-      "title": "Grain Veneer Panel CAD Details",
+      "id": "planq-rfa",
+      "title": "PLANQ RFA files",
       "type": "cad",
-      "product": "grain-veneer",
-      "format": "DWG",
-      "size": "11.3 MB",
-      "updated": "2026-09-09",
-      "href": "#"
+      "products": [
+        "acoustic-panel-planq"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "RFA",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Planq_-_RFA.zip"
     },
     {
-      "id": "grain-veneer-bim",
-      "title": "Grain Veneer Panel BIM Object",
-      "type": "bim",
-      "product": "grain-veneer",
-      "format": "RVT",
-      "size": "24.7 MB",
-      "updated": "2026-07-08",
-      "href": "#"
-    },
-    {
-      "id": "linea-slat-spec-sheet",
-      "title": "Linea Slat Spec Sheet",
-      "type": "spec-sheet",
-      "product": "linea-slat",
-      "format": "PDF",
-      "size": "1.7 MB",
-      "updated": "2026-04-22",
-      "href": "#"
-    },
-    {
-      "id": "linea-slat-install-guide",
-      "title": "Linea Slat Installation Guide",
-      "type": "install-guide",
-      "product": "linea-slat",
-      "format": "PDF",
-      "size": "2.1 MB",
-      "updated": "2026-08-27",
-      "href": "#"
-    },
-    {
-      "id": "linea-slat-warranty",
-      "title": "Linea Slat Warranty",
-      "type": "warranty",
-      "product": "linea-slat",
-      "format": "PDF",
-      "size": "4.8 MB",
-      "updated": "2026-05-10",
-      "href": "#"
-    },
-    {
-      "id": "linea-slat-sds",
-      "title": "Linea Slat Safety Data Sheet",
-      "type": "sds",
-      "product": "linea-slat",
-      "format": "PDF",
-      "size": "0.3 MB",
-      "updated": "2026-07-18",
-      "href": "#"
-    },
-    {
-      "id": "linea-slat-cad",
-      "title": "Linea Slat CAD Details",
+      "id": "planq-obj",
+      "title": "PLANQ OBJ files",
       "type": "cad",
-      "product": "linea-slat",
-      "format": "DWG",
-      "size": "9.9 MB",
-      "updated": "2026-06-05",
-      "href": "#"
+      "products": [
+        "acoustic-panel-planq"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "OBJ",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Planq_-_OBJ.zip"
     },
     {
-      "id": "linea-slat-bim",
-      "title": "Linea Slat BIM Object",
-      "type": "bim",
-      "product": "linea-slat",
-      "format": "RVT",
-      "size": "13.4 MB",
-      "updated": "2026-01-15",
-      "href": "#"
-    },
-    {
-      "id": "linea-slat-epd",
-      "title": "Linea Slat EPD / Sustainability",
-      "type": "epd",
-      "product": "linea-slat",
-      "format": "PDF",
-      "size": "6.3 MB",
-      "updated": "2026-09-13",
-      "href": "#"
-    },
-    {
-      "id": "quiet-felt-tile-spec-sheet",
-      "title": "Quiet Felt Tile Spec Sheet",
-      "type": "spec-sheet",
-      "product": "quiet-felt-tile",
-      "format": "PDF",
-      "size": "3.4 MB",
-      "updated": "2026-07-04",
-      "href": "#"
-    },
-    {
-      "id": "quiet-felt-tile-install-guide",
-      "title": "Quiet Felt Tile Installation Guide",
-      "type": "install-guide",
-      "product": "quiet-felt-tile",
-      "format": "PDF",
-      "size": "4.0 MB",
-      "updated": "2026-07-02",
-      "href": "#"
-    },
-    {
-      "id": "quiet-felt-tile-warranty",
-      "title": "Quiet Felt Tile Warranty",
-      "type": "warranty",
-      "product": "quiet-felt-tile",
-      "format": "PDF",
-      "size": "1.8 MB",
-      "updated": "2026-04-15",
-      "href": "#"
-    },
-    {
-      "id": "quiet-felt-tile-sds",
-      "title": "Quiet Felt Tile Safety Data Sheet",
-      "type": "sds",
-      "product": "quiet-felt-tile",
-      "format": "PDF",
-      "size": "1.5 MB",
-      "updated": "2026-06-20",
-      "href": "#"
-    },
-    {
-      "id": "quiet-felt-tile-cad",
-      "title": "Quiet Felt Tile CAD Details",
+      "id": "planq-stp",
+      "title": "PLANQ STP files",
       "type": "cad",
-      "product": "quiet-felt-tile",
-      "format": "DWG",
-      "size": "2.3 MB",
-      "updated": "2026-01-19",
-      "href": "#"
+      "products": [
+        "acoustic-panel-planq"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "STP",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Planq_-_STP.zip"
     },
     {
-      "id": "echo-baffle-spec-sheet",
-      "title": "Echo Baffle Spec Sheet",
-      "type": "spec-sheet",
-      "product": "echo-baffle",
-      "format": "PDF",
-      "size": "3.1 MB",
-      "updated": "2026-01-03",
-      "href": "#"
-    },
-    {
-      "id": "echo-baffle-install-guide",
-      "title": "Echo Baffle Installation Guide",
-      "type": "install-guide",
-      "product": "echo-baffle",
-      "format": "PDF",
-      "size": "7.0 MB",
-      "updated": "2026-07-05",
-      "href": "#"
-    },
-    {
-      "id": "echo-baffle-warranty",
-      "title": "Echo Baffle Warranty",
-      "type": "warranty",
-      "product": "echo-baffle",
-      "format": "PDF",
-      "size": "5.2 MB",
-      "updated": "2026-06-20",
-      "href": "#"
-    },
-    {
-      "id": "echo-baffle-sds",
-      "title": "Echo Baffle Safety Data Sheet",
-      "type": "sds",
-      "product": "echo-baffle",
-      "format": "PDF",
-      "size": "3.1 MB",
-      "updated": "2026-02-04",
-      "href": "#"
-    },
-    {
-      "id": "echo-baffle-cad",
-      "title": "Echo Baffle CAD Details",
+      "id": "planq-3dm",
+      "title": "PLANQ 3DM files",
       "type": "cad",
-      "product": "echo-baffle",
-      "format": "DWG",
-      "size": "21.4 MB",
-      "updated": "2026-08-16",
-      "href": "#"
+      "products": [
+        "acoustic-panel-planq"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "3DM",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Planq_-_3DM.zip"
     },
     {
-      "id": "echo-baffle-bim",
-      "title": "Echo Baffle BIM Object",
-      "type": "bim",
-      "product": "echo-baffle",
-      "format": "RVT",
-      "size": "3.1 MB",
-      "updated": "2026-02-24",
-      "href": "#"
-    },
-    {
-      "id": "weave-panel-spec-sheet",
-      "title": "Weave Acoustic Panel Spec Sheet",
-      "type": "spec-sheet",
-      "product": "weave-panel",
+      "id": "ml-petfelt-test-c423-a-halfin",
+      "title": "PET Felt Acoustical Tests",
+      "type": "tests",
+      "products": [
+        "acoustic-panel-planq",
+        "engraved-acoustic-panel-vee"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "2.3 MB",
-      "updated": "2026-03-17",
-      "href": "#"
+      "size": null,
+      "updated": "2024-12",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/12/ML_PETFelt_Test_C423_A_Halfin.pdf"
     },
     {
-      "id": "weave-panel-install-guide",
-      "title": "Weave Acoustic Panel Installation Guide",
-      "type": "install-guide",
-      "product": "weave-panel",
+      "id": "ml-petfelt-test-e84-halfin",
+      "title": "PET Felt Fire Tests",
+      "type": "tests",
+      "products": [
+        "acoustic-panel-planq",
+        "pet-felt-acoustic-baffle-blade"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "0.5 MB",
-      "updated": "2026-09-12",
-      "href": "#"
+      "size": null,
+      "updated": "2024-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/11/ML_PETFelt_Test_E84_Halfin.pdf"
     },
     {
-      "id": "weave-panel-warranty",
-      "title": "Weave Acoustic Panel Warranty",
-      "type": "warranty",
-      "product": "weave-panel",
-      "format": "PDF",
-      "size": "1.4 MB",
-      "updated": "2026-09-01",
-      "href": "#"
-    },
-    {
-      "id": "weave-panel-sds",
-      "title": "Weave Acoustic Panel Safety Data Sheet",
+      "id": "ml-petfelt-sds",
+      "title": "PLANQ SDS",
       "type": "sds",
-      "product": "weave-panel",
+      "products": [
+        "acoustic-panel-planq"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "6.1 MB",
-      "updated": "2026-05-21",
-      "href": "#"
+      "size": null,
+      "updated": "2024-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/11/ML_PETFelt_SDS.pdf"
     },
     {
-      "id": "weave-panel-cad",
-      "title": "Weave Acoustic Panel CAD Details",
-      "type": "cad",
-      "product": "weave-panel",
-      "format": "DWG",
-      "size": "21.7 MB",
-      "updated": "2026-05-17",
-      "href": "#"
-    },
-    {
-      "id": "weave-panel-bim",
-      "title": "Weave Acoustic Panel BIM Object",
-      "type": "bim",
-      "product": "weave-panel",
-      "format": "RVT",
-      "size": "5.0 MB",
-      "updated": "2026-04-18",
-      "href": "#"
-    },
-    {
-      "id": "weave-panel-epd",
-      "title": "Weave Acoustic Panel EPD / Sustainability",
-      "type": "epd",
-      "product": "weave-panel",
+      "id": "ml-petfelt-hpd",
+      "title": "PET Felt HPD",
+      "type": "sustainability",
+      "products": [
+        "acoustic-panel-planq",
+        "engraved-acoustic-panel-vee",
+        "pet-felt-acoustic-panel-grilla",
+        "pet-felt-baffles-blaffe",
+        "pet-felt-ceiling-system-beam",
+        "pet-felt-ceiling-system-graffle",
+        "pet-felt-ceiling-tiles-keys",
+        "pet-felt-linear-acoustic-system-classiq"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "4.2 MB",
-      "updated": "2026-04-20",
-      "href": "#"
+      "size": null,
+      "updated": "2024-09",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/09/ML_PETFelt_HPD.pdf"
     },
     {
-      "id": "arc-grid-spec-sheet",
-      "title": "Arc Ceiling Grid Spec Sheet",
-      "type": "spec-sheet",
-      "product": "arc-grid",
+      "id": "ml-petfelt-test-vocemissions",
+      "title": "PET Felt VOC Emissions",
+      "type": "sustainability",
+      "products": [
+        "acoustic-panel-planq",
+        "pet-felt-acoustic-baffle-blade"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "6.5 MB",
-      "updated": "2026-04-26",
-      "href": "#"
+      "size": null,
+      "updated": "2024-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/11/ML_PETFelt_Test_VOCEmissions.pdf"
     },
     {
-      "id": "arc-grid-install-guide",
-      "title": "Arc Ceiling Grid Installation Guide",
-      "type": "install-guide",
-      "product": "arc-grid",
+      "id": "ml-petfelt-vee-datasheet",
+      "title": "VEE Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "engraved-acoustic-panel-vee"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "2.1 MB",
-      "updated": "2026-07-24",
-      "href": "#"
+      "size": null,
+      "updated": "2025-03",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/03/ML_PETFelt_VEE_DataSheet.pdf"
     },
     {
-      "id": "arc-grid-warranty",
-      "title": "Arc Ceiling Grid Warranty",
+      "id": "ml-petfelt-vee-csispec",
+      "title": "VEE CSI Spec",
+      "type": "csi-spec",
+      "products": [
+        "engraved-acoustic-panel-vee"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "ZIP",
+      "size": null,
+      "updated": "2024-09",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/09/ML_PETFelt_Vee_CSISpec.zip"
+    },
+    {
+      "id": "ml-vee-install-adhesive",
+      "title": "VEE Installation Instructions",
+      "type": "installation",
+      "products": [
+        "engraved-acoustic-panel-vee"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2024-09",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/09/ML_VEE_Install_Adhesive.pdf"
+    },
+    {
+      "id": "ml-petfelt-cleaningguide",
+      "title": "PET Felt Care & Maintenance",
+      "type": "care",
+      "products": [
+        "engraved-acoustic-panel-vee",
+        "pet-felt-ceiling-system-beam",
+        "pet-felt-linear-acoustic-system-classiq"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2024-09",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/09/ML_PETFelt_CleaningGuide.pdf"
+    },
+    {
+      "id": "ml-warranty-1yearlimited",
+      "title": "Warranty",
       "type": "warranty",
-      "product": "arc-grid",
+      "products": [
+        "engraved-acoustic-panel-vee",
+        "pet-felt-acoustic-panel-grilla",
+        "pet-felt-baffles-blaffe",
+        "pet-felt-ceiling-system-beam",
+        "pet-felt-ceiling-system-graffle",
+        "pet-felt-ceiling-tiles-keys",
+        "pet-felt-linear-acoustic-system-classiq",
+        "silk-metal-baffles",
+        "silk-metal-ceiling-tiles",
+        "silk-metal-clouds",
+        "silk-metal-grille",
+        "silk-metal-panels",
+        "silk-metal-squell",
+        "silk-metal-trell",
+        "wood-slat-ceiling-tiles-slatta-tile",
+        "wood-slat-panels-slatta",
+        "wood-wool-engraved-ceiling-tiles",
+        "wood-wool-engraved-panels"
+      ],
+      "materials": [
+        "pet-felt",
+        "silk-metal",
+        "wood",
+        "wood-wool"
+      ],
       "format": "PDF",
-      "size": "6.5 MB",
-      "updated": "2026-04-17",
-      "href": "#"
+      "size": null,
+      "updated": "2024-07",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/07/ML_Warranty_1YearLimited.pdf"
     },
     {
-      "id": "arc-grid-sds",
-      "title": "Arc Ceiling Grid Safety Data Sheet",
+      "id": "vee-dwgs",
+      "title": "VEE DWG files",
+      "type": "cad",
+      "products": [
+        "engraved-acoustic-panel-vee"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "DWG",
+      "size": null,
+      "updated": "2024-09",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/09/VEE-DWGs.zip"
+    },
+    {
+      "id": "vee-skps",
+      "title": "VEE SKP files",
+      "type": "cad",
+      "products": [
+        "engraved-acoustic-panel-vee"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "SKP",
+      "size": null,
+      "updated": "2024-09",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/09/VEE-SKPs.zip"
+    },
+    {
+      "id": "vee-obj",
+      "title": "VEE OBJ files",
+      "type": "cad",
+      "products": [
+        "engraved-acoustic-panel-vee"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "OBJ",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/vee-obj.zip"
+    },
+    {
+      "id": "vee-stp",
+      "title": "VEE STP files",
+      "type": "cad",
+      "products": [
+        "engraved-acoustic-panel-vee"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "STP",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/vee-stp.zip"
+    },
+    {
+      "id": "vee-3dm",
+      "title": "VEE 3DM files",
+      "type": "cad",
+      "products": [
+        "engraved-acoustic-panel-vee"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "3DM",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/vee-3dm.zip"
+    },
+    {
+      "id": "ml-petfelt-test-e84-halfin-3",
+      "title": "PET Felt Fire Tests",
+      "type": "tests",
+      "products": [
+        "engraved-acoustic-panel-vee",
+        "pet-felt-ceiling-tiles-keys",
+        "pet-felt-linear-acoustic-system-classiq"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/ML_PETFelt_Test_E84_Halfin-3.pdf"
+    },
+    {
+      "id": "ml-petfelt-sds",
+      "title": "PET Felt SDS",
       "type": "sds",
-      "product": "arc-grid",
+      "products": [
+        "engraved-acoustic-panel-vee",
+        "pet-felt-acoustic-baffle-blade",
+        "pet-felt-baffles-blaffe",
+        "pet-felt-ceiling-system-beam",
+        "pet-felt-ceiling-system-graffle",
+        "pet-felt-ceiling-tiles-keys",
+        "pet-felt-linear-acoustic-system-classiq"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "4.1 MB",
-      "updated": "2026-01-01",
-      "href": "#"
+      "size": null,
+      "updated": "2024-09",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/09/ML_PETFelt_SDS.pdf"
     },
     {
-      "id": "arc-grid-cad",
-      "title": "Arc Ceiling Grid CAD Details",
-      "type": "cad",
-      "product": "arc-grid",
-      "format": "DWG",
-      "size": "20.0 MB",
-      "updated": "2026-08-09",
-      "href": "#"
-    },
-    {
-      "id": "arc-grid-epd",
-      "title": "Arc Ceiling Grid EPD / Sustainability",
-      "type": "epd",
-      "product": "arc-grid",
+      "id": "ml-petfelt-test-vocemissions-2",
+      "title": "PET Felt VOC Emissions",
+      "type": "sustainability",
+      "products": [
+        "engraved-acoustic-panel-vee",
+        "pet-felt-ceiling-tiles-keys",
+        "pet-felt-linear-acoustic-system-classiq"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "3.0 MB",
-      "updated": "2026-06-12",
-      "href": "#"
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/ML_PETFelt_Test_VOCEmissions-2.pdf"
     },
     {
-      "id": "vela-cloud-spec-sheet",
-      "title": "Vela Cloud Spec Sheet",
-      "type": "spec-sheet",
-      "product": "vela-cloud",
+      "id": "ml-petfelt-blade-datasheet",
+      "title": "BLADE Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "pet-felt-acoustic-baffle-blade"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "0.9 MB",
-      "updated": "2026-02-08",
-      "href": "#"
+      "size": null,
+      "updated": "2025-03",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/03/ML_PETFelt_Blade_DataSheet.pdf"
     },
     {
-      "id": "vela-cloud-install-guide",
-      "title": "Vela Cloud Installation Guide",
-      "type": "install-guide",
-      "product": "vela-cloud",
+      "id": "ml-petfelt-blade-csispec",
+      "title": "BLADE CSI Spec",
+      "type": "csi-spec",
+      "products": [
+        "pet-felt-acoustic-baffle-blade"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "DOCX",
+      "size": null,
+      "updated": "2024-12",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/12/ML_PETFelt_Blade_CSISpec.docx"
+    },
+    {
+      "id": "blade-install",
+      "title": "BLADE Installation Instructions",
+      "type": "installation",
+      "products": [
+        "pet-felt-acoustic-baffle-blade"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "ZIP",
+      "size": null,
+      "updated": "2024-12",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/12/BLADE-INSTALL.zip"
+    },
+    {
+      "id": "ml-blade-test-c423-jmount",
+      "title": "BLADE Acoustical Tests",
+      "type": "tests",
+      "products": [
+        "pet-felt-acoustic-baffle-blade"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "3.9 MB",
-      "updated": "2026-06-07",
-      "href": "#"
+      "size": null,
+      "updated": "2025-03",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/03/ML_BLADE_Test_C423_JMount.pdf"
     },
     {
-      "id": "vela-cloud-warranty",
-      "title": "Vela Cloud Warranty",
+      "id": "ml-petfelt-panel-datasheet",
+      "title": "PET Felt Acoustic Panel Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "pet-felt-acoustic-panel-ceiling-and-wall-panel"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2025-09",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/09/ML_PETFelt_Panel_DataSheet.pdf"
+    },
+    {
+      "id": "ml-petfelt-csispec-ceilingandwallpanel",
+      "title": "PET Felt Acoustic Panel CSI Spec",
+      "type": "csi-spec",
+      "products": [
+        "pet-felt-acoustic-panel-ceiling-and-wall-panel"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "ZIP",
+      "size": null,
+      "updated": "2025-09",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/09/ML_PETFelt_CSISpec_CeilingandWallPanel.zip"
+    },
+    {
+      "id": "ml-petfelt-panel-install-adhesive",
+      "title": "PET Felt Acoustic Panel Installation Instructions",
+      "type": "installation",
+      "products": [
+        "pet-felt-acoustic-panel-ceiling-and-wall-panel"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2025-09",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/09/ML_PETFelt_Panel_Install_Adhesive.pdf"
+    },
+    {
+      "id": "ml-petfelt-cleaningguide",
+      "title": "PET Felt Acoustic Panel Cleaning Guide",
+      "type": "care",
+      "products": [
+        "pet-felt-acoustic-panel-ceiling-and-wall-panel"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2025-08",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/08/ML_PETFelt_CleaningGuide.pdf"
+    },
+    {
+      "id": "ml-warranty-1yearlimited",
+      "title": "PET Felt Acoustic Panel Warranty",
       "type": "warranty",
-      "product": "vela-cloud",
+      "products": [
+        "pet-felt-acoustic-panel-ceiling-and-wall-panel"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "4.0 MB",
-      "updated": "2026-01-16",
-      "href": "#"
+      "size": null,
+      "updated": "2025-08",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/08/ML_Warranty_1YearLimited.pdf"
     },
     {
-      "id": "vela-cloud-sds",
-      "title": "Vela Cloud Safety Data Sheet",
+      "id": "ml-petfelt-test-e84-halfin",
+      "title": "PET Felt Acoustic Panel Acoustical Tests",
+      "type": "tests",
+      "products": [
+        "pet-felt-acoustic-panel-ceiling-and-wall-panel"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2025-08",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/08/ML_PETFelt_Test_E84_Halfin.pdf"
+    },
+    {
+      "id": "ml-petfelt-test-e84-halfin",
+      "title": "PET Felt Acoustic Panel Fire Tests",
+      "type": "tests",
+      "products": [
+        "pet-felt-acoustic-panel-ceiling-and-wall-panel"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2025-09",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/09/ML_PETFelt_Test_E84_Halfin.pdf"
+    },
+    {
+      "id": "ml-petfelt-sds",
+      "title": "PET Felt Acoustic Panel SDS",
       "type": "sds",
-      "product": "vela-cloud",
+      "products": [
+        "pet-felt-acoustic-panel-ceiling-and-wall-panel"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "7.3 MB",
-      "updated": "2026-06-26",
-      "href": "#"
+      "size": null,
+      "updated": "2025-08",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/08/ML_PETFelt_SDS.pdf"
     },
     {
-      "id": "vela-cloud-cad",
-      "title": "Vela Cloud CAD Details",
+      "id": "ml-petfelt-hpd",
+      "title": "PET Felt Acoustic Panel HPD",
+      "type": "sustainability",
+      "products": [
+        "pet-felt-acoustic-panel-ceiling-and-wall-panel"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2025-08",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/08/ML_PETFelt_HPD.pdf"
+    },
+    {
+      "id": "ml-petfelt-test-vocemissions",
+      "title": "PET Felt Acoustic Panel VOC Emissions",
+      "type": "sustainability",
+      "products": [
+        "pet-felt-acoustic-panel-ceiling-and-wall-panel"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2025-08",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/08/ML_PETFelt_Test_VOCEmissions.pdf"
+    },
+    {
+      "id": "ml-grilla-datasheet-20260409",
+      "title": "GRILLA Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "pet-felt-acoustic-panel-grilla"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_GRILLA_DataSheet_20260409.pdf"
+    },
+    {
+      "id": "ml-petfelt-grilla-csispec",
+      "title": "GRILLA CSI Spec",
+      "type": "csi-spec",
+      "products": [
+        "pet-felt-acoustic-panel-grilla"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "DOCX",
+      "size": null,
+      "updated": "2024-07",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/07/ML_PETFelt_Grilla_CSISpec.docx"
+    },
+    {
+      "id": "grilla-installation-instructions",
+      "title": "GRILLA Installation Instructions",
+      "type": "installation",
+      "products": [
+        "pet-felt-acoustic-panel-grilla"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "ZIP",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/Grilla-Installation-Instructions.zip"
+    },
+    {
+      "id": "ml-petfelt-cleaningguide-1",
+      "title": "GRILLA Cleaning Guide",
+      "type": "care",
+      "products": [
+        "pet-felt-acoustic-panel-grilla"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2024-07",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/07/ML_PETFelt_CleaningGuide-1.pdf"
+    },
+    {
+      "id": "grilla-dwg",
+      "title": "GRILLA DWG files",
       "type": "cad",
-      "product": "vela-cloud",
+      "products": [
+        "pet-felt-acoustic-panel-grilla"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "DWG",
-      "size": "16.4 MB",
-      "updated": "2026-02-13",
-      "href": "#"
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Grilla_-_DWG.zip"
     },
     {
-      "id": "vela-cloud-bim",
-      "title": "Vela Cloud BIM Object",
-      "type": "bim",
-      "product": "vela-cloud",
-      "format": "RVT",
-      "size": "19.0 MB",
-      "updated": "2026-08-06",
-      "href": "#"
+      "id": "grilla-skp",
+      "title": "GRILLA SKP files",
+      "type": "cad",
+      "products": [
+        "pet-felt-acoustic-panel-grilla"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "SKP",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Grilla_-_SKP.zip"
     },
     {
-      "id": "vela-cloud-epd",
-      "title": "Vela Cloud EPD / Sustainability",
-      "type": "epd",
-      "product": "vela-cloud",
+      "id": "grilla-rfa",
+      "title": "GRILLA RFA files",
+      "type": "cad",
+      "products": [
+        "pet-felt-acoustic-panel-grilla"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "RFA",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Grilla_-_RFA.zip"
+    },
+    {
+      "id": "grilla-obj",
+      "title": "GRILLA OBJ files",
+      "type": "cad",
+      "products": [
+        "pet-felt-acoustic-panel-grilla"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "OBJ",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/grilla-obj.zip"
+    },
+    {
+      "id": "grilla-stp",
+      "title": "GRILLA STP files",
+      "type": "cad",
+      "products": [
+        "pet-felt-acoustic-panel-grilla"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "STP",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/grilla-stp.zip"
+    },
+    {
+      "id": "grilla-3dm",
+      "title": "GRILLA 3DM files",
+      "type": "cad",
+      "products": [
+        "pet-felt-acoustic-panel-grilla"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "3DM",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/grilla-3dm.zip"
+    },
+    {
+      "id": "ml-grilla-acoustictests",
+      "title": "GRILLA Acoustical Tests",
+      "type": "tests",
+      "products": [
+        "pet-felt-acoustic-panel-grilla"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "ZIP",
+      "size": null,
+      "updated": "2025-03",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/03/ML_GRILLA_AcousticTests.zip"
+    },
+    {
+      "id": "ml-petfelt-test-e84-halfin-2",
+      "title": "GRILLA Fire Tests",
+      "type": "tests",
+      "products": [
+        "pet-felt-acoustic-panel-grilla"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "5.2 MB",
-      "updated": "2026-02-26",
-      "href": "#"
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_PETFelt_Test_E84_Halfin-2.pdf"
     },
     {
-      "id": "plane-metal-spec-sheet",
-      "title": "Plane Metal Ceiling Spec Sheet",
-      "type": "spec-sheet",
-      "product": "plane-metal",
-      "format": "PDF",
-      "size": "7.6 MB",
-      "updated": "2026-07-15",
-      "href": "#"
-    },
-    {
-      "id": "plane-metal-install-guide",
-      "title": "Plane Metal Ceiling Installation Guide",
-      "type": "install-guide",
-      "product": "plane-metal",
-      "format": "PDF",
-      "size": "3.4 MB",
-      "updated": "2026-02-24",
-      "href": "#"
-    },
-    {
-      "id": "plane-metal-warranty",
-      "title": "Plane Metal Ceiling Warranty",
-      "type": "warranty",
-      "product": "plane-metal",
-      "format": "PDF",
-      "size": "1.5 MB",
-      "updated": "2026-03-01",
-      "href": "#"
-    },
-    {
-      "id": "plane-metal-sds",
-      "title": "Plane Metal Ceiling Safety Data Sheet",
+      "id": "ml-petfelt-sds-2",
+      "title": "GRILLA SDS",
       "type": "sds",
-      "product": "plane-metal",
+      "products": [
+        "pet-felt-acoustic-panel-grilla"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "1.5 MB",
-      "updated": "2026-08-26",
-      "href": "#"
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_PETFelt_SDS-2.pdf"
     },
     {
-      "id": "plane-metal-cad",
-      "title": "Plane Metal Ceiling CAD Details",
-      "type": "cad",
-      "product": "plane-metal",
-      "format": "DWG",
-      "size": "16.7 MB",
-      "updated": "2026-08-22",
-      "href": "#"
-    },
-    {
-      "id": "plane-metal-bim",
-      "title": "Plane Metal Ceiling BIM Object",
-      "type": "bim",
-      "product": "plane-metal",
-      "format": "RVT",
-      "size": "4.7 MB",
-      "updated": "2026-09-05",
-      "href": "#"
-    },
-    {
-      "id": "terra-laminate-spec-sheet",
-      "title": "Terra Laminate Spec Sheet",
-      "type": "spec-sheet",
-      "product": "terra-laminate",
+      "id": "ml-petfelt-test-vocemissions-1",
+      "title": "PET Felt VOC Emissions",
+      "type": "sustainability",
+      "products": [
+        "pet-felt-acoustic-panel-grilla",
+        "pet-felt-ceiling-system-graffle"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "6.5 MB",
-      "updated": "2026-02-17",
-      "href": "#"
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/ML_PETFelt_Test_VOCEmissions-1.pdf"
     },
     {
-      "id": "terra-laminate-install-guide",
-      "title": "Terra Laminate Installation Guide",
-      "type": "install-guide",
-      "product": "terra-laminate",
+      "id": "ml-topo-datasheet-20260424",
+      "title": "TOPO Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "pet-felt-baffle-system-topo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "6.1 MB",
-      "updated": "2026-03-14",
-      "href": "#"
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_TOPO_DataSheet_20260424.pdf"
     },
     {
-      "id": "terra-laminate-warranty",
-      "title": "Terra Laminate Warranty",
+      "id": "ml-petfelt-topo-csispec",
+      "title": "TOPO CSI Spec",
+      "type": "csi-spec",
+      "products": [
+        "pet-felt-baffle-system-topo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "DOCX",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_PETFelt_Topo_CSISpec.docx"
+    },
+    {
+      "id": "topo-installation-instructions-040726",
+      "title": "TOPO Installation Instructions",
+      "type": "installation",
+      "products": [
+        "pet-felt-baffle-system-topo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/Topo-Installation-Instructions-040726.pdf"
+    },
+    {
+      "id": "ml-petfelt-cleaningguide",
+      "title": "TOPO Cleaning Guide",
+      "type": "care",
+      "products": [
+        "pet-felt-baffle-system-topo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_PETFelt_CleaningGuide.pdf"
+    },
+    {
+      "id": "ml-warranty-1yearlimited",
+      "title": "TOPO Warranty",
       "type": "warranty",
-      "product": "terra-laminate",
+      "products": [
+        "pet-felt-baffle-system-topo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "7.9 MB",
-      "updated": "2026-04-27",
-      "href": "#"
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_Warranty_1YearLimited.pdf"
     },
     {
-      "id": "terra-laminate-sds",
-      "title": "Terra Laminate Safety Data Sheet",
+      "id": "topo-dwg",
+      "title": "TOPO DWG files",
+      "type": "cad",
+      "products": [
+        "pet-felt-baffle-system-topo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "DWG",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Topo_-_DWG.zip"
+    },
+    {
+      "id": "topo-skp",
+      "title": "TOPO SKP files",
+      "type": "cad",
+      "products": [
+        "pet-felt-baffle-system-topo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "SKP",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Topo_-_SKP.zip"
+    },
+    {
+      "id": "topo-rfas",
+      "title": "TOPO RFA files",
+      "type": "cad",
+      "products": [
+        "pet-felt-baffle-system-topo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "RFA",
+      "size": null,
+      "updated": "2026-08",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/08/TOPO-RFAs.zip"
+    },
+    {
+      "id": "topo-obj-files",
+      "title": "TOPO OBJ files",
+      "type": "cad",
+      "products": [
+        "pet-felt-baffle-system-topo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "OBJ",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/Topo-OBJ-Files.zip"
+    },
+    {
+      "id": "topo-stp-files",
+      "title": "TOPO STP files",
+      "type": "cad",
+      "products": [
+        "pet-felt-baffle-system-topo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "STP",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/Topo-STP-Files.zip"
+    },
+    {
+      "id": "topo-3dm-files",
+      "title": "TOPO 3DM files",
+      "type": "cad",
+      "products": [
+        "pet-felt-baffle-system-topo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "3DM",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/Topo-3DM-Files.zip"
+    },
+    {
+      "id": "ml-petfelt-baffle-c423-acoustictest",
+      "title": "TOPO Acoustical Tests",
+      "type": "tests",
+      "products": [
+        "pet-felt-baffle-system-topo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_PETFelt_Baffle_C423_AcousticTest.pdf"
+    },
+    {
+      "id": "ml-petfelt-test-e84-halfin",
+      "title": "TOPO Fire Tests",
+      "type": "tests",
+      "products": [
+        "pet-felt-baffle-system-topo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_PETFelt_Test_E84_Halfin.pdf"
+    },
+    {
+      "id": "ml-petfelt-sds",
+      "title": "TOPO SDS",
       "type": "sds",
-      "product": "terra-laminate",
+      "products": [
+        "pet-felt-baffle-system-topo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "7.0 MB",
-      "updated": "2026-01-09",
-      "href": "#"
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_PETFelt_SDS.pdf"
     },
     {
-      "id": "terra-laminate-cad",
-      "title": "Terra Laminate CAD Details",
+      "id": "ml-petfelt-hpd",
+      "title": "TOPO HPD",
+      "type": "sustainability",
+      "products": [
+        "pet-felt-baffle-system-topo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_PETFelt_HPD.pdf"
+    },
+    {
+      "id": "ml-petfelt-test-vocemissions",
+      "title": "TOPO VOC Emissions",
+      "type": "sustainability",
+      "products": [
+        "pet-felt-baffle-system-topo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_PETFelt_Test_VOCEmissions.pdf"
+    },
+    {
+      "id": "ml-petfelt-blaffe-datasheet",
+      "title": "BLAFFE Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "pet-felt-baffles-blaffe"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2025-03",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/03/ML_PETFelt-_BLAFFE_DataSheet.pdf"
+    },
+    {
+      "id": "ml-petfelt-blaffe-csispec",
+      "title": "BLAFFE CSI Spec",
+      "type": "csi-spec",
+      "products": [
+        "pet-felt-baffles-blaffe"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "DOCX",
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/ML_PETFelt_Blaffe_CSISpec.docx"
+    },
+    {
+      "id": "20",
+      "title": "BLAFFE Installation Instructions",
+      "type": "installation",
+      "products": [
+        "pet-felt-baffles-blaffe"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "#%20",
+      "size": null,
+      "updated": null,
+      "href": "#%20"
+    },
+    {
+      "id": "ml-petfelt-cleaningguide",
+      "title": "PET Felt Cleaning Guide",
+      "type": "care",
+      "products": [
+        "pet-felt-baffles-blaffe",
+        "pet-felt-ceiling-system-graffle",
+        "pet-felt-ceiling-tiles-keys"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2024-07",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/07/ML_PETFelt_CleaningGuide.pdf"
+    },
+    {
+      "id": "blaffe-dwg",
+      "title": "BLAFFE DWG files",
       "type": "cad",
-      "product": "terra-laminate",
+      "products": [
+        "pet-felt-baffles-blaffe"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "DWG",
-      "size": "6.1 MB",
-      "updated": "2026-09-08",
-      "href": "#"
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Blaffe-DWG.zip"
     },
     {
-      "id": "terra-laminate-bim",
-      "title": "Terra Laminate BIM Object",
-      "type": "bim",
-      "product": "terra-laminate",
-      "format": "RVT",
-      "size": "8.8 MB",
-      "updated": "2026-09-14",
-      "href": "#"
+      "id": "blaffe-skp",
+      "title": "BLAFFE SKP files",
+      "type": "cad",
+      "products": [
+        "pet-felt-baffles-blaffe"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "SKP",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Blaffe-SKP.zip"
     },
     {
-      "id": "terra-laminate-epd",
-      "title": "Terra Laminate EPD / Sustainability",
-      "type": "epd",
-      "product": "terra-laminate",
+      "id": "blaffe-rfa",
+      "title": "BLAFFE RFA files",
+      "type": "cad",
+      "products": [
+        "pet-felt-baffles-blaffe"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "RFA",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Blaffe-RFA.zip"
+    },
+    {
+      "id": "blaffe-obj",
+      "title": "BLAFFE OBJ files",
+      "type": "cad",
+      "products": [
+        "pet-felt-baffles-blaffe"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "OBJ",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/blaffe-obj.zip"
+    },
+    {
+      "id": "blaffe-stp",
+      "title": "BLAFFE STP files",
+      "type": "cad",
+      "products": [
+        "pet-felt-baffles-blaffe"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "STP",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/blaffe-stp.zip"
+    },
+    {
+      "id": "blaffe-3dm",
+      "title": "BLAFFE 3DM files",
+      "type": "cad",
+      "products": [
+        "pet-felt-baffles-blaffe"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "3DM",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/blaffe-3dm.zip"
+    },
+    {
+      "id": "ml-petfelt-blaffe-test-c423-j-8fins",
+      "title": "BLAFFE Acoustical Tests",
+      "type": "tests",
+      "products": [
+        "pet-felt-baffles-blaffe"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "0.8 MB",
-      "updated": "2026-06-15",
-      "href": "#"
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/ML_PETFelt_Blaffe_Test_C423_J_8fins.pdf"
     },
     {
-      "id": "mono-solid-spec-sheet",
-      "title": "Mono Solid Surface Spec Sheet",
-      "type": "spec-sheet",
-      "product": "mono-solid",
+      "id": "ml-petfelt-test-e84-halfin-1",
+      "title": "BLAFFE Fire Tests",
+      "type": "tests",
+      "products": [
+        "pet-felt-baffles-blaffe"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "5.4 MB",
-      "updated": "2026-09-14",
-      "href": "#"
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/ML_PETFelt_Test_E84_Halfin-1.pdf"
     },
     {
-      "id": "mono-solid-install-guide",
-      "title": "Mono Solid Surface Installation Guide",
-      "type": "install-guide",
-      "product": "mono-solid",
+      "id": "ml-petfelt-test-lightreflectance",
+      "title": "BLAFFE Light Reflectance",
+      "type": "tests",
+      "products": [
+        "pet-felt-baffles-blaffe"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "6.7 MB",
-      "updated": "2026-09-05",
-      "href": "#"
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/ML_PETFelt_Test_LightReflectance.pdf"
     },
     {
-      "id": "mono-solid-warranty",
-      "title": "Mono Solid Surface Warranty",
+      "id": "ml-petfelt-test-vocemissions",
+      "title": "BLAFFE VOC Emissions",
+      "type": "sustainability",
+      "products": [
+        "pet-felt-baffles-blaffe"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/ML_PETFelt_Test_VOCEmissions.pdf"
+    },
+    {
+      "id": "ml-petfelt-beam-datasheet",
+      "title": "BEAM Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "pet-felt-ceiling-system-beam"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2025-03",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/03/ML_PETFelt_Beam_DataSheet.pdf"
+    },
+    {
+      "id": "ml-petfelt-beam-csispec",
+      "title": "BEAM CSI Spec",
+      "type": "csi-spec",
+      "products": [
+        "pet-felt-ceiling-system-beam"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "DOCX",
+      "size": null,
+      "updated": "2024-09",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/09/ML_PETFelt_Beam_CSISpec.docx"
+    },
+    {
+      "id": "pet-beam-dwg",
+      "title": "BEAM DWG files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-system-beam"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "DWG",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/PET_Beam_-_DWG.zip"
+    },
+    {
+      "id": "pet-beam-skp",
+      "title": "BEAM SKP files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-system-beam"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "SKP",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/PET_Beam_-_SKP.zip"
+    },
+    {
+      "id": "pet-beam-rfa",
+      "title": "BEAM RFA files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-system-beam"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "RFA",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/PET-Beam-RFA.zip"
+    },
+    {
+      "id": "pet-felt-beams-obj",
+      "title": "BEAM OBJ files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-system-beam"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "OBJ",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/pet-felt-beams-obj.zip"
+    },
+    {
+      "id": "pet-felt-beam-stp",
+      "title": "BEAM STP files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-system-beam"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "STP",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/pet-felt-beam-stp.zip"
+    },
+    {
+      "id": "pet-felt-beam-3dm",
+      "title": "BEAM 3DM files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-system-beam"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "3DM",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/pet-felt-beam-3dm.zip"
+    },
+    {
+      "id": "ml-beam-acoustictests",
+      "title": "BEAM Acoustical Tests",
+      "type": "tests",
+      "products": [
+        "pet-felt-ceiling-system-beam"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "ZIP",
+      "size": null,
+      "updated": "2025-03",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/03/ML_BEAM_AcousticTests.zip"
+    },
+    {
+      "id": "ml-petfelt-test-e84-halfin",
+      "title": "BEAM Fire Tests",
+      "type": "tests",
+      "products": [
+        "pet-felt-ceiling-system-beam"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2024-09",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/09/ML_PETFelt_Test_E84_Halfin.pdf"
+    },
+    {
+      "id": "ml-petfelt-test-vocemissions",
+      "title": "BEAM VOC Emissions",
+      "type": "sustainability",
+      "products": [
+        "pet-felt-ceiling-system-beam"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2024-09",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/09/ML_PETFelt_Test_VOCEmissions.pdf"
+    },
+    {
+      "id": "ml-petfelt-graffle-datasheet",
+      "title": "GRAFFLE Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "pet-felt-ceiling-system-graffle"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2025-03",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/03/ML_PETFelt_GRAFFLE_DataSheet.pdf"
+    },
+    {
+      "id": "ml-petfelt-graffle-csispec",
+      "title": "GRAFFLE CSI Spec",
+      "type": "csi-spec",
+      "products": [
+        "pet-felt-ceiling-system-graffle"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "DOCX",
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/ML_PETFelt_Graffle_CSISpec.docx"
+    },
+    {
+      "id": "graffle-dwg",
+      "title": "GRAFFLE DWG files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-system-graffle"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "DWG",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Graffle_-_DWG.zip"
+    },
+    {
+      "id": "graffle-skp",
+      "title": "GRAFFLE SKP files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-system-graffle"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "SKP",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Graffle_-_SKP.zip"
+    },
+    {
+      "id": "graffle-rfa",
+      "title": "GRAFFLE RFA files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-system-graffle"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "RFA",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Graffle_-_RFA.zip"
+    },
+    {
+      "id": "graffle-obj",
+      "title": "GRAFFLE OBJ files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-system-graffle"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "OBJ",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/graffle-obj.zip"
+    },
+    {
+      "id": "graffle-stp",
+      "title": "GRAFFLE STP files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-system-graffle"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "STP",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/graffle-stp.zip"
+    },
+    {
+      "id": "graffle-3dm",
+      "title": "GRAFFLE 3DM files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-system-graffle"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "3DM",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/graffle-3dm.zip"
+    },
+    {
+      "id": "acoustical-tests-1",
+      "title": "GRAFFLE Acoustical Tests",
+      "type": "tests",
+      "products": [
+        "pet-felt-ceiling-system-graffle"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "ZIP",
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/Acoustical-Tests-1.zip"
+    },
+    {
+      "id": "ml-petfelt-test-e84-halfin-2",
+      "title": "GRAFFLE Fire Tests",
+      "type": "tests",
+      "products": [
+        "pet-felt-ceiling-system-graffle"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/ML_PETFelt_Test_E84_Halfin-2.pdf"
+    },
+    {
+      "id": "ml-petfelt-test-lightreflectance-1",
+      "title": "GRAFFLE Light Reflectance",
+      "type": "tests",
+      "products": [
+        "pet-felt-ceiling-system-graffle"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/ML_PETFelt_Test_LightReflectance-1.pdf"
+    },
+    {
+      "id": "ml-gryd-datasheet",
+      "title": "GRYD Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "pet-felt-ceiling-system-gryd"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2025-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/05/ML_GRYD_DataSheet.pdf"
+    },
+    {
+      "id": "ml-petfelt-gryd-csispec",
+      "title": "GRYD CSI Spec",
+      "type": "csi-spec",
+      "products": [
+        "pet-felt-ceiling-system-gryd"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "DOCX",
+      "size": null,
+      "updated": "2025-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/05/ML_PETFelt_GRYD_CSISpec.docx"
+    },
+    {
+      "id": "ml-petfelt-cleaningguide",
+      "title": "GRYD Cleaning Guide",
+      "type": "care",
+      "products": [
+        "pet-felt-ceiling-system-gryd"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2025-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/05/ML_PETFelt_CleaningGuide.pdf"
+    },
+    {
+      "id": "ml-warranty-1yearlimited",
+      "title": "GRYD Warranty",
       "type": "warranty",
-      "product": "mono-solid",
+      "products": [
+        "pet-felt-ceiling-system-gryd"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "4.4 MB",
-      "updated": "2026-09-17",
-      "href": "#"
+      "size": null,
+      "updated": "2025-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/05/ML_Warranty_1YearLimited.pdf"
     },
     {
-      "id": "mono-solid-sds",
-      "title": "Mono Solid Surface Safety Data Sheet",
+      "id": "ml-petfelt-test-e84-halfin",
+      "title": "GRYD Acoustical Tests",
+      "type": "tests",
+      "products": [
+        "pet-felt-ceiling-system-gryd"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2025-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/05/ML_PETFelt_Test_E84_Halfin.pdf"
+    },
+    {
+      "id": "ml-petfelt-sds",
+      "title": "GRYD SDS",
       "type": "sds",
-      "product": "mono-solid",
+      "products": [
+        "pet-felt-ceiling-system-gryd"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "0.4 MB",
-      "updated": "2026-08-25",
-      "href": "#"
+      "size": null,
+      "updated": "2025-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/05/ML_PETFelt_SDS.pdf"
     },
     {
-      "id": "mono-solid-cad",
-      "title": "Mono Solid Surface CAD Details",
-      "type": "cad",
-      "product": "mono-solid",
-      "format": "DWG",
-      "size": "5.4 MB",
-      "updated": "2026-01-25",
-      "href": "#"
-    },
-    {
-      "id": "mono-solid-bim",
-      "title": "Mono Solid Surface BIM Object",
-      "type": "bim",
-      "product": "mono-solid",
-      "format": "RVT",
-      "size": "5.1 MB",
-      "updated": "2026-08-20",
-      "href": "#"
-    },
-    {
-      "id": "mono-solid-epd",
-      "title": "Mono Solid Surface EPD / Sustainability",
-      "type": "epd",
-      "product": "mono-solid",
+      "id": "ml-petfelt-hpd",
+      "title": "GRYD HPD",
+      "type": "sustainability",
+      "products": [
+        "pet-felt-ceiling-system-gryd"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "4.6 MB",
-      "updated": "2026-06-22",
-      "href": "#"
+      "size": null,
+      "updated": "2025-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/05/ML_PETFelt_HPD.pdf"
     },
     {
-      "id": "material-logiq-product-catalog-2026",
-      "title": "Material Logiq Product Catalog 2026",
-      "type": "brochure",
-      "product": null,
+      "id": "ml-petfelt-test-vocemissions",
+      "title": "GRYD VOC Emissions",
+      "type": "sustainability",
+      "products": [
+        "pet-felt-ceiling-system-gryd"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "8.7 MB",
-      "updated": "2026-06-01",
-      "href": "#"
+      "size": null,
+      "updated": "2025-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/05/ML_PETFelt_Test_VOCEmissions.pdf"
     },
     {
-      "id": "acoustic-design-guide",
-      "title": "Acoustic Design Guide",
-      "type": "brochure",
-      "product": null,
+      "id": "ml-petfelt-coffa-datasheet",
+      "title": "COFFA Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "pet-felt-ceiling-tiles-coffa"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "9.2 MB",
-      "updated": "2026-06-01",
-      "href": "#"
+      "size": null,
+      "updated": "2026-08",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/08/ML_PETFelt_COFFA_DataSheet.pdf"
     },
     {
-      "id": "general-terms-and-warranty-policy",
-      "title": "General Terms & Warranty Policy",
+      "id": "ml-petfelt-coffa-csispec-ceilingtile",
+      "title": "COFFA CSI Spec",
+      "type": "csi-spec",
+      "products": [
+        "pet-felt-ceiling-tiles-coffa"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "DOCX",
+      "size": null,
+      "updated": "2026-07",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/07/ML_PETFelt_Coffa_CSISpec_CeilingTile.docx"
+    },
+    {
+      "id": "coffa-installation-instructions",
+      "title": "COFFA Installation Instructions",
+      "type": "installation",
+      "products": [
+        "pet-felt-ceiling-tiles-coffa"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-08",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/08/Coffa_Installation_Instructions.pdf"
+    },
+    {
+      "id": "ml-petfelt-cleaningguide-1",
+      "title": "COFFA Cleaning Guide",
+      "type": "care",
+      "products": [
+        "pet-felt-ceiling-tiles-coffa"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-07",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/07/ML_PETFelt_CleaningGuide-1.pdf"
+    },
+    {
+      "id": "ml-warranty-1yearlimited-1",
+      "title": "COFFA Warranty",
       "type": "warranty",
-      "product": null,
+      "products": [
+        "pet-felt-ceiling-tiles-coffa"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "12.2 MB",
-      "updated": "2026-06-01",
-      "href": "#"
+      "size": null,
+      "updated": "2026-07",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/07/ML_Warranty_1YearLimited-1.pdf"
     },
     {
-      "id": "sustainability-overview",
-      "title": "Sustainability Overview",
-      "type": "epd",
-      "product": null,
+      "id": "coffa-dwgs",
+      "title": "COFFA DWG files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-tiles-coffa"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "DWG",
+      "size": null,
+      "updated": "2026-08",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/08/COFFA-DWGs.zip"
+    },
+    {
+      "id": "coffa-skps",
+      "title": "COFFA SKP files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-tiles-coffa"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "SKP",
+      "size": null,
+      "updated": "2026-08",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/08/COFFA-SKPs.zip"
+    },
+    {
+      "id": "coffa-objs",
+      "title": "COFFA OBJ files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-tiles-coffa"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "OBJ",
+      "size": null,
+      "updated": "2026-08",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/08/COFFA-OBJs.zip"
+    },
+    {
+      "id": "coffa-stps",
+      "title": "COFFA STP files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-tiles-coffa"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "STP",
+      "size": null,
+      "updated": "2026-08",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/08/COFFA-STPs.zip"
+    },
+    {
+      "id": "coffa-3dms",
+      "title": "COFFA 3DM files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-tiles-coffa"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "3DM",
+      "size": null,
+      "updated": "2026-08",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/08/COFFA-3DMs.zip"
+    },
+    {
+      "id": "ml-petfelt-test-e84-halfin-1",
+      "title": "COFFA Fire Tests",
+      "type": "tests",
+      "products": [
+        "pet-felt-ceiling-tiles-coffa"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
       "format": "PDF",
-      "size": "3.4 MB",
-      "updated": "2026-06-01",
-      "href": "#"
+      "size": null,
+      "updated": "2026-07",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/07/ML_PETFelt_Test_E84_Halfin-1.pdf"
+    },
+    {
+      "id": "ml-petfelt-sds-1",
+      "title": "COFFA SDS",
+      "type": "sds",
+      "products": [
+        "pet-felt-ceiling-tiles-coffa"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-07",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/07/ML_PETFelt_SDS-1.pdf"
+    },
+    {
+      "id": "ml-petfelt-hpd-1",
+      "title": "COFFA HPD",
+      "type": "sustainability",
+      "products": [
+        "pet-felt-ceiling-tiles-coffa"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-07",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/07/ML_PETFelt_HPD-1.pdf"
+    },
+    {
+      "id": "ml-petfelt-vocemissions-greenguard-gold-certification-1",
+      "title": "COFFA VOC Emissions",
+      "type": "sustainability",
+      "products": [
+        "pet-felt-ceiling-tiles-coffa"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-07",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/07/ML_PETFelt_VOCEmissions_GREENGUARD_GOLD_Certification-1.pdf"
+    },
+    {
+      "id": "ml-petfelt-hollo-datasheet",
+      "title": "HOLLO Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "pet-felt-ceiling-tiles-hollo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-08",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/08/ML_PETFelt_HOLLO_DataSheet.pdf"
+    },
+    {
+      "id": "hollo-installation-instructions",
+      "title": "HOLLO Installation Instructions",
+      "type": "installation",
+      "products": [
+        "pet-felt-ceiling-tiles-hollo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-08",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/08/Hollo-Installation-Instructions.pdf"
+    },
+    {
+      "id": "ml-petfelt-cleaningguide",
+      "title": "HOLLO Cleaning Guide",
+      "type": "care",
+      "products": [
+        "pet-felt-ceiling-tiles-hollo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-07",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/07/ML_PETFelt_CleaningGuide.pdf"
+    },
+    {
+      "id": "ml-warranty-1yearlimited",
+      "title": "HOLLO Warranty",
+      "type": "warranty",
+      "products": [
+        "pet-felt-ceiling-tiles-hollo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-07",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/07/ML_Warranty_1YearLimited.pdf"
+    },
+    {
+      "id": "hollo-dwgs",
+      "title": "HOLLO DWG files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-tiles-hollo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "DWG",
+      "size": null,
+      "updated": "2026-08",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/08/HOLLO-DWGs.zip"
+    },
+    {
+      "id": "hollo-skps",
+      "title": "HOLLO SKP files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-tiles-hollo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "SKP",
+      "size": null,
+      "updated": "2026-08",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/08/HOLLO-SKPs.zip"
+    },
+    {
+      "id": "hollo-objs",
+      "title": "HOLLO OBJ files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-tiles-hollo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "OBJ",
+      "size": null,
+      "updated": "2026-08",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/08/HOLLO-OBJs.zip"
+    },
+    {
+      "id": "hollo-stps",
+      "title": "HOLLO STP files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-tiles-hollo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "STP",
+      "size": null,
+      "updated": "2026-08",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/08/HOLLO-STPs.zip"
+    },
+    {
+      "id": "hollo-3dms",
+      "title": "HOLLO 3DM files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-tiles-hollo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "3DM",
+      "size": null,
+      "updated": "2026-08",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/08/HOLLO-3DMs.zip"
+    },
+    {
+      "id": "ml-petfelt-test-e84-halfin",
+      "title": "HOLLO Fire Tests",
+      "type": "tests",
+      "products": [
+        "pet-felt-ceiling-tiles-hollo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-07",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/07/ML_PETFelt_Test_E84_Halfin.pdf"
+    },
+    {
+      "id": "ml-petfelt-sds",
+      "title": "HOLLO SDS",
+      "type": "sds",
+      "products": [
+        "pet-felt-ceiling-tiles-hollo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-07",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/07/ML_PETFelt_SDS.pdf"
+    },
+    {
+      "id": "ml-petfelt-hpd",
+      "title": "HOLLO HPD",
+      "type": "sustainability",
+      "products": [
+        "pet-felt-ceiling-tiles-hollo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-07",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/07/ML_PETFelt_HPD.pdf"
+    },
+    {
+      "id": "ml-petfelt-vocemissions-greenguard-gold-certification",
+      "title": "HOLLO VOC Emissions",
+      "type": "sustainability",
+      "products": [
+        "pet-felt-ceiling-tiles-hollo"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-07",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/07/ML_PETFelt_VOCEmissions_GREENGUARD_GOLD_Certification.pdf"
+    },
+    {
+      "id": "ml-petfelt-keys-datasheet-1",
+      "title": "KEYS Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "pet-felt-ceiling-tiles-keys"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2025-03",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/03/ML_PETFelt_KEYS_DataSheet-1.pdf"
+    },
+    {
+      "id": "ml-petfelt-keys-csispec-ceilingtile",
+      "title": "KEYS CSI Spec",
+      "type": "csi-spec",
+      "products": [
+        "pet-felt-ceiling-tiles-keys"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "DOCX",
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/ML_PETFelt_Keys_CSISpec_CeilingTile.docx"
+    },
+    {
+      "id": "keys-dwg",
+      "title": "KEYS DWG files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-tiles-keys"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "DWG",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Keys_-_DWG.zip"
+    },
+    {
+      "id": "keys-skp",
+      "title": "KEYS SKP files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-tiles-keys"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "SKP",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Keys_-_SKP.zip"
+    },
+    {
+      "id": "keys-rfa",
+      "title": "KEYS RFA files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-tiles-keys"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "RFA",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Keys_-_RFA.zip"
+    },
+    {
+      "id": "keys-obj",
+      "title": "KEYS OBJ files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-tiles-keys"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "OBJ",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/keys-obj.zip"
+    },
+    {
+      "id": "keys-stp",
+      "title": "KEYS STP files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-tiles-keys"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "STP",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/keys-stp.zip"
+    },
+    {
+      "id": "keys-3dm",
+      "title": "KEYS 3DM files",
+      "type": "cad",
+      "products": [
+        "pet-felt-ceiling-tiles-keys"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "3DM",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/keys-3dm.zip"
+    },
+    {
+      "id": "ml-keys-test-c423-emount",
+      "title": "KEYS Acoustical Tests",
+      "type": "tests",
+      "products": [
+        "pet-felt-ceiling-tiles-keys"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2025-03",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/03/ML_KEYS_Test_C423_EMount.pdf"
+    },
+    {
+      "id": "ml-petfelt-test-lightreflectance-2",
+      "title": "KEYS Light Reflectance",
+      "type": "tests",
+      "products": [
+        "pet-felt-ceiling-tiles-keys"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/ML_PETFelt_Test_LightReflectance-2.pdf"
+    },
+    {
+      "id": "ml-petfelt-thatch-datasheet-20260420",
+      "title": "THATCH Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "pet-felt-cloud-system-thatch"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_PETFelt_THATCH_DataSheet_20260420.pdf"
+    },
+    {
+      "id": "ml-petfelt-thatch-csispec",
+      "title": "THATCH CSI Spec",
+      "type": "csi-spec",
+      "products": [
+        "pet-felt-cloud-system-thatch"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "DOCX",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_PETFelt_THATCH_CSISpec.docx"
+    },
+    {
+      "id": "thatch-installation-instructions",
+      "title": "THATCH Installation Instructions",
+      "type": "installation",
+      "products": [
+        "pet-felt-cloud-system-thatch"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "ZIP",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/Thatch-Installation-Instructions.zip"
+    },
+    {
+      "id": "ml-petfelt-cleaningguide-1",
+      "title": "THATCH Cleaning Guide",
+      "type": "care",
+      "products": [
+        "pet-felt-cloud-system-thatch"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_PETFelt_CleaningGuide-1.pdf"
+    },
+    {
+      "id": "ml-warranty-1yearlimited-1",
+      "title": "THATCH Warranty",
+      "type": "warranty",
+      "products": [
+        "pet-felt-cloud-system-thatch"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_Warranty_1YearLimited-1.pdf"
+    },
+    {
+      "id": "thatch-dwg",
+      "title": "THATCH DWG files",
+      "type": "cad",
+      "products": [
+        "pet-felt-cloud-system-thatch"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "DWG",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Thatch_-_DWG.zip"
+    },
+    {
+      "id": "thatch-skp",
+      "title": "THATCH SKP files",
+      "type": "cad",
+      "products": [
+        "pet-felt-cloud-system-thatch"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "SKP",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Thatch_-_SKP.zip"
+    },
+    {
+      "id": "thatch-rfa",
+      "title": "THATCH RFA files",
+      "type": "cad",
+      "products": [
+        "pet-felt-cloud-system-thatch"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "RFA",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Thatch_-_RFA.zip"
+    },
+    {
+      "id": "thatch-obj",
+      "title": "THATCH OBJ files",
+      "type": "cad",
+      "products": [
+        "pet-felt-cloud-system-thatch"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "OBJ",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Thatch_-_OBJ.zip"
+    },
+    {
+      "id": "thatch-stp",
+      "title": "THATCH STP files",
+      "type": "cad",
+      "products": [
+        "pet-felt-cloud-system-thatch"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "STP",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Thatch_-_STP.zip"
+    },
+    {
+      "id": "thatch-3dm",
+      "title": "THATCH 3DM files",
+      "type": "cad",
+      "products": [
+        "pet-felt-cloud-system-thatch"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "3DM",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Thatch_-_3DM.zip"
+    },
+    {
+      "id": "ml-petfelt-test-e84-halfin-1",
+      "title": "THATCH Fire Tests",
+      "type": "tests",
+      "products": [
+        "pet-felt-cloud-system-thatch"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_PETFelt_Test_E84_Halfin-1.pdf"
+    },
+    {
+      "id": "ml-petfelt-sds-1",
+      "title": "THATCH SDS",
+      "type": "sds",
+      "products": [
+        "pet-felt-cloud-system-thatch"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_PETFelt_SDS-1.pdf"
+    },
+    {
+      "id": "ml-petfelt-hpd-1",
+      "title": "THATCH HPD",
+      "type": "sustainability",
+      "products": [
+        "pet-felt-cloud-system-thatch"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_PETFelt_HPD-1.pdf"
+    },
+    {
+      "id": "ml-petfelt-test-vocemissions-1",
+      "title": "THATCH VOC Emissions",
+      "type": "sustainability",
+      "products": [
+        "pet-felt-cloud-system-thatch"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_PETFelt_Test_VOCEmissions-1.pdf"
+    },
+    {
+      "id": "ml-petfelt-classiq-datasheet-1",
+      "title": "CLASSIQ Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "pet-felt-linear-acoustic-system-classiq"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2025-03",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/03/ML_PETFelt_CLASSIQ_DataSheet-1.pdf"
+    },
+    {
+      "id": "ml-classiq-csispec",
+      "title": "CLASSIQ CSI Spec",
+      "type": "csi-spec",
+      "products": [
+        "pet-felt-linear-acoustic-system-classiq"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "DOCX",
+      "size": null,
+      "updated": "2025-03",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/03/ML_CLASSIQ_CSISpec.docx"
+    },
+    {
+      "id": "ml-classiq-install-v1",
+      "title": "CLASSIQ Installation Instructions",
+      "type": "installation",
+      "products": [
+        "pet-felt-linear-acoustic-system-classiq"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2025-03",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/03/ML_CLASSIQ_Install_v1.pdf"
+    },
+    {
+      "id": "ml-classiq-acoustictests",
+      "title": "CLASSIQ Acoustical Tests",
+      "type": "tests",
+      "products": [
+        "pet-felt-linear-acoustic-system-classiq"
+      ],
+      "materials": [
+        "pet-felt"
+      ],
+      "format": "ZIP",
+      "size": null,
+      "updated": "2025-03",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/03/ML_CLASSIQ_AcousticTests.zip"
+    },
+    {
+      "id": "ml-silkmetal-baffle-datasheet-20260410",
+      "title": "Silk Metal Baffles Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "silk-metal-baffles"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_SilkMetal_Baffle_DataSheet_20260410.pdf"
+    },
+    {
+      "id": "ml-silkmetal-baffle-csispec",
+      "title": "Silk Metal Baffles CSI Spec",
+      "type": "csi-spec",
+      "products": [
+        "silk-metal-baffles"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "DOCX",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_SilkMetal_Baffle_CSISpec.docx"
+    },
+    {
+      "id": "silk-metal-baffle-installation-instructions",
+      "title": "Silk Metal Baffles Installation Instructions",
+      "type": "installation",
+      "products": [
+        "silk-metal-baffles"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/Silk-Metal-Baffle-Installation-Instructions.pdf"
+    },
+    {
+      "id": "ml-silkmetal-cleaningguide",
+      "title": "Silk Metal Cleaning Guide",
+      "type": "care",
+      "products": [
+        "silk-metal-baffles",
+        "silk-metal-ceiling-tiles",
+        "silk-metal-clouds",
+        "silk-metal-grille",
+        "silk-metal-panels",
+        "silk-metal-squell",
+        "silk-metal-trell"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_SilkMetal_CleaningGuide.pdf"
+    },
+    {
+      "id": "silk-metal-baffle-dwg",
+      "title": "Silk Metal Baffles DWG files",
+      "type": "cad",
+      "products": [
+        "silk-metal-baffles"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "DWG",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Silk_Metal_Baffle_-_DWG.zip"
+    },
+    {
+      "id": "silk-metal-baffle-skp",
+      "title": "Silk Metal Baffles SKP files",
+      "type": "cad",
+      "products": [
+        "silk-metal-baffles"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "SKP",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Silk_Metal_Baffle_-_SKP.zip"
+    },
+    {
+      "id": "silk-metal-baffle-rfa",
+      "title": "Silk Metal Baffles RFA files",
+      "type": "cad",
+      "products": [
+        "silk-metal-baffles"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "RFA",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Silk_Metal_Baffle_-_RFA.zip"
+    },
+    {
+      "id": "silk-metal-baffle-obj",
+      "title": "Silk Metal Baffles OBJ files",
+      "type": "cad",
+      "products": [
+        "silk-metal-baffles"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "OBJ",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/silk-metal-baffle-obj.zip"
+    },
+    {
+      "id": "sm-baffle-stp",
+      "title": "Silk Metal Baffles STP files",
+      "type": "cad",
+      "products": [
+        "silk-metal-baffles"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "STP",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/sm-baffle-stp.zip"
+    },
+    {
+      "id": "silk-metal-baffle-3dm",
+      "title": "Silk Metal Baffles 3DM files",
+      "type": "cad",
+      "products": [
+        "silk-metal-baffles"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "3DM",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/silk-metal-baffle-3dm.zip"
+    },
+    {
+      "id": "silk-metal-baffle-standard-details-r2-final-draft",
+      "title": "Silk Metal Baffles Standard Details",
+      "type": "details",
+      "products": [
+        "silk-metal-baffles"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/Silk-Metal-Baffle-Standard-Details-r2-Final-Draft.pdf"
+    },
+    {
+      "id": "ml-silkmetal-baffle-test-c423-2in-pdfisiperfmetal-baffle-test-c423-2in",
+      "title": "Silk Metal Baffles Acoustical Tests",
+      "type": "tests",
+      "products": [
+        "silk-metal-baffles"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_SilkMetal_Baffle_Test_C423_2in.pdfisiPerfMetal_Baffle_Test_C423_2in.pdf"
+    },
+    {
+      "id": "ml-silkmetal-sds",
+      "title": "Silk Metal SDS",
+      "type": "sds",
+      "products": [
+        "silk-metal-baffles",
+        "silk-metal-ceiling-tiles",
+        "silk-metal-clouds",
+        "silk-metal-grille",
+        "silk-metal-panels",
+        "silk-metal-squell",
+        "silk-metal-trell"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_SilkMetal_SDS.pdf"
+    },
+    {
+      "id": "ml-silkmetal-hpd",
+      "title": "Silk Metal HPD",
+      "type": "sustainability",
+      "products": [
+        "silk-metal-baffles",
+        "silk-metal-ceiling-tiles",
+        "silk-metal-clouds",
+        "silk-metal-grille",
+        "silk-metal-panels",
+        "silk-metal-squell",
+        "silk-metal-trell"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_SilkMetal_HPD.pdf"
+    },
+    {
+      "id": "material-logiq-2025-scs-iaq-11156-s3",
+      "title": "Silk Metal VOC Emissions",
+      "type": "sustainability",
+      "products": [
+        "silk-metal-baffles",
+        "silk-metal-ceiling-tiles",
+        "silk-metal-clouds",
+        "silk-metal-grille",
+        "silk-metal-squell",
+        "silk-metal-trell"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/Material-Logiq_2025_SCS-IAQ-11156_s3.pdf"
+    },
+    {
+      "id": "ml-silkmetal-ceilingtile-datasheet-20260410",
+      "title": "Silk Metal Ceiling Tiles Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "silk-metal-ceiling-tiles"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_SilkMetal_CeilingTile_DataSheet_20260410.pdf"
+    },
+    {
+      "id": "ml-silkmetal-csispec-ceilingtile",
+      "title": "Silk Metal Ceiling Tiles CSI Spec",
+      "type": "csi-spec",
+      "products": [
+        "silk-metal-ceiling-tiles"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "DOCX",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_SilkMetal_CSISpec_CeilingTile.docx"
+    },
+    {
+      "id": "ml-microperforatedaluminum-ceilingtile-install-layin",
+      "title": "Silk Metal Ceiling Tiles Installation Instructions",
+      "type": "installation",
+      "products": [
+        "silk-metal-ceiling-tiles"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/ML_MicroperforatedAluminum_CeilingTile_Install_LayIn.pdf"
+    },
+    {
+      "id": "sm-layintile-2x2-dwg-and-sm-layintile-2x4-dwg",
+      "title": "Silk Metal Ceiling Tiles DWG files",
+      "type": "cad",
+      "products": [
+        "silk-metal-ceiling-tiles"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "DWG",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/SM_LayInTile_2x2.dwg-and-SM_LayInTile_2x4.dwg_.zip"
+    },
+    {
+      "id": "sm-layintile-2x2-rfa-and-sm-layintile-2x4-rfa",
+      "title": "Silk Metal Ceiling Tiles RFA files",
+      "type": "cad",
+      "products": [
+        "silk-metal-ceiling-tiles"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "RFA",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/SM_LayInTile_2x2.rfa-and-SM_LayInTile_2x4.rfa_.zip"
+    },
+    {
+      "id": "skp-sm-ceiling-tiles",
+      "title": "Silk Metal Ceiling Tiles SKP files",
+      "type": "cad",
+      "products": [
+        "silk-metal-ceiling-tiles"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "SKP",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/skp-sm-ceiling-tiles.zip"
+    },
+    {
+      "id": "sm-layintile-2x2-obj-and-sm-layintile-2x4-obj",
+      "title": "Silk Metal Ceiling Tiles OBJ files",
+      "type": "cad",
+      "products": [
+        "silk-metal-ceiling-tiles"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "OBJ",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/SM_LayInTile_2x2-OBJ-and-SM_LayInTile_2x4-OBJ.zip"
+    },
+    {
+      "id": "silk-metal-ceiling-tile-stp",
+      "title": "Silk Metal Ceiling Tiles STP files",
+      "type": "cad",
+      "products": [
+        "silk-metal-ceiling-tiles"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "STP",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/silk-metal-ceiling-tile-stp.zip"
+    },
+    {
+      "id": "sm-layintile-2x2-3dm-and-sm-layintile-2x4-3dm",
+      "title": "Silk Metal Ceiling Tiles 3DM files",
+      "type": "cad",
+      "products": [
+        "silk-metal-ceiling-tiles"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "3DM",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/SM_LayInTile_2x2.3dm-and-SM_LayInTile_2x4.3dm.zip"
+    },
+    {
+      "id": "ml-silkmetal-test-c423-e400",
+      "title": "Silk Metal Acoustical Tests",
+      "type": "tests",
+      "products": [
+        "silk-metal-ceiling-tiles",
+        "silk-metal-clouds"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_SilkMetal_Test_C423_E400.pdf"
+    },
+    {
+      "id": "ml-silkmetal-cloud-datasheet-20260413",
+      "title": "Silk Metal Clouds Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "silk-metal-clouds"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_SilkMetal_Cloud_DataSheet_20260413.pdf"
+    },
+    {
+      "id": "ml-silkmetal-cloud-csispec",
+      "title": "Silk Metal Clouds CSI Spec",
+      "type": "csi-spec",
+      "products": [
+        "silk-metal-clouds"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "DOCX",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_SilkMetal_Cloud_CSISpec.docx"
+    },
+    {
+      "id": "ml-microperforatedaluminum-cloud-install",
+      "title": "Silk Metal Clouds Installation Instructions",
+      "type": "installation",
+      "products": [
+        "silk-metal-clouds"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/ML_MicroperforatedAluminum_Cloud_Install.pdf"
+    },
+    {
+      "id": "silk-metal-clouds-dwg",
+      "title": "Silk Metal Clouds DWG files",
+      "type": "cad",
+      "products": [
+        "silk-metal-clouds"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "DWG",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Silk_Metal_Clouds_-_DWG.zip"
+    },
+    {
+      "id": "silk-metal-clouds-skp",
+      "title": "Silk Metal Clouds SKP files",
+      "type": "cad",
+      "products": [
+        "silk-metal-clouds"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "SKP",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Silk_Metal_Clouds_-_SKP.zip"
+    },
+    {
+      "id": "silk-metal-clouds-rfa",
+      "title": "Silk Metal Clouds RFA files",
+      "type": "cad",
+      "products": [
+        "silk-metal-clouds"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "RFA",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Silk_Metal_Clouds_-_RFA.zip"
+    },
+    {
+      "id": "silk-metal-clouds-obj",
+      "title": "Silk Metal Clouds OBJ files",
+      "type": "cad",
+      "products": [
+        "silk-metal-clouds"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "OBJ",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Silk_Metal_Clouds_-_OBJ.zip"
+    },
+    {
+      "id": "silk-metal-clouds-stp",
+      "title": "Silk Metal Clouds STP files",
+      "type": "cad",
+      "products": [
+        "silk-metal-clouds"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "STP",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Silk_Metal_Clouds_-_STP.zip"
+    },
+    {
+      "id": "silk-metal-clouds-3dm",
+      "title": "Silk Metal Clouds 3DM files",
+      "type": "cad",
+      "products": [
+        "silk-metal-clouds"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "3DM",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Silk_Metal_Clouds_-_3DM.zip"
+    },
+    {
+      "id": "silk-metal-curved-cloud-standard-details-r2-final-draft",
+      "title": "Silk Metal Clouds Standard Details",
+      "type": "details",
+      "products": [
+        "silk-metal-clouds"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/Silk-Metal-Curved-Cloud-Standard-Details-r2-Final-Draft.pdf"
+    },
+    {
+      "id": "ml-silkmetal-grille-datasheet-20260410",
+      "title": "Silk Metal Grille Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "silk-metal-grille"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_SilkMetal_Grille_DataSheet_20260410.pdf"
+    },
+    {
+      "id": "ml-silkmetal-grille-csispec",
+      "title": "Silk Metal Grille CSI Spec",
+      "type": "csi-spec",
+      "products": [
+        "silk-metal-grille"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "DOCX",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_SilkMetal_Grille_CSISpec.docx"
+    },
+    {
+      "id": "silk-metal-grille-install-instructions-r3-041026",
+      "title": "Silk Metal Grille Installation Instructions",
+      "type": "installation",
+      "products": [
+        "silk-metal-grille"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/Silk-Metal-GRILLE-Install-Instructions-r3-041026.pdf"
+    },
+    {
+      "id": "grille-dwg",
+      "title": "Silk Metal Grille DWG files",
+      "type": "cad",
+      "products": [
+        "silk-metal-grille"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "DWG",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Grille_-_DWG.zip"
+    },
+    {
+      "id": "grille-skp",
+      "title": "Silk Metal Grille SKP files",
+      "type": "cad",
+      "products": [
+        "silk-metal-grille"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "SKP",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Grille_-_SKP.zip"
+    },
+    {
+      "id": "grille-rfa",
+      "title": "Silk Metal Grille RFA files",
+      "type": "cad",
+      "products": [
+        "silk-metal-grille"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "RFA",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Grille_-_RFA.zip"
+    },
+    {
+      "id": "grille-obj",
+      "title": "Silk Metal Grille OBJ files",
+      "type": "cad",
+      "products": [
+        "silk-metal-grille"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "OBJ",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/grille-obj.zip"
+    },
+    {
+      "id": "grille-stp",
+      "title": "Silk Metal Grille STP files",
+      "type": "cad",
+      "products": [
+        "silk-metal-grille"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "STP",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/grille-stp.zip"
+    },
+    {
+      "id": "grille-3dm",
+      "title": "Silk Metal Grille 3DM files",
+      "type": "cad",
+      "products": [
+        "silk-metal-grille"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "3DM",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/grille-3dm.zip"
+    },
+    {
+      "id": "ml-silkmetal-acoustictest-grille",
+      "title": "Silk Metal Grille Acoustical Tests",
+      "type": "tests",
+      "products": [
+        "silk-metal-grille"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "ZIP",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_SilkMetal_AcousticTest_Grille.zip"
+    },
+    {
+      "id": "ml-silkmetal-ceilingwallpanel-datasheet-20260412",
+      "title": "Silk Metal Ceiling and Wall Panel Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "silk-metal-panels"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_SilkMetal_CeilingWallPanel_DataSheet_20260412.pdf"
+    },
+    {
+      "id": "ml-silkmetal-csispec-ceilingandwallpanels",
+      "title": "Silk Metal Ceiling and Wall Panel CSI Spec",
+      "type": "csi-spec",
+      "products": [
+        "silk-metal-panels"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "ZIP",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_SilkMetal_CSISpec_CeilingandWallPanels.zip"
+    },
+    {
+      "id": "silk-metal-hook-on-wall-panel-standard-details-r2-final-draft",
+      "title": "Silk Metal Ceiling and Wall Panel Hook On Wall Panel Standard Detail",
+      "type": "details",
+      "products": [
+        "silk-metal-panels"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/Silk-Metal-Hook-On-Wall-Panel-Standard-Details-r2-Final-Draft.pdf"
+    },
+    {
+      "id": "silk-metal-clip-in-wall-panel-standard-details-r2-final-draft",
+      "title": "Silk Metal Ceiling and Wall Panel Clip-In Wall Panel Standard Detail",
+      "type": "details",
+      "products": [
+        "silk-metal-panels"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/Silk-Metal-Clip-in-Wall-Panel-Standard-Details-r2-Final-Draft.pdf"
+    },
+    {
+      "id": "silk-metal-hook-on-ceiling-panel-standard-details-r2-final-draft",
+      "title": "Silk Metal Ceiling and Wall Panel Hook On Ceiling Panel Standard Detail",
+      "type": "details",
+      "products": [
+        "silk-metal-panels"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/Silk-Metal-Hook-On-Ceiling-Panel-Standard-Details-r2-Final-Draft.pdf"
+    },
+    {
+      "id": "silk-metal-2x2-clip-in-tile-standard-details-r2-final-draft",
+      "title": "Silk Metal Ceiling and Wall Panel 2x2 Clip In Tile/Panel Standard Detail",
+      "type": "details",
+      "products": [
+        "silk-metal-panels"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/Silk-Metal-2X2-Clip-In-Tile-Standard-Details-r2-Final-Draft.pdf"
+    },
+    {
+      "id": "silk-metal-2x4-clip-in-tile-standard-details-r2-final-draft",
+      "title": "Silk Metal Ceiling and Wall Panel 2x4 Clip In Tile/Panel Standard Detail",
+      "type": "details",
+      "products": [
+        "silk-metal-panels"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/Silk-Metal-2X4-Clip-in-Tile-Standard-Details-r2-Final-Draft.pdf"
+    },
+    {
+      "id": "ml-silkmetal-acoustictest-panel",
+      "title": "Silk Metal Ceiling and Wall Panel Acoustical Tests",
+      "type": "tests",
+      "products": [
+        "silk-metal-panels"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "ZIP",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_SilkMetal_AcousticTest_Panel.zip"
+    },
+    {
+      "id": "material-logiq-2025-scs-iaq-11156-s2-1",
+      "title": "Silk Metal Ceiling and Wall Panel VOC Emissions",
+      "type": "sustainability",
+      "products": [
+        "silk-metal-panels"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2025-12",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/12/Material-Logiq_2025_SCS-IAQ-11156_s2-1.pdf"
+    },
+    {
+      "id": "ml-silkmetal-squell-datasheet-20260413",
+      "title": "Silk Metal Squell Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "silk-metal-squell"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_SilkMetal_SQUELL_DataSheet_20260413.pdf"
+    },
+    {
+      "id": "ml-silkmetal-squell-csispec",
+      "title": "Silk Metal Squell CSI Spec",
+      "type": "csi-spec",
+      "products": [
+        "silk-metal-squell"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "DOCX",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_SilkMetal_Squell_CSISpec.docx"
+    },
+    {
+      "id": "silk-metal-squell-install-instructions-r3-041026",
+      "title": "Silk Metal Squell Installation Instructions",
+      "type": "installation",
+      "products": [
+        "silk-metal-squell"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/Silk-Metal-SQUELL-Install-Instructions-r3-041026.pdf"
+    },
+    {
+      "id": "silk-metal-squell-ceiling-baffle-system-standard-details-r2-final-draft",
+      "title": "Silk Metal Squell Standard Details",
+      "type": "details",
+      "products": [
+        "silk-metal-squell"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/Silk-Metal-Squell-Ceiling-Baffle-System-Standard-Details-r2-Final-Draft.pdf"
+    },
+    {
+      "id": "ml-squell-test-c423-emount",
+      "title": "Silk Metal Squell Acoustical Tests",
+      "type": "tests",
+      "products": [
+        "silk-metal-squell"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2025-03",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/03/ML_SQUELL_Test_C423_EMount.pdf"
+    },
+    {
+      "id": "ml-silkmetal-trell-datasheet-20260413",
+      "title": "Silk Metal Trell Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "silk-metal-trell"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_SilkMetal_TRELL_DataSheet_20260413.pdf"
+    },
+    {
+      "id": "ml-silkmetal-trell-csispec",
+      "title": "Silk Metal Trell CSI Spec",
+      "type": "csi-spec",
+      "products": [
+        "silk-metal-trell"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "DOCX",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/ML_SilkMetal_Trell_CSISpec.docx"
+    },
+    {
+      "id": "silk-metal-trell-install-instructions-r3-041026",
+      "title": "Silk Metal Trell Installation Instructions",
+      "type": "installation",
+      "products": [
+        "silk-metal-trell"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2026-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/04/Silk-Metal-TRELL-Install-Instructions-r3-041026.pdf"
+    },
+    {
+      "id": "ml-trell-test-c423-emount",
+      "title": "Silk Metal Trell Acoustical Tests",
+      "type": "tests",
+      "products": [
+        "silk-metal-trell"
+      ],
+      "materials": [
+        "silk-metal"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2025-03",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/03/ML_TRELL_Test_C423_EMount.pdf"
+    },
+    {
+      "id": "ml-slatta-tile-datasheet-1",
+      "title": "SLATTA TILE Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "wood-slat-ceiling-tiles-slatta-tile"
+      ],
+      "materials": [
+        "wood"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2025-03",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/03/ML_SLATTA_Tile_DataSheet-1.pdf"
+    },
+    {
+      "id": "ml-slatta-csispec-ceilingtile",
+      "title": "SLATTA TILE CSI Spec",
+      "type": "csi-spec",
+      "products": [
+        "wood-slat-ceiling-tiles-slatta-tile"
+      ],
+      "materials": [
+        "wood"
+      ],
+      "format": "DOCX",
+      "size": null,
+      "updated": "2024-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/05/ML_SLATTA_CSISpec_CeilingTile.docx"
+    },
+    {
+      "id": "ml-slatta-tile-install",
+      "title": "SLATTA TILE Installation Instructions",
+      "type": "installation",
+      "products": [
+        "wood-slat-ceiling-tiles-slatta-tile"
+      ],
+      "materials": [
+        "wood"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2024-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/05/ML_SLATTA_Tile_Install.pdf"
+    },
+    {
+      "id": "slatta-tile-dwg",
+      "title": "SLATTA TILE DWG files",
+      "type": "cad",
+      "products": [
+        "wood-slat-ceiling-tiles-slatta-tile"
+      ],
+      "materials": [
+        "wood"
+      ],
+      "format": "DWG",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Slatta_Tile_-_DWG.zip"
+    },
+    {
+      "id": "slatta-tile-skp",
+      "title": "SLATTA TILE SKP files",
+      "type": "cad",
+      "products": [
+        "wood-slat-ceiling-tiles-slatta-tile"
+      ],
+      "materials": [
+        "wood"
+      ],
+      "format": "SKP",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Slatta_Tile_-_SKP.zip"
+    },
+    {
+      "id": "slatta-tile-rfa",
+      "title": "SLATTA TILE RFA files",
+      "type": "cad",
+      "products": [
+        "wood-slat-ceiling-tiles-slatta-tile"
+      ],
+      "materials": [
+        "wood"
+      ],
+      "format": "RFA",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Slatta_Tile_-_RFA.zip"
+    },
+    {
+      "id": "slatta-obj",
+      "title": "SLATTA TILE OBJ files",
+      "type": "cad",
+      "products": [
+        "wood-slat-ceiling-tiles-slatta-tile"
+      ],
+      "materials": [
+        "wood"
+      ],
+      "format": "OBJ",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/slatta-obj.zip"
+    },
+    {
+      "id": "slatta-stp",
+      "title": "SLATTA TILE STP files",
+      "type": "cad",
+      "products": [
+        "wood-slat-ceiling-tiles-slatta-tile"
+      ],
+      "materials": [
+        "wood"
+      ],
+      "format": "STP",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/slatta-stp.zip"
+    },
+    {
+      "id": "slatta-3dm",
+      "title": "SLATTA TILE 3DM files",
+      "type": "cad",
+      "products": [
+        "wood-slat-ceiling-tiles-slatta-tile"
+      ],
+      "materials": [
+        "wood"
+      ],
+      "format": "3DM",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/slatta-3dm.zip"
+    },
+    {
+      "id": "ml-slatta-test-c423-emount",
+      "title": "SLATTA TILE Acoustical Tests",
+      "type": "tests",
+      "products": [
+        "wood-slat-ceiling-tiles-slatta-tile"
+      ],
+      "materials": [
+        "wood"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2025-03",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/03/ML_SLATTA_Test_C423_EMount.pdf"
+    },
+    {
+      "id": "ml-slatta-datasheet",
+      "title": "SLATTA Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "wood-slat-panels-slatta"
+      ],
+      "materials": [
+        "wood"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2025-10",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/10/ML_SLATTA_DataSheet.pdf"
+    },
+    {
+      "id": "csi-specs-slatta",
+      "title": "SLATTA CSI Spec",
+      "type": "csi-spec",
+      "products": [
+        "wood-slat-panels-slatta"
+      ],
+      "materials": [
+        "wood"
+      ],
+      "format": "ZIP",
+      "size": null,
+      "updated": "2024-04",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/04/CSI_Specs_Slatta.zip"
+    },
+    {
+      "id": "ml-slatta-direct-attach-wall-instructions-11-09-23",
+      "title": "SLATTA Installation Instructions",
+      "type": "installation",
+      "products": [
+        "wood-slat-panels-slatta"
+      ],
+      "materials": [
+        "wood"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/ML-Slatta-Direct-Attach-Wall-Instructions-11.09.23.pdf"
+    },
+    {
+      "id": "slatta-dwg",
+      "title": "SLATTA DWG files",
+      "type": "cad",
+      "products": [
+        "wood-slat-panels-slatta"
+      ],
+      "materials": [
+        "wood"
+      ],
+      "format": "DWG",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Slatta_-_DWG.zip"
+    },
+    {
+      "id": "slatta-skp",
+      "title": "SLATTA SKP files",
+      "type": "cad",
+      "products": [
+        "wood-slat-panels-slatta"
+      ],
+      "materials": [
+        "wood"
+      ],
+      "format": "SKP",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Slatta_-_SKP.zip"
+    },
+    {
+      "id": "slatta-rfa",
+      "title": "SLATTA RFA files",
+      "type": "cad",
+      "products": [
+        "wood-slat-panels-slatta"
+      ],
+      "materials": [
+        "wood"
+      ],
+      "format": "RFA",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Slatta_-_RFA.zip"
+    },
+    {
+      "id": "slatta-obj-1",
+      "title": "SLATTA OBJ files",
+      "type": "cad",
+      "products": [
+        "wood-slat-panels-slatta"
+      ],
+      "materials": [
+        "wood"
+      ],
+      "format": "OBJ",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/slatta-obj-1.zip"
+    },
+    {
+      "id": "slatta-stp-1",
+      "title": "SLATTA STP files",
+      "type": "cad",
+      "products": [
+        "wood-slat-panels-slatta"
+      ],
+      "materials": [
+        "wood"
+      ],
+      "format": "STP",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/slatta-stp-1.zip"
+    },
+    {
+      "id": "slatta-3dm-1",
+      "title": "SLATTA 3DM files",
+      "type": "cad",
+      "products": [
+        "wood-slat-panels-slatta"
+      ],
+      "materials": [
+        "wood"
+      ],
+      "format": "3DM",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/slatta-3dm-1.zip"
+    },
+    {
+      "id": "ml-slatta-test-c423-amount",
+      "title": "SLATTA Acoustical Tests",
+      "type": "tests",
+      "products": [
+        "wood-slat-panels-slatta"
+      ],
+      "materials": [
+        "wood"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2025-03",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/03/ML_SLATTA_Test_C423_AMount.pdf"
+    },
+    {
+      "id": "ml-wood-wool-engraved-ceiling-tiles-datasheet-102923",
+      "title": "Wood Wool Engraved Ceiling Tiles Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "wood-wool-engraved-ceiling-tiles"
+      ],
+      "materials": [
+        "wood-wool"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/ML_Wood-Wool_Engraved_Ceiling-Tiles_DataSheet_102923.pdf"
+    },
+    {
+      "id": "ml-woodwool-engraved-csispec-ceilingtile",
+      "title": "Wood Wool Engraved Ceiling Tiles CSI Spec",
+      "type": "csi-spec",
+      "products": [
+        "wood-wool-engraved-ceiling-tiles"
+      ],
+      "materials": [
+        "wood-wool"
+      ],
+      "format": "DOCX",
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/ML_WoodWool_Engraved_CSISpec_CeilingTile.docx"
+    },
+    {
+      "id": "ml-ceilingtile-install-layin",
+      "title": "Wood Wool Engraved Ceiling Tiles Installation Instructions",
+      "type": "installation",
+      "products": [
+        "wood-wool-engraved-ceiling-tiles"
+      ],
+      "materials": [
+        "wood-wool"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/ML_CeilingTile_Install_LayIn.pdf"
+    },
+    {
+      "id": "ml-woodwool-cleaningguide",
+      "title": "Wood Wool Cleaning Guide",
+      "type": "care",
+      "products": [
+        "wood-wool-engraved-ceiling-tiles",
+        "wood-wool-engraved-panels"
+      ],
+      "materials": [
+        "wood-wool"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2024-07",
+      "href": "https://materiallogiq.com/wp-content/uploads/2024/07/ML_WoodWool_CleaningGuide.pdf"
+    },
+    {
+      "id": "engraved-dwg-files",
+      "title": "Wood Wool Engraved Ceiling Tiles DWG files",
+      "type": "cad",
+      "products": [
+        "wood-wool-engraved-ceiling-tiles"
+      ],
+      "materials": [
+        "wood-wool"
+      ],
+      "format": "DWG",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Engraved_-_DWG_Files.zip"
+    },
+    {
+      "id": "engraved-skp-files",
+      "title": "Wood Wool Engraved Ceiling Tiles SKP files",
+      "type": "cad",
+      "products": [
+        "wood-wool-engraved-ceiling-tiles"
+      ],
+      "materials": [
+        "wood-wool"
+      ],
+      "format": "SKP",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Engraved_-_SKP_Files.zip"
+    },
+    {
+      "id": "engraved-rfa-files",
+      "title": "Wood Wool Engraved Ceiling Tiles RFA files",
+      "type": "cad",
+      "products": [
+        "wood-wool-engraved-ceiling-tiles"
+      ],
+      "materials": [
+        "wood-wool"
+      ],
+      "format": "RFA",
+      "size": null,
+      "updated": "2026-06",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/06/Engraved-RFA-Files.zip"
+    },
+    {
+      "id": "obj-engraved-wood-wool",
+      "title": "Wood Wool Engraved Ceiling Tiles OBJ files",
+      "type": "cad",
+      "products": [
+        "wood-wool-engraved-ceiling-tiles"
+      ],
+      "materials": [
+        "wood-wool"
+      ],
+      "format": "OBJ",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/obj-engraved-wood-wool.zip"
+    },
+    {
+      "id": "engraved-wood-wool-stp-2",
+      "title": "Wood Wool Engraved Ceiling Tiles STP files",
+      "type": "cad",
+      "products": [
+        "wood-wool-engraved-ceiling-tiles"
+      ],
+      "materials": [
+        "wood-wool"
+      ],
+      "format": "STP",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/engraved-wood-wool.stp_-2.zip"
+    },
+    {
+      "id": "engraved-wood-wool-3dm",
+      "title": "Wood Wool Engraved Ceiling Tiles 3DM files",
+      "type": "cad",
+      "products": [
+        "wood-wool-engraved-ceiling-tiles"
+      ],
+      "materials": [
+        "wood-wool"
+      ],
+      "format": "3DM",
+      "size": null,
+      "updated": "2026-05",
+      "href": "https://materiallogiq.com/wp-content/uploads/2026/05/engraved-wood-wool-3dm.zip"
+    },
+    {
+      "id": "acoustical-tests",
+      "title": "Wood Wool Engraved Ceiling Tiles Acoustical Tests",
+      "type": "tests",
+      "products": [
+        "wood-wool-engraved-ceiling-tiles"
+      ],
+      "materials": [
+        "wood-wool"
+      ],
+      "format": "ZIP",
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/Acoustical-Tests.zip"
+    },
+    {
+      "id": "fire-tests",
+      "title": "Wood Wool Engraved Ceiling Tiles Fire Tests",
+      "type": "tests",
+      "products": [
+        "wood-wool-engraved-ceiling-tiles"
+      ],
+      "materials": [
+        "wood-wool"
+      ],
+      "format": "ZIP",
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/Fire-Tests.zip"
+    },
+    {
+      "id": "ml-woodwool-test-lightreflectance-clear-white",
+      "title": "Wood Wool Engraved Ceiling Tiles Light Reflectance",
+      "type": "tests",
+      "products": [
+        "wood-wool-engraved-ceiling-tiles"
+      ],
+      "materials": [
+        "wood-wool"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/ML_WoodWool_Test_LightReflectance_Clear_White.pdf"
+    },
+    {
+      "id": "as-envirocousticwoodwool-hpd",
+      "title": "Wood Wool Engraved Ceiling Tiles HPD",
+      "type": "sustainability",
+      "products": [
+        "wood-wool-engraved-ceiling-tiles"
+      ],
+      "materials": [
+        "wood-wool"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2023-09",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/09/AS_EnvirocousticWoodWool_HPD.pdf"
+    },
+    {
+      "id": "material-logiq-2025-scs-iaq-11156-s2",
+      "title": "Wood Wool VOC Emissions",
+      "type": "sustainability",
+      "products": [
+        "wood-wool-engraved-ceiling-tiles",
+        "wood-wool-engraved-panels"
+      ],
+      "materials": [
+        "wood-wool"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2025-12",
+      "href": "https://materiallogiq.com/wp-content/uploads/2025/12/Material-Logiq_2025_SCS-IAQ-11156_s2.pdf"
+    },
+    {
+      "id": "ml-wood-wool-engraved-panels-datasheet-102923-1",
+      "title": "Wood Wool Engraved Panels Data Sheet",
+      "type": "data-sheet",
+      "products": [
+        "wood-wool-engraved-panels"
+      ],
+      "materials": [
+        "wood-wool"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/ML_Wood-Wool_Engraved_Panels_DataSheet_102923-1.pdf"
+    },
+    {
+      "id": "csi-specification-2",
+      "title": "Wood Wool Engraved Panels CSI Spec",
+      "type": "csi-spec",
+      "products": [
+        "wood-wool-engraved-panels"
+      ],
+      "materials": [
+        "wood-wool"
+      ],
+      "format": "ZIP",
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/CSI-Specification-2.zip"
+    },
+    {
+      "id": "installation-instructions",
+      "title": "Wood Wool Engraved Panels Installation Instructions",
+      "type": "installation",
+      "products": [
+        "wood-wool-engraved-panels"
+      ],
+      "materials": [
+        "wood-wool"
+      ],
+      "format": "ZIP",
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/Installation-Instructions.zip"
+    },
+    {
+      "id": "acoustical-tests-2",
+      "title": "Wood Wool Engraved Panels Acoustical Tests",
+      "type": "tests",
+      "products": [
+        "wood-wool-engraved-panels"
+      ],
+      "materials": [
+        "wood-wool"
+      ],
+      "format": "ZIP",
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/Acoustical-Tests-2.zip"
+    },
+    {
+      "id": "fire-tests-1",
+      "title": "Wood Wool Engraved Panels Fire Tests",
+      "type": "tests",
+      "products": [
+        "wood-wool-engraved-panels"
+      ],
+      "materials": [
+        "wood-wool"
+      ],
+      "format": "ZIP",
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/Fire-Tests-1.zip"
+    },
+    {
+      "id": "ml-woodwool-test-lightreflectance-clear-white-1",
+      "title": "Wood Wool Engraved Panels Light Reflectance",
+      "type": "tests",
+      "products": [
+        "wood-wool-engraved-panels"
+      ],
+      "materials": [
+        "wood-wool"
+      ],
+      "format": "PDF",
+      "size": null,
+      "updated": "2023-11",
+      "href": "https://materiallogiq.com/wp-content/uploads/2023/11/ML_WoodWool_Test_LightReflectance_Clear_White-1.pdf"
     }
   ]
 }

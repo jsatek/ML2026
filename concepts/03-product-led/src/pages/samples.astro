@@ -1,0 +1,130 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site, products, sectors, getMaterial } from '@ml/content';
+import { url } from '../lib/utils';
+
+const catalog = Object.fromEntries(products.map((p) => [p.slug, { name: p.name, material: getMaterial(p.material)?.name, img: p.images.hero, finishes: p.finishes.map((f) => ({ n: f.name, h: f.hex })) }]));
+const sorted = [...products].sort((a, b) => a.name.localeCompare(b.name));
+---
+<Layout title="Sample request" description="Request Material Logiq samples.">
+  <section class="shell py-8">
+    <h1 class="text-3xl">Sample request</h1>
+    <p class="mt-1 text-muted">Review your samples (change finishes right here), then tell us where to ship. Up to {site.sampleLimit} per request.</p>
+  </section>
+
+  <div class="shell grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_24rem]" data-flow>
+    <section aria-labelledby="cart-h">
+      <div class="flex items-center justify-between">
+        <h2 id="cart-h" class="text-xl">Samples <span class="text-muted">(<span data-cart-count>0</span>/{site.sampleLimit})</span></h2>
+        <a href={url('/products')} class="text-sm font-semibold text-green underline">Keep exploring</a>
+      </div>
+      <ul class="mt-3 space-y-3" data-list aria-live="polite"></ul>
+      <div data-empty class="card mt-3 p-10 text-center text-muted">No samples yet. Add some below or <a href={url('/products')} class="text-green underline">explore products</a>.</div>
+
+      <div class="card mt-6 p-4">
+        <p class="label">Quick add</p>
+        <div class="mt-2 flex flex-col gap-2 sm:flex-row">
+          <select class="field" data-qa aria-label="Product"><option value="">Choose a product…</option>{sorted.map((p) => <option value={p.slug}>{p.name} ({getMaterial(p.material)?.name})</option>)}</select>
+        </div>
+        <div class="mt-3 grid grid-cols-8 gap-2 sm:grid-cols-12" data-qa-swatches></div>
+        <p class="mt-2 text-sm text-[#b3261e]" data-qa-msg role="alert"></p>
+      </div>
+    </section>
+
+    <aside>
+      <form class="card space-y-3 p-4 lg:sticky lg:top-20" data-form novalidate>
+        <h2 class="text-xl">Ship to</h2>
+        <div class="grid grid-cols-2 gap-3">
+          <label class="col-span-2 text-sm font-medium">Name<input name="name" required autocomplete="name" class="field mt-1" /></label>
+          <label class="col-span-2 text-sm font-medium">Email<input name="email" type="email" required autocomplete="email" class="field mt-1" /></label>
+          <label class="col-span-2 text-sm font-medium">Company<input name="company" autocomplete="organization" class="field mt-1" /></label>
+          <label class="col-span-2 text-sm font-medium">Street address<input name="address" required autocomplete="street-address" class="field mt-1" /></label>
+          <label class="text-sm font-medium">City<input name="city" required autocomplete="address-level2" class="field mt-1" /></label>
+          <div class="grid grid-cols-2 gap-2">
+            <label class="text-sm font-medium">State<input name="state" required autocomplete="address-level1" class="field mt-1" /></label>
+            <label class="text-sm font-medium">ZIP<input name="zip" required inputmode="numeric" autocomplete="postal-code" class="field mt-1" /></label>
+          </div>
+          <label class="col-span-2 text-sm font-medium">Market<select name="sector" class="field mt-1"><option value="">Select…</option>{sectors.map((s) => <option>{s}</option>)}</select></label>
+        </div>
+        <p class="text-sm text-[#b3261e]" data-error role="alert"></p>
+        <button class="btn btn-primary w-full">Submit request</button>
+        <p class="text-center text-xs text-muted">Mockup only: nothing is sent.</p>
+      </form>
+    </aside>
+  </div>
+
+  <section class="shell py-10" data-done hidden tabindex="-1">
+    <div class="card mx-auto max-w-lg p-8 text-center">
+      <p class="text-4xl" aria-hidden="true">✓</p>
+      <h2 class="mt-2 text-2xl">Request sent</h2>
+      <p class="mt-2 text-muted"><span data-done-n></span> samples ship within one business day to <span data-done-name></span>.</p>
+      <a href={url('/products')} class="btn btn-primary mt-6">Back to explore</a>
+    </div>
+  </section>
+
+  <script type="application/json" id="catalog" set:html={JSON.stringify(catalog)}></script>
+  <script>
+    import * as cart from '@ml/content/cart';
+    type P = { name: string; material: string; img: string | null; finishes: { n: string; h: string }[] };
+    const cat: Record<string, P> = JSON.parse(document.getElementById('catalog')!.textContent!);
+    const esc = (s: string) => s.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
+    const list = document.querySelector<HTMLElement>('[data-list]')!;
+    cart.onChange((items) => {
+      list.innerHTML = items.map((i, n) => {
+        const p = cat[i.product];
+        const hex = p?.finishes.find((f) => f.n === i.finish)?.h ?? '#ccc';
+        return `<li class="card flex flex-wrap items-center gap-3 p-3">
+          <img src="${p?.img ?? ''}" alt="" class="size-16 rounded-lg bg-panel object-cover">
+          <div class="min-w-0 flex-1"><p class="font-semibold">${esc(p?.name ?? i.product)}</p><p class="text-sm text-muted">${esc(p?.material ?? '')}</p></div>
+          <label class="flex items-center gap-2 text-sm"><span class="size-6 rounded ring-1 ring-black/10" style="background:${hex}"></span>
+            <span class="sr-only">Finish for ${esc(p?.name ?? '')}</span>
+            <select class="field !w-auto !py-1.5" data-change="${n}">${(p?.finishes ?? []).map((f) => `<option ${f.n === i.finish ? 'selected' : ''}>${esc(f.n)}</option>`).join('')}</select>
+          </label>
+          <button type="button" class="rounded p-2 text-muted hover:bg-panel" data-rm="${n}" aria-label="Remove ${esc(p?.name ?? '')}">✕</button>
+        </li>`;
+      }).join('');
+      document.querySelector<HTMLElement>('[data-empty]')!.hidden = items.length > 0;
+    });
+    list.addEventListener('change', (e) => {
+      const sel = (e.target as Element).closest<HTMLSelectElement>('[data-change]');
+      if (!sel) return;
+      const item = cart.getCart()[Number(sel.dataset.change)];
+      cart.remove(item);
+      if (cart.add({ product: item.product, finish: sel.value }) === 'exists') document.querySelector('[data-qa-msg]')!.textContent = 'That finish was already in your list.';
+    });
+    list.addEventListener('click', (e) => {
+      const b = (e.target as Element).closest<HTMLButtonElement>('[data-rm]');
+      if (b) cart.remove(cart.getCart()[Number(b.dataset.rm)]);
+    });
+
+    const qa = document.querySelector<HTMLSelectElement>('[data-qa]')!;
+    const sw = document.querySelector<HTMLElement>('[data-qa-swatches]')!;
+    const msg = document.querySelector<HTMLElement>('[data-qa-msg]')!;
+    qa.addEventListener('change', () => {
+      const p = cat[qa.value];
+      sw.innerHTML = p ? p.finishes.map((f) => `<button type="button" class="aspect-square rounded-lg ring-1 ring-black/15 hover:ring-2 hover:ring-green" style="background:${f.h}" title="${esc(f.n)}" aria-label="Add ${esc(f.n)}" data-f="${esc(f.n)}"></button>`).join('') : '';
+    });
+    sw.addEventListener('click', (e) => {
+      const b = (e.target as Element).closest<HTMLButtonElement>('[data-f]');
+      if (!b) return;
+      const r = cart.add({ product: qa.value, finish: b.dataset.f! });
+      msg.textContent = r === 'full' ? `Limit of ${cart.LIMIT} reached.` : r === 'exists' ? 'Already added.' : '';
+    });
+
+    const form = document.querySelector<HTMLFormElement>('[data-form]')!;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const err = document.querySelector('[data-error]')!;
+      if (!cart.getCart().length) { err.textContent = 'Add at least one sample.'; qa.focus(); return; }
+      if (!form.checkValidity()) { err.textContent = 'Please complete the required fields.'; form.querySelector<HTMLElement>(':invalid')?.focus(); form.reportValidity(); return; }
+      const d = new FormData(form);
+      document.querySelector('[data-done-n]')!.textContent = String(cart.getCart().length);
+      document.querySelector('[data-done-name]')!.textContent = `${d.get('city')}, ${d.get('state')}`;
+      cart.clear();
+      document.querySelector<HTMLElement>('[data-flow]')!.hidden = true;
+      const done = document.querySelector<HTMLElement>('[data-done]')!;
+      done.hidden = false;
+      done.focus();
+    });
+  </script>
+</Layout>

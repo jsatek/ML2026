@@ -1,0 +1,98 @@
+---
+import '../styles/global.css';
+import { site, categories, productsInCategory } from '@ml/content';
+import wordmark from '@ml/brand/logo/materiallogiq-wordmark.webp';
+import mark from '@ml/brand/logo/materiallogiq-mark.svg';
+import { url } from '../lib/utils';
+
+interface Props { title?: string; description?: string; }
+const { title, description = site.intro } = Astro.props;
+const path = Astro.url.pathname.replace(/\/$/, '');
+const active = (href: string) => path === url(href) || path.startsWith(`${url(href)}/`);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex" />
+    <title>{title ? `${title} — ${site.name}` : `${site.name} — ${site.tagline}`}</title>
+    <link rel="icon" type="image/svg+xml" href={mark.src} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-paper focus:px-4 focus:py-2">Skip to content</a>
+    <header class="wrap">
+      <div class="flex items-center justify-between gap-4 border-b border-ink py-5">
+        <a href={url('/')} aria-label={`${site.name} home`}><img src={wordmark.src} alt="" class="h-4 w-auto sm:h-5" width="190" height="20" /></a>
+        <nav aria-label="Primary" class="hidden items-center gap-8 md:flex">
+          {site.nav.map((n) => (
+            <a href={url(n.href)} class="font-medium hover:underline aria-[current=page]:underline aria-[current=page]:decoration-orange aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-4" aria-current={active(n.href) ? 'page' : undefined}>{n.label}</a>
+          ))}
+          <a href={url('/samples')} class="font-medium">Samples <sup data-cart-count class="text-orange">0</sup></a>
+        </nav>
+        <button type="button" class="font-medium md:hidden" aria-expanded="false" aria-controls="menu" data-menu>Menu <sup data-cart-count class="text-orange">0</sup></button>
+      </div>
+      <p class="kicker flex flex-wrap justify-between gap-2 py-2 text-muted">
+        <span>Concept 02 · Editorial</span><span class="hidden sm:inline">Acoustical &amp; architectural products · Chaska, Minnesota</span>
+      </p>
+    </header>
+
+    <!-- Full-screen index menu (mobile) -->
+    <div id="menu" hidden class="fixed inset-0 z-50 overflow-y-auto bg-ink text-paper">
+      <div class="wrap flex items-center justify-between py-5">
+        <span class="kicker">Index</span>
+        <button type="button" class="font-medium" data-menu-close>Close</button>
+      </div>
+      <nav aria-label="Menu" class="wrap pb-16">
+        <ul class="space-y-1 text-5xl font-bold tracking-tight">
+          {[...site.nav, { label: 'Samples', href: '/samples' }].map((n) => <li><a href={url(n.href)} class="hover:text-sky">{n.label}</a></li>)}
+        </ul>
+        <ul class="mt-10 grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
+          {categories.map((c) => <li><a href={url(`/products?type=${c.slug}`)} class="hover:underline">{c.name} <span class="opacity-60">{productsInCategory(c.slug).length}</span></a></li>)}
+        </ul>
+      </nav>
+    </div>
+
+    <main id="main" class="flex-1"><slot /></main>
+
+    <footer class="mt-32 bg-ink text-paper">
+      <div class="wrap py-16">
+        <p class="kicker text-sky">Every project starts with a conversation</p>
+        <a href={`mailto:${site.contact.email}`} class="headline mt-4 block hover:text-sky">Let's talk.</a>
+        <div class="mt-16 grid gap-8 border-t border-paper/30 pt-8 text-sm sm:grid-cols-3">
+          <address class="not-italic">{site.contact.address}</address>
+          <p><a href={`tel:${site.contact.phone.replace(/\D/g, '')}`} class="link">{site.contact.phone}</a><br /><a href={`mailto:${site.contact.email}`} class="link">{site.contact.email}</a></p>
+          <ul class="space-y-1">{site.nav.map((n) => <li><a href={url(n.href)} class="link">{n.label}</a></li>)}<li><a href={url('/samples')} class="link">Samples</a></li></ul>
+        </div>
+      </div>
+    </footer>
+
+    <div role="status" aria-live="polite" class="pointer-events-none fixed bottom-6 left-1/2 z-50 -translate-x-1/2">
+      <p data-toast hidden class="pointer-events-auto bg-ink px-5 py-3 text-sm text-paper shadow-lg"></p>
+    </div>
+
+    <script>
+      import { bindSampleUI } from '@ml/content/sample-ui';
+      const toast = document.querySelector<HTMLElement>('[data-toast]')!;
+      let t: number | undefined;
+      bindSampleUI({
+        notify: (msg) => {
+          toast.textContent = msg;
+          toast.hidden = false;
+          clearTimeout(t);
+          t = window.setTimeout(() => (toast.hidden = true), 3000);
+        },
+      });
+      const menu = document.getElementById('menu')!;
+      const opener = document.querySelector<HTMLButtonElement>('[data-menu]')!;
+      const close = () => { menu.hidden = true; opener.setAttribute('aria-expanded', 'false'); opener.focus(); };
+      opener.addEventListener('click', () => { menu.hidden = false; opener.setAttribute('aria-expanded', 'true'); menu.querySelector<HTMLElement>('[data-menu-close]')!.focus(); });
+      menu.querySelector('[data-menu-close]')!.addEventListener('click', close);
+      document.addEventListener('keydown', (e) => e.key === 'Escape' && !menu.hidden && close());
+    </script>
+  </body>
+</html>

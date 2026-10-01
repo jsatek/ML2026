@@ -1,0 +1,154 @@
+---
+import '../styles/global.css';
+import { site, products, resources, getMaterial } from '@ml/content';
+import wordmark from '@ml/brand/logo/materiallogiq-wordmark.webp';
+import mark from '@ml/brand/logo/materiallogiq-mark.svg';
+import { url } from '../lib/utils';
+
+interface Props { title?: string; description?: string; }
+const { title, description = site.intro } = Astro.props;
+const path = Astro.url.pathname.replace(/\/$/, '');
+const nav = [{ label: 'Explore', href: '/products' }, { label: 'Projects', href: '/projects' }, { label: 'Documents', href: '/resources' }];
+const active = (href: string) => path === url(href) || path.startsWith(`${url(href)}/`);
+const index = {
+  base: url('/').replace(/\/$/, ''),
+  products: products.map((p) => ({ s: p.slug, n: p.name, f: p.fullName, m: getMaterial(p.material)?.name, img: p.images.hero, fin: Object.fromEntries(p.finishes.map((f) => [f.name, f.hex])) })),
+  docs: resources.map((r) => ({ t: r.title, h: r.href, f: r.format })),
+};
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex" />
+    <title>{title ? `${title} · ${site.name}` : `${site.name} · Acoustic product explorer`}</title>
+    <link rel="icon" type="image/svg+xml" href={mark.src} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-white focus:px-4 focus:py-2">Skip to content</a>
+    <header class="sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur">
+      <div class="shell flex h-16 items-center gap-3 lg:gap-6">
+        <a href={url('/')} class="shrink-0" aria-label={`${site.name} home`}>
+          <img src={mark.src} alt="" class="h-6 w-auto sm:hidden" width="48" height="24" />
+          <img src={wordmark.src} alt="" class="hidden h-5 w-auto sm:block" width="190" height="20" />
+        </a>
+        <div class="relative min-w-0 flex-1 lg:max-w-xl" data-search>
+          <label for="global-q" class="sr-only">Search products and documents</label>
+          <input id="global-q" type="search" autocomplete="off" placeholder="Search products & documents…" class="field !rounded-full !bg-panel !py-2 !pl-9" role="combobox" aria-expanded="false" aria-controls="search-results" aria-autocomplete="list" />
+          <svg class="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="9" cy="9" r="6" /><path d="M14 14l4 4" /></svg>
+          <div id="search-results" role="listbox" hidden class="card absolute inset-x-0 top-full mt-2 max-h-[70vh] overflow-y-auto p-2 shadow-xl"></div>
+        </div>
+        <nav aria-label="Primary" class="hidden items-center gap-1 md:flex">
+          {nav.map((n) => <a href={url(n.href)} aria-current={active(n.href) ? 'page' : undefined} class="rounded-lg px-3 py-2 font-medium text-muted hover:bg-panel hover:text-ink aria-[current=page]:text-green">{n.label}</a>)}
+        </nav>
+        <button type="button" class="btn btn-primary btn-sm shrink-0" data-drawer-open aria-controls="drawer">
+          <span class="hidden sm:inline">Samples</span>
+          <svg class="size-4 sm:hidden" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="4" width="12" height="12" rx="2" /></svg>
+          <span data-cart-count class="grid min-w-5 place-items-center rounded-full bg-white px-1 text-xs text-green">0</span>
+        </button>
+      </div>
+      <nav aria-label="Primary (mobile)" class="shell flex gap-1 overflow-x-auto pb-2 md:hidden">
+        {nav.map((n) => <a href={url(n.href)} aria-current={active(n.href) ? 'page' : undefined} class="chip aria-[current=page]:border-green aria-[current=page]:text-green">{n.label}</a>)}
+      </nav>
+    </header>
+
+    <main id="main" class="flex-1"><slot /></main>
+
+    <footer class="mt-20 border-t border-line bg-panel">
+      <div class="shell grid gap-8 py-10 text-sm sm:grid-cols-3">
+        <div><img src={wordmark.src} alt={site.name} class="h-4 w-auto" /><p class="mt-3 text-muted">{site.tagline}</p><p class="mt-6 text-xs text-muted">Concept 03 · Product-led</p></div>
+        <address class="not-italic text-muted">{site.contact.address}<br />{site.contact.phone}<br /><a href={`mailto:${site.contact.email}`} class="underline">{site.contact.email}</a></address>
+        <ul class="space-y-1">{nav.map((n) => <li><a href={url(n.href)} class="hover:underline">{n.label}</a></li>)}<li><a href={url('/samples')} class="hover:underline">Sample request</a></li></ul>
+      </div>
+    </footer>
+
+    <!-- Sample drawer -->
+    <dialog id="drawer" class="ml-auto mr-0 h-dvh max-h-dvh w-full max-w-md p-0 backdrop:bg-black/40" aria-labelledby="drawer-title">
+      <div class="flex h-full flex-col">
+        <div class="flex items-center justify-between border-b border-line p-4">
+          <h2 id="drawer-title" class="text-lg">Your samples <span class="font-normal text-muted">(<span data-cart-count>0</span>/{site.sampleLimit})</span></h2>
+          <button type="button" class="rounded p-2 hover:bg-panel" data-drawer-close aria-label="Close">✕</button>
+        </div>
+        <p data-drawer-msg class="hidden bg-sky/30 px-4 py-2 text-sm" role="status"></p>
+        <ul class="flex-1 divide-y divide-line overflow-y-auto" data-drawer-list></ul>
+        <p data-drawer-empty class="flex-1 p-6 text-center text-muted">No samples yet. Use the <strong>Sample</strong> buttons as you explore.</p>
+        <div class="border-t border-line p-4">
+          <a href={url('/samples')} class="btn btn-primary w-full">Request these samples</a>
+        </div>
+      </div>
+    </dialog>
+
+    <script type="application/json" id="ml-index" set:html={JSON.stringify(index)}></script>
+    <script>
+      import { bindSampleUI } from '@ml/content/sample-ui';
+      import * as cart from '@ml/content/cart';
+      type Idx = { base: string; products: { s: string; n: string; f: string; m: string; img: string | null; fin: Record<string, string> }[]; docs: { t: string; h: string; f: string }[] };
+      const idx: Idx = JSON.parse(document.getElementById('ml-index')!.textContent!);
+      const esc = (s: string) => s.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
+      const bySlug = Object.fromEntries(idx.products.map((p) => [p.s, p]));
+
+      // Drawer
+      const drawer = document.getElementById('drawer') as HTMLDialogElement;
+      const msg = drawer.querySelector<HTMLElement>('[data-drawer-msg]')!;
+      document.querySelectorAll('[data-drawer-open]').forEach((b) => b.addEventListener('click', () => { msg.classList.add('hidden'); drawer.showModal(); }));
+      drawer.querySelector('[data-drawer-close]')!.addEventListener('click', () => drawer.close());
+      drawer.addEventListener('click', (e) => e.target === drawer && drawer.close());
+      cart.onChange((items) => {
+        drawer.querySelector('[data-drawer-list]')!.innerHTML = items.map((i) => `
+          <li class="flex items-center gap-3 p-4">
+            <span class="size-12 shrink-0 rounded-lg ring-1 ring-black/10" style="background:${bySlug[i.product]?.fin[i.finish] ?? '#ccc'}"></span>
+            <span class="min-w-0 flex-1"><a href="${idx.base}/products/${i.product}" class="block font-semibold hover:underline">${esc(bySlug[i.product]?.n ?? i.product)}</a><span class="text-sm text-muted">${esc(i.finish)}</span></span>
+            <button type="button" class="rounded p-2 text-muted hover:bg-panel" data-rm="${esc(i.product)}" data-fin="${esc(i.finish)}" aria-label="Remove ${esc(i.finish)}">✕</button>
+          </li>`).join('');
+        drawer.querySelector<HTMLElement>('[data-drawer-empty]')!.hidden = items.length > 0;
+      });
+      drawer.addEventListener('click', (e) => {
+        const b = (e.target as Element).closest<HTMLButtonElement>('[data-rm]');
+        if (b) cart.remove({ product: b.dataset.rm!, finish: b.dataset.fin! });
+      });
+      bindSampleUI({
+        notify: (text, kind) => {
+          if (kind === 'removed') return;
+          msg.textContent = text;
+          msg.classList.remove('hidden');
+          if (!drawer.open) drawer.showModal();
+        },
+      });
+
+      // Global search
+      const input = document.getElementById('global-q') as HTMLInputElement;
+      const box = document.getElementById('search-results')!;
+      let active = -1;
+      const show = (open: boolean) => { box.hidden = !open; input.setAttribute('aria-expanded', String(open)); };
+      input.addEventListener('input', () => {
+        const terms = input.value.toLowerCase().split(/\s+/).filter(Boolean);
+        if (!terms.length) return show(false);
+        const hit = (s: string) => terms.every((t) => s.toLowerCase().includes(t));
+        const ps = idx.products.filter((p) => hit(`${p.n} ${p.f} ${p.m}`)).slice(0, 6);
+        const ds = idx.docs.filter((d) => hit(`${d.t} ${d.f}`)).slice(0, 8);
+        box.innerHTML =
+          (ps.length ? `<p class="label px-2 pt-1">Products</p>` + ps.map((p) => `<a role="option" href="${idx.base}/products/${p.s}" class="flex items-center gap-3 rounded-lg p-2 hover:bg-panel aria-selected:bg-panel"><img src="${p.img ?? ''}" alt="" class="size-10 rounded object-cover bg-panel"><span><span class="block font-semibold">${esc(p.n)}</span><span class="text-sm text-muted">${esc(p.m)}</span></span></a>`).join('') : '') +
+          (ds.length ? `<p class="label px-2 pt-3">Documents</p>` + ds.map((d) => `<a role="option" href="${d.h}" target="_blank" rel="noopener" class="flex items-center gap-3 rounded-lg p-2 hover:bg-panel aria-selected:bg-panel"><span class="grid size-10 place-items-center rounded bg-sky/40 text-[10px] font-bold text-green">${esc(d.f)}</span><span class="text-sm">${esc(d.t)}</span></a>`).join('') : '') +
+          (!ps.length && !ds.length ? `<p class="p-3 text-muted">No matches for “${esc(input.value)}”.</p>` : `<a href="${idx.base}/products?q=${encodeURIComponent(input.value)}" class="mt-1 block rounded-lg p-2 text-sm font-semibold text-green hover:bg-panel">Explore all results →</a>`);
+        active = -1;
+        show(true);
+      });
+      input.addEventListener('keydown', (e) => {
+        const opts = [...box.querySelectorAll<HTMLAnchorElement>('[role=option]')];
+        if (e.key === 'Escape') return show(false);
+        if (!opts.length || !['ArrowDown', 'ArrowUp', 'Enter'].includes(e.key)) return;
+        e.preventDefault();
+        if (e.key === 'Enter') return (opts[active] ?? opts[0]).click();
+        active = (active + (e.key === 'ArrowDown' ? 1 : opts.length - 1)) % opts.length;
+        opts.forEach((o, i) => o.setAttribute('aria-selected', String(i === active)));
+        opts[active].scrollIntoView({ block: 'nearest' });
+      });
+      document.addEventListener('click', (e) => !(e.target as Element).closest('[data-search]') && show(false));
+    </script>
+  </body>
+</html>

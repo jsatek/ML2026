@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Media from '../../components/Media.astro';
+import { projects, sectors, getProduct, getMaterial } from '@ml/content';
+import { url } from '../../lib/utils';
+
+const ordered = [...projects.filter((p) => !p.placeholder), ...projects.filter((p) => p.placeholder)];
+const credits = (p: (typeof projects)[number]) =>
+  p.products.length ? p.products.map((s) => getProduct(s)?.name).join(', ') : `Custom ${p.materials.map((m) => getMaterial(m)?.name).join(', ')}`;
+const usedSectors = sectors.filter((s) => projects.some((p) => p.sector === s));
+---
+<Layout title="Projects" description="Material Logiq in built projects.">
+  <section class="wrap pt-10">
+    <h1 class="display">Ingenuity you can walk through</h1>
+    <p class="lede mt-6 max-w-3xl">A portfolio built not on products, but on problems solved, relationships built, and spaces worth experiencing.</p>
+    <div class="mt-10 flex flex-wrap gap-x-5 gap-y-2 border-y border-ink py-4" role="group" aria-label="Market">
+      <span class="kicker w-20 self-center">Market</span>
+      <button type="button" class="toggle" data-sector="" aria-pressed="true">All</button>
+      {usedSectors.map((s) => <button type="button" class="toggle" data-sector={s} aria-pressed="false">{s}</button>)}
+    </div>
+  </section>
+
+  <ol class="wrap mt-12 space-y-24" data-list>
+    {ordered.map((p, i) => (
+      <li data-item data-sector={p.sector} class="group grid items-center gap-8 md:grid-cols-12">
+        <a href={url(`/projects/${p.slug}`)} class:list={['block md:col-span-7', i % 2 && 'md:order-2']} tabindex="-1" aria-hidden="true">
+          <Media src={p.images[0]} class="aspect-[4/3]" eager={i < 2} />
+        </a>
+        <div class:list={['md:col-span-5', i % 2 && 'md:order-1']}>
+          <p class="kicker text-teal-ink">{p.sector} · {p.location}{p.placeholder && ' · Sample project'}</p>
+          <h2 class="headline mt-4"><a href={url(`/projects/${p.slug}`)} class="group-hover:underline group-hover:decoration-orange">{p.name}</a></h2>
+          <p class="mt-6 text-lg">{p.summary}</p>
+          <p class="mt-6 text-sm text-muted">Specified: {credits(p)}</p>
+        </div>
+      </li>
+    ))}
+  </ol>
+
+  <script>
+    const items = [...document.querySelectorAll<HTMLElement>('[data-item]')];
+    const btns = [...document.querySelectorAll<HTMLButtonElement>('[data-sector]')];
+    let sector = new URLSearchParams(location.search).get('sector') ?? '';
+    const apply = () => {
+      btns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.sector === sector)));
+      items.forEach((it) => (it.hidden = !!sector && it.dataset.sector !== sector));
+      history.replaceState(null, '', sector ? `?sector=${encodeURIComponent(sector)}` : location.pathname);
+    };
+    btns.forEach((b) => b.addEventListener('click', () => { sector = b.dataset.sector!; apply(); }));
+    apply();
+  </script>
+</Layout>
