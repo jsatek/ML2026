@@ -1,0 +1,64 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Media from '../../components/Media.astro';
+import { projects, site, getProduct, getMaterial } from '@ml/content';
+import { url } from '../../lib/utils';
+
+export function getStaticPaths() {
+  return projects.map((p) => ({ params: { slug: p.slug }, props: { project: p } }));
+}
+const { project: p } = Astro.props;
+const used = p.products.map((s) => getProduct(s)!).filter(Boolean);
+const facts = [
+  ['Market', p.sector], ['Location', p.location], ['Year', p.year],
+  ['Material', p.materials.map((m) => getMaterial(m)?.name).join(', ')], ['Application', p.applications.join(', ')],
+].filter(([, v]) => v);
+const next = projects[(projects.indexOf(p) + 1) % projects.length];
+---
+<Layout title={p.name} description={p.summary}>
+  <article>
+    <header class="wrap pt-10">
+      <p class="kicker"><a href={url('/projects')} class="hover:underline">Projects</a> / {p.sector}</p>
+      <h1 class="display mt-6">{p.name}</h1>
+      <p class="lede mt-6 max-w-3xl">{p.summary}</p>
+      {p.placeholder && <p class="mt-4 inline-block border border-orange px-3 py-1 text-sm">Sample project: real product photo, invented story</p>}
+    </header>
+    <Media src={p.images[0]} alt={p.name} class="mt-12 aspect-[4/3] sm:aspect-[21/9]" eager />
+
+    <div class="wrap mt-16 grid gap-12 lg:grid-cols-12">
+      <dl class="h-fit border-t border-ink lg:col-span-4">
+        {facts.map(([k, v]) => <div class="grid grid-cols-[7rem_1fr] gap-4 border-b border-ink/25 py-3"><dt class="text-muted">{k}</dt><dd class="font-medium">{v}</dd></div>)}
+      </dl>
+      <div class="space-y-6 text-xl leading-relaxed lg:col-span-8">
+        {p.story.map((s) => <p>{s}</p>)}
+        {p.images.slice(1, 3).map((src) => <Media src={src} class="aspect-[16/10]" />)}
+      </div>
+    </div>
+
+    <section class="wrap mt-24 border-t border-ink pt-8" aria-labelledby="credits">
+      <h2 id="credits" class="kicker">Specified</h2>
+      {used.length ? (
+        <ul class="mt-4">
+          {used.map((u) => (
+            <li class="border-b border-ink/25">
+              <a href={url(`/products/${u.slug}`)} class="group flex items-baseline justify-between gap-4 py-4">
+                <span class="text-3xl font-bold tracking-tight group-hover:underline group-hover:decoration-orange">{u.name}</span>
+                <span class="text-sm text-muted">{getMaterial(u.material)?.name}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div class="mt-4 grid gap-6 md:grid-cols-12">
+          <p class="text-3xl font-bold tracking-tight md:col-span-7">A custom solution, made with Materialize.</p>
+          <div class="md:col-span-5"><p class="text-muted">{site.materialize.text}</p><a href={`mailto:${site.contact.email}`} class="btn btn-solid mt-4">Start a conversation <span aria-hidden="true">→</span></a></div>
+        </div>
+      )}
+    </section>
+
+    <a href={url(`/projects/${next.slug}`)} class="wrap group mt-24 block border-t border-ink pt-8">
+      <span class="kicker">Next project</span>
+      <span class="headline mt-4 block group-hover:underline group-hover:decoration-orange">{next.name} →</span>
+    </a>
+  </article>
+</Layout>

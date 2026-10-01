@@ -1,0 +1,123 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import Media from '../components/Media.astro';
+import { site, products, categories, materials, projects, resources } from '@ml/content';
+import { records, usedFamilies } from '../lib/records';
+import { url } from '../lib/utils';
+
+const surfaces = [...new Set(categories.map((c) => c.group))];
+const ordered = [...products].sort((a, b) => Number(b.featured) - Number(a.featured));
+const feature = projects.find((p) => !p.placeholder)!;
+---
+<Layout>
+  <section class="border-b border-line bg-panel">
+    <div class="shell grid gap-10 py-10 lg:grid-cols-12 lg:py-14">
+      <div class="lg:col-span-5">
+        <p class="label text-teal-ink">Acoustic product finder</p>
+        <h1 class="mt-3 text-4xl leading-tight sm:text-5xl">Find the right acoustic solution in four choices.</h1>
+        <p class="mt-4 text-lg text-muted">{products.length} systems in PET felt, Silk Metal, wood, and wood wool. Results update as you choose.</p>
+        <form class="mt-8 space-y-6" data-finder>
+          <fieldset><legend class="label">1 · Surface</legend>
+            <div class="mt-2 flex flex-wrap gap-2">
+              <label class="chip cursor-pointer"><input type="radio" name="surface" value="" class="sr-only" checked />Any</label>
+              {surfaces.map((s) => <label class="chip cursor-pointer"><input type="radio" name="surface" value={s} class="sr-only" />{s}</label>)}
+            </div>
+          </fieldset>
+          <fieldset><legend class="label">2 · Product type</legend>
+            <div class="mt-2 flex flex-wrap gap-2">
+              {categories.map((c) => <label class="chip cursor-pointer" data-group={c.group}><input type="checkbox" name="types" value={c.slug} class="sr-only" />{c.name}</label>)}
+            </div>
+          </fieldset>
+          <fieldset><legend class="label">3 · Material</legend>
+            <div class="mt-2 flex flex-wrap gap-2">
+              {materials.map((m) => <label class="chip cursor-pointer"><input type="checkbox" name="materials" value={m.slug} class="sr-only" />{m.name}</label>)}
+            </div>
+          </fieldset>
+          <fieldset><legend class="label">4 · Performance</legend>
+            <div class="mt-2 flex flex-wrap gap-2">
+              <label class="chip cursor-pointer"><input type="checkbox" name="classA" value="1" class="sr-only" />Class A fire</label>
+              <label class="chip cursor-pointer"><input type="checkbox" name="minNrc" value="0.8" class="sr-only" />NRC 0.80+</label>
+              <label class="chip cursor-pointer"><input type="checkbox" name="minNrc" value="1" class="sr-only" />NRC 1.00+</label>
+            </div>
+          </fieldset>
+          <a href={url('/products')} class="btn btn-primary w-full sm:w-auto" data-see-all>See all <span data-n>{products.length}</span> matches →</a>
+        </form>
+      </div>
+      <div class="lg:col-span-7">
+        <div class="flex items-center justify-between">
+          <p class="font-semibold" aria-live="polite"><span data-n>{products.length}</span> matching products</p>
+          <button type="button" class="text-sm text-green underline" data-reset>Reset</button>
+        </div>
+        <div class="mt-3 grid gap-4 sm:grid-cols-2" data-results>
+          {ordered.map((p, i) => <div data-slot={p.slug} hidden={i >= 4}><ProductCard product={p} eager={i < 4} /></div>)}
+        </div>
+        <p data-none hidden class="card mt-3 p-8 text-center text-muted">No exact match. Try removing a choice, or <a href={`mailto:${site.contact.email}`} class="text-green underline">ask about a custom solution</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="shell py-14" aria-labelledby="color-h">
+    <h2 id="color-h" class="text-2xl">Shop by color</h2>
+    <p class="mt-1 text-muted">Every finish, grouped into color families. Pick one to see the products that come in it.</p>
+    <ul class="mt-6 grid grid-cols-4 gap-3 sm:grid-cols-7 lg:grid-cols-12">
+      {usedFamilies.map((f) => (
+        <li><a href={url(`/products?color=${f.slug}`)} class="group block text-center">
+          <span class="block aspect-square rounded-xl ring-1 ring-black/10 transition group-hover:scale-105" style={`background:${f.hex}`}></span>
+          <span class="mt-2 block text-xs font-medium">{f.name}</span>
+          <span class="text-xs text-muted">{records.filter((r) => r.colors.includes(f.slug)).length} products</span>
+        </a></li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="shell grid gap-4 pb-6 md:grid-cols-3" aria-label="Shortcuts">
+    <a href={url('/resources')} class="card group p-6 hover:border-ink">
+      <p class="label">Documents</p>
+      <p class="mt-2 text-xl font-bold">Build a spec kit</p>
+      <p class="mt-1 text-sm text-muted">Pick products and file types from {resources.length} documents: data sheets, CSI, CAD/BIM, HPD.</p>
+    </a>
+    <a href={url('/samples')} class="card group p-6 hover:border-ink">
+      <p class="label">Samples</p>
+      <p class="mt-2 text-xl font-bold">Order up to {site.sampleLimit} samples</p>
+      <p class="mt-1 text-sm text-muted">Add finishes as you browse; they collect in your sample drawer.</p>
+    </a>
+    <a href={url(`/projects/${feature.slug}`)} class="card group flex overflow-hidden hover:border-ink">
+      <div class="flex-1 p-6"><p class="label">Custom work</p><p class="mt-2 text-xl font-bold">{site.materialize.title}</p><p class="mt-1 text-sm text-muted">See {feature.name}: custom PET felt clouds.</p></div>
+      <Media src={feature.images[0]} class="w-1/3" />
+    </a>
+  </section>
+
+  <script type="application/json" id="records" set:html={JSON.stringify(records)}></script>
+  <script>
+    import { matches, empty, toParams } from '../lib/explorer';
+    import type { Rec } from '../lib/records';
+    const recs: Rec[] = JSON.parse(document.getElementById('records')!.textContent!);
+    const form = document.querySelector<HTMLFormElement>('[data-finder]')!;
+    const slots = new Map([...document.querySelectorAll<HTMLElement>('[data-slot]')].map((el) => [el.dataset.slot!, el]));
+    const container = document.querySelector<HTMLElement>('[data-results]')!;
+    const seeAll = document.querySelector<HTMLAnchorElement>('[data-see-all]')!;
+    const base = seeAll.getAttribute('href')!;
+
+    function update() {
+      const d = new FormData(form);
+      const s = { ...empty(), surface: String(d.get('surface') ?? ''), types: d.getAll('types') as string[], materials: d.getAll('materials') as string[], classA: d.has('classA'), minNrc: Math.max(0, ...d.getAll('minNrc').map(Number)) };
+      // Hide type chips that don't belong to the chosen surface.
+      form.querySelectorAll<HTMLElement>('[data-group]').forEach((c) => {
+        c.hidden = !!s.surface && c.dataset.group !== s.surface;
+        const box = c.querySelector('input')!;
+        if (c.hidden && box.checked) { box.checked = false; s.types = s.types.filter((t) => t !== box.value); }
+      });
+      const hits = recs.filter((r) => matches(r, s));
+      slots.forEach((el) => (el.hidden = true));
+      hits.slice(0, 4).forEach((r) => { const el = slots.get(r.slug)!; el.hidden = false; container.append(el); });
+      document.querySelectorAll('[data-n]').forEach((n) => (n.textContent = String(hits.length)));
+      document.querySelector<HTMLElement>('[data-none]')!.hidden = hits.length > 0;
+      const p = toParams(s);
+      seeAll.href = `${base}${p.size ? `?${p}` : ''}`;
+    }
+    form.addEventListener('change', update);
+    document.querySelector('[data-reset]')!.addEventListener('click', () => { form.reset(); update(); });
+    update();
+  </script>
+</Layout>

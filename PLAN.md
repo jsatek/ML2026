@@ -106,9 +106,9 @@ as they build to static files in `dist/`.
 ### Phase 2 — First concepts (3–4 divergent directions)
 Suggested starting set — deliberately different so the comparison is useful:
 - **01-baseline** ✅ — conventional best-practice structure, all six pages (the control)
-- **02-editorial** — story-led, big typography, case-study forward
-- **03-product-led** — interactive product/material explorer front and center
-- **04-bold-motion** — immersive hero, scroll-driven animation
+- **02-editorial** ✅ — story-led magazine layout: typographic product index, long-form product pages, A–Z library, stepped sample request
+- **03-product-led** ✅ — explorer-first: guided finder, faceted search with live counts, shop by color, configurator product page, document picker, sample drawer
+- **04-bold-motion** ✅ — dark and kinetic: animated logo-band hero, pinned materials scroller, scroll-synced product imagery, stacked projects (reduced-motion safe)
 
 Each builds all six pages at mockup fidelity (real layout and interactions, sample data).
 

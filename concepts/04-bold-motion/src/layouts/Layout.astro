@@ -1,0 +1,100 @@
+---
+import '../styles/global.css';
+import { site } from '@ml/content';
+import mark from '@ml/brand/logo/materiallogiq-mark.svg';
+import { url } from '../lib/utils';
+
+interface Props { title?: string; description?: string; }
+const { title, description = site.intro } = Astro.props;
+const links = [...site.nav, { label: 'Samples', href: '/samples' }];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#0a0e0d" />
+    <meta name="view-transition" content="same-origin" />
+    <title>{title ? `${title} — ${site.name}` : `${site.name} — ${site.tagline}`}</title>
+    <link rel="icon" type="image/svg+xml" href={mark.src} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script is:inline>document.documentElement.classList.add('motion');</script>
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-bone focus:px-4 focus:py-2 focus:text-night">Skip to content</a>
+    <header class="fixed inset-x-0 top-0 z-50">
+      <div class="stage flex h-20 items-center justify-between">
+        <a href={url('/')} class="flex items-center gap-3" aria-label={`${site.name} home`}>
+          <img src={mark.src} alt="" class="h-7 w-auto" width="56" height="28" />
+          <span class="hidden text-sm font-semibold tracking-[0.3em] sm:inline">MATERIAL <b class="font-extrabold">LOGIQ</b></span>
+        </a>
+        <div class="flex items-center gap-2">
+          <a href={url('/samples')} class="pill bg-night/60 backdrop-blur">Samples <span data-cart-count class="text-sky">0</span></a>
+          <button type="button" class="pill bg-night/60 backdrop-blur" aria-expanded="false" aria-controls="menu" data-menu>Menu</button>
+        </div>
+      </div>
+    </header>
+
+    <div id="menu" hidden class="fixed inset-0 z-[55] overflow-y-auto bg-green">
+      <div class="stage flex h-20 items-center justify-between">
+        <span class="tag text-bone">Concept 04 · Bold motion</span>
+        <button type="button" class="pill" data-menu-close>Close</button>
+      </div>
+      <nav aria-label="Primary" class="stage pb-16 pt-6">
+        <ul>
+          {links.map((l, i) => (
+            <li class="border-b border-bone/20"><a href={url(l.href)} class="menu-link block py-3 text-[clamp(2.5rem,9vw,7rem)] font-extrabold uppercase leading-none tracking-tighter hover:text-sky" style={`--i:${i}`}>{l.label}</a></li>
+          ))}
+        </ul>
+        <p class="mt-12 text-bone/80">{site.contact.phone} · <a href={`mailto:${site.contact.email}`} class="underline">{site.contact.email}</a></p>
+      </nav>
+    </div>
+
+    <main id="main" class="flex-1"><slot /></main>
+
+    <footer class="relative overflow-hidden border-t border-edge">
+      <div class="stage py-20">
+        <p class="tag">Every project starts with a conversation</p>
+        <a href={`mailto:${site.contact.email}`} class="mega mt-6 block hover:text-sky">Let's talk</a>
+        <div class="mt-16 grid gap-6 text-sm text-dim sm:grid-cols-3">
+          <address class="not-italic">{site.contact.address}</address>
+          <p>{site.contact.phone}<br /><a href={`mailto:${site.contact.email}`} class="underline">{site.contact.email}</a></p>
+          <ul class="flex flex-wrap gap-x-4">{links.map((l) => <li><a href={url(l.href)} class="hover:text-bone">{l.label}</a></li>)}</ul>
+        </div>
+      </div>
+    </footer>
+
+    <div role="status" aria-live="polite" class="pointer-events-none fixed bottom-6 left-1/2 z-50 -translate-x-1/2">
+      <p data-toast hidden class="rounded-full bg-bone px-5 py-3 text-sm font-semibold text-night shadow-2xl"></p>
+    </div>
+
+    <style>
+      .motion #menu:not([hidden]) .menu-link { animation: menu-in .6s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(var(--i) * 60ms); }
+      @keyframes menu-in { from { opacity: 0; transform: translateY(30%); } }
+      @media (prefers-reduced-motion: reduce) { .motion #menu .menu-link { animation: none; } }
+    </style>
+
+    <script>
+      import { bindSampleUI } from '@ml/content/sample-ui';
+      const toast = document.querySelector<HTMLElement>('[data-toast]')!;
+      let t: number | undefined;
+      bindSampleUI({ notify: (m) => { toast.textContent = m; toast.hidden = false; clearTimeout(t); t = window.setTimeout(() => (toast.hidden = true), 2800); } });
+
+      // Reveal on scroll
+      const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -10% 0px' });
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+      // Menu
+      const menu = document.getElementById('menu')!;
+      const opener = document.querySelector<HTMLButtonElement>('[data-menu]')!;
+      const close = () => { menu.hidden = true; opener.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; opener.focus(); };
+      opener.addEventListener('click', () => { menu.hidden = false; opener.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; menu.querySelector<HTMLElement>('[data-menu-close]')!.focus(); });
+      menu.querySelector('[data-menu-close]')!.addEventListener('click', close);
+      document.addEventListener('keydown', (e) => e.key === 'Escape' && !menu.hidden && close());
+    </script>
+  </body>
+</html>

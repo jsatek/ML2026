@@ -1,0 +1,7 @@
+---
+interface Props { src?: string | null; alt?: string; color?: string; class?: string; eager?: boolean; fit?: 'cover' | 'contain'; }
+const { src, alt = '', color = '#e5e8e7', class: cls = '', eager = false, fit = 'cover' } = Astro.props;
+---
+<div class:list={['relative overflow-hidden', cls]} style={`background:${color}`}>
+  {src && <img src={src} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" class:list={['absolute inset-0 h-full w-full', fit === 'cover' ? 'object-cover' : 'object-contain p-3']} />}
+</div>

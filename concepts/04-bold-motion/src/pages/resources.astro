@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { resources, resourceTypes, getProduct, getMaterial } from '@ml/content';
+
+const typeName = Object.fromEntries(resourceTypes.map((t) => [t.slug, t.name]));
+const rows = [...resources].sort((a, b) => a.title.localeCompare(b.title)).map((r) => ({
+  ...r,
+  who: r.products.length === 1 ? getProduct(r.products[0])!.name : `${r.materials.map((m) => getMaterial(m)?.name).join(' & ')} · ${r.products.length} products`,
+}));
+---
+<Layout title="Resources" description="Search every Material Logiq document.">
+  <section class="stage pt-36">
+    <p class="tag">{resources.length} documents</p>
+    <h1 class="mega rise mt-4"><span><span>Resources</span></span></h1>
+    <label for="r-q" class="sr-only">Search documents</label>
+    <input id="r-q" type="search" autocomplete="off" placeholder="Type a product, file, or format…" class="mt-10 w-full border-0 border-b-2 border-edge bg-transparent pb-4 text-[clamp(1.75rem,5vw,4rem)] font-bold tracking-tight placeholder:text-edge focus:border-sky focus:outline-none" data-q />
+    <div class="mt-6 flex flex-wrap gap-2" role="group" aria-label="Document type">
+      <button type="button" class="pill !py-1.5 text-sm" data-t="" aria-pressed="true">All</button>
+      {resourceTypes.map((t) => <button type="button" class="pill !py-1.5 text-sm" data-t={t.slug} aria-pressed="false">{t.name}</button>)}
+    </div>
+    <p class="mt-6 text-dim" aria-live="polite"><span data-n>{rows.length}</span> results</p>
+  </section>
+  <ul class="stage mt-4" data-list>
+    {rows.map((r) => (
+      <li data-row data-type={r.type} data-s={`${r.title} ${r.who} ${typeName[r.type]} ${r.format}`.toLowerCase()}>
+        <a href={r.href} target="_blank" rel="noopener" class="group grid grid-cols-[1fr_auto] items-center gap-4 border-b border-edge py-5 sm:grid-cols-[2fr_1fr_8rem_auto]">
+          <span class="text-xl font-semibold transition group-hover:translate-x-2 group-hover:text-sky sm:text-2xl">{r.title}</span>
+          <span class="hidden text-dim sm:block">{r.who}</span>
+          <span class="hidden text-sm text-dim sm:block">{typeName[r.type]}</span>
+          <span class="rounded-full border border-edge px-3 py-1 text-xs font-bold">{r.format} ↗</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+  <p data-none hidden class="stage py-24 text-center text-2xl text-dim">No documents match.</p>
+  <style>
+    .motion [data-row].pop { animation: pop .5s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(var(--i) * 25ms); }
+    @keyframes pop { from { opacity: 0; transform: translateY(12px); } }
+    @media (prefers-reduced-motion: reduce) { .motion [data-row].pop { animation: none; } }
+  </style>
+  <script>
+    const q = document.querySelector<HTMLInputElement>('[data-q]')!;
+    const rows = [...document.querySelectorAll<HTMLElement>('[data-row]')];
+    const btns = [...document.querySelectorAll<HTMLButtonElement>('[data-t]')];
+    const params = new URLSearchParams(location.search);
+    q.value = params.get('q') ?? '';
+    let type = params.get('type') ?? '';
+    function apply() {
+      const terms = q.value.toLowerCase().split(/\s+/).filter(Boolean);
+      btns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.t === type)));
+      let n = 0;
+      rows.forEach((r) => {
+        const ok = (!type || r.dataset.type === type) && terms.every((t) => r.dataset.s!.includes(t));
+        r.hidden = !ok;
+        r.classList.remove('pop');
+        if (ok) { r.style.setProperty('--i', String(Math.min(n, 20))); void r.offsetWidth; r.classList.add('pop'); n++; }
+      });
+      document.querySelector('[data-n]')!.textContent = String(n);
+      document.querySelector<HTMLElement>('[data-none]')!.hidden = n > 0;
+    }
+    let timer: number | undefined;
+    q.addEventListener('input', () => { clearTimeout(timer); timer = window.setTimeout(apply, 120); });
+    btns.forEach((b) => b.addEventListener('click', () => { type = b.dataset.t!; apply(); }));
+    apply();
+  </script>
+</Layout>

@@ -1,0 +1,8 @@
+---
+interface Props { product: string; name: string; finish: string; label?: string; class?: string; }
+const { product, name, finish, label = 'Sample', class: cls = 'btn btn-ghost btn-sm' } = Astro.props;
+---
+<button type="button" class={cls} data-add-sample data-product={product} data-name={name} data-finish={finish} data-label-add={label} aria-pressed="false">
+  <svg class="size-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="4" width="12" height="12" rx="2" /><path d="M10 7v6M7 10h6" /></svg>
+  <span data-label>{label}</span>
+</button>

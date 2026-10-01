@@ -1,0 +1,7 @@
+---
+interface Props { product: string; name: string; finish: string; label?: string; class?: string; }
+const { product, name, finish, label = 'Add sample', class: cls = 'pill' } = Astro.props;
+---
+<button type="button" class={cls} data-add-sample data-product={product} data-name={name} data-finish={finish} data-label-add={label} aria-pressed="false">
+  <span aria-hidden="true">＋</span><span data-label>{label}</span>
+</button>

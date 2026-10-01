@@ -1,0 +1,97 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { products, resources, resourceTypes, materials, getMaterial } from '@ml/content';
+import { url } from '../lib/utils';
+
+const sorted = [...products].sort((a, b) => a.name.localeCompare(b.name));
+const letters = [...new Set(sorted.map((p) => p.name[0].toUpperCase()))];
+const docsFor = (slug: string) => resources.filter((r) => r.products.length === 1 && r.products[0] === slug);
+const shared = materials.map((m) => ({ ...m, docs: resources.filter((r) => r.products.length > 1 && r.materials.includes(m.slug)) })).filter((m) => m.docs.length);
+const typeName = Object.fromEntries(resourceTypes.map((t) => [t.slug, t.name]));
+---
+<Layout title="Library" description="Every Material Logiq document, A to Z.">
+  <section class="wrap pt-10">
+    <h1 class="display">Library</h1>
+    <p class="lede mt-6 max-w-3xl">{resources.length} documents, A to Z by product: data sheets, CSI specs, installation guides, CAD and BIM, test reports, and sustainability.</p>
+    <label for="lib-q" class="sr-only">Search the library</label>
+    <input id="lib-q" type="search" placeholder="Search, e.g. “BLADE RFA” or “HPD”" class="field mt-10 !text-2xl" data-q />
+    <div class="mt-6 flex flex-wrap gap-x-5 gap-y-2" role="group" aria-label="Document type">
+      <span class="kicker w-20 self-center">Type</span>
+      <button type="button" class="toggle" data-type="" aria-pressed="true">All</button>
+      {resourceTypes.map((t) => <button type="button" class="toggle" data-type={t.slug} aria-pressed="false">{t.name}</button>)}
+    </div>
+    <nav aria-label="Jump to letter" class="sticky top-0 z-10 mt-6 flex flex-wrap gap-3 border-y border-ink bg-paper py-3 text-lg font-bold">
+      {letters.map((l) => <a href={`#letter-${l}`} class="hover:text-orange">{l}</a>)}
+      <a href="#shared" class="ml-auto text-sm font-medium hover:text-orange">Shared documents</a>
+    </nav>
+  </section>
+
+  <section class="wrap mt-6">
+    {letters.map((l) => (
+      <div id={`letter-${l}`} class="scroll-mt-16" data-letter>
+        <p class="pt-6 text-sm font-bold text-muted">{l}</p>
+        {sorted.filter((p) => p.name[0].toUpperCase() === l).map((p) => (
+          <div id={p.slug} class="grid scroll-mt-16 gap-3 border-b border-ink/25 py-5 md:grid-cols-12" data-group data-search={`${p.name} ${p.fullName}`.toLowerCase()}>
+            <div class="md:col-span-4">
+              <a href={url(`/products/${p.slug}`)} class="text-3xl font-bold tracking-tight hover:underline hover:decoration-orange">{p.name}</a>
+              <p class="text-sm text-muted">{getMaterial(p.material)?.name}</p>
+            </div>
+            <ul class="flex flex-wrap content-start gap-x-4 gap-y-1 md:col-span-8">
+              {docsFor(p.slug).map((d) => (
+                <li data-doc data-type={d.type} data-search={`${d.title} ${typeName[d.type]} ${d.format}`.toLowerCase()}>
+                  <a href={d.href} target="_blank" rel="noopener" class="link">{d.title.replace(`${p.name} `, '')}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    ))}
+    <div id="shared" class="mt-16 scroll-mt-16" data-letter>
+      <h2 class="headline border-b border-ink pb-4">Shared documents</h2>
+      {shared.map((m) => (
+        <div class="grid gap-3 border-b border-ink/25 py-5 md:grid-cols-12" data-group data-search={m.name.toLowerCase()}>
+          <p class="text-3xl font-bold tracking-tight md:col-span-4">{m.name}</p>
+          <ul class="flex flex-wrap content-start gap-x-4 gap-y-1 md:col-span-8">
+            {m.docs.map((d) => (
+              <li data-doc data-type={d.type} data-search={`${d.title} ${typeName[d.type]} ${d.format}`.toLowerCase()}>
+                <a href={d.href} target="_blank" rel="noopener" class="link">{d.title.replace(`${m.name} `, '')}</a> <span class="text-xs text-muted">({d.products.length} products)</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <p data-empty hidden class="py-16 text-center text-2xl">No documents match.</p>
+  </section>
+
+  <script>
+    const q = document.querySelector<HTMLInputElement>('[data-q]')!;
+    const btns = [...document.querySelectorAll<HTMLButtonElement>('[data-type]')];
+    const groups = [...document.querySelectorAll<HTMLElement>('[data-group]')];
+    const params = new URLSearchParams(location.search);
+    q.value = params.get('q') ?? '';
+    let type = params.get('type') ?? '';
+    function apply() {
+      btns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.type === type)));
+      const terms = q.value.toLowerCase().split(/\s+/).filter(Boolean);
+      let total = 0;
+      for (const g of groups) {
+        let n = 0;
+        g.querySelectorAll<HTMLElement>('[data-doc]').forEach((d) => {
+          const hay = `${g.dataset.search} ${d.dataset.search}`;
+          const ok = (!type || d.dataset.type === type) && terms.every((t) => hay.includes(t));
+          d.hidden = !ok;
+          if (ok) n++;
+        });
+        g.hidden = n === 0;
+        total += n;
+      }
+      document.querySelectorAll<HTMLElement>('[data-letter]').forEach((l) => (l.hidden = !l.querySelector('[data-group]:not([hidden])')));
+      document.querySelector<HTMLElement>('[data-empty]')!.hidden = total > 0;
+    }
+    q.addEventListener('input', apply);
+    btns.forEach((b) => b.addEventListener('click', () => { type = b.dataset.type!; apply(); }));
+    apply();
+  </script>
+</Layout>

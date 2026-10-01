@@ -26,3 +26,10 @@ export const productsInMaterial = (slug) => products.filter((p) => p.material ==
 export const projectsUsingProduct = (slug) => projects.filter((p) => p.products.includes(slug));
 export const resourcesForProduct = (slug) => resources.filter((r) => r.products.includes(slug));
 export const relatedProducts = (product) => product.related.map(getProduct).filter(Boolean);
+
+/** Euclidean RGB distance between two hex colors (0–441). */
+export function colorDistance(a, b) {
+  const rgb = (h) => [0, 2, 4].map((i) => parseInt(h.replace('#', '').slice(i, i + 2), 16));
+  const [x, y] = [rgb(a), rgb(b)];
+  return Math.hypot(x[0] - y[0], x[1] - y[1], x[2] - y[2]);
+}

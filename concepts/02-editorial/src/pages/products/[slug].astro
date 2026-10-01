@@ -1,0 +1,175 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Media from '../../components/Media.astro';
+import SampleButton from '../../components/SampleButton.astro';
+import { products, getCategory, getMaterial, resourcesForProduct, resourceTypes, projectsUsingProduct, relatedProducts } from '@ml/content';
+import { url } from '../../lib/utils';
+
+export function getStaticPaths() {
+  return products.map((p) => ({ params: { slug: p.slug }, props: { product: p } }));
+}
+const { product: p } = Astro.props;
+const material = getMaterial(p.material)!;
+const docs = resourcesForProduct(p.slug);
+const dataSheet = docs.find((d) => d.type === 'data-sheet');
+const docGroups = resourceTypes.map((t) => ({ ...t, docs: docs.filter((d) => d.type === t.slug) })).filter((g) => g.docs.length);
+const groups = [...new Set(p.finishes.map((f) => f.group))];
+const first = p.finishes[0];
+const used = projectsUsingProduct(p.slug);
+const related = relatedProducts(p);
+const [hero, ...rest] = p.images.gallery;
+const facts = [
+  ['Material', material.name],
+  ['Used for', p.types.map((t) => getCategory(t)?.name).join(', ')],
+  ['NRC', p.attributes.nrc != null ? `Up to ${p.attributes.nrc.toFixed(2)}` : 'See data sheet'],
+  ['Fire', p.attributes.fireRating ? `Class ${p.attributes.fireRating}, ASTM E84` : '—'],
+  ['Finishes', `${p.finishes.length} options`],
+];
+---
+<Layout title={p.name} description={p.tagline}>
+  <article>
+    <header class="wrap pt-10">
+      <p class="kicker"><a href={url('/products')} class="hover:underline">Index</a> / {material.name} / {getCategory(p.category)?.name}</p>
+      <h1 class="display mt-6">{p.name}</h1>
+      <p class="lede mt-6 max-w-4xl">{p.tagline}</p>
+    </header>
+
+    <figure class="mt-12">
+      <Media src={hero} alt={`${p.name} installed`} class="aspect-[4/3] sm:aspect-[21/9]" eager />
+      <figcaption class="wrap mt-3 text-sm text-muted">{p.fullName}</figcaption>
+    </figure>
+
+    <div class="wrap mt-16 grid gap-12 lg:grid-cols-12">
+      <!-- At a glance -->
+      <aside class="lg:col-span-4">
+        <div class="lg:sticky lg:top-8">
+          <p class="kicker">At a glance</p>
+          <dl class="mt-4 border-t border-ink">
+            {facts.map(([k, v]) => <div class="grid grid-cols-[7rem_1fr] gap-4 border-b border-ink/25 py-3"><dt class="text-muted">{k}</dt><dd class="font-medium">{v}</dd></div>)}
+          </dl>
+          {first && (
+            <div class="mt-6">
+              <p class="text-sm">Selected finish: <strong data-finish-name>{first.name}</strong> · <a href="#palette" class="link">change</a></p>
+              <SampleButton product={p.slug} name={p.name} finish={first.name} class="btn btn-solid mt-3 w-full justify-between" />
+            </div>
+          )}
+          {dataSheet && <a href={dataSheet.href} target="_blank" rel="noopener" class="btn mt-3 w-full justify-between">Data sheet ({dataSheet.format}) <span aria-hidden="true">↓</span></a>}
+        </div>
+      </aside>
+
+      <!-- Story -->
+      <div class="lg:col-span-8">
+        <p class="text-xl leading-relaxed first-letter:float-left first-letter:mr-3 first-letter:text-7xl first-letter:font-bold first-letter:leading-[0.8]">{p.description}</p>
+        {p.features.length > 0 && (
+          <>
+            <h2 class="mt-16 text-4xl">Why it works</h2>
+            <ol class="mt-6 border-t border-ink">
+              {p.features.map((f, i) => (
+                <li class="grid grid-cols-[3rem_1fr] gap-4 border-b border-ink/25 py-4 text-lg"><span class="font-bold text-teal-ink">{String(i + 1).padStart(2, '0')}</span>{f}</li>
+              ))}
+            </ol>
+          </>
+        )}
+        {rest.length > 0 && (
+          <div class="mt-16 grid grid-cols-2 gap-4">
+            {rest.slice(0, 4).map((src, i) => <Media src={src} alt="" class:list={['aspect-[4/3]', i === 0 && 'col-span-2 aspect-[16/9]']} />)}
+          </div>
+        )}
+      </div>
+    </div>
+
+    <!-- Palette -->
+    {first && (
+      <section id="palette" class="wrap mt-28 scroll-mt-8" aria-labelledby="palette-h">
+        <div class="flex items-end justify-between border-b border-ink pb-4">
+          <h2 id="palette-h" class="headline">The palette</h2>
+          <p class="text-muted">{p.finishes.length} finishes</p>
+        </div>
+        {groups.map((g) => (
+          <fieldset class="mt-10">
+            <legend class="kicker">{g}</legend>
+            <div class="mt-4 grid grid-cols-3 gap-x-4 gap-y-6 sm:grid-cols-5 lg:grid-cols-8">
+              {p.finishes.filter((f) => f.group === g).map((f) => (
+                <label class="group cursor-pointer">
+                  <input type="radio" name="finish" value={f.name} checked={f === first} class="peer sr-only" />
+                  <span class="block aspect-square bg-cover bg-center ring-offset-4 ring-offset-paper transition group-hover:scale-[1.03] peer-checked:ring-2 peer-checked:ring-ink peer-focus-visible:outline-3 peer-focus-visible:outline-orange" style={`background-color:${f.hex}`} data-texture={f.image ?? ''}></span>
+                  <span class="mt-2 block text-sm">{f.name}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        ))}
+      </section>
+    )}
+
+    {p.designOptions.length > 0 && (
+      <section class="wrap mt-28" aria-labelledby="options-h">
+        <h2 id="options-h" class="headline border-b border-ink pb-4">Design options</h2>
+        <ul class="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
+          {p.designOptions.map((o) => <li><Media src={o.image} alt={o.name} fit="contain" color="#ffffff" class="aspect-[4/3]" /><p class="mt-2 font-medium">{o.name}</p></li>)}
+        </ul>
+      </section>
+    )}
+
+    <!-- Specs + documents -->
+    <section class="wrap mt-28 grid gap-16 lg:grid-cols-2">
+      <div>
+        <h2 class="headline border-b border-ink pb-4">Specifications</h2>
+        <dl>
+          {Object.entries(p.specs).map(([k, v]) => (
+            <div class="grid grid-cols-2 gap-4 border-b border-ink/25 py-3"><dt class="text-muted">{k}</dt><dd>{Array.isArray(v) ? v.map((x) => <span class="block">{x}</span>) : v}</dd></div>
+          ))}
+        </dl>
+      </div>
+      <div>
+        <h2 class="headline border-b border-ink pb-4">Documents</h2>
+        <dl>
+          {docGroups.map((g) => (
+            <div class="grid grid-cols-[9rem_1fr] gap-4 border-b border-ink/25 py-3">
+              <dt class="text-muted">{g.name}</dt>
+              <dd class="flex flex-wrap gap-x-4 gap-y-1">{g.docs.map((d) => <a href={d.href} target="_blank" rel="noopener" class="link">{g.slug === 'cad' ? d.format : d.title.replace(`${p.name} `, '')}</a>)}</dd>
+            </div>
+          ))}
+        </dl>
+        <a href={url(`/resources#${p.slug}`)} class="link mt-4 inline-block text-sm">All documents in the library</a>
+      </div>
+    </section>
+
+    {(used.length > 0 || related.length > 0) && (
+      <section class="wrap mt-28 border-t border-ink pt-8" aria-labelledby="next-h">
+        <h2 id="next-h" class="kicker">Read next</h2>
+        <ul class="mt-6 grid gap-8 md:grid-cols-3">
+          {[...used.slice(0, 1).map((u) => ({ href: `/projects/${u.slug}`, img: u.images[0], kicker: `Project · ${u.sector}`, title: u.name })),
+            ...related.map((r) => ({ href: `/products/${r.slug}`, img: r.images.hero, kicker: getMaterial(r.material)?.name, title: r.name }))].slice(0, 3).map((x) => (
+            <li class="group">
+              <a href={url(x.href)}>
+                <Media src={x.img} class="aspect-[4/3]" />
+                <p class="kicker mt-4 text-teal-ink">{x.kicker}</p>
+                <p class="mt-2 text-3xl font-bold tracking-tight group-hover:underline group-hover:decoration-orange">{x.title}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </article>
+
+  <script>
+    const btn = document.querySelector<HTMLButtonElement>('aside [data-add-sample]');
+    document.querySelectorAll<HTMLInputElement>('input[name=finish]').forEach((i) =>
+      i.addEventListener('change', () => {
+        document.querySelector('[data-finish-name]')!.textContent = i.value;
+        if (btn) btn.dataset.finish = i.value;
+        window.dispatchEvent(new CustomEvent('ml:cart'));
+      }),
+    );
+    const plates = document.querySelectorAll<HTMLElement>('[data-texture]');
+    const io = new IntersectionObserver((es) => es.forEach((e) => {
+      if (!e.isIntersecting) return;
+      const el = e.target as HTMLElement;
+      if (el.dataset.texture) el.style.backgroundImage = `url("${el.dataset.texture}")`;
+      io.unobserve(el);
+    }), { rootMargin: '200px' });
+    plates.forEach((p) => io.observe(p));
+  </script>
+</Layout>

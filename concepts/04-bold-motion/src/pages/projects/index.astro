@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Media from '../../components/Media.astro';
+import { projects, getProduct, getMaterial } from '@ml/content';
+import { url } from '../../lib/utils';
+
+const ordered = [...projects.filter((p) => !p.placeholder), ...projects.filter((p) => p.placeholder)];
+---
+<Layout title="Projects" description="Material Logiq in built spaces.">
+  <section class="stage pt-36 pb-16">
+    <p class="tag">Portfolio</p>
+    <h1 class="mega rise mt-4"><span><span>Ingenuity</span></span><span><span style="--i:1">you can</span></span><span><span style="--i:2">walk through</span></span></h1>
+    <p class="reveal mt-8 max-w-2xl text-xl text-dim">A portfolio built not on products, but on problems solved, relationships built, and spaces worth experiencing.</p>
+  </section>
+
+  <!-- Stacked sticky cards -->
+  <ol class="stage pb-24">
+    {ordered.map((p, i) => (
+      <li class="sticky mb-8" style={`top: calc(5.5rem + ${i * 14}px)`}>
+        <a href={url(`/projects/${p.slug}`)} class="group relative block h-[75svh] overflow-hidden rounded-3xl border border-edge shadow-[0_-20px_60px_rgba(0,0,0,.6)]">
+          <Media src={p.images[0]} alt="" class="absolute inset-0" eager={i < 2} imgClass="transition duration-1000 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t from-night via-night/30 to-transparent"></div>
+          <div class="absolute inset-x-0 bottom-0 flex flex-wrap items-end justify-between gap-6 p-6 sm:p-10">
+            <div class="max-w-3xl">
+              <p class="tag">{String(i + 1).padStart(2, '0')} · {p.sector} · {p.location}{p.placeholder && ' · Sample project'}</p>
+              <h2 class="big mt-3">{p.name}</h2>
+              <p class="mt-3 text-bone/80">{p.products.length ? p.products.map((s) => getProduct(s)?.name).join(' · ') : `Custom ${p.materials.map((m) => getMaterial(m)?.name).join(', ')}`}</p>
+            </div>
+            <span class="pill pill-solid">View project →</span>
+          </div>
+        </a>
+      </li>
+    ))}
+  </ol>
+</Layout>

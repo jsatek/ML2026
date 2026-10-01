@@ -26,6 +26,60 @@ importers:
         specifier: ^4.3.3
         version: 4.3.3
 
+  concepts/02-editorial:
+    dependencies:
+      '@ml/brand':
+        specifier: workspace:*
+        version: link:../../packages/brand
+      '@ml/content':
+        specifier: workspace:*
+        version: link:../../packages/content
+      '@tailwindcss/vite':
+        specifier: ^4.3.3
+        version: 4.3.3(vite@8.3.1(esbuild@0.28.2)(jiti@2.7.0))
+      astro:
+        specifier: ^7.3.5
+        version: 7.3.5(jiti@2.7.0)
+      tailwindcss:
+        specifier: ^4.3.3
+        version: 4.3.3
+
+  concepts/03-product-led:
+    dependencies:
+      '@ml/brand':
+        specifier: workspace:*
+        version: link:../../packages/brand
+      '@ml/content':
+        specifier: workspace:*
+        version: link:../../packages/content
+      '@tailwindcss/vite':
+        specifier: ^4.3.3
+        version: 4.3.3(vite@8.3.1(esbuild@0.28.2)(jiti@2.7.0))
+      astro:
+        specifier: ^7.3.5
+        version: 7.3.5(jiti@2.7.0)
+      tailwindcss:
+        specifier: ^4.3.3
+        version: 4.3.3
+
+  concepts/04-bold-motion:
+    dependencies:
+      '@ml/brand':
+        specifier: workspace:*
+        version: link:../../packages/brand
+      '@ml/content':
+        specifier: workspace:*
+        version: link:../../packages/content
+      '@tailwindcss/vite':
+        specifier: ^4.3.3
+        version: 4.3.3(vite@8.3.1(esbuild@0.28.2)(jiti@2.7.0))
+      astro:
+        specifier: ^7.3.5
+        version: 7.3.5(jiti@2.7.0)
+      tailwindcss:
+        specifier: ^4.3.3
+        version: 4.3.3
+
   concepts/_template:
     dependencies:
       '@ml/brand':

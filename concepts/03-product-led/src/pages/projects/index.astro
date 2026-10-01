@@ -1,0 +1,56 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Media from '../../components/Media.astro';
+import { projects, sectors, materials, getProduct, getMaterial } from '@ml/content';
+import { url } from '../../lib/utils';
+
+const usedSectors = sectors.filter((s) => projects.some((p) => p.sector === s));
+const usedMaterials = materials.filter((m) => projects.some((p) => p.materials.includes(m.slug)));
+const ordered = [...projects.filter((p) => !p.placeholder), ...projects.filter((p) => p.placeholder)];
+---
+<Layout title="Projects" description="Projects using Material Logiq products.">
+  <section class="shell py-8">
+    <h1 class="text-3xl">Projects</h1>
+    <p class="mt-1 text-muted">See products in real spaces, then jump straight to the product or its samples.</p>
+    <div class="mt-6 flex flex-wrap items-center gap-2" role="group" aria-label="Filters">
+      <span class="label mr-1">Market</span>
+      {usedSectors.map((s) => <button type="button" class="chip" aria-pressed="false" data-f="sector" data-v={s}>{s}</button>)}
+      <span class="label ml-3 mr-1">Material</span>
+      {usedMaterials.map((m) => <button type="button" class="chip" aria-pressed="false" data-f="material" data-v={m.slug}>{m.name}</button>)}
+    </div>
+    <p class="mt-4 text-sm text-muted" aria-live="polite"><span data-n>{projects.length}</span> projects</p>
+    <ul class="mt-3 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {ordered.map((p, i) => (
+        <li class="card flex flex-col overflow-hidden" data-item data-sector={p.sector} data-material={p.materials.join('|')}>
+          <a href={url(`/projects/${p.slug}`)} class="relative block"><Media src={p.images[0]} alt="" class="aspect-[4/3]" eager={i < 3} />
+            {p.placeholder && <span class="absolute left-2 top-2 rounded-md bg-white/90 px-2 py-0.5 text-xs font-semibold">Sample project</span>}
+          </a>
+          <div class="flex flex-1 flex-col p-4">
+            <p class="text-sm text-muted">{p.sector} · {p.location}</p>
+            <h2 class="mt-1 text-lg"><a href={url(`/projects/${p.slug}`)} class="hover:underline">{p.name}</a></h2>
+            <div class="mt-auto flex flex-wrap gap-1.5 pt-3">
+              {p.products.length
+                ? p.products.map((s) => <a href={url(`/products/${s}`)} class="chip hover:border-ink">{getProduct(s)?.name}</a>)
+                : <span class="chip">Custom {p.materials.map((m) => getMaterial(m)?.name).join(', ')}</span>}
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+  <script>
+    const items = [...document.querySelectorAll<HTMLElement>('[data-item]')];
+    const btns = [...document.querySelectorAll<HTMLButtonElement>('[data-f]')];
+    btns.forEach((b) => b.addEventListener('click', () => {
+      // Single choice per group; click again to clear.
+      const on = b.getAttribute('aria-pressed') !== 'true';
+      btns.filter((o) => o.dataset.f === b.dataset.f).forEach((o) => o.setAttribute('aria-pressed', 'false'));
+      b.setAttribute('aria-pressed', String(on));
+      const pick = (f: string) => btns.find((o) => o.dataset.f === f && o.getAttribute('aria-pressed') === 'true')?.dataset.v;
+      const [sec, mat] = [pick('sector'), pick('material')];
+      let n = 0;
+      items.forEach((it) => { const ok = (!sec || it.dataset.sector === sec) && (!mat || it.dataset.material!.split('|').includes(mat)); it.hidden = !ok; if (ok) n++; });
+      document.querySelector('[data-n]')!.textContent = String(n);
+    }));
+  </script>
+</Layout>

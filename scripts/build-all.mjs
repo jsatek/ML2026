@@ -120,7 +120,7 @@ writeFileSync(
 <header><div class="wrap">
   <img src="wordmark.webp" alt="Material Logiq" />
   <h1>Website redesign <span>concepts</span></h1>
-  <p class="lede">Each concept builds the same six pages from the same placeholder content, so directions can be compared page by page. Open a concept, or jump straight to a page below.</p>
+  <p class="lede">Each concept builds the same six pages from the same real Material Logiq content, so directions can be compared page by page. Open a concept, or jump straight to a page below.</p>
 </div></header>
 <main class="wrap">
   <div class="grid">${cards}</div>

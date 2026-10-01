@@ -1,0 +1,112 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { products, categories, materials, getCategory, getMaterial } from '@ml/content';
+import { url } from '../../lib/utils';
+
+const sorted = [...products].sort((a, b) => a.name.localeCompare(b.name));
+---
+<Layout title="Index of products" description="Every Material Logiq product in one index.">
+  <section class="wrap pt-10">
+    <h1 class="display">Index</h1>
+    <p class="lede mt-6 max-w-3xl">{products.length} acoustical systems in four materials, for ceilings and walls. Hover a name to preview it; filter by surface or material.</p>
+  </section>
+
+  <section class="wrap mt-12" aria-label="Filters">
+    <div class="space-y-3 border-y border-ink py-4 text-sm sm:text-base">
+      <div class="flex flex-wrap gap-x-5 gap-y-2" role="group" aria-label="Product type">
+        <span class="kicker w-20 self-center">Type</span>
+        <button type="button" class="toggle" data-filter="type" data-value="" aria-pressed="true">All</button>
+        {categories.map((c) => <button type="button" class="toggle" data-filter="type" data-value={c.slug} aria-pressed="false">{c.name}</button>)}
+      </div>
+      <div class="flex flex-wrap gap-x-5 gap-y-2" role="group" aria-label="Material">
+        <span class="kicker w-20 self-center">Material</span>
+        <button type="button" class="toggle" data-filter="material" data-value="" aria-pressed="true">All</button>
+        {materials.map((m) => <button type="button" class="toggle" data-filter="material" data-value={m.slug} aria-pressed="false">{m.name}</button>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap mt-6" aria-labelledby="count">
+    <div class="hidden grid-cols-12 gap-4 pb-2 text-sm text-muted md:grid">
+      <span class="col-span-1">No.</span>
+      <button type="button" class="col-span-5 text-left hover:text-ink" data-sort="name">Name ↓</button>
+      <span class="col-span-2">Material</span>
+      <span class="col-span-2">Type</span>
+      <button type="button" class="col-span-1 text-left hover:text-ink" data-sort="nrc">NRC</button>
+      <span class="col-span-1">Fire</span>
+    </div>
+    <h2 id="count" class="sr-only" aria-live="polite"><span data-count>{products.length}</span> products</h2>
+    <ol class="border-t border-ink" data-list>
+      {sorted.map((p, i) => (
+        <li
+          class="border-b border-ink/25"
+          data-row
+          data-name={p.name}
+          data-nrc={p.attributes.nrc ?? 0}
+          data-types={p.types.join('|')}
+          data-material={p.material}
+          data-img={p.images.hero ?? ''}
+        >
+          <a href={url(`/products/${p.slug}`)} class="group grid grid-cols-[4.5rem_1fr] items-center gap-4 py-4 md:grid-cols-12 md:py-5">
+            <img src={p.images.hero ?? ''} alt="" loading="lazy" class="aspect-square w-full object-cover md:hidden" />
+            <span class="hidden text-sm text-muted md:col-span-1 md:block" data-num>{String(i + 1).padStart(2, '0')}</span>
+            <span class="md:col-span-5">
+              <span class="block text-3xl font-bold tracking-tight group-hover:underline group-hover:decoration-orange sm:text-4xl">{p.name}</span>
+              <span class="mt-1 block text-sm text-muted md:hidden">{getMaterial(p.material)?.name} · {getCategory(p.category)?.name}{p.attributes.nrc != null && ` · NRC ${p.attributes.nrc.toFixed(2)}`}</span>
+            </span>
+            <span class="hidden md:col-span-2 md:block">{getMaterial(p.material)?.name}</span>
+            <span class="hidden text-sm md:col-span-2 md:block">{p.types.map((t) => getCategory(t)?.name).join(', ')}</span>
+            <span class="hidden tabular-nums md:col-span-1 md:block">{p.attributes.nrc?.toFixed(2) ?? '—'}</span>
+            <span class="hidden md:col-span-1 md:block">{p.attributes.fireRating ? `Class ${p.attributes.fireRating}` : '—'}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+    <p data-empty hidden class="py-16 text-center text-2xl">Nothing matches. <button type="button" class="link" data-reset>Show everything</button></p>
+  </section>
+
+  <!-- Cursor-following preview (fine pointers only) -->
+  <img data-preview alt="" class="pointer-events-none fixed left-0 top-0 z-30 hidden aspect-[4/3] w-80 object-cover opacity-0 shadow-2xl transition-opacity duration-150" />
+
+  <script>
+    const rows = [...document.querySelectorAll<HTMLElement>('[data-row]')];
+    const list = document.querySelector<HTMLElement>('[data-list]')!;
+    const state: Record<string, string> = { type: '', material: '' };
+    const params = new URLSearchParams(location.search);
+    state.type = params.get('type') ?? '';
+    state.material = params.get('material') ?? '';
+    let sort = 'name';
+
+    function apply() {
+      document.querySelectorAll<HTMLButtonElement>('[data-filter]').forEach((b) => b.setAttribute('aria-pressed', String(state[b.dataset.filter!] === b.dataset.value)));
+      const visible = rows.filter((r) => {
+        const ok = (!state.type || r.dataset.types!.split('|').includes(state.type)) && (!state.material || r.dataset.material === state.material);
+        r.hidden = !ok;
+        return ok;
+      });
+      const ordered = [...rows].sort((a, b) => (sort === 'nrc' ? Number(b.dataset.nrc) - Number(a.dataset.nrc) : a.dataset.name!.localeCompare(b.dataset.name!)));
+      list.append(...ordered);
+      ordered.filter((r) => !r.hidden).forEach((r, i) => (r.querySelector('[data-num]')!.textContent = String(i + 1).padStart(2, '0')));
+      document.querySelector('[data-count]')!.textContent = String(visible.length);
+      document.querySelector<HTMLElement>('[data-empty]')!.hidden = visible.length > 0;
+      document.querySelectorAll<HTMLButtonElement>('[data-sort]').forEach((b) => (b.textContent = `${b.dataset.sort === 'nrc' ? 'NRC' : 'Name'}${b.dataset.sort === sort ? ' ↓' : ''}`));
+      const next = new URLSearchParams(Object.entries(state).filter(([, v]) => v));
+      history.replaceState(null, '', `${location.pathname}${next.size ? `?${next}` : ''}`);
+    }
+    document.querySelectorAll<HTMLButtonElement>('[data-filter]').forEach((b) => b.addEventListener('click', () => { state[b.dataset.filter!] = b.dataset.value!; apply(); }));
+    document.querySelectorAll<HTMLButtonElement>('[data-sort]').forEach((b) => b.addEventListener('click', () => { sort = b.dataset.sort!; apply(); }));
+    document.querySelector('[data-reset]')!.addEventListener('click', () => { state.type = ''; state.material = ''; apply(); });
+    apply();
+
+    // Hover preview
+    const preview = document.querySelector<HTMLImageElement>('[data-preview]')!;
+    if (matchMedia('(pointer: fine) and (min-width: 768px)').matches) {
+      preview.classList.remove('hidden');
+      rows.forEach((r) => {
+        r.addEventListener('mouseenter', () => { if (r.dataset.img) { preview.src = r.dataset.img; preview.style.opacity = '1'; } });
+        r.addEventListener('mouseleave', () => (preview.style.opacity = '0'));
+        r.addEventListener('mousemove', (e) => (preview.style.transform = `translate(${Math.min(e.clientX + 24, innerWidth - 340)}px, ${Math.min(e.clientY - 120, innerHeight - 260)}px)`));
+      });
+    }
+  </script>
+</Layout>

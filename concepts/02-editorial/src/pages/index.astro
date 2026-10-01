@@ -1,0 +1,127 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Media from '../components/Media.astro';
+import { site, categories, materials, products, projects, productsInCategory, productsInMaterial, getProduct } from '@ml/content';
+import { url } from '../lib/utils';
+
+const cover = getProduct('pet-felt-ceiling-tiles-coffa')!;
+const feature = projects.find((p) => !p.placeholder)!;
+const words = site.tagline.replace(/\.$/, '').split(' ');
+const firstSentences = (s: string, n = 2) => (s.match(/[^.!?]+[.!?]+/g) ?? [s]).slice(0, n).join(' ').trim();
+const groups = [...new Set(categories.map((c) => c.group))];
+---
+<Layout>
+  <!-- Masthead -->
+  <section class="wrap pt-10 sm:pt-16">
+    <h1 class="display">
+      {words.slice(0, -1).join(' ')} <span class="u">{words.at(-1)}.</span>
+    </h1>
+    <div class="mt-10 grid gap-6 border-t border-ink pt-6 md:grid-cols-12">
+      <p class="kicker md:col-span-3">The short version</p>
+      <p class="lede md:col-span-8">{site.intro}</p>
+    </div>
+  </section>
+
+  <figure class="mt-14">
+    <Media src={cover.images.hero} alt={`${cover.name} ${cover.fullName} in a restaurant`} class="aspect-[4/3] sm:aspect-[21/9]" eager />
+    <figcaption class="wrap mt-3 flex justify-between gap-4 text-sm text-muted">
+      <span>On the cover: <a href={url(`/products/${cover.slug}`)} class="link text-ink">{cover.name}</a>, {cover.tagline.toLowerCase()}</span>
+    </figcaption>
+  </figure>
+
+  <!-- Cover story -->
+  <section class="wrap mt-28 grid gap-10 md:grid-cols-12" aria-labelledby="feature">
+    <div class="md:col-span-7">
+      <Media src={feature.images[0]} alt={feature.name} class="aspect-[4/3]" />
+    </div>
+    <div class="flex flex-col md:col-span-5">
+      <p class="kicker text-teal-ink">Feature · {feature.sector}</p>
+      <h2 id="feature" class="headline mt-4">{feature.name}</h2>
+      <p class="mt-6 text-lg">{feature.story[0]}</p>
+      <a href={url(`/projects/${feature.slug}`)} class="link mt-6 font-semibold">Read the story</a>
+    </div>
+  </section>
+
+  <!-- Chapters: materials -->
+  <section class="wrap mt-32" aria-labelledby="chapters">
+    <div class="flex items-end justify-between border-b border-ink pb-4">
+      <h2 id="chapters" class="headline">Four materials</h2>
+      <p class="kicker hidden sm:block">Chapters 01–04</p>
+    </div>
+    <ol>
+      {materials.map((m, i) => {
+        const items = productsInMaterial(m.slug);
+        return (
+          <li class="grid gap-6 border-b border-ink/20 py-10 md:grid-cols-12">
+            <p class="text-6xl font-bold text-teal md:col-span-1">0{i + 1}</p>
+            <div class="md:col-span-5">
+              <h3 class="text-4xl sm:text-5xl">{m.name}</h3>
+              {m.aka && <p class="mt-2 text-muted">{m.aka}</p>}
+              <p class="mt-4">{firstSentences(m.summary)}</p>
+              <p class="mt-4 text-sm">
+                {items.slice(0, 6).map((p, j) => <><a href={url(`/products/${p.slug}`)} class="link">{p.name}</a>{j < Math.min(items.length, 6) - 1 ? ', ' : ''}</>)}
+                {items.length > 6 && <> and <a href={url(`/products?material=${m.slug}`)} class="link">{items.length - 6} more</a></>}
+              </p>
+            </div>
+            <Media src={items[0]?.images.gallery[1] ?? items[0]?.images.hero} class="aspect-[16/10] md:col-span-6" />
+          </li>
+        );
+      })}
+    </ol>
+  </section>
+
+  <!-- By surface -->
+  <section class="wrap mt-32 grid gap-12 md:grid-cols-2" aria-label="Products by surface">
+    {groups.map((g) => (
+      <div>
+        <h2 class="headline border-b border-ink pb-4">{g}</h2>
+        <ul>
+          {categories.filter((c) => c.group === g).map((c) => (
+            <li class="border-b border-ink/20">
+              <a href={url(`/products?type=${c.slug}`)} class="group flex items-baseline justify-between gap-4 py-4">
+                <span class="text-2xl font-semibold group-hover:underline group-hover:decoration-orange">{c.name}</span>
+                <span class="text-muted">{productsInCategory(c.slug).length}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </section>
+
+  <!-- Process essay -->
+  <section class="mt-32 bg-green py-24 text-paper" aria-labelledby="process">
+    <div class="wrap">
+      <p class="kicker text-sky">{site.materialize.title}</p>
+      <h2 id="process" class="headline mt-4 max-w-4xl">Ideate. Co-create. Fabricate.</h2>
+      <p class="lede mt-8 max-w-3xl text-paper/85">{site.materialize.text}</p>
+      <ol class="mt-16 grid gap-8 border-t border-paper/30 pt-8 sm:grid-cols-2 lg:grid-cols-5">
+        {site.process.map((s, i) => (
+          <li>
+            <p class="text-5xl font-bold text-sky">{i + 1}</p>
+            <h3 class="mt-3 text-2xl">{s.step}</h3>
+            <p class="mt-2 text-paper/80">{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Values + samples -->
+  <section class="wrap mt-32 grid gap-12 md:grid-cols-12">
+    <div class="md:col-span-7">
+      <p class="kicker">What we believe</p>
+      <ul class="mt-6 space-y-8">
+        {site.values.map((v) => (
+          <li><h3 class="text-3xl">{v.title}</h3><p class="mt-2 text-lg text-muted">{v.text}</p></li>
+        ))}
+      </ul>
+    </div>
+    <aside class="h-fit border border-ink p-8 md:col-span-5">
+      <p class="kicker">A note on samples</p>
+      <p class="mt-4 text-2xl font-semibold leading-snug">Felt, metal, and wood are tactile. Hold them before you specify them.</p>
+      <p class="mt-4 text-muted">Choose up to {site.sampleLimit} colors and finishes from across {products.length} products. We'll ship them with the data sheets.</p>
+      <a href={url('/samples')} class="btn btn-solid mt-6">Request samples <span aria-hidden="true">→</span></a>
+    </aside>
+  </section>
+</Layout>
