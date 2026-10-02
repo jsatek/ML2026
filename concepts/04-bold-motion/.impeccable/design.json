@@ -1,0 +1,261 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-02T20:10:49+00:00",
+  "title": "Design System: Material Logiq · 04 Bold motion",
+  "extensions": {
+    "colorMeta": {
+      "stage-night": {
+        "role": "primary",
+        "displayName": "Stage Night",
+        "canonical": "oklch(15.9% 0.007 178.6)",
+        "tonalRamp": [
+          "oklch(15.0% 0.007 178.6)",
+          "oklch(26.0% 0.007 178.6)",
+          "oklch(37.0% 0.007 178.6)",
+          "oklch(48.0% 0.007 178.6)",
+          "oklch(59.0% 0.007 178.6)",
+          "oklch(70.0% 0.007 178.6)",
+          "oklch(82.0% 0.007 178.6)",
+          "oklch(95.0% 0.007 178.6)"
+        ]
+      },
+      "stage-night-raised": {
+        "role": "neutral",
+        "displayName": "Stage Night Raised",
+        "canonical": "oklch(20.5% 0.011 175.9)",
+        "tonalRamp": [
+          "oklch(15.0% 0.011 175.9)",
+          "oklch(26.0% 0.011 175.9)",
+          "oklch(37.0% 0.011 175.9)",
+          "oklch(48.0% 0.011 175.9)",
+          "oklch(59.0% 0.011 175.9)",
+          "oklch(70.0% 0.011 175.9)",
+          "oklch(82.0% 0.011 175.9)",
+          "oklch(95.0% 0.011 175.9)"
+        ]
+      },
+      "bone": {
+        "role": "primary",
+        "displayName": "Bone",
+        "canonical": "oklch(95.8% 0.007 97.4)",
+        "tonalRamp": [
+          "oklch(15.0% 0.007 97.4)",
+          "oklch(26.0% 0.007 97.4)",
+          "oklch(37.0% 0.007 97.4)",
+          "oklch(48.0% 0.007 97.4)",
+          "oklch(59.0% 0.007 97.4)",
+          "oklch(70.0% 0.007 97.4)",
+          "oklch(82.0% 0.007 97.4)",
+          "oklch(95.0% 0.007 97.4)"
+        ]
+      },
+      "dim": {
+        "role": "neutral",
+        "displayName": "Dim",
+        "canonical": "oklch(73.4% 0.010 171.7)",
+        "tonalRamp": [
+          "oklch(15.0% 0.010 171.7)",
+          "oklch(26.0% 0.010 171.7)",
+          "oklch(37.0% 0.010 171.7)",
+          "oklch(48.0% 0.010 171.7)",
+          "oklch(59.0% 0.010 171.7)",
+          "oklch(70.0% 0.010 171.7)",
+          "oklch(82.0% 0.010 171.7)",
+          "oklch(95.0% 0.010 171.7)"
+        ]
+      },
+      "edge": {
+        "role": "neutral",
+        "displayName": "Edge",
+        "canonical": "oklch(29.9% 0.015 175.1)",
+        "tonalRamp": [
+          "oklch(15.0% 0.015 175.1)",
+          "oklch(26.0% 0.015 175.1)",
+          "oklch(37.0% 0.015 175.1)",
+          "oklch(48.0% 0.015 175.1)",
+          "oklch(59.0% 0.015 175.1)",
+          "oklch(70.0% 0.015 175.1)",
+          "oklch(82.0% 0.015 175.1)",
+          "oklch(95.0% 0.015 175.1)"
+        ]
+      },
+      "deep-green": {
+        "role": "secondary",
+        "displayName": "Deep Green",
+        "canonical": "oklch(41.0% 0.073 184.2)",
+        "tonalRamp": [
+          "oklch(15.0% 0.073 184.2)",
+          "oklch(26.0% 0.073 184.2)",
+          "oklch(37.0% 0.073 184.2)",
+          "oklch(48.0% 0.073 184.2)",
+          "oklch(59.0% 0.073 184.2)",
+          "oklch(70.0% 0.073 184.2)",
+          "oklch(82.0% 0.073 184.2)",
+          "oklch(95.0% 0.073 184.2)"
+        ]
+      },
+      "teal": {
+        "role": "tertiary",
+        "displayName": "Brand Teal",
+        "canonical": "oklch(59.6% 0.089 198.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.089 198.0)",
+          "oklch(26.0% 0.089 198.0)",
+          "oklch(37.0% 0.089 198.0)",
+          "oklch(48.0% 0.089 198.0)",
+          "oklch(59.0% 0.089 198.0)",
+          "oklch(70.0% 0.089 198.0)",
+          "oklch(82.0% 0.089 198.0)",
+          "oklch(95.0% 0.089 198.0)"
+        ]
+      },
+      "sky": {
+        "role": "secondary",
+        "displayName": "Sky",
+        "canonical": "oklch(82.3% 0.073 206.9)",
+        "tonalRamp": [
+          "oklch(15.0% 0.073 206.9)",
+          "oklch(26.0% 0.073 206.9)",
+          "oklch(37.0% 0.073 206.9)",
+          "oklch(48.0% 0.073 206.9)",
+          "oklch(59.0% 0.073 206.9)",
+          "oklch(70.0% 0.073 206.9)",
+          "oklch(82.0% 0.073 206.9)",
+          "oklch(95.0% 0.073 206.9)"
+        ]
+      },
+      "signal-orange": {
+        "role": "secondary",
+        "displayName": "Signal Orange",
+        "canonical": "oklch(65.4% 0.164 39.2)",
+        "tonalRamp": [
+          "oklch(15.0% 0.120 39.2)",
+          "oklch(26.0% 0.120 39.2)",
+          "oklch(37.0% 0.120 39.2)",
+          "oklch(48.0% 0.120 39.2)",
+          "oklch(59.0% 0.120 39.2)",
+          "oklch(70.0% 0.120 39.2)",
+          "oklch(82.0% 0.120 39.2)",
+          "oklch(95.0% 0.120 39.2)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "mega": {
+        "displayName": "Mega",
+        "purpose": "hero headline and footer \"Let's talk\"."
+      },
+      "big": {
+        "displayName": "Big",
+        "purpose": "section openers and product names."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "card and chapter titles."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "descriptions and specs, in bone or dim."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "pill buttons and controls."
+      }
+    },
+    "shadows": [
+      {
+        "name": "toast",
+        "value": "0 25px 50px -12px rgb(0 0 0/.25)",
+        "purpose": "Bone toast."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-stage",
+        "value": "cubic-bezier(.2,.7,.2,1)",
+        "purpose": "Scroll reveals (0.9s, 90ms stagger)."
+      },
+      {
+        "name": "ease-out-rise",
+        "value": "cubic-bezier(.2,.8,.2,1)",
+        "purpose": "Headline rise (1s) and band entrance (1.2s)."
+      },
+      {
+        "name": "marquee",
+        "value": "40s linear infinite",
+        "purpose": "Material marquee; paused on hover and under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Pill",
+      "kind": "button",
+      "refersTo": "pill",
+      "description": "Default control on the dark stage.",
+      "html": "<button class=\"ds-pill\">Menu</button>",
+      "css": ".ds-pill{border:1px solid #26302d;border-radius:999px;padding:.55rem 1.1rem;background:#0a0e0d;color:#f2f1ec;font:600 1rem/1.2 'Inter Tight',sans-serif;transition:background .2s,color .2s,border-color .2s}.ds-pill:hover{border-color:#f2f1ec}.ds-pill:focus-visible{outline:3px solid #E1663B;outline-offset:3px}"
+    },
+    {
+      "name": "Solid Pill",
+      "kind": "button",
+      "refersTo": "pill-solid",
+      "description": "Primary action; hover turns sky.",
+      "html": "<button class=\"ds-pill-solid\">Request samples</button>",
+      "css": ".ds-pill-solid{border:1px solid #f2f1ec;border-radius:999px;padding:.55rem 1.1rem;background:#f2f1ec;color:#0a0e0d;font:600 1rem/1.2 'Inter Tight',sans-serif;transition:background .2s,border-color .2s}.ds-pill-solid:hover{background:#8BD3DD;border-color:#8BD3DD}.ds-pill-solid:focus-visible{outline:3px solid #E1663B;outline-offset:3px}"
+    },
+    {
+      "name": "Night Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Form input on the dark stage.",
+      "html": "<input class=\"ds-field\" placeholder=\"Email\">",
+      "css": ".ds-field{width:100%;border:1px solid #26302d;border-radius:.75rem;padding:.8rem 1rem;background:#121917;color:#f2f1ec;font:400 1rem 'Inter Tight',sans-serif}.ds-field:focus{outline:2px solid #8BD3DD;outline-offset:-1px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Fabrication Stage",
+    "overview": "The materials perform on a dark stage. Felt, perforated metal, and wood are lit like objects in a workshop at night, and scroll is the choreography: the logo's three bands slide in carrying photography, headlines rise line by line, the materials glide across in a pinned scroller, and project cards stack as you go. Motion is direction, not decoration: it leads the eye to the next material and then gets out of the way of the specs.\n\nThe palette is nearly black with warm bone-white type and the brand colors used as light: sky for small accents and hovers, orange as the single underline, deep green as the full-screen menu. Type is uppercase and huge where it announces, plain where it informs. Everything has a reduced-motion version that is a complete, static layout, and nothing is hidden without JavaScript.",
+    "keyCharacteristics": [
+      "Near-black stage (`stage-night`) with bone type; `color-scheme: dark`.",
+      "Uppercase mega type up to 12rem, tracked tight (-0.04em) and set at 0.92.",
+      "The logo's three diagonal bands as the hero's structure and motion.",
+      "Pill controls with thin `edge` borders; large rounded panels (1.5rem).",
+      "Scroll-driven reveals, staggered entrances, a marquee, and stacked cards, all off under reduced motion."
+    ],
+    "rules": [
+      {
+        "name": "The Lights On the Material Rule",
+        "body": "Color on this stage should come from material photography. Brand colors are small lights (an underline, a count, a hover), with the deep-green menu as the one full-color surface.",
+        "section": "colors"
+      },
+      {
+        "name": "The Shout Then Inform Rule",
+        "body": "Uppercase mega type announces a section; everything the visitor needs to read or compare is sentence case at body size.",
+        "section": "typography"
+      }
+    ],
+    "dos": [
+      "**Do** gate every animation behind the `.motion` class and switch it off under `prefers-reduced-motion`.",
+      "**Do** use uppercase mega type only to announce; keep specs and body text in sentence case.",
+      "**Do** keep the Samples pill and its count visible in the fixed header.",
+      "**Do** check finish colors against the dark stage; show swatches large enough to judge."
+    ],
+    "donts": [
+      "**Don't** hide content until JavaScript runs.",
+      "**Don't** let motion delay access to specs, documents, or the sample action.",
+      "**Don't** use square corners on controls; this world is pills and soft panels.",
+      "**Don't** fill large areas with brand color other than the menu's deep green."
+    ]
+  }
+}

@@ -1,0 +1,317 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-02T20:10:49+00:00",
+  "title": "Design System: Material Logiq · 03 Product-led",
+  "extensions": {
+    "colorMeta": {
+      "deep-green": {
+        "role": "primary",
+        "displayName": "Deep Workbench Green",
+        "canonical": "oklch(41.0% 0.073 184.2)",
+        "tonalRamp": [
+          "oklch(15.0% 0.073 184.2)",
+          "oklch(26.0% 0.073 184.2)",
+          "oklch(37.0% 0.073 184.2)",
+          "oklch(48.0% 0.073 184.2)",
+          "oklch(59.0% 0.073 184.2)",
+          "oklch(70.0% 0.073 184.2)",
+          "oklch(82.0% 0.073 184.2)",
+          "oklch(95.0% 0.073 184.2)"
+        ]
+      },
+      "deep-green-pressed": {
+        "role": "primary",
+        "displayName": "Deep Green Pressed",
+        "canonical": "oklch(32.3% 0.057 184.1)",
+        "tonalRamp": [
+          "oklch(15.0% 0.057 184.1)",
+          "oklch(26.0% 0.057 184.1)",
+          "oklch(37.0% 0.057 184.1)",
+          "oklch(48.0% 0.057 184.1)",
+          "oklch(59.0% 0.057 184.1)",
+          "oklch(70.0% 0.057 184.1)",
+          "oklch(82.0% 0.057 184.1)",
+          "oklch(95.0% 0.057 184.1)"
+        ]
+      },
+      "teal": {
+        "role": "secondary",
+        "displayName": "Brand Teal",
+        "canonical": "oklch(59.6% 0.089 198.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.089 198.0)",
+          "oklch(26.0% 0.089 198.0)",
+          "oklch(37.0% 0.089 198.0)",
+          "oklch(48.0% 0.089 198.0)",
+          "oklch(59.0% 0.089 198.0)",
+          "oklch(70.0% 0.089 198.0)",
+          "oklch(82.0% 0.089 198.0)",
+          "oklch(95.0% 0.089 198.0)"
+        ]
+      },
+      "teal-ink": {
+        "role": "secondary",
+        "displayName": "Teal Ink",
+        "canonical": "oklch(49.6% 0.075 197.5)",
+        "tonalRamp": [
+          "oklch(15.0% 0.075 197.5)",
+          "oklch(26.0% 0.075 197.5)",
+          "oklch(37.0% 0.075 197.5)",
+          "oklch(48.0% 0.075 197.5)",
+          "oklch(59.0% 0.075 197.5)",
+          "oklch(70.0% 0.075 197.5)",
+          "oklch(82.0% 0.075 197.5)",
+          "oklch(95.0% 0.075 197.5)"
+        ]
+      },
+      "sky": {
+        "role": "secondary",
+        "displayName": "Sky",
+        "canonical": "oklch(82.3% 0.073 206.9)",
+        "tonalRamp": [
+          "oklch(15.0% 0.073 206.9)",
+          "oklch(26.0% 0.073 206.9)",
+          "oklch(37.0% 0.073 206.9)",
+          "oklch(48.0% 0.073 206.9)",
+          "oklch(59.0% 0.073 206.9)",
+          "oklch(70.0% 0.073 206.9)",
+          "oklch(82.0% 0.073 206.9)",
+          "oklch(95.0% 0.073 206.9)"
+        ]
+      },
+      "signal-orange": {
+        "role": "tertiary",
+        "displayName": "Signal Orange",
+        "canonical": "oklch(65.4% 0.164 39.2)",
+        "tonalRamp": [
+          "oklch(15.0% 0.120 39.2)",
+          "oklch(26.0% 0.120 39.2)",
+          "oklch(37.0% 0.120 39.2)",
+          "oklch(48.0% 0.120 39.2)",
+          "oklch(59.0% 0.120 39.2)",
+          "oklch(70.0% 0.120 39.2)",
+          "oklch(82.0% 0.120 39.2)",
+          "oklch(95.0% 0.120 39.2)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(18.9% 0.009 184.1)",
+        "tonalRamp": [
+          "oklch(15.0% 0.009 184.1)",
+          "oklch(26.0% 0.009 184.1)",
+          "oklch(37.0% 0.009 184.1)",
+          "oklch(48.0% 0.009 184.1)",
+          "oklch(59.0% 0.009 184.1)",
+          "oklch(70.0% 0.009 184.1)",
+          "oklch(82.0% 0.009 184.1)",
+          "oklch(95.0% 0.009 184.1)"
+        ]
+      },
+      "instrument-muted": {
+        "role": "neutral",
+        "displayName": "Instrument Muted",
+        "canonical": "oklch(48.5% 0.010 179.2)",
+        "tonalRamp": [
+          "oklch(15.0% 0.010 179.2)",
+          "oklch(26.0% 0.010 179.2)",
+          "oklch(37.0% 0.010 179.2)",
+          "oklch(48.0% 0.010 179.2)",
+          "oklch(59.0% 0.010 179.2)",
+          "oklch(70.0% 0.010 179.2)",
+          "oklch(82.0% 0.010 179.2)",
+          "oklch(95.0% 0.010 179.2)"
+        ]
+      },
+      "bench-white": {
+        "role": "neutral",
+        "displayName": "Bench White",
+        "canonical": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "oklch(15.0% 0.000 89.9)",
+          "oklch(26.0% 0.000 89.9)",
+          "oklch(37.0% 0.000 89.9)",
+          "oklch(48.0% 0.000 89.9)",
+          "oklch(59.0% 0.000 89.9)",
+          "oklch(70.0% 0.000 89.9)",
+          "oklch(82.0% 0.000 89.9)",
+          "oklch(95.0% 0.000 89.9)"
+        ]
+      },
+      "panel-gray": {
+        "role": "neutral",
+        "displayName": "Panel Gray",
+        "canonical": "oklch(96.5% 0.002 165.1)",
+        "tonalRamp": [
+          "oklch(15.0% 0.002 165.1)",
+          "oklch(26.0% 0.002 165.1)",
+          "oklch(37.0% 0.002 165.1)",
+          "oklch(48.0% 0.002 165.1)",
+          "oklch(59.0% 0.002 165.1)",
+          "oklch(70.0% 0.002 165.1)",
+          "oklch(82.0% 0.002 165.1)",
+          "oklch(95.0% 0.002 165.1)"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "oklch(91.2% 0.005 165.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.005 165.0)",
+          "oklch(26.0% 0.005 165.0)",
+          "oklch(37.0% 0.005 165.0)",
+          "oklch(48.0% 0.005 165.0)",
+          "oklch(59.0% 0.005 165.0)",
+          "oklch(70.0% 0.005 165.0)",
+          "oklch(82.0% 0.005 165.0)",
+          "oklch(95.0% 0.005 165.0)"
+        ]
+      },
+      "error-red": {
+        "role": "neutral",
+        "displayName": "Error Red",
+        "canonical": "oklch(50.1% 0.178 28.7)",
+        "tonalRamp": [
+          "oklch(15.0% 0.120 28.7)",
+          "oklch(26.0% 0.120 28.7)",
+          "oklch(37.0% 0.120 28.7)",
+          "oklch(48.0% 0.120 28.7)",
+          "oklch(59.0% 0.120 28.7)",
+          "oklch(70.0% 0.120 28.7)",
+          "oklch(82.0% 0.120 28.7)",
+          "oklch(95.0% 0.120 28.7)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "page titles; the largest type on the site."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "panel and section headings, drawer title."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "descriptions and results; secondary text at 0.85–0.875rem."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "facet group names and result-group headings in search."
+      }
+    },
+    "shadows": [
+      {
+        "name": "overlay",
+        "value": "0 20px 25px -5px rgb(0 0 0/.1), 0 8px 10px -6px rgb(0 0 0/.1)",
+        "purpose": "Search dropdown and other overlays."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state",
+        "value": "150ms ease",
+        "purpose": "Hover and pressed color transitions."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Actions and the Samples drawer button.",
+      "html": "<button class=\"ds-btn-primary\">Request these samples</button>",
+      "css": ".ds-btn-primary{border:0;border-radius:.6rem;padding:.65rem 1rem;background:#00574F;color:#fff;font:600 15px/1.2 'Inter Tight',sans-serif;transition:background .15s}.ds-btn-primary:hover{background:#003d37}.ds-btn-primary:focus-visible{outline:3px solid #E1663B;outline-offset:2px}"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary actions such as Compare and Spec kit.",
+      "html": "<button class=\"ds-btn-ghost\">Compare</button>",
+      "css": ".ds-btn-ghost{border:1px solid #dfe3e1;border-radius:.6rem;padding:.65rem 1rem;background:#fff;color:#0f1514;font:600 15px/1.2 'Inter Tight',sans-serif;transition:border-color .15s}.ds-btn-ghost:hover{border-color:#0f1514}.ds-btn-ghost:focus-visible{outline:3px solid #E1663B;outline-offset:2px}"
+    },
+    {
+      "name": "Facet Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Facets and active filters.",
+      "html": "<button class=\"ds-chip\">Class A</button> <button class=\"ds-chip\" aria-pressed=\"true\">NRC ≥ 0.8</button>",
+      "css": ".ds-chip{border:1px solid #dfe3e1;border-radius:999px;padding:.3rem .7rem;background:#fff;color:#0f1514;font:400 .85rem 'Inter Tight',sans-serif}.ds-chip[aria-pressed=true]{border-color:#00574F;background:color-mix(in srgb,#00574F 10%,white);color:#00574F;font-weight:600}"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Header combobox for products and documents.",
+      "html": "<input class=\"ds-search\" type=\"search\" placeholder=\"Search products & documents…\">",
+      "css": ".ds-search{width:100%;border:1px solid #dfe3e1;border-radius:999px;padding:.5rem .8rem .5rem 2.25rem;background:#f2f4f3;color:#0f1514;font:400 15px 'Inter Tight',sans-serif}.ds-search:focus{outline:2px solid #2B8F92;outline-offset:-1px}"
+    },
+    {
+      "name": "Sample Added",
+      "kind": "button",
+      "refersTo": "sample-added",
+      "description": "Sample button state when already in the cart.",
+      "html": "<button class=\"ds-sample-added\">✓ In samples</button>",
+      "css": ".ds-sample-added{border:0;border-radius:.6rem;padding:.4rem .7rem;background:#1e6f71;color:#fff;font:600 .85rem 'Inter Tight',sans-serif}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Spec Workbench",
+    "overview": "A capable tool on a specifier's workbench, mid-project. The visitor arrives with requirements (\"Class A baffle, NRC above 0.8, warm gray\") and the interface behaves like an instrument: search in the header, live counts on every facet, removable filter chips, compare, and a drawer that collects samples without leaving the page. Every pixel is there to shorten the path from requirement to sample or spec kit.\n\nIt is compact and precise. The base font size is 15px, controls are small and tightly spaced, and surfaces are white with light gray panels and hairline borders. Brand color is functional: deep green for actions and selected states, teal ink for things already in the cart, sky as a light highlight for document types and messages.",
+    "keyCharacteristics": [
+      "Dense: 15px base, small controls, tight gaps.",
+      "Search-first header with instant product and document results.",
+      "White workbench with `panel-gray` side panels and hairline borders.",
+      "Gently rounded controls (0.6rem) and cards (0.9rem); chips are pills.",
+      "Selected means deep green; \"in your cart\" means teal ink."
+    ],
+    "rules": [
+      {
+        "name": "The Chosen vs Collected Rule",
+        "body": "Deep green means \"selected as a filter or option\". Teal ink means \"in your sample cart\". Never swap them.",
+        "section": "colors"
+      },
+      {
+        "name": "The Data Leads Rule",
+        "body": "No heading should be larger than it needs to be. On a tool, the numbers and controls are the headline.",
+        "section": "typography"
+      },
+      {
+        "name": "The Only Overlays Float Rule",
+        "body": "Shadows are reserved for layers that sit above the page. Cards and panels stay flat.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** show live counts on facets and keep active filters as removable chips.",
+      "**Do** use deep green for selected options and teal ink for samples already in the cart.",
+      "**Do** keep controls compact and aligned to the 15px base.",
+      "**Do** reserve shadows for the drawer, dropdowns, and other overlays."
+    ],
+    "donts": [
+      "**Don't** set display-sized type; this world tops out at 2.25rem.",
+      "**Don't** shadow cards or panels.",
+      "**Don't** use teal (`#2B8F92`) for small text; use `teal-ink`.",
+      "**Don't** make a visitor leave the page to add a sample."
+    ]
+  }
+}
