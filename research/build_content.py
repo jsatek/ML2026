@@ -117,6 +117,21 @@ def photo_score(url, slug):
 
 FEATURED = ['pet-felt-ceiling-tiles-coffa', 'silk-metal-baffles', 'wood-slat-panels-slatta', 'wood-wool-engraved-panels']
 
+# A few pages have no intro of their own, so the scraper picks up the shared
+# Materialize call-to-action as the description and the site nav as features.
+BOILERPLATE_INTRO = 'Like what you see, but want a solution tailored to your vision?'
+NAV_LABELS = {'Products', 'Materialize', 'Inspiration', 'Resources', 'Blog', 'Contact'}
+
+def intro_of(p):
+    """(tagline, description) without the shared CTA; falls back to the page's own subtitle."""
+    desc = p['description'] or ''
+    if desc.startswith(BOILERPLATE_INTRO):
+        return (p['headings'][0] if p['headings'] else p['title']), ''
+    return first_sentence(p['ldDescription'] or desc), desc
+
+def features_of(p):
+    return [] if set(p['features']) <= NAV_LABELS else p['features']
+
 products = []
 for p in snap['products']:
     specs = OrderedDict((k.strip(), v) for k, v in p['specs'].items())
@@ -134,6 +149,7 @@ for p in snap['products']:
         for f_ in p['features']:
             if 'NRC' in f_: nrc = max(float(n) for n in re.findall(r'\d?\.\d+', f_))
     types = types_of(p)
+    tagline, description = intro_of(p)
     products.append({
         'slug': p['slug'],
         'name': NAMES[p['slug']],
@@ -141,9 +157,9 @@ for p in snap['products']:
         'material': material_of(p),
         'category': types[0],
         'types': types,
-        'tagline': first_sentence(p['ldDescription'] or p['description']),
-        'description': p['description'],
-        'features': p['features'],
+        'tagline': tagline,
+        'description': description,
+        'features': features_of(p),
         'specs': specs,
         'attributes': {'fireRating': fire_of(specs), 'nrc': nrc, 'acoustic': nrc is not None},
         'finishes': finishes,

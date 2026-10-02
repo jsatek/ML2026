@@ -95,7 +95,7 @@ components:
 
 A bright, friendly showroom where every product sits within arm's reach. Visitors walk in, see the whole range laid out on clean white tables, pick things up, compare them side by side, and pocket a sample on the way out. Nothing is hidden behind a story or an effect; the material photography and real finish colors do the selling.
 
-The system is deliberately conventional. It is the control for this repo, so its job is to be clear and comfortable, not surprising. Density is moderate: generous white space around cards, a sticky header that always offers the sample cart, and soft rounded shapes that invite touching. Brand color is used with restraint: deep green carries every action, teal and sky appear as quiet accents, and orange is reserved for focus and the brand underline.
+The system is deliberately conventional. It is the control for this repo, so its job is to be clear and comfortable, not surprising. Density is moderate: generous white space around cards, a sticky header that always offers the sample cart, and soft rounded shapes that invite touching. Brand color is used with restraint: deep green carries every action, teal and sky appear as quiet accents, and orange is reserved for focus rings and the underline on the brand line. Silk Metal, the material only Material Logiq makes, gets the one dark ink band on the home page.
 
 **Key Characteristics:**
 - White floor, warm-paper bays: white page with `warm-paper` bands to group sections.
@@ -114,13 +114,13 @@ A white showroom lit by the brand's deep green, with teal and sky as accents and
 ### Secondary
 - **Brand Teal** (`teal`): the single-underline on headlines and links, and input focus outlines. Never used for small text on white (fails AA).
 - **Teal Ink** (`teal-ink`): the darkened teal (5.9:1 on white) for any small teal text.
-- **Sky** (`sky`): the cart-count badge and the toast's "View samples" link on dark.
+- **Sky** (`sky`): the cart-count badge, accent text and link underlines on dark bands (ink and deep green), and the hover fill of white buttons on dark.
 
 ### Tertiary
-- **Signal Orange** (`signal-orange`): keyboard focus rings only (3px outline, 2px offset).
+- **Signal Orange** (`signal-orange`): keyboard focus rings (3px outline, 2px offset) and the single underline on the hero's brand line ("imagination."). Nowhere else.
 
 ### Neutral
-- **Ink** (`ink`): body text and the dark footer and toast background.
+- **Ink** (`ink`): body text, the dark footer and toast, and the Silk Metal feature band.
 - **Slate Muted** (`slate-muted`): secondary text, taglines, spec labels.
 - **Showroom White** (`showroom-white`): the page and card surfaces.
 - **Warm Paper** (`warm-paper`): alternating section bands and hover backgrounds for nav items.
@@ -150,7 +150,7 @@ A white showroom lit by the brand's deep green, with teal and sky as accents and
 Headings use `text-wrap: balance`; paragraphs use `text-wrap: pretty`.
 
 ### Named Rules
-**The Single Underline Rule.** From the brand guide: emphasis in headlines, quotes, and links is a single underline (0.08em thick, 0.14em offset, teal), never italics or a highlight box.
+**The Single Underline Rule.** From the brand guide: emphasis in headlines, quotes, and links is a single underline (0.08em thick, 0.14em offset), never italics or a highlight box. It is teal on nav and links, and orange only on the hero's brand line.
 
 ## Layout
 
@@ -169,7 +169,7 @@ Mostly flat with hairline borders. Depth appears only as a response to interacti
 
 ## Shapes
 
-Soft and touchable. Buttons, chips, nav items, and the cart badge are full pills (999px). Cards use 1rem corners, larger feature panels 1.5rem, and form fields 0.6rem. Card images are cropped to 4:3 and scale up 3% on hover inside an overflow-hidden frame. Where a product image is missing, a color field from the finish hex fills the frame, with the logo's diagonal bands as texture.
+Soft and touchable. Buttons, chips, nav items, and the cart badge are full pills (999px). Cards use 1rem corners, larger feature panels 1.5rem, and form fields 0.6rem. Card images are cropped to 4:3 and scale up 3% on hover inside an overflow-hidden frame. Every media frame is a color field from the finish hex with the logo's diagonal bands as texture; the photo sits on top and removes itself if it fails to load (images are hotlinked), so a broken image never shows.
 
 ## Components
 
@@ -179,6 +179,7 @@ Soft and touchable. Buttons, chips, nav items, and the cart badge are full pills
 - **Hover / Focus:** background deepens to `deep-green-pressed` over 150ms; focus shows the orange ring.
 - **Outline:** 1.5px border in the current color (deep green for sample buttons), 8% tint on hover.
 - **Small:** 0.5rem × 0.9rem, 0.875rem text; used for card sample buttons and the header Samples button.
+- **Touch target:** every button is at least 44px tall (min-height 2.75rem).
 
 ### Chips
 - **Style:** white pill, hairline border, 0.875rem medium text.
@@ -189,7 +190,7 @@ Soft and touchable. Buttons, chips, nav items, and the cart badge are full pills
 - **Background:** white with a hairline border.
 - **Shadow Strategy:** flat; large shadow on hover.
 - **Internal Padding:** 1.25rem.
-- **Order:** image (4:3), material and type line, name, two-line tagline, NRC and fire class, then swatches and the sample button pinned to the bottom.
+- **Order:** image (4:3), name, material and type line (teal ink), two-line tagline, NRC and fire class, then the finish picker and the sample button pinned to the bottom.
 
 ### Inputs / Fields
 - **Style:** white, `field-stroke` border, 0.6rem corners, 0.7rem × 0.9rem padding.
@@ -201,7 +202,7 @@ Soft and touchable. Buttons, chips, nav items, and the cart badge are full pills
 - **Mobile:** a hamburger toggles a full-width list of large links under the header; the Samples button stays visible.
 
 ### Sample Button (signature)
-A small outline pill with a plus icon on every product card and project. Pressing it toggles the product and finish in the shared cart; the label changes to "Added" with a check icon, and a dark pill toast confirms with a "View samples" link.
+A small outline pill with a plus icon on every product card and project. On cards it sits under a finish picker: up to six swatches spread across the range, each a 28px button, with the chosen one ringed in deep green and named ("Sample finish: Beige"), so the visitor always knows which finish they're adding. Pressing it toggles that product and finish in the shared cart; the label changes to "Added" with a check icon. A dark pill toast confirms with a "View samples" link, or offers "Undo" after a removal.
 
 ## Do's and Don'ts
 
@@ -210,10 +211,13 @@ A small outline pill with a plus icon on every product card and project. Pressin
 - **Do** keep photography first in cards, cropped 4:3, with the finish swatches directly underneath.
 - **Do** keep the sample button and the header cart count visible at every width.
 - **Do** use `teal-ink` (`#1e6f71`) for any small teal text.
-- **Do** fall back to a finish-hex color field when an image is missing.
+- **Do** fall back to a finish-hex color field when an image is missing or fails to load.
+- **Do** show performance where people choose (for example an NRC range on each product-type tile).
 
 ### Don't:
 - **Don't** put teal (`#2B8F92`) text under 24px on white.
-- **Don't** use orange for anything but focus rings and the brand underline.
+- **Don't** use orange for anything but focus rings and the hero brand-line underline.
+- **Don't** put a small uppercase label above a heading; the heading carries the section.
+- **Don't** add a sample without showing which finish it is.
 - **Don't** add shadows to resting surfaces; depth is a hover response.
 - **Don't** use square corners on buttons or chips; this world is rounded.

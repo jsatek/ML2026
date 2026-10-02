@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-02T20:10:49+00:00",
+  "generatedAt": "2026-10-02T23:22:17+00:00",
   "title": "Design System: Material Logiq · 01 Baseline",
   "extensions": {
     "colorMeta": {
@@ -300,7 +300,7 @@
   ],
   "narrative": {
     "northStar": "The Showroom Floor",
-    "overview": "A bright, friendly showroom where every product sits within arm's reach. Visitors walk in, see the whole range laid out on clean white tables, pick things up, compare them side by side, and pocket a sample on the way out. Nothing is hidden behind a story or an effect; the material photography and real finish colors do the selling.\n\nThe system is deliberately conventional. It is the control for this repo, so its job is to be clear and comfortable, not surprising. Density is moderate: generous white space around cards, a sticky header that always offers the sample cart, and soft rounded shapes that invite touching. Brand color is used with restraint: deep green carries every action, teal and sky appear as quiet accents, and orange is reserved for focus and the brand underline.",
+    "overview": "A bright, friendly showroom where every product sits within arm's reach. Visitors walk in, see the whole range laid out on clean white tables, pick things up, compare them side by side, and pocket a sample on the way out. Nothing is hidden behind a story or an effect; the material photography and real finish colors do the selling.\n\nThe system is deliberately conventional. It is the control for this repo, so its job is to be clear and comfortable, not surprising. Density is moderate: generous white space around cards, a sticky header that always offers the sample cart, and soft rounded shapes that invite touching. Brand color is used with restraint: deep green carries every action, teal and sky appear as quiet accents, and orange is reserved for focus rings and the underline on the brand line. Silk Metal, the material only Material Logiq makes, gets the one dark ink band on the home page.",
     "keyCharacteristics": [
       "White floor, warm-paper bays: white page with `warm-paper` bands to group sections.",
       "Rounded, touchable objects: pill buttons and chips, 1rem cards.",
@@ -321,7 +321,7 @@
       },
       {
         "name": "The Single Underline Rule",
-        "body": "From the brand guide: emphasis in headlines, quotes, and links is a single underline (0.08em thick, 0.14em offset, teal), never italics or a highlight box.",
+        "body": "From the brand guide: emphasis in headlines, quotes, and links is a single underline (0.08em thick, 0.14em offset), never italics or a highlight box. It is teal on nav and links, and orange only on the hero's brand line.",
         "section": "typography"
       },
       {
@@ -335,11 +335,14 @@
       "**Do** keep photography first in cards, cropped 4:3, with the finish swatches directly underneath.",
       "**Do** keep the sample button and the header cart count visible at every width.",
       "**Do** use `teal-ink` (`#1e6f71`) for any small teal text.",
-      "**Do** fall back to a finish-hex color field when an image is missing."
+      "**Do** fall back to a finish-hex color field when an image is missing or fails to load.",
+      "**Do** show performance where people choose (for example an NRC range on each product-type tile)."
     ],
     "donts": [
       "**Don't** put teal (`#2B8F92`) text under 24px on white.",
-      "**Don't** use orange for anything but focus rings and the brand underline.",
+      "**Don't** use orange for anything but focus rings and the hero brand-line underline.",
+      "**Don't** put a small uppercase label above a heading; the heading carries the section.",
+      "**Don't** add a sample without showing which finish it is.",
       "**Don't** add shadows to resting surfaces; depth is a hover response.",
       "**Don't** use square corners on buttons or chips; this world is rounded."
     ]

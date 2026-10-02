@@ -10,7 +10,7 @@ const used = p.products.length
   : `Custom ${p.materials.map((m: string) => getMaterial(m)?.name).join(', ')}${p.applications.length ? ` · ${p.applications.join(', ')}` : ''}`;
 ---
 <article class="group relative" data-project-card data-sector={p.sector} data-products={p.products.join('|')}>
-  <Placeholder src={p.images[0]} alt="" seed={index + 1} class="aspect-[4/3] rounded-2xl" label={p.placeholder ? 'Sample project' : undefined} />
+  <Placeholder src={p.images[0]} alt="" seed={index + 1} class="aspect-[4/3] rounded-2xl" label={p.placeholder ? 'Example project' : undefined} />
   <div class="mt-4">
     <p class:list={['text-sm font-medium', dark ? 'text-sky' : 'text-teal-ink']}>{p.sector} · {p.location}</p>
     <h3 class="mt-1 text-xl">

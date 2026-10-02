@@ -1,7 +1,6 @@
 ---
 import { getCategory, getMaterial } from '@ml/content';
 import Placeholder from './Placeholder.astro';
-import Swatches from './Swatches.astro';
 import SampleButton from './SampleButton.astro';
 import { url } from '../lib/utils';
 
@@ -9,6 +8,11 @@ interface Props { product: any; index?: number; compare?: boolean; }
 const { product: p, index = 0, compare = false } = Astro.props;
 const category = getCategory(p.category);
 const material = getMaterial(p.material);
+// Spread the swatch preview across the range instead of showing the first N of one group.
+const step = Math.max(1, Math.floor(p.finishes.length / 6));
+const swatches = p.finishes.filter((_: any, i: number) => i % step === 0).slice(0, 6);
+const more = p.finishes.length - swatches.length;
+const first = swatches[0];
 ---
 <article
   class="group flex flex-col overflow-hidden rounded-2xl border border-line bg-white transition hover:shadow-lg"
@@ -23,30 +27,47 @@ const material = getMaterial(p.material);
   data-search={`${p.name} ${p.fullName} ${p.tagline} ${material?.name} ${p.types.join(' ').replace(/-/g, ' ')} ${p.finishes.map((f: any) => f.name).join(' ')}`.toLowerCase()}
 >
   <a href={url(`/products/${p.slug}`)} class="block overflow-hidden" tabindex="-1" aria-hidden="true">
-    <Placeholder src={p.images.hero} color={p.finishes[0]?.hex} seed={index} class="aspect-[4/3] transition duration-300 group-hover:scale-[1.03]" />
+    <Placeholder src={p.images.hero} color={first?.hex} seed={index} class="aspect-[4/3] transition duration-300 group-hover:scale-[1.03]" />
   </a>
   <div class="flex flex-1 flex-col gap-3 p-5">
     <div>
-      <p class="eyebrow">{material?.name} · {category?.name}</p>
-      <h3 class="mt-1 text-lg">
+      <h3 class="text-lg">
         <a href={url(`/products/${p.slug}`)} class="hover:ml-underline">{p.name}</a>
       </h3>
-      <p class="mt-1 line-clamp-2 text-sm text-muted">{p.tagline}</p>
+      <p class="text-sm font-medium text-teal-ink">{material?.name} · {category?.name}</p>
+      <p class="mt-2 line-clamp-2 text-sm text-muted">{p.tagline}</p>
     </div>
     <dl class="flex gap-4 text-xs text-muted">
       {p.attributes.nrc != null && <div><dt class="inline">NRC </dt><dd class="inline font-semibold text-ink">up to {p.attributes.nrc.toFixed(2)}</dd></div>}
       {p.attributes.fireRating && <div><dt class="inline">Fire </dt><dd class="inline font-semibold text-ink">Class {p.attributes.fireRating}</dd></div>}
     </dl>
-    <div class="mt-auto flex flex-wrap items-center justify-between gap-3 pt-2">
-      {p.finishes.length > 0 ? <Swatches finishes={p.finishes} /> : <span />}
-      <div class="flex items-center gap-2">
-        {compare && (
-          <label class="flex cursor-pointer items-center gap-1.5 text-sm text-muted">
-            <input type="checkbox" class="size-4 accent-(--ml-deep-green)" data-compare value={p.slug} /> Compare
-          </label>
-        )}
-        {p.finishes[0] && <SampleButton product={p.slug} name={p.name} finish={p.finishes[0].name} label="Sample" />}
-      </div>
+    {first && (
+      <fieldset class="mt-auto pt-2">
+        <legend class="text-xs text-muted">Sample finish: <span class="font-semibold text-ink" data-finish-name>{first.name}</span></legend>
+        <div class="mt-2 flex flex-wrap items-center gap-1">
+          {swatches.map((f: any, i: number) => (
+            <button
+              type="button"
+              class="grid size-7 place-items-center rounded-full aria-pressed:ring-2 aria-pressed:ring-green"
+              data-finish-pick={f.name}
+              aria-pressed={i === 0 ? 'true' : 'false'}
+              aria-label={f.name}
+              title={f.name}
+            >
+              <span class="size-5 rounded-full ring-1 ring-black/10" style={`background-color:${f.hex}`}></span>
+            </button>
+          ))}
+          {more > 0 && <a href={url(`/products/${p.slug}`)} class="ml-1 text-xs font-medium text-muted hover:text-ink">+{more} more</a>}
+        </div>
+      </fieldset>
+    )}
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      {first && <SampleButton product={p.slug} name={p.name} finish={first.name} label="Add sample" />}
+      {compare && (
+        <label class="flex min-h-11 cursor-pointer items-center gap-1.5 text-sm text-muted">
+          <input type="checkbox" class="size-4 accent-(--ml-deep-green)" data-compare value={p.slug} /> Compare
+        </label>
+      )}
     </div>
   </div>
 </article>

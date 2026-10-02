@@ -30,7 +30,7 @@ const isActive = (href: string) => path === url(href) || path.startsWith(`${url(
 
     <header class="sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur">
       <div class="container-x flex h-16 items-center gap-3 md:gap-6 lg:h-20">
-        <a href={url('/')} class="shrink-0" aria-label={`${site.name} home`}>
+        <a href={url("/")} class="shrink-0 py-3" aria-label={`${site.name} home`}>
           <img src={wordmark.src} alt="" class="h-5 w-auto lg:h-6" width="200" height="21" />
         </a>
         <nav aria-label="Primary" class="ml-auto hidden md:block">
@@ -50,7 +50,7 @@ const isActive = (href: string) => path === url(href) || path.startsWith(`${url(
           Samples
           <span data-cart-count hidden class="grid min-w-5 place-items-center rounded-full bg-sky px-1.5 text-xs font-bold text-green">0</span>
         </a>
-        <button type="button" class="rounded p-2 md:hidden" aria-controls="mobile-nav" aria-expanded="false" data-menu-toggle>
+        <button type="button" class="grid size-11 place-items-center rounded md:hidden" aria-controls="mobile-nav" aria-expanded="false" data-menu-toggle>
           <span class="sr-only">Menu</span>
           <svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
         </button>
@@ -95,7 +95,8 @@ const isActive = (href: string) => path === url(href) || path.startsWith(`${url(
     <div role="status" aria-live="polite" class="pointer-events-none fixed inset-x-0 bottom-4 z-50 flex justify-center px-4">
       <div data-toast hidden class="pointer-events-auto flex items-center gap-4 rounded-full bg-ink px-5 py-3 text-sm text-white shadow-xl">
         <span data-toast-text></span>
-        <a href={url('/samples')} class="font-semibold text-sky underline underline-offset-4">View samples</a>
+        <button type="button" data-toast-undo hidden class="min-h-11 font-semibold text-sky underline underline-offset-4">Undo</button>
+        <a href={url('/samples')} data-toast-view class="flex min-h-11 items-center font-semibold text-sky underline underline-offset-4">View samples</a>
       </div>
     </div>
 
@@ -114,12 +115,16 @@ const isActive = (href: string) => path === url(href) || path.startsWith(`${url(
       // Toast
       const toast = document.querySelector<HTMLElement>('[data-toast]');
       let toastTimer: number | undefined;
-      function notify(text: string) {
+      let undo: (() => void) | undefined;
+      function notify(text: string, onUndo?: () => void) {
         if (!toast) return;
         toast.querySelector('[data-toast-text]')!.textContent = text;
+        undo = onUndo;
+        toast.querySelector<HTMLElement>('[data-toast-undo]')!.hidden = !onUndo;
+        toast.querySelector<HTMLElement>('[data-toast-view]')!.hidden = !!onUndo;
         toast.hidden = false;
         clearTimeout(toastTimer);
-        toastTimer = window.setTimeout(() => (toast.hidden = true), 3500);
+        toastTimer = window.setTimeout(() => (toast.hidden = true), onUndo ? 6000 : 3500);
       }
 
       // Sample buttons + header count
@@ -139,13 +144,29 @@ const isActive = (href: string) => path === url(href) || path.startsWith(`${url(
       cart.onChange(sync);
 
       document.addEventListener('click', (e) => {
-        const btn = (e.target as Element).closest<HTMLButtonElement>('[data-add-sample]');
+        const target = e.target as Element;
+        if (target.closest('[data-toast-undo]')) {
+          undo?.();
+          toast!.hidden = true;
+          return;
+        }
+        // Product cards: picking a swatch sets which finish the card's sample button adds.
+        const pick = target.closest<HTMLButtonElement>('[data-finish-pick]');
+        if (pick) {
+          const card = pick.closest<HTMLElement>('[data-product-card]')!;
+          card.querySelectorAll('[data-finish-pick]').forEach((b) => b.setAttribute('aria-pressed', String(b === pick)));
+          card.querySelector('[data-finish-name]')!.textContent = pick.dataset.finishPick!;
+          card.querySelector<HTMLElement>('[data-add-sample]')!.dataset.finish = pick.dataset.finishPick!;
+          sync(cart.getCart());
+          return;
+        }
+        const btn = target.closest<HTMLButtonElement>('[data-add-sample]');
         if (!btn) return;
         const item = { product: btn.dataset.product!, finish: btn.dataset.finish! };
         const name = btn.dataset.name ?? 'Sample';
         if (cart.has(item)) {
           cart.remove(item);
-          notify(`Removed ${name} (${item.finish})`);
+          notify(`Removed ${name} (${item.finish})`, () => cart.add(item));
           return;
         }
         const result = cart.add(item);

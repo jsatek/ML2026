@@ -1,39 +1,52 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Placeholder from '../components/Placeholder.astro';
-import ProductCard from '../components/ProductCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import { site, categories, materials, products, projects, productsInCategory, productsInMaterial, resources } from '@ml/content';
+import { site, categories, materials, products, projects, productsInCategory, productsInMaterial, resources, getMaterial } from '@ml/content';
 import { url } from '../lib/utils';
 
-const featured = products.filter((p) => p.featured).slice(0, 4);
-const featuredProjects = [...projects.filter((p) => p.featured), ...projects.filter((p) => !p.featured)].slice(0, 3);
+const featured = products.filter((p) => p.featured);
 const heroBands = featured.slice(0, 3).map((p, i) => ({ src: p.images.hero, color: ['#8BD3DD', '#2B8F92', '#00574F'][i] }));
 const groups = [...new Set(categories.map((c) => c.group))];
 const [taglineStart, lastWord] = [site.tagline.split(' ').slice(0, -1).join(' '), site.tagline.split(' ').at(-1)];
+
+// "PET Felt" -> "PET felt"; keep the Silk Metal brand name capitalized.
+const materialWord = (name: string) => (name === 'Silk Metal' ? name : name.replace(/\b(?!PET\b)[A-Z][a-z]+/g, (w) => w.toLowerCase()));
+const names = materials.map((m) => materialWord(m.name));
+const materialList = `${names.slice(0, -1).join(', ')} and ${names.at(-1)}`;
+
+const nrcRange = (items: typeof products) => {
+  const values = items.map((p) => p.attributes.nrc).filter((n): n is number => n != null);
+  if (!values.length) return null;
+  const [lo, hi] = [Math.min(...values), Math.max(...values)];
+  return lo === hi ? `NRC ${hi.toFixed(2)}` : `NRC ${lo.toFixed(2)}–${hi.toFixed(2)}`;
+};
+
+// Silk Metal: the one material only Material Logiq makes.
+const silk = getMaterial('silk-metal')!;
+const silkProducts = productsInMaterial('silk-metal');
+const silkFinishes = new Set(silkProducts.flatMap((p) => p.finishes.map((f) => f.name))).size;
+const silkAllClassA = silkProducts.every((p) => p.attributes.fireRating === 'A');
+const silkStory = silk.summary.match(/[^.!?]+[.!?]/g)!.slice(1, 3).join(' ').trim();
+const silkPhotos = [...new Set(silkProducts.flatMap((p) => [p.images.hero, ...p.images.gallery]).filter(Boolean))].slice(0, 3) as string[];
+
+// Real installations only; they're all custom work, so they prove Materialize.
+const realProjects = projects.filter((p) => !p.placeholder);
 ---
 <Layout>
-  <!-- Hero -->
+  <!-- Hero: say what we make, then the brand line -->
   <section class="overflow-hidden">
-    <div class="container-x grid items-center gap-12 py-16 lg:grid-cols-12 lg:py-24">
+    <div class="container-x grid items-center gap-10 py-10 lg:grid-cols-12 lg:gap-12 lg:py-20">
       <div class="lg:col-span-6">
-        <p class="eyebrow">Acoustical &amp; architectural products</p>
-        <h1 class="mt-4 text-5xl leading-[1.02] sm:text-6xl lg:text-7xl">
+        <h1 class="text-4xl leading-[1.05] sm:text-5xl lg:text-6xl">Acoustic ceilings and walls in {materialList}.</h1>
+        <p class="mt-5 text-2xl font-semibold tracking-tight text-green sm:text-3xl">
           {taglineStart} <span class="ml-underline decoration-orange">{lastWord}</span>
-        </h1>
-        <p class="mt-6 max-w-xl text-lg text-muted">{site.intro}</p>
+        </p>
+        <p class="mt-5 max-w-xl text-lg text-muted">{products.length} standard systems to specify as they are, or to customize to your project.</p>
         <div class="mt-8 flex flex-wrap gap-3">
           <a href={url('/products')} class="btn btn-primary">Explore products</a>
-          <a href={url('/samples')} class="btn btn-outline text-green">Order samples</a>
+          <a href={url('/resources')} class="btn btn-outline text-green">Find specs and CAD</a>
         </div>
-        <dl class="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-line pt-6">
-          {site.stats.map((s) => (
-            <div class="flex flex-col">
-              <dt class="text-sm text-muted">{s.label}</dt>
-              <dd class="order-first text-2xl font-bold text-green sm:text-3xl">{s.value}</dd>
-            </div>
-          ))}
-        </dl>
       </div>
       <!-- Logo-derived bands filled with product photography -->
       <div class="relative lg:col-span-6" aria-hidden="true">
@@ -44,7 +57,6 @@ const [taglineStart, lastWord] = [site.tagline.split(' ').slice(0, -1).join(' ')
               style={`left:${i * 31}%; clip-path: polygon(${i === 0 ? '0 100%, 60% 100%, 100% 0, 40% 0' : '0 0, 60% 0, 100% 100%, 40% 100%'}); background:${b.color}`}
             >
               <Placeholder src={b.src} color={b.color} seed={i} class="h-full w-full" eager />
-              <div class="absolute inset-0 mix-blend-multiply" style={`background:${b.color}; opacity:.35`}></div>
             </div>
           ))}
         </div>
@@ -52,31 +64,62 @@ const [taglineStart, lastWord] = [site.tagline.split(' ').slice(0, -1).join(' ')
     </div>
   </section>
 
-  <!-- Product types -->
-  <section class="bg-paper py-20" aria-labelledby="cat-heading">
+  <!-- Silk Metal: the signature material -->
+  <section class="bg-ink text-white" aria-labelledby="silk-heading">
+    <div class="container-x grid gap-10 py-16 lg:grid-cols-12 lg:gap-12 lg:py-24">
+      <div class="lg:col-span-5">
+        <h2 id="silk-heading" class="text-4xl sm:text-5xl">Silk Metal, made only by Material Logiq</h2>
+        <p class="mt-3 text-lg font-medium text-sky">{silk.aka}</p>
+        <p class="mt-6 max-w-prose text-white/80">{silkStory}</p>
+        <p class="mt-6 text-sm text-white/80">
+          <strong class="text-white">{silkProducts.length} systems</strong> · {nrcRange(silkProducts)}{silkAllClassA && ' · Class A fire rated'} · {silkFinishes} finishes
+        </p>
+        <ul class="mt-6 grid gap-x-6 border-t border-white/15 sm:grid-cols-2">
+          {silkProducts.map((p) => (
+            <li class="border-b border-white/15">
+              <a href={url(`/products/${p.slug}`)} class="flex min-h-11 items-center justify-between gap-3 py-2 hover:text-sky">
+                <span class="font-semibold">{p.name.replace(/^Silk Metal /, '')}</span>
+                {p.attributes.nrc != null && <span class="shrink-0 text-sm text-white/70">NRC {p.attributes.nrc.toFixed(2)}</span>}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <a href={url('/products?material=silk-metal')} class="btn mt-8 bg-white text-green hover:bg-sky">Explore Silk Metal</a>
+      </div>
+      <div class="grid grid-cols-2 gap-3 sm:gap-4 lg:col-span-7" aria-hidden="true">
+        {silkPhotos.map((src, i) => (
+          <Placeholder src={src} color={['#2B8F92', '#8BD3DD', '#00574F'][i]} seed={i} class={`rounded-2xl ${i === 0 ? 'col-span-2 aspect-[16/9]' : 'aspect-[4/3]'}`} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Product types: the one catalog entry -->
+  <section class="bg-paper py-16 lg:py-20" aria-labelledby="cat-heading">
     <div class="container-x">
       <div class="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p class="eyebrow">Products</p>
-          <h2 id="cat-heading" class="mt-2 text-3xl sm:text-4xl">Start with the surface you're treating</h2>
-        </div>
+        <h2 id="cat-heading" class="text-3xl sm:text-4xl">Start with the surface you're treating</h2>
         <a href={url('/products')} class="link">View all {products.length} products</a>
       </div>
       {groups.map((g) => (
         <div class="mt-10">
-          <h3 class="text-sm font-semibold uppercase tracking-wider text-muted">{g}</h3>
-          <ul class="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <h3 class="text-xl">{g}</h3>
+          <ul class="mt-4 grid gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
             {categories.filter((c) => c.group === g).map((c, i) => {
               const items = productsInCategory(c.slug);
+              const nrc = nrcRange(items);
               return (
-                <li class="group relative flex flex-col overflow-hidden rounded-2xl bg-white">
-                  <Placeholder src={items[i % items.length]?.images.hero} color={items[0]?.finishes[0]?.hex} seed={i} class="aspect-[3/2]" />
-                  <div class="flex flex-1 flex-col p-5">
-                    <h4 class="text-xl font-bold">
+                <li class="group relative flex overflow-hidden rounded-2xl bg-white sm:flex-col">
+                  <Placeholder src={items[i % items.length]?.images.hero} color={items[0]?.finishes[0]?.hex} seed={i} class="w-28 shrink-0 sm:aspect-[3/2] sm:w-auto" />
+                  <div class="flex flex-1 flex-col p-4 sm:p-5">
+                    <h4 class="text-lg font-bold sm:text-xl">
                       <a href={url(`/products?type=${c.slug}`)} class="after:absolute after:inset-0 group-hover:ml-underline">{c.name}</a>
                     </h4>
-                    <p class="mt-2 line-clamp-3 text-sm text-muted">{c.summary}</p>
-                    <p class="mt-auto pt-4 text-sm font-semibold text-green">{items.length} products →</p>
+                    <p class="mt-2 line-clamp-3 text-sm text-muted max-sm:hidden">{c.summary}</p>
+                    <p class="mt-auto pt-2 text-sm sm:pt-4">
+                      <span class="font-semibold text-green">{items.length} products</span>
+                      {nrc && <span class="text-muted"> · {nrc}</span>}
+                    </p>
                   </div>
                 </li>
               );
@@ -84,99 +127,56 @@ const [taglineStart, lastWord] = [site.tagline.split(' ').slice(0, -1).join(' ')
           </ul>
         </div>
       ))}
-    </div>
-  </section>
-
-  <!-- Materials -->
-  <section class="py-20" aria-labelledby="mat-heading">
-    <div class="container-x">
-      <p class="eyebrow">Materials</p>
-      <h2 id="mat-heading" class="mt-2 text-3xl sm:text-4xl">Four materials, endless expressions</h2>
-      <ul class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {materials.map((m, i) => {
-          const items = productsInMaterial(m.slug);
-          return (
-            <li class="group relative overflow-hidden rounded-2xl">
-              <Placeholder src={items[0]?.images.gallery[1] ?? items[0]?.images.hero} seed={i} class="aspect-[3/4]" />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-              <div class="absolute inset-x-0 bottom-0 p-5 text-white">
-                <h3 class="text-2xl">
-                  <a href={url(`/products?material=${m.slug}`)} class="after:absolute after:inset-0 group-hover:underline">{m.name}</a>
-                </h3>
-                {m.aka && <p class="text-sm text-white/80">{m.aka}</p>}
-                <p class="mt-1 text-sm text-white/80">{items.length} products</p>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  </section>
-
-  <!-- Featured products -->
-  <section class="pb-20" aria-labelledby="featured-heading">
-    <div class="container-x">
-      <p class="eyebrow">Featured</p>
-      <h2 id="featured-heading" class="mt-2 text-3xl sm:text-4xl">Featured products</h2>
-      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {featured.map((p, i) => <ProductCard product={p} index={i} />)}
+      <div class="mt-10 flex flex-wrap items-center gap-2">
+        <h3 class="mr-2 text-base font-semibold">Or browse by material</h3>
+        {materials.map((m) => (
+          <a href={url(`/products?material=${m.slug}`)} class="chip min-h-11 hover:border-green">
+            {m.name} <span class="text-muted">{productsInMaterial(m.slug).length}</span>
+          </a>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- Projects -->
-  <section class="bg-green py-20 text-white" aria-labelledby="proj-heading">
-    <div class="container-x">
-      <div class="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p class="eyebrow !text-sky">Portfolio</p>
-          <h2 id="proj-heading" class="mt-2 text-3xl sm:text-4xl">Ingenuity you can walk through</h2>
-        </div>
-        <a href={url('/projects')} class="font-semibold text-white underline decoration-sky decoration-2 underline-offset-4">All projects</a>
-      </div>
-      <div class="mt-10 grid gap-8 md:grid-cols-3">
-        {featuredProjects.map((p, i) => <ProjectCard project={p} index={i} dark />)}
-      </div>
-    </div>
-  </section>
-
-  <!-- Materialize process -->
-  <section class="py-20" aria-labelledby="process-heading">
-    <div class="container-x">
-      <div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
-        <div class="lg:col-span-4">
-          <p class="eyebrow">{site.materialize.title}</p>
-          <h2 id="process-heading" class="mt-2 text-3xl sm:text-4xl">Ideate. Co-create. Fabricate.</h2>
-          <p class="mt-4 text-muted">{site.materialize.text}</p>
-        </div>
-        <ol class="grid gap-4 sm:grid-cols-2 lg:col-span-8 lg:grid-cols-5">
-          {site.process.map((s, i) => (
-            <li class="rounded-2xl border border-line p-5">
-              <span class="grid size-10 place-items-center rounded-full bg-sky font-bold text-green">{i + 1}</span>
-              <h3 class="mt-4 text-lg">{s.step}</h3>
-              <p class="mt-1 text-sm text-muted">{s.text}</p>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </div>
-  </section>
-
-  <!-- Samples + resources -->
-  <section class="container-x grid gap-6 lg:grid-cols-2" aria-label="Samples and resources">
+  <!-- Samples + resources: the two things specifiers come for -->
+  <section class="container-x grid gap-6 py-16 lg:grid-cols-2 lg:py-20" aria-label="Samples and documents">
     <div class="rounded-3xl bg-green p-8 text-white sm:p-12">
       <h2 class="text-3xl">Touch it before you specify it</h2>
       <p class="mt-2 text-white/80">Pick colors and finishes from any product and we'll ship up to {site.sampleLimit} samples.</p>
-      <a href={url('/samples')} class="btn mt-6 bg-white text-green hover:bg-sky">Start a sample request</a>
+      <a href={url('/samples')} class="btn mt-6 bg-white text-green hover:bg-sky">Request samples</a>
     </div>
     <div class="rounded-3xl bg-paper p-8 sm:p-12">
       <h2 class="text-3xl">Data sheets, CAD, BIM and more</h2>
       <p class="mt-2 text-muted">{resources.length} documents across every product, in one searchable library.</p>
-      <form action={url('/resources')} method="get" role="search" class="mt-6 flex gap-2">
-        <label for="home-res-q" class="sr-only">Search resources</label>
+      <form action={url('/resources')} method="get" role="search" class="mt-6 flex flex-col gap-2 sm:flex-row">
+        <label for="home-res-q" class="sr-only">Search documents</label>
         <input id="home-res-q" name="q" type="search" placeholder="e.g. COFFA installation" class="field" />
         <button class="btn btn-primary shrink-0">Search</button>
       </form>
+    </div>
+  </section>
+
+  <!-- Materialize: customization, proven by real projects -->
+  <section class="bg-green py-16 text-white lg:py-20" aria-labelledby="custom-heading">
+    <div class="container-x grid gap-12 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <h2 id="custom-heading" class="text-3xl sm:text-4xl">Need it custom? We start with yes.</h2>
+        <p class="mt-4 text-white/85">{site.materialize.text}</p>
+        <ol class="mt-8 space-y-4 border-l border-white/25 pl-5">
+          {site.process.map((s) => (
+            <li>
+              <span class="font-semibold">{s.step}.</span> <span class="text-white/85">{s.text}</span>
+            </li>
+          ))}
+        </ol>
+        <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <a href={`mailto:${site.contact.email}?subject=${encodeURIComponent('Custom project')}`} class="btn bg-white text-green hover:bg-sky">Start a custom project</a>
+          <a href={url('/projects')} class="link-light">All projects</a>
+        </div>
+      </div>
+      <div class="grid gap-8 sm:grid-cols-2 lg:col-span-7">
+        {realProjects.map((p, i) => <ProjectCard project={p} index={i} dark />)}
+      </div>
     </div>
   </section>
 </Layout>
