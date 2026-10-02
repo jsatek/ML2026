@@ -1,0 +1,269 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-02T20:10:49+00:00",
+  "title": "Design System: Material Logiq · 02 Editorial",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "primary",
+        "displayName": "Ink",
+        "canonical": "oklch(18.2% 0.000 89.9)",
+        "tonalRamp": [
+          "oklch(15.0% 0.000 89.9)",
+          "oklch(26.0% 0.000 89.9)",
+          "oklch(37.0% 0.000 89.9)",
+          "oklch(48.0% 0.000 89.9)",
+          "oklch(59.0% 0.000 89.9)",
+          "oklch(70.0% 0.000 89.9)",
+          "oklch(82.0% 0.000 89.9)",
+          "oklch(95.0% 0.000 89.9)"
+        ]
+      },
+      "specimen-paper": {
+        "role": "neutral",
+        "displayName": "Specimen Paper",
+        "canonical": "oklch(96.7% 0.007 88.6)",
+        "tonalRamp": [
+          "oklch(15.0% 0.007 88.6)",
+          "oklch(26.0% 0.007 88.6)",
+          "oklch(37.0% 0.007 88.6)",
+          "oklch(48.0% 0.007 88.6)",
+          "oklch(59.0% 0.007 88.6)",
+          "oklch(70.0% 0.007 88.6)",
+          "oklch(82.0% 0.007 88.6)",
+          "oklch(95.0% 0.007 88.6)"
+        ]
+      },
+      "graphite-muted": {
+        "role": "neutral",
+        "displayName": "Graphite Muted",
+        "canonical": "oklch(46.7% 0.008 97.5)",
+        "tonalRamp": [
+          "oklch(15.0% 0.008 97.5)",
+          "oklch(26.0% 0.008 97.5)",
+          "oklch(37.0% 0.008 97.5)",
+          "oklch(48.0% 0.008 97.5)",
+          "oklch(59.0% 0.008 97.5)",
+          "oklch(70.0% 0.008 97.5)",
+          "oklch(82.0% 0.008 97.5)",
+          "oklch(95.0% 0.008 97.5)"
+        ]
+      },
+      "deep-green": {
+        "role": "tertiary",
+        "displayName": "Deep Green",
+        "canonical": "oklch(41.0% 0.073 184.2)",
+        "tonalRamp": [
+          "oklch(15.0% 0.073 184.2)",
+          "oklch(26.0% 0.073 184.2)",
+          "oklch(37.0% 0.073 184.2)",
+          "oklch(48.0% 0.073 184.2)",
+          "oklch(59.0% 0.073 184.2)",
+          "oklch(70.0% 0.073 184.2)",
+          "oklch(82.0% 0.073 184.2)",
+          "oklch(95.0% 0.073 184.2)"
+        ]
+      },
+      "teal": {
+        "role": "neutral",
+        "displayName": "Teal / Teal Ink",
+        "canonical": "oklch(59.6% 0.089 198.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.089 198.0)",
+          "oklch(26.0% 0.089 198.0)",
+          "oklch(37.0% 0.089 198.0)",
+          "oklch(48.0% 0.089 198.0)",
+          "oklch(59.0% 0.089 198.0)",
+          "oklch(70.0% 0.089 198.0)",
+          "oklch(82.0% 0.089 198.0)",
+          "oklch(95.0% 0.089 198.0)"
+        ]
+      },
+      "teal-ink": {
+        "role": "neutral",
+        "displayName": "Teal Ink",
+        "canonical": "oklch(49.6% 0.075 197.5)",
+        "tonalRamp": [
+          "oklch(15.0% 0.075 197.5)",
+          "oklch(26.0% 0.075 197.5)",
+          "oklch(37.0% 0.075 197.5)",
+          "oklch(48.0% 0.075 197.5)",
+          "oklch(59.0% 0.075 197.5)",
+          "oklch(70.0% 0.075 197.5)",
+          "oklch(82.0% 0.075 197.5)",
+          "oklch(95.0% 0.075 197.5)"
+        ]
+      },
+      "sky": {
+        "role": "tertiary",
+        "displayName": "Sky",
+        "canonical": "oklch(82.3% 0.073 206.9)",
+        "tonalRamp": [
+          "oklch(15.0% 0.073 206.9)",
+          "oklch(26.0% 0.073 206.9)",
+          "oklch(37.0% 0.073 206.9)",
+          "oklch(48.0% 0.073 206.9)",
+          "oklch(59.0% 0.073 206.9)",
+          "oklch(70.0% 0.073 206.9)",
+          "oklch(82.0% 0.073 206.9)",
+          "oklch(95.0% 0.073 206.9)"
+        ]
+      },
+      "signal-orange": {
+        "role": "secondary",
+        "displayName": "Signal Orange",
+        "canonical": "oklch(65.4% 0.164 39.2)",
+        "tonalRamp": [
+          "oklch(15.0% 0.120 39.2)",
+          "oklch(26.0% 0.120 39.2)",
+          "oklch(37.0% 0.120 39.2)",
+          "oklch(48.0% 0.120 39.2)",
+          "oklch(59.0% 0.120 39.2)",
+          "oklch(70.0% 0.120 39.2)",
+          "oklch(82.0% 0.120 39.2)",
+          "oklch(95.0% 0.120 39.2)"
+        ]
+      },
+      "error-red": {
+        "role": "neutral",
+        "displayName": "Error Red",
+        "canonical": "oklch(50.1% 0.178 28.7)",
+        "tonalRamp": [
+          "oklch(15.0% 0.120 28.7)",
+          "oklch(26.0% 0.120 28.7)",
+          "oklch(37.0% 0.120 28.7)",
+          "oklch(48.0% 0.120 28.7)",
+          "oklch(59.0% 0.120 28.7)",
+          "oklch(70.0% 0.120 28.7)",
+          "oklch(82.0% 0.120 28.7)",
+          "oklch(95.0% 0.120 28.7)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "product names and the home cover headline."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "section openers and the footer \"Let's talk.\""
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "the opening paragraph of product and project pages."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "long-form text; keep lines to about 65–75 characters."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "buttons and index column headers."
+      }
+    },
+    "shadows": [
+      {
+        "name": "toast",
+        "value": "0 10px 15px -3px rgb(0 0 0/.1), 0 4px 6px -4px rgb(0 0 0/.1)",
+        "purpose": "Toast only; surfaces are flat."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state",
+        "value": "150ms ease",
+        "purpose": "Hover and pressed color transitions."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "768px"
+      },
+      {
+        "name": "md",
+        "value": "1280px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button",
+      "description": "Default action; inverts on hover.",
+      "html": "<button class=\"ds-btn\">Add sample</button>",
+      "css": ".ds-btn{border:1.5px solid #121212;border-radius:0;padding:.9rem 1.4rem;background:transparent;color:#121212;font:600 1rem/1.2 'Inter Tight',sans-serif;transition:background .15s,color .15s}.ds-btn:hover{background:#121212;color:#f6f4ef}.ds-btn:focus-visible{outline:3px solid #E1663B;outline-offset:3px}"
+    },
+    {
+      "name": "Solid Button",
+      "kind": "button",
+      "refersTo": "button-solid",
+      "description": "Primary step in the sample flow.",
+      "html": "<button class=\"ds-btn-solid\">Continue</button>",
+      "css": ".ds-btn-solid{border:1.5px solid #121212;border-radius:0;padding:.9rem 1.4rem;background:#121212;color:#f6f4ef;font:600 1rem/1.2 'Inter Tight',sans-serif;transition:background .15s}.ds-btn-solid:hover{background:#00574F;border-color:#00574F}.ds-btn-solid:focus-visible{outline:3px solid #E1663B;outline-offset:3px}"
+    },
+    {
+      "name": "Text Toggle",
+      "kind": "chip",
+      "refersTo": "toggle",
+      "description": "Index filters and sorts; selected gets the orange underline.",
+      "html": "<button class=\"ds-toggle\">Walls</button> <button class=\"ds-toggle\" aria-pressed=\"true\">Ceilings</button>",
+      "css": ".ds-toggle{border:0;background:none;padding:0 .5rem;color:#5b5a55;font:500 1rem 'Inter Tight',sans-serif}.ds-toggle:hover{color:#121212}.ds-toggle[aria-pressed=true]{color:#121212;text-decoration:underline;text-decoration-color:#E1663B;text-decoration-thickness:2px;text-underline-offset:5px}"
+    },
+    {
+      "name": "Ruled Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Bottom-rule-only input.",
+      "html": "<input class=\"ds-field\" placeholder=\"Your name\">",
+      "css": ".ds-field{width:100%;border:0;border-bottom:1.5px solid #121212;padding:.6rem 0;background:transparent;color:#121212;font:400 1.125rem 'Inter Tight',sans-serif}.ds-field:focus{outline:none;border-bottom-color:#E1663B}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Specimen Book",
+    "overview": "A beautifully set specimen book of materials. Each product is presented the way a type foundry presents a typeface: named in very large type, measured precisely, and shown in full as large swatch plates and full-bleed photographs. The catalog is an index, not a wall of cards; documents are an A–Z appendix.\n\nWarm paper, black ink, and thin black rules do almost all the work. There are no rounded corners, no shadows on surfaces, and no decorative color. Color comes from the materials themselves (photos and finish swatches) and from one orange accent used as a single underline. The pace is unhurried and confident, but the facts (NRC, fire class, documents) are always set alongside the imagery so a returning specifier can scan them.",
+    "keyCharacteristics": [
+      "Warm specimen paper, black ink, 1px black hairline rules.",
+      "Display type up to 10rem, tightly tracked and set solid (0.95 line height).",
+      "Square corners everywhere; buttons are outlined boxes that invert on hover.",
+      "Orange appears only as the single underline (active nav, links, emphasis).",
+      "Text indexes and tables instead of card grids."
+    ],
+    "rules": [
+      {
+        "name": "The Ink and Paper Rule",
+        "body": "Interface chrome is only ink and paper. If you're reaching for a brand color to decorate, let a material photo or swatch do it instead.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Underline Rule",
+        "body": "Orange appears as a single underline marking what's current or emphasized, never as a fill.",
+        "section": "colors"
+      },
+      {
+        "name": "The Set Solid Rule",
+        "body": "Headlines sit at 0.95 line height with negative tracking. Loose, airy headings break the specimen feel.",
+        "section": "typography"
+      },
+      {
+        "name": "The Paper Has No Depth Rule",
+        "body": "Nothing on the page floats. Use a rule or a scale change to separate content.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** separate sections with 1px ink rules.",
+      "**Do** set product names at display size with tight tracking.",
+      "**Do** let photos and swatch plates carry the color.",
+      "**Do** keep NRC, fire class, and the sample button in the sticky fact column on product pages."
+    ],
+    "donts": [
+      "**Don't** round any corner.",
+      "**Don't** fill shapes with orange; it's an underline color.",
+      "**Don't** add shadows to cards, images, or panels.",
+      "**Don't** replace the text index with a card grid."
+    ]
+  }
+}

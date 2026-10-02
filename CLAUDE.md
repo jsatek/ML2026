@@ -10,6 +10,7 @@ from the same content and published to one gallery. See `PLAN.md` for goals and 
 - `packages/content/` (`@ml/content`): shared content **scraped from materiallogiq.com** (`site`, `products`, `materials`, `categories`, `projects`, `resources`) plus helpers and the browser sample cart (`@ml/content/cart`). See its README for the data shape.
 - `research/`: `current-site.md` audit, `scrape_site.py` → `site-snapshot.json` → `build_content.py` → `packages/content/*.json`.
 - `scripts/`: `dev.mjs`, `new-concept.mjs`, `build-all.mjs` (builds every concept and the gallery into `_site/`).
+- Design skill: [Impeccable](https://impeccable.style) in `.claude/skills/impeccable/`. `PRODUCT.md` (root) holds shared product context; each concept's `DESIGN.md` (+ `.impeccable/design.json`) records its visual system. Work one page at a time, e.g. `/impeccable critique concepts/02-editorial/src/pages/samples.astro`. Run `/impeccable document` in a new concept once it has code.
 
 ## Commands
 - `pnpm install`

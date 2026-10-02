@@ -1,0 +1,347 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-02T20:10:49+00:00",
+  "title": "Design System: Material Logiq · 01 Baseline",
+  "extensions": {
+    "colorMeta": {
+      "deep-green": {
+        "role": "primary",
+        "displayName": "Deep Showroom Green",
+        "canonical": "oklch(41.0% 0.073 184.2)",
+        "tonalRamp": [
+          "oklch(15.0% 0.073 184.2)",
+          "oklch(26.0% 0.073 184.2)",
+          "oklch(37.0% 0.073 184.2)",
+          "oklch(48.0% 0.073 184.2)",
+          "oklch(59.0% 0.073 184.2)",
+          "oklch(70.0% 0.073 184.2)",
+          "oklch(82.0% 0.073 184.2)",
+          "oklch(95.0% 0.073 184.2)"
+        ]
+      },
+      "deep-green-pressed": {
+        "role": "primary",
+        "displayName": "Deep Green Pressed",
+        "canonical": "oklch(33.0% 0.058 184.3)",
+        "tonalRamp": [
+          "oklch(15.0% 0.058 184.3)",
+          "oklch(26.0% 0.058 184.3)",
+          "oklch(37.0% 0.058 184.3)",
+          "oklch(48.0% 0.058 184.3)",
+          "oklch(59.0% 0.058 184.3)",
+          "oklch(70.0% 0.058 184.3)",
+          "oklch(82.0% 0.058 184.3)",
+          "oklch(95.0% 0.058 184.3)"
+        ]
+      },
+      "teal": {
+        "role": "secondary",
+        "displayName": "Brand Teal",
+        "canonical": "oklch(59.6% 0.089 198.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.089 198.0)",
+          "oklch(26.0% 0.089 198.0)",
+          "oklch(37.0% 0.089 198.0)",
+          "oklch(48.0% 0.089 198.0)",
+          "oklch(59.0% 0.089 198.0)",
+          "oklch(70.0% 0.089 198.0)",
+          "oklch(82.0% 0.089 198.0)",
+          "oklch(95.0% 0.089 198.0)"
+        ]
+      },
+      "teal-ink": {
+        "role": "secondary",
+        "displayName": "Teal Ink",
+        "canonical": "oklch(49.6% 0.075 197.5)",
+        "tonalRamp": [
+          "oklch(15.0% 0.075 197.5)",
+          "oklch(26.0% 0.075 197.5)",
+          "oklch(37.0% 0.075 197.5)",
+          "oklch(48.0% 0.075 197.5)",
+          "oklch(59.0% 0.075 197.5)",
+          "oklch(70.0% 0.075 197.5)",
+          "oklch(82.0% 0.075 197.5)",
+          "oklch(95.0% 0.075 197.5)"
+        ]
+      },
+      "sky": {
+        "role": "secondary",
+        "displayName": "Sky",
+        "canonical": "oklch(82.3% 0.073 206.9)",
+        "tonalRamp": [
+          "oklch(15.0% 0.073 206.9)",
+          "oklch(26.0% 0.073 206.9)",
+          "oklch(37.0% 0.073 206.9)",
+          "oklch(48.0% 0.073 206.9)",
+          "oklch(59.0% 0.073 206.9)",
+          "oklch(70.0% 0.073 206.9)",
+          "oklch(82.0% 0.073 206.9)",
+          "oklch(95.0% 0.073 206.9)"
+        ]
+      },
+      "signal-orange": {
+        "role": "tertiary",
+        "displayName": "Signal Orange",
+        "canonical": "oklch(65.4% 0.164 39.2)",
+        "tonalRamp": [
+          "oklch(15.0% 0.120 39.2)",
+          "oklch(26.0% 0.120 39.2)",
+          "oklch(37.0% 0.120 39.2)",
+          "oklch(48.0% 0.120 39.2)",
+          "oklch(59.0% 0.120 39.2)",
+          "oklch(70.0% 0.120 39.2)",
+          "oklch(82.0% 0.120 39.2)",
+          "oklch(95.0% 0.120 39.2)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(18.8% 0.005 173.8)",
+        "tonalRamp": [
+          "oklch(15.0% 0.005 173.8)",
+          "oklch(26.0% 0.005 173.8)",
+          "oklch(37.0% 0.005 173.8)",
+          "oklch(48.0% 0.005 173.8)",
+          "oklch(59.0% 0.005 173.8)",
+          "oklch(70.0% 0.005 173.8)",
+          "oklch(82.0% 0.005 173.8)",
+          "oklch(95.0% 0.005 173.8)"
+        ]
+      },
+      "slate-muted": {
+        "role": "neutral",
+        "displayName": "Slate Muted",
+        "canonical": "oklch(46.7% 0.011 179.2)",
+        "tonalRamp": [
+          "oklch(15.0% 0.011 179.2)",
+          "oklch(26.0% 0.011 179.2)",
+          "oklch(37.0% 0.011 179.2)",
+          "oklch(48.0% 0.011 179.2)",
+          "oklch(59.0% 0.011 179.2)",
+          "oklch(70.0% 0.011 179.2)",
+          "oklch(82.0% 0.011 179.2)",
+          "oklch(95.0% 0.011 179.2)"
+        ]
+      },
+      "showroom-white": {
+        "role": "neutral",
+        "displayName": "Showroom White",
+        "canonical": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "oklch(15.0% 0.000 89.9)",
+          "oklch(26.0% 0.000 89.9)",
+          "oklch(37.0% 0.000 89.9)",
+          "oklch(48.0% 0.000 89.9)",
+          "oklch(59.0% 0.000 89.9)",
+          "oklch(70.0% 0.000 89.9)",
+          "oklch(82.0% 0.000 89.9)",
+          "oklch(95.0% 0.000 89.9)"
+        ]
+      },
+      "warm-paper": {
+        "role": "neutral",
+        "displayName": "Warm Paper",
+        "canonical": "oklch(96.7% 0.005 95.1)",
+        "tonalRamp": [
+          "oklch(15.0% 0.005 95.1)",
+          "oklch(26.0% 0.005 95.1)",
+          "oklch(37.0% 0.005 95.1)",
+          "oklch(48.0% 0.005 95.1)",
+          "oklch(59.0% 0.005 95.1)",
+          "oklch(70.0% 0.005 95.1)",
+          "oklch(82.0% 0.005 95.1)",
+          "oklch(95.0% 0.005 95.1)"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "oklch(90.7% 0.008 91.5)",
+        "tonalRamp": [
+          "oklch(15.0% 0.008 91.5)",
+          "oklch(26.0% 0.008 91.5)",
+          "oklch(37.0% 0.008 91.5)",
+          "oklch(48.0% 0.008 91.5)",
+          "oklch(59.0% 0.008 91.5)",
+          "oklch(70.0% 0.008 91.5)",
+          "oklch(82.0% 0.008 91.5)",
+          "oklch(95.0% 0.008 91.5)"
+        ]
+      },
+      "field-stroke": {
+        "role": "neutral",
+        "displayName": "Field Stroke",
+        "canonical": "oklch(82.7% 0.012 89.7)",
+        "tonalRamp": [
+          "oklch(15.0% 0.012 89.7)",
+          "oklch(26.0% 0.012 89.7)",
+          "oklch(37.0% 0.012 89.7)",
+          "oklch(48.0% 0.012 89.7)",
+          "oklch(59.0% 0.012 89.7)",
+          "oklch(70.0% 0.012 89.7)",
+          "oklch(82.0% 0.012 89.7)",
+          "oklch(95.0% 0.012 89.7)"
+        ]
+      },
+      "error-red": {
+        "role": "neutral",
+        "displayName": "Error Red",
+        "canonical": "oklch(50.1% 0.178 28.7)",
+        "tonalRamp": [
+          "oklch(15.0% 0.120 28.7)",
+          "oklch(26.0% 0.120 28.7)",
+          "oklch(37.0% 0.120 28.7)",
+          "oklch(48.0% 0.120 28.7)",
+          "oklch(59.0% 0.120 28.7)",
+          "oklch(70.0% 0.120 28.7)",
+          "oklch(82.0% 0.120 28.7)",
+          "oklch(95.0% 0.120 28.7)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "home hero headline."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "section and page titles."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "product and project card names."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "paragraphs; taglines at 0.875rem in `slate-muted`, clamped to two lines on cards."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "buttons, chips, spec values."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card-lift",
+        "value": "0 10px 15px -3px rgb(0 0 0/.1), 0 4px 6px -4px rgb(0 0 0/.1)",
+        "purpose": "Cards on hover."
+      },
+      {
+        "name": "toast-float",
+        "value": "0 20px 25px -5px rgb(0 0 0/.1), 0 8px 10px -6px rgb(0 0 0/.1)",
+        "purpose": "Cart toast."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state",
+        "value": "150ms ease",
+        "purpose": "Hover and pressed color transitions."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Every primary action: Samples, Request samples.",
+      "html": "<button class=\"ds-btn-primary\">Request samples</button>",
+      "css": ".ds-btn-primary{display:inline-flex;align-items:center;gap:.5rem;border:0;border-radius:999px;padding:.75rem 1.35rem;background:#00574F;color:#fff;font:600 1rem/1.2 'Inter Tight',sans-serif;transition:background-color .15s}.ds-btn-primary:hover{background:#003f39}.ds-btn-primary:focus-visible{outline:3px solid #E1663B;outline-offset:2px}"
+    },
+    {
+      "name": "Sample Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Toggles a product and finish in the sample cart.",
+      "html": "<button class=\"ds-btn-sample\">+ Sample</button>",
+      "css": ".ds-btn-sample{border:1.5px solid currentColor;border-radius:999px;padding:.5rem .9rem;background:transparent;color:#00574F;font:600 .875rem/1.2 'Inter Tight',sans-serif;transition:background-color .15s}.ds-btn-sample:hover{background:color-mix(in srgb,#00574F 8%,transparent)}.ds-btn-sample:focus-visible{outline:3px solid #E1663B;outline-offset:2px}"
+    },
+    {
+      "name": "Filter Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Catalog filters; selected fills deep green.",
+      "html": "<button class=\"ds-chip\">Ceiling Baffles</button> <button class=\"ds-chip\" aria-pressed=\"true\">PET Felt</button>",
+      "css": ".ds-chip{border:1px solid #e2e0da;border-radius:999px;padding:.4rem .85rem;background:#fff;color:#111413;font:500 .875rem/1.2 'Inter Tight',sans-serif}.ds-chip[aria-pressed=true]{background:#00574F;border-color:#00574F;color:#fff}.ds-chip:focus-visible{outline:3px solid #E1663B;outline-offset:2px}"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Sample request and search fields.",
+      "html": "<input class=\"ds-field\" placeholder=\"Company\">",
+      "css": ".ds-field{width:100%;border:1px solid #c9c6be;border-radius:.6rem;padding:.7rem .9rem;background:#fff;color:#111413;font:400 1rem 'Inter Tight',sans-serif}.ds-field:focus{outline:2px solid #2B8F92;border-color:#2B8F92}"
+    },
+    {
+      "name": "Product Card",
+      "kind": "card",
+      "refersTo": "product-card",
+      "description": "Image first, swatches and sample action at the bottom.",
+      "html": "<article class=\"ds-card\"><div class=\"ds-card-img\"></div><div class=\"ds-card-body\"><h3>COFFA</h3><p>NRC up to 0.85 · Class A</p></div></article>",
+      "css": ".ds-card{width:240px;overflow:hidden;border:1px solid #e2e0da;border-radius:1rem;background:#fff;font-family:'Inter Tight',sans-serif;transition:box-shadow .15s}.ds-card:hover{box-shadow:0 10px 15px -3px rgb(0 0 0/.1),0 4px 6px -4px rgb(0 0 0/.1)}.ds-card-img{aspect-ratio:4/3;background:#8BD3DD}.ds-card-body{padding:1.25rem}.ds-card-body h3{margin:0;font:700 1.125rem/1.4 'Inter Tight',sans-serif;letter-spacing:-.02em}.ds-card-body p{margin:.25rem 0 0;font-size:.75rem;color:#545c5a}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Showroom Floor",
+    "overview": "A bright, friendly showroom where every product sits within arm's reach. Visitors walk in, see the whole range laid out on clean white tables, pick things up, compare them side by side, and pocket a sample on the way out. Nothing is hidden behind a story or an effect; the material photography and real finish colors do the selling.\n\nThe system is deliberately conventional. It is the control for this repo, so its job is to be clear and comfortable, not surprising. Density is moderate: generous white space around cards, a sticky header that always offers the sample cart, and soft rounded shapes that invite touching. Brand color is used with restraint: deep green carries every action, teal and sky appear as quiet accents, and orange is reserved for focus and the brand underline.",
+    "keyCharacteristics": [
+      "White floor, warm-paper bays: white page with `warm-paper` bands to group sections.",
+      "Rounded, touchable objects: pill buttons and chips, 1rem cards.",
+      "Deep green means \"do this\": every primary action, selected chip, and active link.",
+      "Photography first in every card, with the finish swatches right under it.",
+      "A sample button on every product card and the header count always visible."
+    ],
+    "rules": [
+      {
+        "name": "The One Action Color Rule",
+        "body": "If it's clickable and primary, it's deep green. Teal, sky, and orange never carry a primary action.",
+        "section": "colors"
+      },
+      {
+        "name": "The Small Teal Rule",
+        "body": "Brand teal is for lines and large shapes. Any teal text smaller than 24px uses `teal-ink`.",
+        "section": "colors"
+      },
+      {
+        "name": "The Single Underline Rule",
+        "body": "From the brand guide: emphasis in headlines, quotes, and links is a single underline (0.08em thick, 0.14em offset, teal), never italics or a highlight box.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat at Rest Rule",
+        "body": "Surfaces are flat with a hairline border until touched. Shadows mean \"you're interacting with this\".",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** use deep green (`#00574F`) for every primary action and selected state.",
+      "**Do** keep photography first in cards, cropped 4:3, with the finish swatches directly underneath.",
+      "**Do** keep the sample button and the header cart count visible at every width.",
+      "**Do** use `teal-ink` (`#1e6f71`) for any small teal text.",
+      "**Do** fall back to a finish-hex color field when an image is missing."
+    ],
+    "donts": [
+      "**Don't** put teal (`#2B8F92`) text under 24px on white.",
+      "**Don't** use orange for anything but focus rings and the brand underline.",
+      "**Don't** add shadows to resting surfaces; depth is a hover response.",
+      "**Don't** use square corners on buttons or chips; this world is rounded."
+    ]
+  }
+}

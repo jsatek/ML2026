@@ -4,3 +4,6 @@ _site/
 .astro/
 .DS_Store
 *.log
+
+# Impeccable engine binary: the launcher downloads and checksums it on first use
+.claude/skills/impeccable/scripts/bin/
