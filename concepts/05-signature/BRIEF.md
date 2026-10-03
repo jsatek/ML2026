@@ -42,7 +42,7 @@ and CAD files in one or two clicks.
   refuses the hero-plus-three-cards template, eyebrows, stat strips and any
   borrowed metaphor.
 - **OWN-WORLD:** White ground, black type, deep green (#00574F) for every
-  action and the signature band, teal (#2B8F92) as a rule and focus accent
+  action and the footer band, teal (#2B8F92) as a rule and focus accent
   only, Inter Tight at two weights; square photography edge to edge, thin
   black rules, 4px radii on controls only; finish color appears only inside
   swatches and photos.
