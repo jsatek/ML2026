@@ -26,32 +26,32 @@ const catalog = Object.fromEntries(products.map((p) => [p.slug, {
     <title>{title ? `${title} | ${site.name}` : `${site.name} · ${site.tagline}`}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600&display=swap" rel="stylesheet" />
   </head>
   <body class="flex min-h-screen flex-col font-sans">
     <a href="#main" class="sr-only z-[70] bg-ink px-4 py-2 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Skip to content</a>
 
     <header class="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/85">
-      <div class="wrap flex h-16 items-center gap-3 md:gap-6">
+      <div class="wrap flex h-16 items-center gap-2 md:gap-6">
         <a href={url('/')} class="shrink-0" aria-label={`${site.name} home`}>
-          <img src={wordmark.src} alt="" width={wordmark.width} height={wordmark.height} class="h-5 w-auto" />
+          <img src={wordmark.src} alt="" width={wordmark.width} height={wordmark.height} class="h-4 w-auto md:h-5" />
         </a>
         <nav aria-label="Main" class="ml-auto hidden items-center gap-7 md:flex">
           {nav.map((n) => (
-            <a href={url(n.href)} class:list={['text-[0.9375rem] font-medium hover:text-green', isActive(n.href) && 'underline decoration-teal decoration-2 underline-offset-[1.35rem]']} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a>
+            <a href={url(n.href)} class:list={['text-[0.9375rem] hover:text-green', isActive(n.href) && 'underline decoration-teal decoration-2 underline-offset-[1.35rem]']} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a>
           ))}
         </nav>
         <a href={url('/samples')} class="btn btn-primary ml-auto !min-h-10 !px-4 !py-2 md:ml-0" data-drawer-open aria-haspopup="dialog" aria-controls="sample-drawer">
           Samples <span class="num rounded-sm bg-white/15 px-1.5 text-sm" data-cart-count>0</span><span class="sr-only"> of {site.sampleLimit}</span>
         </a>
-        <button type="button" class="-mr-2 p-2 md:hidden" aria-expanded="false" aria-controls="mobile-nav" data-menu>
+        <button type="button" class="p-2 md:hidden" aria-expanded="false" aria-controls="mobile-nav" data-menu>
           <span class="sr-only">Menu</span>
           <svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M4 8h16M4 16h16" /></svg>
         </button>
       </div>
       <nav id="mobile-nav" aria-label="Mobile" hidden class="border-t border-line md:hidden">
         <ul class="wrap py-2">
-          {nav.map((n) => <li><a href={url(n.href)} class="flex min-h-12 items-center border-b border-line text-lg font-medium last:border-0" aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a></li>)}
+          {nav.map((n) => <li><a href={url(n.href)} class="flex min-h-12 items-center border-b border-line text-lg font-semibold last:border-0" aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a></li>)}
         </ul>
       </nav>
     </header>

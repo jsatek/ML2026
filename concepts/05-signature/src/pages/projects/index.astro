@@ -26,8 +26,8 @@ const color = (p: (typeof projects)[number]) => getProduct(p.products[0] ?? '')?
       <li class="group relative grid gap-8 border-t border-ink pt-8 lg:grid-cols-12" data-sector={p.sector}>
         <Media src={p.images[0]} alt={p.name} color={color(p)} eager={i === 0} class="aspect-[16/10] lg:col-span-8" />
         <div class="lg:col-span-4">
-          <p class="text-sm text-muted">{p.sector} · {p.location}{p.year && ` · ${p.year}`}</p>
-          <h2 class="h2 mt-2"><a href={url(`/projects/${p.slug}`)} class="after:absolute after:inset-0 group-hover:underline">{p.name}</a></h2>
+          <h2 class="h2"><a href={url(`/projects/${p.slug}`)} class="after:absolute after:inset-0 group-hover:underline">{p.name}</a></h2>
+          <p class="mt-2 text-sm text-muted">{p.sector} · {p.location}{p.year && ` · ${p.year}`}</p>
           <p class="mt-4 text-lg">{p.summary}</p>
           <p class="mt-4 text-sm text-muted">Specified: {specified(p)}</p>
         </div>

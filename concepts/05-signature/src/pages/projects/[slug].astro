@@ -32,7 +32,7 @@ const facts = [
       ) : (
         <div class="mt-6 space-y-4 text-lg text-muted">{p.story.map((s) => <p>{s}</p>)}</div>
       )}
-      {p.quote && <blockquote class="mt-8 text-2xl font-medium tracking-tight">“{p.quote}”</blockquote>}
+      {p.quote && <blockquote class="mt-8 text-2xl tracking-tight">“{p.quote}”</blockquote>}
     </div>
     <dl class="h-fit border-t border-ink lg:col-span-4 lg:col-start-9">
       {facts.map(([k, v]) => <div class="flex justify-between gap-4 border-b border-line py-3 text-sm"><dt class="text-muted">{k}</dt><dd class="text-right">{v}</dd></div>)}

@@ -1214,21 +1214,6 @@
       "href": "https://materiallogiq.com/wp-content/uploads/2023/11/ML_PETFelt_Blaffe_CSISpec.docx"
     },
     {
-      "id": "20",
-      "title": "BLAFFE Installation Instructions",
-      "type": "installation",
-      "products": [
-        "pet-felt-baffles-blaffe"
-      ],
-      "materials": [
-        "pet-felt"
-      ],
-      "format": "#%20",
-      "size": null,
-      "updated": null,
-      "href": "#%20"
-    },
-    {
       "id": "ml-petfelt-cleaningguide",
       "title": "PET Felt Cleaning Guide",
       "type": "care",

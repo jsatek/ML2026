@@ -12,4 +12,4 @@ const { product, name, finish, photo = false, class: cls = '' } = Astro.props;
   aria-label={`${finish.name}: add ${name} sample`}
   aria-pressed="false"
   data-add-sample data-product={product} data-name={name} data-finish={finish.name}
->{photo && finish.image && <img src={finish.image} alt="" loading="lazy" decoding="async" class="absolute inset-0 h-full w-full object-cover" />}</button>
+>{photo && finish.image && <img src={finish.image} alt="" loading="lazy" onerror="this.remove()" decoding="async" class="absolute inset-0 h-full w-full object-cover" />}</button>
