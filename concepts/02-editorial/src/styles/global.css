@@ -28,7 +28,7 @@
   @media (min-width: 768px) { .wrap { padding-inline: 2rem; } }
   @media (min-width: 1280px) { .wrap { padding-inline: 3.5rem; } }
   .kicker { font-size: .7rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; }
-  .display { font-size: clamp(3rem, 10vw, 10rem); }
+  .display { font-size: clamp(3rem, 8vw, 6rem); }
   .headline { font-size: clamp(2.25rem, 6vw, 5.5rem); }
   .lede { font-size: clamp(1.25rem, 2.2vw, 1.75rem); line-height: 1.35; letter-spacing: -0.01em; }
   .u { text-decoration: underline; text-decoration-thickness: .07em; text-underline-offset: .12em; text-decoration-color: var(--ml-orange); }

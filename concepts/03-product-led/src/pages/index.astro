@@ -2,20 +2,28 @@
 import Layout from '../layouts/Layout.astro';
 import ProductCard from '../components/ProductCard.astro';
 import Media from '../components/Media.astro';
-import { site, products, categories, materials, projects, resources } from '@ml/content';
+import { site, products, categories, materials, projects, resources, productsInMaterial, getMaterial, specSummary, formatNrc } from '@ml/content';
 import { records, usedFamilies } from '../lib/records';
 import { url } from '../lib/utils';
 
 const surfaces = [...new Set(categories.map((c) => c.group))];
 const ordered = [...products].sort((a, b) => Number(b.featured) - Number(a.featured));
 const feature = projects.find((p) => !p.placeholder)!;
+const materialList = new Intl.ListFormat('en', { type: 'conjunction' }).format(materials.map((m) => m.name));
+const silk = getMaterial('silk-metal')!;
+const silkProducts = productsInMaterial(silk.slug);
+const silkSpec = specSummary(silkProducts);
+const silkSentences = silk.summary.match(/[^.!?]+[.!?]+/g) ?? [];
+const silkAt = silkSentences.findIndex((t) => t.includes('perforations'));
+const silkCopy = silkAt >= 0 ? silkSentences.slice(silkAt, silkAt + 2).join(' ').trim() : silk.aka;
+const silkHero = silkProducts.find((p) => p.slug === 'silk-metal-grille') ?? silkProducts[0];
 ---
 <Layout>
   <section class="border-b border-line bg-panel">
     <div class="shell grid gap-10 py-10 lg:grid-cols-12 lg:py-14">
       <div class="lg:col-span-5">
-        <h1 class="text-4xl leading-tight sm:text-5xl">Find the right acoustic solution in four choices.</h1>
-        <p class="mt-4 text-lg text-muted">{products.length} systems in PET felt, Silk Metal, wood, and wood wool. Results update as you choose.</p>
+        <h1 class="text-4xl leading-tight sm:text-5xl">Find products that meet your spec.</h1>
+        <p class="mt-4 text-lg text-muted">{products.length} systems in {materialList}. Narrow by surface, type, material and performance; results update as you choose.</p>
         <form class="mt-8 space-y-6" data-finder>
           <fieldset><legend class="label">1 · Surface</legend>
             <div class="mt-2 flex flex-wrap gap-2">
@@ -52,6 +60,25 @@ const feature = projects.find((p) => !p.placeholder)!;
           {ordered.map((p, i) => <div data-slot={p.slug} hidden={i >= 4}><ProductCard product={p} eager={i < 4} /></div>)}
         </div>
         <p data-none hidden class="card mt-3 p-8 text-center text-muted">No exact match. Try removing a choice, or <a href={`mailto:${site.contact.email}`} class="text-green underline">ask about a custom solution</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-ink text-white" aria-labelledby="silk-h">
+    <div class="shell grid items-center gap-10 py-14 lg:grid-cols-12">
+      <Media src={silkHero.images.hero} color={silkSpec.finishes[0]?.hex} class="aspect-[16/10] rounded-xl lg:col-span-6" />
+      <div class="lg:col-span-6">
+        <h2 id="silk-h" class="text-3xl">{silk.name} <span class="block text-lg font-normal text-sky">{silk.aka}</span></h2>
+        <p class="mt-4 text-white/80">{silkCopy}</p>
+        <dl class="mt-6 grid grid-cols-3 gap-2 text-center text-sm">
+          <div class="rounded-lg bg-white/10 p-3"><dt class="text-xs text-white/70">NRC</dt><dd class="font-bold tabular-nums">{formatNrc(silkSpec) ?? 'n/a'}</dd></div>
+          <div class="rounded-lg bg-white/10 p-3"><dt class="text-xs text-white/70">Fire</dt><dd class="font-bold">{silkSpec.fire.map((r) => `Class ${r}`).join(', ') || 'n/a'}</dd></div>
+          <div class="rounded-lg bg-white/10 p-3"><dt class="text-xs text-white/70">Finishes</dt><dd class="font-bold tabular-nums">{silkSpec.finishes.length}</dd></div>
+        </dl>
+        <ul class="mt-5 flex flex-wrap gap-1.5" aria-label={`${silk.name} finishes`}>
+          {silkSpec.finishes.map((f) => <li class="size-6 rounded ring-1 ring-white/20" style={`background:${f.hex}`} title={f.name}><span class="sr-only">{f.name}</span></li>)}
+        </ul>
+        <a href={url(`/products?material=${silk.slug}`)} class="btn mt-6 bg-white text-green hover:bg-sky">Show all {silkSpec.count} {silk.name} systems</a>
       </div>
     </div>
   </section>

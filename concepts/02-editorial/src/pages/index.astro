@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Media from '../components/Media.astro';
-import { site, categories, materials, products, projects, productsInCategory, productsInMaterial, getProduct } from '@ml/content';
+import { site, categories, materials, products, projects, productsInCategory, productsInMaterial, getProduct, getMaterial, specSummary, formatNrc } from '@ml/content';
 import { url } from '../lib/utils';
 
 const cover = getProduct('pet-felt-ceiling-tiles-coffa')!;
@@ -9,6 +9,15 @@ const feature = projects.find((p) => !p.placeholder)!;
 const words = site.tagline.replace(/\.$/, '').split(' ');
 const firstSentences = (s: string, n = 2) => (s.match(/[^.!?]+[.!?]+/g) ?? [s]).slice(0, n).join(' ').trim();
 const groups = [...new Set(categories.map((c) => c.group))];
+const all = specSummary(products);
+const silk = getMaterial('silk-metal')!;
+const silkProducts = productsInMaterial(silk.slug);
+const silkSpec = specSummary(silkProducts);
+const silkSentences = silk.summary.match(/[^.!?]+[.!?]+/g) ?? [];
+const silkAt = silkSentences.findIndex((t) => t.includes('perforations'));
+const silkCopy = silkAt >= 0 ? silkSentences.slice(silkAt, silkAt + 2).join(' ').trim() : silk.aka;
+const silkHero = silkProducts.find((p) => p.slug === 'silk-metal-grille') ?? silkProducts[0];
+const otherMaterials = materials.filter((m) => m.slug !== silk.slug);
 ---
 <Layout>
   <!-- Masthead -->
@@ -16,15 +25,65 @@ const groups = [...new Set(categories.map((c) => c.group))];
     <h1 class="display">
       {words.slice(0, -1).join(' ')} <span class="u">{words.at(-1)}.</span>
     </h1>
-    <p class="lede mt-10 max-w-4xl border-t border-ink pt-6">{site.intro}</p>
+    <p class="lede mt-8 max-w-4xl border-t border-ink pt-6">{site.intro}</p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href={url('/samples')} class="btn btn-solid">Request samples <span aria-hidden="true">→</span></a>
+      <a href={url('/resources')} class="btn">Data sheets &amp; CAD files</a>
+    </div>
   </section>
 
-  <figure class="mt-14">
+  <figure class="mt-12">
     <Media src={cover.images.hero} alt={`${cover.name} ${cover.fullName} in a restaurant`} class="aspect-[4/3] sm:aspect-[21/9]" eager />
     <figcaption class="wrap mt-3 flex justify-between gap-4 text-sm text-muted">
       <span>On the cover: <a href={url(`/products/${cover.slug}`)} class="link text-ink">{cover.name}</a>, {cover.tagline.toLowerCase()}</span>
     </figcaption>
   </figure>
+
+  <!-- By surface -->
+  <section class="wrap mt-24 grid gap-12 md:grid-cols-2" aria-label="Products by surface">
+    {groups.map((g) => (
+      <div>
+        <h2 class="headline border-b border-ink pb-4">{g}</h2>
+        <ul>
+          {categories.filter((c) => c.group === g).map((c) => (
+            <li class="border-b border-ink/20">
+              <a href={url(`/products?type=${c.slug}`)} class="group flex items-baseline justify-between gap-4 py-4">
+                <span class="text-2xl font-semibold group-hover:underline group-hover:decoration-orange">{c.name}</span>
+                <span class="shrink-0 text-right text-sm tabular-nums text-muted">{productsInCategory(c.slug).length} products<span class="block">NRC {formatNrc(specSummary(productsInCategory(c.slug))) ?? 'n/a'}</span></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+    <p class="text-sm text-muted md:col-span-2">{all.fire.length === 1 && <>All {all.count} systems are fire rated Class {all.fire[0]}. </>}NRC shows the range across each type{all.nrcUnknown > 0 && <>; {all.nrcUnknown} products have no published NRC</>}.</p>
+  </section>
+
+  <!-- Silk Metal -->
+  <section class="mt-32 bg-ink py-20 text-paper" aria-labelledby="silk">
+    <div class="wrap grid gap-10 md:grid-cols-12">
+      <div class="md:col-span-5">
+        <h2 id="silk" class="headline">{silk.name}</h2>
+        <p class="mt-3 text-lg text-sky">{silk.aka}</p>
+        <p class="lede mt-8 text-paper/85">{silkCopy}</p>
+        <dl class="mt-10 grid grid-cols-3 gap-6 border-t border-paper/30 pt-6">
+          <div><dt class="text-sm text-paper/70">NRC</dt><dd class="mt-1 text-2xl font-semibold tabular-nums">{formatNrc(silkSpec) ?? 'n/a'}</dd></div>
+          <div><dt class="text-sm text-paper/70">Fire</dt><dd class="mt-1 text-2xl font-semibold">{silkSpec.fire.map((r) => `Class ${r}`).join(', ') || 'n/a'}</dd></div>
+          <div><dt class="text-sm text-paper/70">Finishes</dt><dd class="mt-1 text-2xl font-semibold tabular-nums">{silkSpec.finishes.length}</dd></div>
+        </dl>
+        <p class="mt-8 text-sm">
+          {silkProducts.map((p, j) => <><a href={url(`/products/${p.slug}`)} class="link">{p.name}</a>{j < silkProducts.length - 1 ? ', ' : ''}</>)}
+        </p>
+      </div>
+      <figure class="md:col-span-7">
+        <Media src={silkHero.images.hero} alt={silkHero.name} class="aspect-[4/3]" />
+        <ul class="mt-4 flex flex-wrap gap-1" aria-label={`${silk.name} finishes`}>
+          {silkSpec.finishes.map((f) => <li class="h-8 w-6" style={`background:${f.hex}`} title={f.name}><span class="sr-only">{f.name}</span></li>)}
+        </ul>
+        <figcaption class="mt-2 text-sm text-paper/70">{silkSpec.finishGroups.join(' · ')}</figcaption>
+      </figure>
+    </div>
+  </section>
 
   <!-- Cover story -->
   <section class="wrap mt-28 grid gap-10 md:grid-cols-12" aria-labelledby="feature">
@@ -42,10 +101,10 @@ const groups = [...new Set(categories.map((c) => c.group))];
   <!-- Chapters: materials -->
   <section class="wrap mt-32" aria-labelledby="chapters">
     <div class="flex items-end justify-between border-b border-ink pb-4">
-      <h2 id="chapters" class="headline">Four materials</h2>
+      <h2 id="chapters" class="headline">{new Intl.ListFormat('en', { type: 'conjunction' }).format(otherMaterials.map((m) => m.name))}</h2>
     </div>
     <ul>
-      {materials.map((m) => {
+      {otherMaterials.map((m) => {
         const items = productsInMaterial(m.slug);
         return (
           <li class="grid gap-6 border-b border-ink/20 py-10 md:grid-cols-12">
@@ -63,25 +122,6 @@ const groups = [...new Set(categories.map((c) => c.group))];
         );
       })}
     </ul>
-  </section>
-
-  <!-- By surface -->
-  <section class="wrap mt-32 grid gap-12 md:grid-cols-2" aria-label="Products by surface">
-    {groups.map((g) => (
-      <div>
-        <h2 class="headline border-b border-ink pb-4">{g}</h2>
-        <ul>
-          {categories.filter((c) => c.group === g).map((c) => (
-            <li class="border-b border-ink/20">
-              <a href={url(`/products?type=${c.slug}`)} class="group flex items-baseline justify-between gap-4 py-4">
-                <span class="text-2xl font-semibold group-hover:underline group-hover:decoration-orange">{c.name}</span>
-                <span class="text-muted">{productsInCategory(c.slug).length}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    ))}
   </section>
 
   <!-- Process essay -->

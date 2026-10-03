@@ -3,13 +3,21 @@ import Layout from '../layouts/Layout.astro';
 import Placeholder from '../components/Placeholder.astro';
 import ProductCard from '../components/ProductCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import { site, categories, materials, products, projects, productsInCategory, resources } from '@ml/content';
+import { site, categories, materials, products, projects, productsInCategory, productsInMaterial, resources, getMaterial, specSummary, formatNrc } from '@ml/content';
 import { url } from '../lib/utils';
 
 const featured = products.filter((p) => p.featured).slice(0, 4);
 const featuredProjects = [...projects.filter((p) => p.featured), ...projects.filter((p) => !p.featured)].slice(0, 3);
 const heroBands = featured.slice(0, 3).map((p, i) => ({ src: p.images.hero, color: ['#8BD3DD', '#2B8F92', '#00574F'][i] }));
 const groups = [...new Set(categories.map((c) => c.group))];
+const all = specSummary(products);
+const silk = getMaterial('silk-metal')!;
+const silkProducts = productsInMaterial(silk.slug);
+const silkSpec = specSummary(silkProducts);
+const silkSentences = silk.summary.match(/[^.!?]+[.!?]+/g) ?? [];
+const silkAt = silkSentences.findIndex((t) => t.includes('perforations'));
+const silkCopy = silkAt >= 0 ? silkSentences.slice(silkAt, silkAt + 2).join(' ').trim() : silk.aka;
+const silkHero = silkProducts.find((p) => p.slug === 'silk-metal-grille') ?? silkProducts[0];
 const [taglineStart, lastWord] = [site.tagline.split(' ').slice(0, -1).join(' '), site.tagline.split(' ').at(-1)];
 ---
 <Layout>
@@ -18,7 +26,7 @@ const [taglineStart, lastWord] = [site.tagline.split(' ').slice(0, -1).join(' ')
     <div class="container-x grid items-center gap-12 py-16 lg:grid-cols-12 lg:py-24">
       <div class="lg:col-span-6">
         <h1 class="text-5xl leading-[1.02] sm:text-6xl lg:text-7xl">
-          {taglineStart} <span class="ml-underline decoration-orange">{lastWord}</span>
+          {taglineStart} <span class="ml-underline">{lastWord}</span>
         </h1>
         <p class="mt-6 max-w-xl text-lg text-muted">{site.intro}</p>
         <div class="mt-8 flex flex-wrap gap-3">
@@ -61,11 +69,12 @@ const [taglineStart, lastWord] = [site.tagline.split(' ').slice(0, -1).join(' ')
                   <a href={url(`/products?material=${m.slug}`)} class="hover:ml-underline">{m.name}</a>
                 </th>
               ))}
+              <th scope="col" class="hidden py-3 pl-6 text-right align-bottom text-sm font-semibold sm:table-cell">NRC</th>
             </tr>
           </thead>
           {groups.map((g) => (
             <tbody>
-              <tr><th colspan={materials.length + 1} scope="colgroup" class="pb-2 pt-6 text-left text-sm font-semibold text-muted">{g}</th></tr>
+              <tr><th colspan={materials.length + 2} scope="colgroup" class="pb-2 pt-6 text-left text-sm font-semibold text-muted">{g}</th></tr>
               {categories.filter((c) => c.group === g).map((c) => (
                 <tr class="border-b border-line">
                   <th scope="row" class="py-3 pr-4 font-bold">
@@ -82,11 +91,58 @@ const [taglineStart, lastWord] = [site.tagline.split(' ').slice(0, -1).join(' ')
                       </td>
                     );
                   })}
+                  <td class="hidden py-3 pl-6 text-right tabular-nums text-muted sm:table-cell">{formatNrc(specSummary(productsInCategory(c.slug))) ?? '–'}</td>
                 </tr>
               ))}
             </tbody>
           ))}
         </table>
+      </div>
+      <p class="mt-4 text-sm text-muted">
+        {all.fire.length === 1 && <>All {all.count} systems are fire rated Class {all.fire[0]}. </>}
+        NRC is the range across products of each type{all.nrcUnknown > 0 && <>; {all.nrcUnknown} products have no published NRC</>}.
+      </p>
+    </div>
+  </section>
+
+  <!-- Samples + resources -->
+  <section class="container-x grid gap-12 py-16 lg:grid-cols-2" aria-label="Samples and resources">
+    <div>
+      <h2 class="text-3xl">Touch it before you specify it</h2>
+      <p class="mt-2 text-muted">Pick colors and finishes from any product, up to {site.sampleLimit} per request.</p>
+      <a href={url('/samples')} class="btn btn-primary mt-6">Start a sample request</a>
+    </div>
+    <div>
+      <h2 class="text-3xl">Data sheets, CAD, BIM and more</h2>
+      <p class="mt-2 text-muted">{resources.length} documents across every product, in one searchable library.</p>
+      <form action={url('/resources')} method="get" role="search" class="mt-6 flex gap-2">
+        <label for="home-res-q" class="sr-only">Search resources</label>
+        <input id="home-res-q" name="q" type="search" placeholder="Product or document, e.g. COFFA installation" class="field" />
+        <button class="btn btn-primary shrink-0">Search</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Silk Metal -->
+  <section class="bg-ink py-20 text-white" aria-labelledby="silk-heading">
+    <div class="container-x grid items-center gap-12 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <h2 id="silk-heading" class="text-4xl sm:text-5xl">{silk.name}</h2>
+        <p class="mt-2 text-lg text-sky">{silk.aka}</p>
+        <p class="mt-6 text-white/80">{silkCopy}</p>
+        <dl class="mt-8 grid grid-cols-3 gap-6 border-t border-white/20 pt-6">
+          <div><dt class="text-sm text-white/70">NRC</dt><dd class="mt-1 text-2xl font-bold tabular-nums">{formatNrc(silkSpec) ?? '–'}</dd></div>
+          <div><dt class="text-sm text-white/70">Fire</dt><dd class="mt-1 text-2xl font-bold">{silkSpec.fire.map((r) => `Class ${r}`).join(', ') || '–'}</dd></div>
+          <div><dt class="text-sm text-white/70">Finishes</dt><dd class="mt-1 text-2xl font-bold tabular-nums">{silkSpec.finishes.length}</dd></div>
+        </dl>
+        <a href={url(`/products?material=${silk.slug}`)} class="btn mt-8 bg-white text-green hover:bg-sky">See all {silkSpec.count} {silk.name} systems</a>
+      </div>
+      <div class="lg:col-span-7">
+        <Placeholder src={silkHero.images.hero} color={silkSpec.finishes[0]?.hex} seed={2} class="aspect-[16/10] rounded-2xl" />
+        <ul class="mt-4 flex flex-wrap gap-1.5" aria-label={`${silk.name} finishes`}>
+          {silkSpec.finishes.map((f) => <li class="size-6 rounded-full ring-1 ring-white/20" style={`background:${f.hex}`} title={f.name}><span class="sr-only">{f.name}</span></li>)}
+        </ul>
+        <p class="mt-2 text-sm text-white/70">{silkSpec.finishGroups.join(' · ')}</p>
       </div>
     </div>
   </section>
@@ -134,21 +190,4 @@ const [taglineStart, lastWord] = [site.tagline.split(' ').slice(0, -1).join(' ')
     </div>
   </section>
 
-  <!-- Samples + resources -->
-  <section class="container-x grid gap-12 border-t border-line py-16 lg:grid-cols-2" aria-label="Samples and resources">
-    <div>
-      <h2 class="text-3xl">Touch it before you specify it</h2>
-      <p class="mt-2 text-muted">Pick colors and finishes from any product and we'll ship up to {site.sampleLimit} samples.</p>
-      <a href={url('/samples')} class="btn btn-primary mt-6">Start a sample request</a>
-    </div>
-    <div>
-      <h2 class="text-3xl">Data sheets, CAD, BIM and more</h2>
-      <p class="mt-2 text-muted">{resources.length} documents across every product, in one searchable library.</p>
-      <form action={url('/resources')} method="get" role="search" class="mt-6 flex gap-2">
-        <label for="home-res-q" class="sr-only">Search resources</label>
-        <input id="home-res-q" name="q" type="search" placeholder="e.g. COFFA installation" class="field" />
-        <button class="btn btn-primary shrink-0">Search</button>
-      </form>
-    </div>
-  </section>
 </Layout>

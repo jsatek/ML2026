@@ -33,8 +33,11 @@ const links = [...site.nav, { label: 'Samples', href: '/samples' }];
           <span class="hidden text-sm font-semibold tracking-[0.3em] sm:inline">MATERIAL <b class="font-extrabold">LOGIQ</b></span>
         </a>
         <div class="flex items-center gap-2">
+          <nav aria-label="Main" class="pill hidden gap-5 bg-night/60 backdrop-blur md:inline-flex">
+            {links.filter((l) => l.href !== '/samples').map((l) => <a href={url(l.href)} class="hover:text-sky">{l.label}</a>)}
+          </nav>
           <a href={url('/samples')} class="pill bg-night/60 backdrop-blur">Samples <span data-cart-count class="text-sky">0</span></a>
-          <button type="button" class="pill bg-night/60 backdrop-blur" aria-expanded="false" aria-controls="menu" data-menu>Menu</button>
+          <button type="button" class="pill bg-night/60 backdrop-blur md:hidden" aria-expanded="false" aria-controls="menu" data-menu>Menu</button>
         </div>
       </div>
     </header>

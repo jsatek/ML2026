@@ -27,6 +27,30 @@ export const projectsUsingProduct = (slug) => projects.filter((p) => p.products.
 export const resourcesForProduct = (slug) => resources.filter((r) => r.products.includes(slug));
 export const relatedProducts = (product) => product.related.map(getProduct).filter(Boolean);
 
+/**
+ * Spec roll-up for a set of products: NRC range (unknown values skipped), fire
+ * ratings present, unique finishes (by name) and finish groups.
+ */
+export function specSummary(list) {
+  const nrc = list.map((p) => p.attributes.nrc).filter((n) => n != null);
+  const finishes = [...new Map(list.flatMap((p) => p.finishes).map((f) => [f.name, f])).values()];
+  return {
+    count: list.length,
+    nrc: nrc.length ? { min: Math.min(...nrc), max: Math.max(...nrc) } : null,
+    nrcUnknown: list.length - nrc.length,
+    fire: [...new Set(list.map((p) => p.attributes.fireRating).filter(Boolean))],
+    finishes,
+    finishGroups: [...new Set(finishes.map((f) => f.group).filter(Boolean))],
+  };
+}
+
+/** "0.70–1.15", "0.80", or null when no product in the set has an NRC value. */
+export function formatNrc(summary) {
+  if (!summary.nrc) return null;
+  const { min, max } = summary.nrc;
+  return min === max ? min.toFixed(2) : `${min.toFixed(2)}–${max.toFixed(2)}`;
+}
+
 /** Euclidean RGB distance between two hex colors (0–441). */
 export function colorDistance(a, b) {
   const rgb = (h) => [0, 2, 4].map((i) => parseInt(h.replace('#', '').slice(i, i + 2), 16));

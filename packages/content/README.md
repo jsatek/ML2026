@@ -13,7 +13,7 @@ into the repo).
 | `products.json` | `categories[]` (6 product types), `materials[]` (4), `products[]` (26) |
 | `projects.json` | `sectors[]` (site markets) and `projects[]` |
 | `resources.json` | `types[]` and `resources[]` (277 real documents) |
-| `index.js` | Named exports plus lookup helpers (`getProduct`, `resourcesForProduct`, ...) |
+| `index.js` | Named exports plus lookup helpers (`getProduct`, `resourcesForProduct`, ...) and `specSummary(products)` / `formatNrc(summary)` for NRC range, fire ratings and finishes of a product set |
 | `cart.js` | Browser sample cart (`add`, `remove`, `onChange`) persisted in localStorage |
 
 ### Product shape
