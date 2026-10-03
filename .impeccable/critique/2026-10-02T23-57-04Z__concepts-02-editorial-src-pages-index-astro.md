@@ -10,6 +10,7 @@ target_fingerprint: "sha256:3d378b8cf38d29b033b0ab802dd93ace0ddeb990275ea7eb30da
 target_path: /home/user/ML2026/concepts/02-editorial/src/pages/index.astro
 timestamp: 2026-10-02T23-57-04Z
 slug: concepts-02-editorial-src-pages-index-astro
+closed: true
 ---
 # Critique: 02-editorial home (dual-agent)
 Specificity: stock broadsheet-editorial (cream #f6f4ef, hairlines, tracked kickers, 10rem tagline cover).

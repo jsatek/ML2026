@@ -10,6 +10,7 @@ target_fingerprint: "sha256:78db4cc3d72610bff7c9e9b30d0105ec71c2083d4f431013cebf
 target_path: /home/user/ML2026/concepts/03-product-led/src/pages/index.astro
 timestamp: 2026-10-02T23-57-04Z
 slug: concepts-03-product-led-src-pages-index-astro
+closed: true
 ---
 # Critique: 03-product-led home (dual-agent)
 Specificity: faceted e-commerce catalog; invented family swatches (lib/colors.ts) instead of real finishes.

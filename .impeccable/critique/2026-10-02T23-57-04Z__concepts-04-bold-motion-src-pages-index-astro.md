@@ -10,6 +10,7 @@ target_fingerprint: "sha256:06677d2474edbb42e195133b76d8923bcd4b169803b4ea8684b9
 target_path: /home/user/ML2026/concepts/04-bold-motion/src/pages/index.astro
 timestamp: 2026-10-02T23-57-04Z
 slug: concepts-04-bold-motion-src-pages-index-astro
+closed: true
 ---
 # Critique: 04-bold-motion home (dual-agent)
 Specificity: near-black award-site agency template (marquee, rounded-3xl, uniform .reveal, LET'S TALK).

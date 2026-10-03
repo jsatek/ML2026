@@ -10,6 +10,7 @@ target_fingerprint: "sha256:89791cad90d904b7da7ec03b63bb482ddb95b2e83d4e6cc070ea
 target_path: /home/user/ML2026/concepts/01-baseline/src/pages/index.astro
 timestamp: 2026-10-02T23-57-04Z
 slug: concepts-01-baseline-src-pages-index-astro
+closed: true
 ---
 # Critique: 01-baseline home (dual-agent)
 Specificity: SaaS/Tailwind marketing template; interchangeable. Only specific device: logo-band hero (:39-51).
