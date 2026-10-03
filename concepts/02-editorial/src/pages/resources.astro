@@ -21,7 +21,7 @@ const typeName = Object.fromEntries(resourceTypes.map((t) => [t.slug, t.name]));
       {resourceTypes.map((t) => <button type="button" class="toggle" data-type={t.slug} aria-pressed="false">{t.name}</button>)}
     </div>
     <nav aria-label="Jump to letter" class="sticky top-0 z-10 mt-6 flex flex-wrap gap-3 border-y border-ink bg-paper py-3 text-lg font-bold">
-      {letters.map((l) => <a href={`#letter-${l}`} class="hover:text-orange">{l}</a>)}
+      {letters.map((l) => <a href={`#letter-${l}`} class="inline-flex min-h-6 min-w-6 items-center justify-center hover:text-orange">{l}</a>)}
       <a href="#shared" class="ml-auto text-sm font-medium hover:text-orange">Shared documents</a>
     </nav>
   </section>

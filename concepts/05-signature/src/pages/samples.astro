@@ -1,0 +1,133 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site, products, sectors, resourcesForProduct } from '@ml/content';
+import { url } from '../lib/utils';
+
+// Per-product facts the box shows for each sample: specs, key documents and finish photos.
+const PREFIX = 'https://materiallogiq.com/wp-content/uploads/';
+const keyDocs = ['csi-spec', 'data-sheet', 'cad'];
+const docLabel: Record<string, string> = { 'csi-spec': 'CSI spec', 'data-sheet': 'Data sheet', cad: 'CAD' };
+const facts = Object.fromEntries(products.map((p) => {
+  const docs = resourcesForProduct(p.slug);
+  return [p.slug, {
+    nrc: p.attributes.nrc, fire: p.attributes.fireRating,
+    d: keyDocs.map((k) => docs.find((r) => r.type === k)).filter(Boolean).map((r) => [docLabel[r!.type], r!.href]),
+    i: Object.fromEntries(p.finishes.filter((f) => f.image).map((f) => [f.name, f.image!.replace(PREFIX, '')])),
+  }];
+}));
+const roles = ['Architect', 'Interior designer', 'Contractor', 'Distributor', 'Other'];
+---
+<Layout title="Sample box">
+  <section class="wrap pt-12">
+    <h1 class="display">Sample box</h1>
+    <p class="mt-4 max-w-2xl text-lg text-muted">Up to {site.sampleLimit} finishes per request. Each sample is a specific product in a specific finish, with its specs and documents beside it.</p>
+  </section>
+
+  <section class="wrap mt-10" aria-labelledby="box-h">
+    <div class="flex flex-wrap items-center justify-between gap-4 border-b border-ink pb-3">
+      <h2 id="box-h" class="text-lg"><span class="num" data-cart-count>0</span> of {site.sampleLimit} chosen</h2>
+      <a href={url('/products')} class="link text-sm">Browse products</a>
+    </div>
+    <ol class="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4" data-box aria-live="polite">
+      {Array.from({ length: site.sampleLimit }, (_, i) => (
+        <li class="flex flex-col">
+          <div class="grid aspect-square place-items-center rounded border border-dashed border-[#b9bfbc] text-sm text-muted"><span class="num">{i + 1}</span></div>
+          <p class="mt-3 text-sm text-muted">Empty</p>
+        </li>
+      ))}
+    </ol>
+    <p class="mt-6 text-muted" data-hint>Add finishes from any product page, the Silk Metal finishes on the home page, or the finish wall.</p>
+  </section>
+
+  <section class="wrap mt-20 grid gap-10 border-t border-ink pt-10 lg:grid-cols-12" aria-labelledby="form-h">
+    <div class="lg:col-span-4">
+      <h2 id="form-h" class="h2">Where should we send them?</h2>
+      <p class="mt-3 text-muted">Questions about a custom finish or size? Add them in the notes, or email <a href={`mailto:${site.contact.email}`} class="link">{site.contact.email}</a>.</p>
+      <p class="mt-6 rounded bg-mist px-4 py-3 text-sm text-muted">Concept mockup: submitting clears the box and sends nothing.</p>
+    </div>
+    <form class="grid gap-5 sm:grid-cols-2 lg:col-span-7 lg:col-start-6" data-form novalidate>
+      <label class="block"><span class="text-sm font-semibold">Full name</span><input name="name" required autocomplete="name" class="field mt-1.5" /></label>
+      <label class="block"><span class="text-sm font-semibold">Work email</span><input name="email" type="email" required autocomplete="email" class="field mt-1.5" /></label>
+      <label class="block"><span class="text-sm font-semibold">Company</span><input name="company" required autocomplete="organization" class="field mt-1.5" /></label>
+      <label class="block"><span class="text-sm font-semibold">Role</span>
+        <select name="role" class="field mt-1.5">{roles.map((r) => <option>{r}</option>)}</select></label>
+      <label class="block"><span class="text-sm font-semibold">Project name <span class="font-normal text-muted">(optional)</span></span><input name="project" class="field mt-1.5" /></label>
+      <label class="block"><span class="text-sm font-semibold">Sector</span>
+        <select name="sector" class="field mt-1.5"><option value="">Choose one</option>{sectors.map((s) => <option>{s}</option>)}</select></label>
+      <label class="block sm:col-span-2"><span class="text-sm font-semibold">Street address</span><input name="address" required autocomplete="street-address" class="field mt-1.5" /></label>
+      <label class="block"><span class="text-sm font-semibold">City</span><input name="city" required autocomplete="address-level2" class="field mt-1.5" /></label>
+      <div class="grid grid-cols-2 gap-4">
+        <label class="block"><span class="text-sm font-semibold">State</span><input name="state" required autocomplete="address-level1" class="field mt-1.5" /></label>
+        <label class="block"><span class="text-sm font-semibold">ZIP</span><input name="zip" required autocomplete="postal-code" inputmode="numeric" class="field mt-1.5" /></label>
+      </div>
+      <label class="block sm:col-span-2"><span class="text-sm font-semibold">Notes <span class="font-normal text-muted">(optional)</span></span><textarea name="notes" rows="3" class="field mt-1.5"></textarea></label>
+      <p class="text-sm text-[#b3261e] sm:col-span-2" data-error role="alert" hidden></p>
+      <div class="sm:col-span-2"><button class="btn btn-primary w-full sm:w-auto" data-submit><span>Request <span class="num" data-cart-count>0</span> samples</span></button></div>
+    </form>
+    <div hidden class="lg:col-span-7 lg:col-start-6" data-done tabindex="-1">
+      <h3 class="h2">Request received</h3>
+      <p class="mt-3 text-lg text-muted" data-done-text></p>
+      <ul class="mt-6 border-t border-line" data-done-list></ul>
+      <a href={url('/products')} class="btn btn-line mt-8">Keep browsing</a>
+    </div>
+  </section>
+
+  <script type="application/json" id="facts" set:html={JSON.stringify({ prefix: PREFIX, facts })}></script>
+  <script>
+    import * as cart from '@ml/content/cart';
+
+    type Facts = Record<string, { nrc: number | null; fire: string | null; d: [string, string][]; i: Record<string, string> }>;
+    const { prefix, facts }: { prefix: string; facts: Facts } = JSON.parse(document.getElementById('facts')!.textContent!);
+    const catalog: Record<string, { n: string; m?: string; h: string; f: Record<string, string> }> = JSON.parse(document.getElementById('catalog')!.textContent!);
+    const esc = (s: string) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+    const box = document.querySelector<HTMLElement>('[data-box]')!;
+    const slots = [...box.children] as HTMLElement[];
+    const emptyHtml = slots.map((s) => s.innerHTML);
+    const hint = document.querySelector<HTMLElement>('[data-hint]')!;
+
+    function render(items: { product: string; finish: string }[]) {
+      hint.hidden = items.length > 0;
+      slots.forEach((slot, i) => {
+        const it = items[i];
+        if (!it) { slot.innerHTML = emptyHtml[i]; return; }
+        const p = catalog[it.product]; const f = facts[it.product];
+        const img = f?.i[it.finish];
+        const spec = [f?.nrc != null ? `NRC ${f.nrc.toFixed(2)}` : 'NRC n/a', f?.fire ? `Class ${f.fire}` : ''].filter(Boolean).join(' · ');
+        slot.innerHTML = `
+          <div class="relative aspect-square overflow-hidden rounded shadow-[inset_0_0_0_1px_rgb(0_0_0/.12)]" style="background:${esc(p?.f[it.finish] ?? '#e6e8e7')}">
+            ${img ? `<img src="${esc(prefix + img)}" alt="" loading="lazy" class="absolute inset-0 h-full w-full object-cover">` : ''}
+            <button type="button" class="absolute right-2 top-2 grid size-9 place-items-center rounded-full bg-white/95 text-ink shadow hover:bg-white" data-remove aria-label="Remove ${esc(p?.n ?? '')} ${esc(it.finish)}">
+              <svg class="size-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg>
+            </button>
+          </div>
+          <p class="mt-3 font-semibold">${esc(it.finish)}</p>
+          <p class="text-sm"><a href="${esc(p?.h ?? '#')}" class="hover:underline">${esc(p?.n ?? it.product)}</a>${p?.m ? `<span class="text-muted"> · ${esc(p.m)}</span>` : ''}</p>
+          <p class="num text-sm text-muted">${esc(spec)}</p>
+          ${f?.d.length ? `<p class="mt-2 flex flex-wrap gap-x-3 text-sm">${f.d.map(([l, h]) => `<a href="${esc(h)}" target="_blank" rel="noopener" class="link !font-normal">${esc(l)}</a>`).join('')}</p>` : ''}`;
+        slot.querySelector<HTMLButtonElement>('[data-remove]')!.onclick = () => cart.remove(it);
+      });
+    }
+    cart.onChange(render);
+
+    const form = document.querySelector<HTMLFormElement>('[data-form]')!;
+    const error = form.querySelector<HTMLElement>('[data-error]')!;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const items = cart.getCart();
+      if (!items.length) { error.textContent = 'Your sample box is empty. Add at least one finish first.'; error.hidden = false; return; }
+      const bad = [...form.elements].find((el) => el instanceof HTMLInputElement && !el.checkValidity()) as HTMLInputElement | undefined;
+      if (bad) {
+        const label = bad.closest('label')?.querySelector('span')?.textContent?.trim() ?? 'This field';
+        error.textContent = bad.validity.typeMismatch ? `${label} needs a valid address, like name@studio.com.` : `${label} is required.`;
+        error.hidden = false; bad.focus(); return;
+      }
+      error.hidden = true;
+      const d = new FormData(form);
+      const done = document.querySelector<HTMLElement>('[data-done]')!;
+      done.querySelector('[data-done-text]')!.textContent = `${items.length} ${items.length === 1 ? 'sample' : 'samples'} for ${d.get('name')}, to ${d.get('city')}, ${d.get('state')}.`;
+      done.querySelector('[data-done-list]')!.innerHTML = items.map((i) => `<li class="flex justify-between gap-4 border-b border-line py-3"><span>${esc(catalog[i.product]?.n ?? i.product)}</span><span class="text-muted">${esc(i.finish)}</span></li>`).join('');
+      form.hidden = true; done.hidden = false; done.focus();
+      cart.clear();
+    });
+  </script>
+</Layout>

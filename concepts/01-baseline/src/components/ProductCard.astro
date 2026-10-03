@@ -27,10 +27,10 @@ const material = getMaterial(p.material);
   </a>
   <div class="flex flex-1 flex-col gap-3 p-5">
     <div>
-      <p class="eyebrow">{material?.name} · {category?.name}</p>
-      <h3 class="mt-1 text-lg">
+      <h3 class="text-lg">
         <a href={url(`/products/${p.slug}`)} class="hover:ml-underline">{p.name}</a>
       </h3>
+      <p class="text-sm text-muted">{material?.name} · {category?.name}</p>
       <p class="mt-1 line-clamp-2 text-sm text-muted">{p.tagline}</p>
     </div>
     <dl class="flex gap-4 text-xs text-muted">

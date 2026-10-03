@@ -1,0 +1,8 @@
+---
+// A photo when there is one; otherwise a field of the product's own finish color.
+interface Props { src?: string | null; alt?: string; color?: string; class?: string; imgClass?: string; eager?: boolean; }
+const { src, alt = '', color = '#e6e8e7', class: cls = '', imgClass = '', eager = false } = Astro.props;
+---
+<div class:list={['relative overflow-hidden', cls]} style={`background:${color}`}>
+  {src && <img src={src} alt={alt} onerror="this.remove()" loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'auto'} decoding="async" class:list={['absolute inset-0 h-full w-full object-cover text-transparent', imgClass]} />}
+</div>

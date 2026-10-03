@@ -48,8 +48,8 @@ const gallery = p.images.gallery;
 
     <!-- Configurator -->
     <aside class="lg:sticky lg:top-20 lg:h-fit">
-      <p class="label text-teal-ink">{material.name} · {category.name}</p>
-      <h1 class="mt-1 text-4xl">{p.name}</h1>
+      <h1 class="text-4xl">{p.name}</h1>
+      <p class="mt-1 text-sm text-muted">{material.name} · {category.name}</p>
       <p class="mt-2 text-muted">{p.tagline}</p>
       <dl class="mt-4 grid grid-cols-3 gap-2 text-center text-sm">
         <div class="rounded-lg bg-panel p-2"><dt class="text-xs text-muted">NRC</dt><dd class="font-bold">{p.attributes.nrc?.toFixed(2) ?? 'n/a'}</dd></div>

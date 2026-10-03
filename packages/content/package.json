@@ -7,6 +7,7 @@
     ".": "./index.js",
     "./cart": "./cart.js",
     "./*.json": "./*.json",
-    "./sample-ui": "./sample-ui.js"
+    "./sample-ui": "./sample-ui.js",
+    "./finish-wall": "./finish-wall.js"
   }
 }

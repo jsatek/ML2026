@@ -2,21 +2,32 @@
 import Layout from '../layouts/Layout.astro';
 import ProductCard from '../components/ProductCard.astro';
 import Media from '../components/Media.astro';
-import { site, products, categories, materials, projects, resources } from '@ml/content';
-import { records, usedFamilies } from '../lib/records';
+import { site, products, categories, materials, projects, resources, productsInMaterial, getMaterial, specSummary, formatNrc, finishWall } from '@ml/content';
+import { records } from '../lib/records';
+import SampleButton from '../components/SampleButton.astro';
 import { url } from '../lib/utils';
 
 const surfaces = [...new Set(categories.map((c) => c.group))];
 const ordered = [...products].sort((a, b) => Number(b.featured) - Number(a.featured));
 const feature = projects.find((p) => !p.placeholder)!;
+const wall = finishWall();
+const wallTotal = wall.reduce((n, w) => n + w.count, 0);
+const wallProducts = Object.fromEntries(products.map((p) => [p.slug, { name: p.name, href: url(`/products/${p.slug}`) }]));
+const materialList = new Intl.ListFormat('en', { type: 'conjunction' }).format(materials.map((m) => m.name));
+const silk = getMaterial('silk-metal')!;
+const silkProducts = productsInMaterial(silk.slug);
+const silkSpec = specSummary(silkProducts);
+const silkSentences = silk.summary.match(/[^.!?]+[.!?]+/g) ?? [];
+const silkAt = silkSentences.findIndex((t) => t.includes('perforations'));
+const silkCopy = silkAt >= 0 ? silkSentences.slice(silkAt, silkAt + 2).join(' ').trim() : silk.aka;
+const silkHero = silkProducts.find((p) => p.slug === 'silk-metal-grille') ?? silkProducts[0];
 ---
 <Layout>
   <section class="border-b border-line bg-panel">
     <div class="shell grid gap-10 py-10 lg:grid-cols-12 lg:py-14">
       <div class="lg:col-span-5">
-        <p class="label text-teal-ink">Acoustic product finder</p>
-        <h1 class="mt-3 text-4xl leading-tight sm:text-5xl">Find the right acoustic solution in four choices.</h1>
-        <p class="mt-4 text-lg text-muted">{products.length} systems in PET felt, Silk Metal, wood, and wood wool. Results update as you choose.</p>
+        <h1 class="text-4xl leading-tight sm:text-5xl">Find products that meet your spec.</h1>
+        <p class="mt-4 text-lg text-muted">{products.length} systems in {materialList}. Narrow by surface, type, material and performance; results update as you choose.</p>
         <form class="mt-8 space-y-6" data-finder>
           <fieldset><legend class="label">1 · Surface</legend>
             <div class="mt-2 flex flex-wrap gap-2">
@@ -41,13 +52,16 @@ const feature = projects.find((p) => !p.placeholder)!;
               <label class="chip cursor-pointer"><input type="checkbox" name="minNrc" value="1" class="sr-only" />NRC 1.00+</label>
             </div>
           </fieldset>
-          <a href={url('/products')} class="btn btn-primary w-full sm:w-auto" data-see-all>See all <span data-n>{products.length}</span> matches →</a>
+          <div class="sticky bottom-0 z-10 -mx-4 flex items-center gap-3 border-t border-line bg-panel/95 px-4 py-3 backdrop-blur lg:static lg:mx-0 lg:border-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
+            <a href={url('/products')} class="btn btn-primary flex-1 sm:flex-none" data-see-all>See all <span data-n>{products.length}</span> matches →</a>
+            <button type="button" class="inline-flex min-h-11 items-center px-1 text-sm text-green underline lg:hidden" data-reset>Reset</button>
+          </div>
         </form>
       </div>
       <div class="lg:col-span-7">
         <div class="flex items-center justify-between">
           <p class="font-semibold" aria-live="polite"><span data-n>{products.length}</span> matching products</p>
-          <button type="button" class="text-sm text-green underline" data-reset>Reset</button>
+          <button type="button" class="inline-flex min-h-6 items-center text-sm text-green underline" data-reset>Reset</button>
         </div>
         <div class="mt-3 grid gap-4 sm:grid-cols-2" data-results>
           {ordered.map((p, i) => <div data-slot={p.slug} hidden={i >= 4}><ProductCard product={p} eager={i < 4} /></div>)}
@@ -57,39 +71,115 @@ const feature = projects.find((p) => !p.placeholder)!;
     </div>
   </section>
 
-  <section class="shell py-14" aria-labelledby="color-h">
-    <h2 id="color-h" class="text-2xl">Shop by color</h2>
-    <p class="mt-1 text-muted">Every finish, grouped into color families. Pick one to see the products that come in it.</p>
-    <ul class="mt-6 grid grid-cols-4 gap-3 sm:grid-cols-7 lg:grid-cols-12">
-      {usedFamilies.map((f) => (
-        <li><a href={url(`/products?color=${f.slug}`)} class="group block text-center">
-          <span class="block aspect-square rounded-xl ring-1 ring-black/10 transition group-hover:scale-105" style={`background:${f.hex}`}></span>
-          <span class="mt-2 block text-xs font-medium">{f.name}</span>
-          <span class="text-xs text-muted">{records.filter((r) => r.colors.includes(f.slug)).length} products</span>
-        </a></li>
-      ))}
-    </ul>
+  <section class="bg-ink text-white" aria-labelledby="silk-h">
+    <div class="shell grid items-center gap-10 py-14 lg:grid-cols-12">
+      <Media src={silkHero.images.hero} color={silkSpec.finishes[0]?.hex} class="aspect-[16/10] rounded-xl lg:col-span-6" />
+      <div class="lg:col-span-6">
+        <h2 id="silk-h" class="text-3xl">{silk.name} <span class="block text-lg font-normal text-sky">{silk.aka}</span></h2>
+        <p class="mt-4 text-white/80">{silkCopy}</p>
+        <dl class="mt-6 grid grid-cols-3 gap-2 text-center text-sm">
+          <div class="rounded-lg bg-white/10 p-3"><dt class="text-xs text-white/70">NRC</dt><dd class="font-bold tabular-nums">{formatNrc(silkSpec) ?? 'n/a'}</dd></div>
+          <div class="rounded-lg bg-white/10 p-3"><dt class="text-xs text-white/70">Fire</dt><dd class="font-bold">{silkSpec.fire.map((r) => `Class ${r}`).join(', ') || 'n/a'}</dd></div>
+          <div class="rounded-lg bg-white/10 p-3"><dt class="text-xs text-white/70">Finishes</dt><dd class="font-bold tabular-nums">{silkSpec.finishes.length}</dd></div>
+        </dl>
+        <ul class="mt-5 flex flex-wrap gap-1.5" aria-label={`${silk.name} finishes`}>
+          {silkSpec.finishes.map((f) => <li class="size-6 rounded ring-1 ring-white/20" style={`background:${f.hex}`} title={f.name}><span class="sr-only">{f.name}</span></li>)}
+        </ul>
+        <a href={url(`/products?material=${silk.slug}`)} class="btn mt-6 bg-white text-green hover:bg-sky">Show all {silkSpec.count} {silk.name} systems</a>
+      </div>
+    </div>
   </section>
 
-  <section class="shell grid gap-4 pb-6 md:grid-cols-3" aria-label="Shortcuts">
-    <a href={url('/resources')} class="card group p-6 hover:border-ink">
-      <p class="label">Documents</p>
-      <p class="mt-2 text-xl font-bold">Build a spec kit</p>
-      <p class="mt-1 text-sm text-muted">Pick products and file types from {resources.length} documents: data sheets, CSI, CAD/BIM, HPD.</p>
-    </a>
-    <a href={url('/samples')} class="card group p-6 hover:border-ink">
-      <p class="label">Samples</p>
-      <p class="mt-2 text-xl font-bold">Order up to {site.sampleLimit} samples</p>
-      <p class="mt-1 text-sm text-muted">Add finishes as you browse; they collect in your sample drawer.</p>
-    </a>
-    <a href={url(`/projects/${feature.slug}`)} class="card group flex overflow-hidden hover:border-ink">
-      <div class="flex-1 p-6"><p class="label">Custom work</p><p class="mt-2 text-xl font-bold">{site.materialize.title}</p><p class="mt-1 text-sm text-muted">See {feature.name}: custom PET felt clouds.</p></div>
-      <Media src={feature.images[0]} class="w-1/3" />
-    </a>
+  <section class="shell py-14" aria-labelledby="wall-h" data-finish-wall>
+    <div class="flex flex-wrap items-end justify-between gap-2">
+      <div>
+        <h2 id="wall-h" class="text-2xl">Shop by finish</h2>
+        <p class="mt-1 text-muted">All {wallTotal} finishes, by material. Pick one to see the products that come in it and add a sample.</p>
+      </div>
+    </div>
+    <script type="application/json" data-wall-products set:html={JSON.stringify(wallProducts)}></script>
+    <div class="mt-8 grid gap-8 lg:grid-cols-12">
+      <div class="divide-y divide-line rounded-xl border border-line bg-white lg:col-span-8">
+        {wall.map((w) => (
+          <div class="grid gap-3 p-5 sm:grid-cols-[9rem_1fr]">
+            <div>
+              <h3 class="font-bold">{w.material.name}</h3>
+              <a href={url(`/products?material=${w.material.slug}`)} class="text-sm text-green underline underline-offset-4">{w.count} finishes</a>
+            </div>
+            <div class="space-y-3">
+              {w.groups.map((g) => (
+                <div>
+                  <p class="text-xs text-muted">{g.name}</p>
+                  <ul class="mt-1.5 grid grid-cols-[repeat(auto-fill,minmax(1.75rem,1fr))] gap-1">
+                    {g.finishes.map((f) => (
+                      <li>
+                        <a href={url(`/products/${f.products[0]}`)} class="swatch block aspect-square rounded ring-1 ring-black/10 ring-inset" style={`background:${f.hex}`} title={f.name}
+                          data-swatch data-name={f.name} data-hex={f.hex} data-image={f.image ?? ''} data-group={g.name} data-material={w.material.name} data-products={f.products.join(' ')}
+                        ><span class="sr-only">{f.name}, {w.material.name}</span></a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="lg:col-span-4">
+        <div data-wall-panel hidden aria-live="polite" class="card fixed inset-x-0 bottom-0 z-40 max-h-[70svh] overflow-y-auto !rounded-b-none p-5 shadow-[0_-8px_30px_rgb(0_0_0/0.15)] lg:sticky lg:top-20 lg:z-auto lg:max-h-[calc(100svh-6rem)] lg:!rounded-b-[.9rem] lg:shadow-none">
+          <div class="flex items-start gap-4">
+            <div data-wall-chip class="size-16 shrink-0 rounded-lg bg-cover bg-center ring-1 ring-black/10 ring-inset"></div>
+            <div class="min-w-0 flex-1">
+              <p data-wall-name class="text-lg font-bold"></p>
+              <p data-wall-meta class="text-sm text-muted"></p>
+              <p data-wall-count class="text-sm font-semibold text-green"></p>
+            </div>
+            <button type="button" data-wall-close class="-mr-1 -mt-1 rounded-md p-1.5 text-muted hover:bg-panel hover:text-ink" aria-label="Close finish details">
+              <svg class="size-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" /></svg>
+            </button>
+          </div>
+          <ul data-wall-rows class="mt-4 divide-y divide-line border-t border-line"></ul>
+          <template data-wall-row>
+            <li class="flex items-center justify-between gap-3 py-2.5">
+              <a data-row-link data-row-name class="font-semibold hover:underline"></a>
+              <SampleButton product="" name="" finish="" class="btn btn-ghost btn-sm shrink-0 whitespace-nowrap" />
+            </li>
+          </template>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-line" aria-label="Documents and samples">
+    <div class="shell grid gap-12 py-12 md:grid-cols-2">
+      <div>
+        <h2 class="text-2xl">Build a spec kit</h2>
+        <p class="mt-1 text-muted">Data sheets, CSI specs, CAD/BIM and HPDs: {resources.length} documents, searchable by product.</p>
+        <form action={url('/resources')} method="get" role="search" class="mt-5 flex gap-2">
+          <label for="home-doc-q" class="sr-only">Search documents</label>
+          <input id="home-doc-q" name="q" type="search" placeholder="Product or document, e.g. COFFA CAD" class="field" />
+          <button class="btn btn-primary shrink-0">Search</button>
+        </form>
+      </div>
+      <div>
+        <h2 class="text-2xl">Your sample tray</h2>
+        <p class="mt-1 text-muted"><span data-cart-count>0</span> of {site.sampleLimit} chosen. Add finishes from any product as you browse.</p>
+        <ol class="mt-5 grid grid-cols-8 gap-2" data-tray aria-label="Sample slots">
+          {Array.from({ length: site.sampleLimit }, () => <li class="aspect-square rounded-md border border-dashed border-line"><span class="sr-only">Empty</span></li>)}
+        </ol>
+        <a href={url('/samples')} class="mt-4 inline-block font-semibold text-green underline underline-offset-4">Review and send request</a>
+      </div>
+    </div>
+    <p class="shell border-t border-line py-6 text-muted">
+      Need something outside the standard line? <a href={url(`/projects/${feature.slug}`)} class="font-semibold text-green underline underline-offset-4">See how {feature.name} was customized</a> through {site.materialize.title}.
+    </p>
   </section>
 
   <script type="application/json" id="records" set:html={JSON.stringify(records)}></script>
   <script>
+    import * as cart from '@ml/content/cart';
+    import { bindFinishWall } from '@ml/content/finish-wall';
+    bindFinishWall();
     import { matches, empty, toParams } from '../lib/explorer';
     import type { Rec } from '../lib/records';
     const recs: Rec[] = JSON.parse(document.getElementById('records')!.textContent!);
@@ -116,8 +206,18 @@ const feature = projects.find((p) => !p.placeholder)!;
       const p = toParams(s);
       seeAll.href = `${base}${p.size ? `?${p}` : ''}`;
     }
+    // Sample tray: one slot per cart item, from the shared cart.
+    const tray = [...document.querySelectorAll<HTMLElement>('[data-tray] > li')];
+    const names = new Map(recs.map((r) => [r.slug, r.name]));
+    const fillTray = (items: { product: string; finish: string }[]) => tray.forEach((slot, i) => {
+      const it = items[i];
+      slot.className = it ? 'aspect-square rounded-md bg-green' : 'aspect-square rounded-md border border-dashed border-line';
+      slot.title = it ? `${names.get(it.product) ?? it.product} · ${it.finish}` : '';
+      slot.innerHTML = `<span class="sr-only">${it ? slot.title.replace(/</g, '&lt;') : 'Empty'}</span>`;
+    });
+    cart.onChange(fillTray);
     form.addEventListener('change', update);
-    document.querySelector('[data-reset]')!.addEventListener('click', () => { form.reset(); update(); });
+    document.querySelectorAll('[data-reset]').forEach((b) => b.addEventListener('click', () => { form.reset(); update(); }));
     update();
   </script>
 </Layout>

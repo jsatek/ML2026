@@ -1,0 +1,15 @@
+---
+// A finish swatch that adds that finish of that product to the sample box.
+// With `photo`, the real swatch texture sits over the color field.
+interface Props { product: string; name: string; finish: { name: string; hex: string; group?: string; image?: string | null }; photo?: boolean; class?: string; }
+const { product, name, finish, photo = false, class: cls = '' } = Astro.props;
+---
+<button
+  type="button"
+  class:list={['chip overflow-hidden', cls]}
+  style={`background:${finish.hex}`}
+  title={`${finish.name}${finish.group ? ` · ${finish.group}` : ''}`}
+  aria-label={`${finish.name}: add ${name} sample`}
+  aria-pressed="false"
+  data-add-sample data-product={product} data-name={name} data-finish={finish.name}
+>{photo && finish.image && <img src={finish.image} alt="" loading="lazy" onerror="this.remove()" decoding="async" class="absolute inset-0 h-full w-full object-cover" />}</button>

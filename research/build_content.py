@@ -172,6 +172,7 @@ by_href = OrderedDict()
 pmap = {p['slug']: p for p in products}
 for p in snap['products']:
     for d in p['documents']:
+        if not d['href'].startswith('http'): continue  # e.g. '#%20': a broken link on the live site
         rec = by_href.setdefault(d['href'], {'label': d['label'], 'products': []})
         if p['slug'] not in rec['products']: rec['products'].append(p['slug'])
 mat_name = {m['slug']: m['name'] for m in materials}

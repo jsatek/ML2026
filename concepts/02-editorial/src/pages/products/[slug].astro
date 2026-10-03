@@ -35,7 +35,7 @@ const facts = [
     </header>
 
     <figure class="mt-12">
-      <Media src={hero} alt={`${p.name} installed`} class="aspect-[4/3] sm:aspect-[21/9]" eager />
+      <Media src={hero} color={p.finishes[0]?.hex} alt={`${p.name} installed`} class="aspect-[4/3] sm:aspect-[21/9]" eager />
       <figcaption class="wrap mt-3 text-sm text-muted">{p.fullName}</figcaption>
     </figure>
 
@@ -72,7 +72,7 @@ const facts = [
         )}
         {rest.length > 0 && (
           <div class="mt-16 grid grid-cols-2 gap-4">
-            {rest.slice(0, 4).map((src, i) => <Media src={src} alt="" class:list={['aspect-[4/3]', i === 0 && 'col-span-2 aspect-[16/9]']} />)}
+            {rest.slice(0, 4).map((src, i) => <Media src={src} color={p.finishes[(i + 1) % Math.max(p.finishes.length, 1)]?.hex} alt="" class:list={['aspect-[4/3]', i === 0 && 'col-span-2 aspect-[16/9]']} />)}
           </div>
         )}
       </div>
@@ -144,8 +144,8 @@ const facts = [
             <li class="group">
               <a href={url(x.href)}>
                 <Media src={x.img} class="aspect-[4/3]" />
-                <p class="kicker mt-4 text-teal-ink">{x.kicker}</p>
-                <p class="mt-2 text-3xl font-bold tracking-tight group-hover:underline group-hover:decoration-orange">{x.title}</p>
+                <p class="mt-4 text-3xl font-bold tracking-tight group-hover:underline group-hover:decoration-orange">{x.title}</p>
+                <p class="mt-1 text-muted">{x.kicker}</p>
               </a>
             </li>
           ))}
