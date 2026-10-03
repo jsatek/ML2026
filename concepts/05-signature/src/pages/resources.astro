@@ -1,0 +1,102 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { resources, resourceTypes, products, getProduct, getMaterial } from '@ml/content';
+
+const types = resourceTypes.map((t) => ({ ...t, n: resources.filter((r) => r.type === t.slug).length })).filter((t) => t.n);
+const typeName = Object.fromEntries(resourceTypes.map((t) => [t.slug, t.name]));
+const withDocs = products.filter((p) => resources.some((r) => r.products.includes(p.slug))).sort((a, b) => a.name.localeCompare(b.name));
+const rows = [...resources].sort((a, b) => a.title.localeCompare(b.title));
+const label = (r: (typeof resources)[number]) => {
+  const names = r.products.map((s) => getProduct(s)?.name).filter(Boolean);
+  return names.length ? names.join(', ') : r.materials.map((m) => getMaterial(m)?.name).filter(Boolean).join(', ') || 'All products';
+};
+---
+<Layout title="Resources">
+  <section class="wrap pt-12">
+    <h1 class="display">Resources</h1>
+    <p class="mt-4 max-w-2xl text-lg text-muted">{resources.length} documents: CSI specs, CAD and BIM, data sheets, test reports, sustainability, installation and warranty.</p>
+  </section>
+
+  <form class="wrap mt-10 grid gap-6 border-y border-ink py-6 lg:grid-cols-12" role="search" data-filters onsubmit="return false">
+    <label class="lg:col-span-5">
+      <span class="text-sm font-semibold">Search</span>
+      <input name="q" type="search" class="field mt-2" placeholder="Product, document or file type" autocomplete="off" />
+    </label>
+    <label class="lg:col-span-3">
+      <span class="text-sm font-semibold">Product</span>
+      <select name="product" class="field mt-2">
+        <option value="">All products</option>
+        {withDocs.map((p) => <option value={p.slug}>{p.name}</option>)}
+      </select>
+    </label>
+    <fieldset class="lg:col-span-12">
+      <legend class="text-sm font-semibold">Type</legend>
+      <div class="mt-2 flex flex-wrap gap-2">
+        {types.map((t) => <label class="facet"><input type="checkbox" name="type" value={t.slug} class="sr-only" />{t.name}<span class="num ml-1.5 opacity-60">{t.n}</span></label>)}
+      </div>
+    </fieldset>
+  </form>
+
+  <section class="wrap mt-6" aria-labelledby="docs-h">
+    <div class="flex items-center justify-between gap-4">
+      <h2 id="docs-h" class="text-lg" aria-live="polite"><span class="num" data-count>{rows.length}</span> documents</h2>
+      <button type="button" class="link text-sm" data-clear hidden>Clear filters</button>
+    </div>
+    <ul class="mt-4 border-t border-ink" data-list>
+      {rows.map((r) => (
+        <li class="border-b border-line" data-type={r.type} data-products={r.products.join(' ')} data-search={`${r.title} ${label(r)} ${typeName[r.type] ?? ''} ${r.format}`.toLowerCase()}>
+          <a href={r.href} target="_blank" rel="noopener" class="group grid min-h-14 grid-cols-[1fr_auto] items-center gap-x-6 gap-y-1 py-3 md:grid-cols-[minmax(0,5fr)_minmax(0,3fr)_minmax(0,2fr)_auto]">
+            <span class="font-medium group-hover:underline">{r.title}</span>
+            <span class="col-start-1 text-sm text-muted md:col-start-auto">{label(r)}</span>
+            <span class="hidden text-sm text-muted md:block">{typeName[r.type]}{r.updated && <span class="num"> · {r.updated}</span>}</span>
+            <span class="row-span-2 row-start-1 inline-flex items-center gap-2 text-sm font-semibold text-green md:row-span-1 md:row-start-auto">
+              <span class="rounded-sm border border-line px-1.5 text-xs text-muted">{r.format}</span>
+              <svg class="size-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M10 3v10M6 9l4 4 4-4M4 16h12" /></svg>
+              <span class="sr-only">Download</span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <div hidden class="py-10" data-empty>
+      <p class="text-xl font-semibold">No documents match.</p>
+      <p class="mt-2 text-muted">Try a product name, or clear the type filter.</p>
+    </div>
+  </section>
+
+  <script>
+    const form = document.querySelector<HTMLFormElement>('[data-filters]')!;
+    const rows = [...document.querySelectorAll<HTMLElement>('[data-list] > li')];
+    const clear = document.querySelector<HTMLButtonElement>('[data-clear]')!;
+    const params = new URLSearchParams(location.search);
+    (form.elements.namedItem('q') as HTMLInputElement).value = params.get('q') ?? '';
+    (form.elements.namedItem('product') as HTMLSelectElement).value = params.get('product') ?? '';
+    form.querySelectorAll<HTMLInputElement>('input[name=type]').forEach((i) => (i.checked = params.getAll('type').includes(i.value)));
+
+    function apply() {
+      const d = new FormData(form);
+      const words = String(d.get('q') ?? '').trim().toLowerCase().split(/\s+/).filter(Boolean);
+      const product = String(d.get('product') ?? '');
+      const types = d.getAll('type') as string[];
+      let n = 0;
+      for (const li of rows) {
+        const ok = words.every((w) => li.dataset.search!.includes(w)) &&
+          (!product || li.dataset.products!.split(' ').includes(product)) &&
+          (!types.length || types.includes(li.dataset.type!));
+        li.hidden = !ok;
+        if (ok) n++;
+      }
+      document.querySelector('[data-count]')!.textContent = String(n);
+      document.querySelector<HTMLElement>('[data-empty]')!.hidden = n > 0;
+      clear.hidden = !(words.length || product || types.length);
+      const out = new URLSearchParams();
+      if (words.length) out.set('q', words.join(' '));
+      if (product) out.set('product', product);
+      types.forEach((t) => out.append('type', t));
+      history.replaceState(null, '', `${location.pathname}${out.size ? `?${out}` : ''}`);
+    }
+    form.addEventListener('input', apply);
+    clear.addEventListener('click', () => { form.reset(); apply(); });
+    apply();
+  </script>
+</Layout>

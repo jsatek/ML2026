@@ -1,0 +1,165 @@
+---
+import '../styles/global.css';
+import { site, products, getMaterial } from '@ml/content';
+import wordmark from '@ml/brand/logo/materiallogiq-wordmark.webp';
+import { url } from '../lib/utils';
+
+interface Props { title?: string; description?: string; }
+const { title, description = site.intro } = Astro.props;
+const path = Astro.url.pathname.replace(import.meta.env.BASE_URL.replace(/\/$/, ''), '') || '/';
+const nav = site.nav;
+const isActive = (href: string) => path === href || path.startsWith(`${href}/`);
+// Compact catalog so the sample drawer can show names and true finish color.
+const catalog = Object.fromEntries(products.map((p) => [p.slug, {
+  n: p.name, m: getMaterial(p.material)?.name, h: url(`/products/${p.slug}`),
+  f: Object.fromEntries(p.finishes.map((f) => [f.name, f.hex])),
+}]));
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#ffffff" />
+    <title>{title ? `${title} | ${site.name}` : `${site.name} · ${site.tagline}`}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body class="flex min-h-screen flex-col font-sans">
+    <a href="#main" class="sr-only z-[70] bg-ink px-4 py-2 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Skip to content</a>
+
+    <header class="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/85">
+      <div class="wrap flex h-16 items-center gap-3 md:gap-6">
+        <a href={url('/')} class="shrink-0" aria-label={`${site.name} home`}>
+          <img src={wordmark.src} alt="" width={wordmark.width} height={wordmark.height} class="h-5 w-auto" />
+        </a>
+        <nav aria-label="Main" class="ml-auto hidden items-center gap-7 md:flex">
+          {nav.map((n) => (
+            <a href={url(n.href)} class:list={['text-[0.9375rem] font-medium hover:text-green', isActive(n.href) && 'underline decoration-teal decoration-2 underline-offset-[1.35rem]']} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a>
+          ))}
+        </nav>
+        <a href={url('/samples')} class="btn btn-primary ml-auto !min-h-10 !px-4 !py-2 md:ml-0" data-drawer-open aria-haspopup="dialog" aria-controls="sample-drawer">
+          Samples <span class="num rounded-sm bg-white/15 px-1.5 text-sm" data-cart-count>0</span><span class="sr-only"> of {site.sampleLimit}</span>
+        </a>
+        <button type="button" class="-mr-2 p-2 md:hidden" aria-expanded="false" aria-controls="mobile-nav" data-menu>
+          <span class="sr-only">Menu</span>
+          <svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M4 8h16M4 16h16" /></svg>
+        </button>
+      </div>
+      <nav id="mobile-nav" aria-label="Mobile" hidden class="border-t border-line md:hidden">
+        <ul class="wrap py-2">
+          {nav.map((n) => <li><a href={url(n.href)} class="flex min-h-12 items-center border-b border-line text-lg font-medium last:border-0" aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a></li>)}
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main" class="flex-1"><slot /></main>
+
+    <footer class="mt-24 bg-green text-white">
+      <div class="wrap grid gap-10 py-16 md:grid-cols-12">
+        <div class="md:col-span-5">
+          <p class="text-3xl font-semibold tracking-tight">{site.tagline}</p>
+          <p class="mt-4 max-w-md text-white/80">Ask about a custom finish, size or system for your project.</p>
+          <a href={`mailto:${site.contact.email}`} class="btn btn-light mt-6">{site.contact.email}</a>
+        </div>
+        <div class="text-sm md:col-span-3 md:col-start-7">
+          <p class="font-semibold">Contact</p>
+          <address class="mt-3 not-italic leading-relaxed text-white/80">{site.contact.address}<br /><a href={`tel:${site.contact.phone.replace(/\D/g, '')}`} class="hover:text-white">{site.contact.phone}</a></address>
+        </div>
+        <nav aria-label="Footer" class="text-sm md:col-span-3">
+          <p class="font-semibold">Explore</p>
+          <ul class="mt-3 space-y-2 text-white/80">
+            {nav.map((n) => <li><a href={url(n.href)} class="hover:text-white">{n.label}</a></li>)}
+            <li><a href={url('/samples')} class="hover:text-white">Sample box</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="border-t border-white/15">
+        <p class="wrap py-4 text-xs text-white/70">Concept 05 · Signature. Content and photography from materiallogiq.com.</p>
+      </div>
+    </footer>
+
+    <!-- Sample drawer -->
+    <dialog id="sample-drawer" aria-labelledby="drawer-h" class="m-0 ml-auto h-dvh max-h-none w-full max-w-md bg-white p-0 backdrop:bg-ink/40 open:flex open:flex-col">
+      <div class="flex items-center justify-between border-b border-line px-6 py-5">
+        <h2 id="drawer-h" class="text-xl">Sample box <span class="num font-normal text-muted"><span data-cart-count>0</span> of {site.sampleLimit}</span></h2>
+        <button type="button" class="-mr-2 p-2" data-drawer-close aria-label="Close sample box">
+          <svg class="size-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" /></svg>
+        </button>
+      </div>
+      <ol class="flex-1 overflow-y-auto px-6" data-drawer-list></ol>
+      <p class="px-6 py-10 text-muted" data-drawer-empty>No samples yet. Pick a finish on any product, or on the finish wall, to add it here.</p>
+      <div class="border-t border-line p-6">
+        <a href={url('/samples')} class="btn btn-primary w-full">Review and request samples</a>
+      </div>
+    </dialog>
+
+    <div role="status" aria-live="polite" class="pointer-events-none fixed inset-x-0 bottom-6 z-[60] flex justify-center px-4">
+      <p hidden data-toast class="pointer-events-auto flex items-center gap-4 rounded bg-ink px-5 py-3 text-sm text-white shadow-[0_8px_24px_rgb(0_0_0/.25)]">
+        <span data-toast-text></span>
+        <button type="button" class="font-semibold underline decoration-teal decoration-2" data-drawer-open>View box</button>
+      </p>
+    </div>
+
+    <script type="application/json" id="catalog" set:html={JSON.stringify(catalog)}></script>
+    <script>
+      import * as cart from '@ml/content/cart';
+      import { bindSampleUI } from '@ml/content/sample-ui';
+
+      const catalog: Record<string, { n: string; m?: string; h: string; f: Record<string, string> }> = JSON.parse(document.getElementById('catalog')!.textContent!);
+      const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+
+      // Toast
+      const toast = document.querySelector<HTMLElement>('[data-toast]')!;
+      let timer: number | undefined;
+      bindSampleUI({
+        addedLabel: 'Added',
+        notify: (message) => {
+          toast.querySelector('[data-toast-text]')!.textContent = message;
+          toast.hidden = false;
+          clearTimeout(timer);
+          timer = window.setTimeout(() => (toast.hidden = true), 4000);
+        },
+      });
+
+      // Drawer
+      const drawer = document.getElementById('sample-drawer') as HTMLDialogElement;
+      const list = drawer.querySelector<HTMLElement>('[data-drawer-list]')!;
+      const empty = drawer.querySelector<HTMLElement>('[data-drawer-empty]')!;
+      cart.onChange((items) => {
+        empty.hidden = items.length > 0;
+        list.innerHTML = items.map((i) => {
+          const p = catalog[i.product];
+          const hex = p?.f[i.finish] ?? '#e6e8e7';
+          return `<li class="flex items-center gap-4 border-b border-line py-4">
+            <span class="size-12 shrink-0 rounded shadow-[inset_0_0_0_1px_rgb(0_0_0/.12)]" style="background:${esc(hex)}"></span>
+            <span class="min-w-0 flex-1"><a href="${esc(p?.h ?? '#')}" class="font-semibold hover:underline">${esc(p?.n ?? i.product)}</a><span class="block text-sm text-muted">${esc(i.finish)}${p?.m ? ` · ${esc(p.m)}` : ''}</span></span>
+            <button type="button" class="p-2 text-muted hover:text-ink" data-remove="${esc(i.product)}" data-finish="${esc(i.finish)}" aria-label="Remove ${esc(p?.n ?? '')} ${esc(i.finish)}">
+              <svg class="size-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg>
+            </button></li>`;
+        }).join('');
+      });
+      list.addEventListener('click', (e) => {
+        const b = (e.target as Element).closest<HTMLElement>('[data-remove]');
+        if (b) cart.remove({ product: b.dataset.remove!, finish: b.dataset.finish! });
+      });
+      document.addEventListener('click', (e) => {
+        if ((e.target as Element).closest('[data-drawer-open]')) { e.preventDefault(); drawer.showModal(); toast.hidden = true; }
+        if ((e.target as Element).closest('[data-drawer-close]')) drawer.close();
+      });
+      drawer.addEventListener('click', (e) => { if (e.target === drawer) drawer.close(); });
+
+      // Mobile menu
+      const menu = document.querySelector<HTMLButtonElement>('[data-menu]')!;
+      const mobileNav = document.getElementById('mobile-nav')!;
+      menu.addEventListener('click', () => {
+        const open = menu.getAttribute('aria-expanded') === 'true';
+        menu.setAttribute('aria-expanded', String(!open));
+        mobileNav.hidden = open;
+      });
+    </script>
+  </body>
+</html>

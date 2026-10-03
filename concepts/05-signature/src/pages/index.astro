@@ -1,0 +1,221 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Media from '../components/Media.astro';
+import FinishChip from '../components/FinishChip.astro';
+import SampleButton from '../components/SampleButton.astro';
+import {
+  site, materials, products, projects, resources, resourceTypes, categories,
+  productsInMaterial, getMaterial, getProduct, specSummary, formatNrc, finishWall,
+} from '@ml/content';
+import { url } from '../lib/utils';
+
+// Silk Metal leads.
+const silk = getMaterial('silk-metal')!;
+const silkProducts = productsInMaterial(silk.slug);
+const silkSpec = specSummary(silkProducts);
+const silkHero = getProduct('silk-metal-baffles') ?? silkProducts[0];
+const sentences = silk.summary.match(/[^.!?]+[.!?]+/g) ?? [];
+const at = sentences.findIndex((t) => t.includes('perforations'));
+const silkCopy = at >= 0 ? sentences.slice(at, at + 2).join(' ').trim() : silk.aka;
+const silkGroups = silkSpec.finishGroups.map((g) => ({ name: g, finishes: silkSpec.finishes.filter((f) => f.group === g) }));
+
+// The range, Silk Metal first.
+const range = [silk, ...materials.filter((m) => m.slug !== silk.slug)].map((m) => {
+  const items = productsInMaterial(m.slug);
+  return { m, items, spec: specSummary(items) };
+});
+const all = specSummary(products);
+
+// Finish wall
+const wall = [...finishWall()].sort((a, b) => Number(b.material.slug === silk.slug) - Number(a.material.slug === silk.slug));
+const wallTotal = wall.reduce((n, w) => n + w.count, 0);
+const wallProducts = Object.fromEntries(products.map((p) => [p.slug, { name: p.name, href: url(`/products/${p.slug}`) }]));
+
+// Case study and documents
+const story = projects.find((p) => !p.placeholder && p.featured) ?? projects.find((p) => !p.placeholder)!;
+const docTypes = resourceTypes.map((t) => ({ ...t, n: resources.filter((r) => r.type === t.slug).length })).filter((t) => t.n);
+---
+<Layout>
+  <!-- Silk Metal -->
+  <section aria-labelledby="silk-h">
+    <Media src={silkHero.images.hero} alt={`${silkHero.name} in a conference room`} color={silkSpec.finishes[0]?.hex} eager
+      class="h-[46svh] min-h-[18rem] sm:h-[58svh]" imgClass="object-[50%_40%]" />
+    <div class="wrap grid gap-10 pt-10 pb-20 lg:grid-cols-12 lg:pt-12">
+      <div class="lg:col-span-6">
+        <h1 id="silk-h" class="display">{silk.name}</h1>
+        <p class="mt-4 text-xl text-teal-ink">{silk.aka}</p>
+        <p class="mt-5 max-w-xl text-lg text-muted">{silkCopy}</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={url(`/products?material=${silk.slug}`)} class="btn btn-primary">See all {silkSpec.count} {silk.name} systems</a>
+          <a href={url('/products')} class="btn btn-line">All {products.length} products</a>
+        </div>
+      </div>
+      <div class="lg:col-span-5 lg:col-start-8">
+        <dl class="num grid grid-cols-3 border-y border-ink py-4">
+          <div><dt class="text-sm text-muted">NRC</dt><dd class="mt-1 text-2xl font-semibold">{formatNrc(silkSpec) ?? 'n/a'}</dd></div>
+          <div><dt class="text-sm text-muted">Fire</dt><dd class="mt-1 text-2xl font-semibold">{silkSpec.fire.map((r) => `Class ${r}`).join(', ') || 'n/a'}</dd></div>
+          <div><dt class="text-sm text-muted">Finishes</dt><dd class="mt-1 text-2xl font-semibold">{silkSpec.finishes.length}</dd></div>
+        </dl>
+        <div class="mt-6" data-silk>
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <h2 class="text-lg">Add a finish to your sample box</h2>
+            <label class="flex items-center gap-2 text-sm text-muted">
+              <span>Sample on</span>
+              <select class="field !min-h-9 !w-auto !py-1.5 !pr-8 text-ink" data-silk-product>
+                {silkProducts.map((p) => <option value={p.slug} selected={p.slug === silkHero.slug}>{p.name}</option>)}
+              </select>
+            </label>
+          </div>
+          {silkGroups.map((g) => (
+            <div class="mt-4">
+              <p class="text-sm text-muted">{g.name}</p>
+              <div class="mt-2 grid grid-cols-9 gap-1.5 sm:gap-2">
+                {g.finishes.map((f) => <FinishChip product={silkHero.slug} name={silkHero.name} finish={f} />)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The range -->
+  <section class="wrap border-t border-ink pt-12" aria-labelledby="range-h">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <h2 id="range-h" class="h2">{materials.length} materials, {products.length} systems</h2>
+      <p class="text-sm text-muted">{all.fire.length === 1 ? `All rated Class ${all.fire[0]} fire.` : ''} NRC shown as the range across each material.</p>
+    </div>
+    <ol class="mt-8">
+      {range.map(({ m, items, spec }, i) => (
+        <li class="group relative grid gap-6 border-t border-line py-8 md:grid-cols-12 md:items-center">
+          <div class="md:col-span-4">
+            <h3 class="text-3xl">
+              <a href={url(`/products?material=${m.slug}`)} class="after:absolute after:inset-0 group-hover:underline">{m.name}</a>
+            </h3>
+            {m.aka && <p class="mt-1 text-muted">{m.aka}</p>}
+          </div>
+          <dl class="num grid grid-cols-3 gap-4 text-sm md:col-span-4">
+            <div><dt class="text-muted">Systems</dt><dd class="mt-1 text-lg font-semibold">{spec.count}</dd></div>
+            <div><dt class="text-muted">NRC</dt><dd class="mt-1 text-lg font-semibold">{formatNrc(spec) ?? 'n/a'}</dd></div>
+            <div><dt class="text-muted">Finishes</dt><dd class="mt-1 text-lg font-semibold">{spec.finishes.length}</dd></div>
+          </dl>
+          <div class="grid grid-cols-3 gap-2 md:col-span-4">
+            {items.slice(0, 3).map((p, j) => (
+              <Media src={p.images.gallery[0] ?? p.images.hero} color={p.finishes[0]?.hex} class="aspect-square" eager={i === 0 && j === 0} />
+            ))}
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <!-- Finish wall -->
+  <section class="mt-16 bg-mist py-20" aria-labelledby="wall-h" data-finish-wall>
+    <div class="wrap">
+      <h2 id="wall-h" class="h2">Every finish</h2>
+      <p class="mt-3 max-w-2xl text-lg text-muted">{wallTotal} finishes across {wall.length} materials. Pick one to see the products that come in it, then add a sample.</p>
+      <script type="application/json" data-wall-products set:html={JSON.stringify(wallProducts)}></script>
+      <div class="mt-10 grid gap-10 lg:grid-cols-12">
+        <div class="space-y-10 lg:col-span-8">
+          {wall.map((w) => (
+            <div>
+              <div class="flex items-baseline justify-between gap-4 border-b border-ink pb-2">
+                <h3 class="text-xl">{w.material.name}</h3>
+                <a href={url(`/products?material=${w.material.slug}`)} class="num text-sm text-muted hover:text-ink">{w.count} finishes</a>
+              </div>
+              {w.groups.map((g) => (
+                <div class="mt-4">
+                  <p class="text-sm text-muted">{g.name}</p>
+                  <ul class="mt-2 grid grid-cols-[repeat(auto-fill,minmax(2.5rem,1fr))] gap-1.5">
+                    {g.finishes.map((f) => (
+                      <li>
+                        <a href={url(`/products/${f.products[0]}`)} class="chip" style={`background:${f.hex}`} title={f.name}
+                          data-swatch data-name={f.name} data-hex={f.hex} data-image={f.image ?? ''} data-group={g.name} data-material={w.material.name} data-products={f.products.join(' ')}
+                        ><span class="sr-only">{f.name}, {w.material.name}</span></a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+        <div class="lg:col-span-4">
+          <div data-wall-panel hidden class="fixed inset-x-0 bottom-0 z-40 max-h-[72svh] overflow-y-auto border-t border-ink bg-white p-6 shadow-[0_-12px_32px_rgb(0_0_0/.18)] lg:sticky lg:top-24 lg:z-auto lg:max-h-[calc(100svh-7rem)] lg:border lg:border-line lg:shadow-none">
+            <div class="flex items-start gap-4">
+              <div data-wall-chip class="aspect-square w-24 shrink-0 rounded bg-cover bg-center shadow-[inset_0_0_0_1px_rgb(0_0_0/.12)]"></div>
+              <div class="min-w-0 flex-1">
+                <p data-wall-name class="text-xl font-semibold tracking-tight"></p>
+                <p data-wall-meta class="text-sm text-muted"></p>
+                <p data-wall-count class="num mt-1 text-sm text-teal-ink"></p>
+              </div>
+              <button type="button" data-wall-close class="-mr-2 -mt-2 p-2 text-muted hover:text-ink" aria-label="Close finish details">
+                <svg class="size-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" /></svg>
+              </button>
+            </div>
+            <ul data-wall-rows class="mt-5 border-t border-ink"></ul>
+            <template data-wall-row>
+              <li class="flex items-center justify-between gap-3 border-b border-line py-3">
+                <a data-row-link data-row-name class="font-semibold hover:underline"></a>
+                <SampleButton product="" name="" finish="" label="Add sample" class="btn btn-line !min-h-9 shrink-0 whitespace-nowrap !px-3 !py-1.5 text-sm" />
+              </li>
+            </template>
+          </div>
+          <p class="wall-hint hidden border-t border-ink pt-4 text-muted lg:sticky lg:top-24 lg:block">Pick a finish to see which products come in it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case study -->
+  <section class="wrap mt-20 grid gap-10 lg:grid-cols-12 lg:items-end" aria-labelledby="story-h">
+    <Media src={story.images[0]} alt={story.name} color={getProduct(story.products[0] ?? '')?.finishes[0]?.hex} class="aspect-[4/3] lg:col-span-7" />
+    <div class="lg:col-span-5">
+      <p class="text-sm text-muted">{story.sector} · {story.location}{story.year && ` · ${story.year}`}</p>
+      <h2 id="story-h" class="h2 mt-2">{story.name}</h2>
+      <p class="mt-4 text-lg">{story.summary}</p>
+      <p class="mt-4 text-muted">{story.story[0]}</p>
+      <a href={url(`/projects/${story.slug}`)} class="link mt-6 inline-block">Read the project</a>
+    </div>
+  </section>
+
+  <!-- Documents -->
+  <section class="wrap mt-24 grid gap-10 border-t border-ink pt-12 lg:grid-cols-12" aria-labelledby="docs-h">
+    <div class="lg:col-span-5">
+      <h2 id="docs-h" class="h2">Specs, drawings and data sheets</h2>
+      <p class="mt-3 text-muted">{resources.length} documents for {categories.length} product types, searchable by product or file.</p>
+      <form action={url('/resources')} method="get" role="search" class="mt-6 flex gap-2">
+        <label for="home-q" class="sr-only">Search documents</label>
+        <input id="home-q" name="q" type="search" class="field" placeholder="Product or document, e.g. COFFA CAD" />
+        <button class="btn btn-primary shrink-0">Search</button>
+      </form>
+    </div>
+    <ul class="grid content-start gap-x-8 sm:grid-cols-2 lg:col-span-6 lg:col-start-7">
+      {docTypes.map((t) => (
+        <li class="border-b border-line">
+          <a href={url(`/resources?type=${t.slug}`)} class="flex min-h-12 items-center justify-between gap-4 py-2 hover:text-green">
+            <span class="font-medium">{t.name}</span><span class="num text-sm text-muted">{t.n}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <script>
+    import { bindFinishWall } from '@ml/content/finish-wall';
+    import { getCart } from '@ml/content/cart';
+    bindFinishWall();
+
+    // Retarget the Silk Metal chips to the chosen system.
+    const select = document.querySelector<HTMLSelectElement>('[data-silk-product]');
+    select?.addEventListener('change', () => {
+      const name = select.selectedOptions[0].textContent ?? '';
+      document.querySelectorAll<HTMLElement>('[data-silk] [data-add-sample]').forEach((b) => {
+        b.dataset.product = select.value;
+        b.dataset.name = name;
+        b.setAttribute('aria-label', `${b.dataset.finish}: add ${name} sample`);
+      });
+      window.dispatchEvent(new CustomEvent('ml:cart', { detail: getCart() }));
+    });
+  </script>
+</Layout>

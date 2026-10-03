@@ -1,0 +1,62 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Media from '../../components/Media.astro';
+import { projects, sectors, getProduct, getMaterial } from '@ml/content';
+import { url } from '../../lib/utils';
+
+const real = projects.filter((p) => !p.placeholder);
+const samples = projects.filter((p) => p.placeholder);
+const usedSectors = sectors.filter((s) => projects.some((p) => p.sector === s));
+const specified = (p: (typeof projects)[number]) =>
+  p.products.length ? p.products.map((s) => getProduct(s)?.name).filter(Boolean).join(', ') : `Custom ${p.materials.map((m) => getMaterial(m)?.name).join(', ')}${p.applications.length ? ` ${p.applications.join(', ').toLowerCase()}` : ''}`;
+const color = (p: (typeof projects)[number]) => getProduct(p.products[0] ?? '')?.finishes[0]?.hex;
+---
+<Layout title="Projects">
+  <section class="wrap pt-12">
+    <h1 class="display">Projects</h1>
+    <p class="mt-4 max-w-2xl text-lg text-muted">{real.length} completed projects, then {samples.length} sample projects that show products in typical settings. Sample projects use real product photos; the settings are illustrative.</p>
+    <div class="mt-8 flex flex-wrap gap-2" role="group" aria-label="Filter by sector" data-sectors>
+      <label class="facet"><input type="radio" name="sector" value="" class="sr-only" checked />All</label>
+      {usedSectors.map((s) => <label class="facet"><input type="radio" name="sector" value={s} class="sr-only" />{s}</label>)}
+    </div>
+  </section>
+
+  <ol class="wrap mt-12 space-y-16" aria-label="Completed projects">
+    {real.map((p, i) => (
+      <li class="group relative grid gap-8 border-t border-ink pt-8 lg:grid-cols-12" data-sector={p.sector}>
+        <Media src={p.images[0]} alt={p.name} color={color(p)} eager={i === 0} class="aspect-[16/10] lg:col-span-8" />
+        <div class="lg:col-span-4">
+          <p class="text-sm text-muted">{p.sector} · {p.location}{p.year && ` · ${p.year}`}</p>
+          <h2 class="h2 mt-2"><a href={url(`/projects/${p.slug}`)} class="after:absolute after:inset-0 group-hover:underline">{p.name}</a></h2>
+          <p class="mt-4 text-lg">{p.summary}</p>
+          <p class="mt-4 text-sm text-muted">Specified: {specified(p)}</p>
+        </div>
+      </li>
+    ))}
+  </ol>
+
+  <section class="wrap mt-24 border-t border-ink pt-10" aria-labelledby="samples-h">
+    <h2 id="samples-h" class="text-2xl">Sample projects</h2>
+    <p class="mt-2 max-w-2xl text-muted">Illustrative settings built around real product photography, so you can see each system in context.</p>
+    <ul class="mt-8 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+      {samples.map((p) => (
+        <li class="group relative" data-sector={p.sector}>
+          <div class="relative">
+            <Media src={p.images[0]} alt="" color={color(p)} class="aspect-[4/3]" />
+            <span class="absolute left-3 top-3 rounded-sm bg-white px-2 py-0.5 text-xs font-semibold">Sample project</span>
+          </div>
+          <h3 class="mt-4 text-lg"><a href={url(`/projects/${p.slug}`)} class="after:absolute after:inset-0 group-hover:underline">{p.name}</a></h3>
+          <p class="text-sm text-muted">{p.sector} · {specified(p)}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <script>
+    const group = document.querySelector('[data-sectors]')!;
+    group.addEventListener('change', (e) => {
+      const v = (e.target as HTMLInputElement).value;
+      document.querySelectorAll<HTMLElement>('[data-sector]').forEach((el) => (el.hidden = !!v && el.dataset.sector !== v));
+    });
+  </script>
+</Layout>

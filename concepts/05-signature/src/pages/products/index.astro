@@ -1,0 +1,153 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { products, materials, categories, productsInMaterial, productsInCategory, specSummary } from '@ml/content';
+
+const order = (slug: string) => (slug === 'silk-metal' ? 0 : 1);
+const sorted = [...products].sort((a, b) => order(a.material) - order(b.material) || Number(b.featured) - Number(a.featured) || a.name.localeCompare(b.name));
+const groups = [...new Set(categories.map((c) => c.group))];
+const mats = [...materials].sort((a, b) => order(a.slug) - order(b.slug));
+const all = specSummary(products);
+const nrcSteps = [0.6, 0.8, 1.0];
+---
+<Layout title="Products">
+  <section class="wrap pt-12">
+    <h1 class="display">Products</h1>
+    <p class="mt-4 max-w-2xl text-lg text-muted">
+      {products.length} acoustic systems in {materials.length} materials.
+      {all.fire.length === 1 && ` All rated Class ${all.fire[0]} fire.`}
+      {all.nrcUnknown > 0 && ` ${all.nrcUnknown} have no published NRC and show as n/a.`}
+    </p>
+  </section>
+
+  <div class="wrap mt-10 grid gap-10 lg:grid-cols-12">
+    <aside class="lg:col-span-3">
+      <details class="group lg:pointer-events-none" open data-filter-panel>
+        <summary class="flex min-h-12 cursor-pointer list-none items-center justify-between border-y border-ink text-lg font-semibold lg:border-t-0 lg:pb-3 [&::-webkit-details-marker]:hidden">
+          Filter <span class="text-sm font-normal text-muted lg:hidden" data-active>None</span>
+        </summary>
+        <form class="space-y-7 pt-6 lg:pointer-events-auto" data-filters>
+          <label class="block">
+            <span class="text-sm font-semibold">Search</span>
+            <input name="q" type="search" class="field mt-2" placeholder="Name, finish or feature" />
+          </label>
+          <fieldset>
+            <legend class="text-sm font-semibold">Surface</legend>
+            <div class="mt-2 flex flex-wrap gap-2">
+              <label class="facet"><input type="radio" name="surface" value="" class="sr-only" checked />Any</label>
+              {groups.map((g) => <label class="facet"><input type="radio" name="surface" value={g} class="sr-only" />{g}</label>)}
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend class="text-sm font-semibold">Product type</legend>
+            <div class="mt-2 flex flex-wrap gap-2">
+              {categories.map((c) => <label class="facet" data-group={c.group}><input type="checkbox" name="type" value={c.slug} class="sr-only" />{c.name}<span class="num ml-1.5 opacity-60">{productsInCategory(c.slug).length}</span></label>)}
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend class="text-sm font-semibold">Material</legend>
+            <div class="mt-2 flex flex-wrap gap-2">
+              {mats.map((m) => <label class="facet"><input type="checkbox" name="material" value={m.slug} class="sr-only" />{m.name}<span class="num ml-1.5 opacity-60">{productsInMaterial(m.slug).length}</span></label>)}
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend class="text-sm font-semibold">Minimum NRC</legend>
+            <div class="mt-2 flex flex-wrap gap-2">
+              <label class="facet"><input type="radio" name="nrc" value="" class="sr-only" checked />Any</label>
+              {nrcSteps.map((n) => <label class="facet num"><input type="radio" name="nrc" value={n} class="sr-only" />{n.toFixed(2)}+</label>)}
+            </div>
+          </fieldset>
+          <button type="reset" class="link text-sm">Clear filters</button>
+        </form>
+      </details>
+    </aside>
+
+    <section class="lg:col-span-9" aria-labelledby="results-h">
+      <div class="flex flex-wrap items-center justify-between gap-4 border-b border-ink pb-3">
+        <h2 id="results-h" class="text-lg" aria-live="polite"><span class="num" data-count>{products.length}</span> products</h2>
+        <label class="flex items-center gap-2 text-sm text-muted">Sort
+          <select name="sort" class="field !min-h-9 !w-auto !py-1.5 !pr-8 text-ink" data-sort>
+            <option value="signature">Silk Metal first</option>
+            <option value="nrc">Highest NRC</option>
+            <option value="name">Name A–Z</option>
+          </select>
+        </label>
+      </div>
+      <ul class="mt-8 grid gap-x-6 gap-y-12 sm:grid-cols-2 xl:grid-cols-3" data-grid>
+        {sorted.map((p, i) => <li data-slug={p.slug} data-name={p.name} data-search={`${p.name} ${p.fullName} ${p.tagline} ${p.features.join(' ')} ${p.finishes.map((f) => f.name).join(' ')}`.toLowerCase()} data-order={i}><ProductCard product={p} eager={i < 3} /></li>)}
+      </ul>
+      <div hidden class="mt-10 border-t border-line pt-8" data-empty>
+        <p class="text-xl font-semibold">No products match all of these filters.</p>
+        <p class="mt-2 text-muted">Loosen the NRC minimum or clear a type, or ask about adapting a system to your spec.</p>
+        <button type="button" class="btn btn-line mt-5" data-clear>Clear filters</button>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const form = document.querySelector<HTMLFormElement>('[data-filters]')!;
+    const grid = document.querySelector<HTMLElement>('[data-grid]')!;
+    const items = [...grid.children] as HTMLElement[];
+    const sortEl = document.querySelector<HTMLSelectElement>('[data-sort]')!;
+    const groupOf: Record<string, string> = {};
+    form.querySelectorAll<HTMLElement>('[data-group]').forEach((l) => (groupOf[l.querySelector('input')!.value] = l.dataset.group!));
+
+    // Restore from the URL (e.g. /products?material=silk-metal from the home page).
+    const params = new URLSearchParams(location.search);
+    form.querySelectorAll<HTMLInputElement>('input[type=checkbox]').forEach((i) => (i.checked = params.getAll(i.name).includes(i.value)));
+    form.querySelectorAll<HTMLInputElement>('input[type=radio]').forEach((i) => (i.checked = (params.get(i.name) ?? '') === i.value));
+    (form.elements.namedItem('q') as HTMLInputElement).value = params.get('q') ?? '';
+    sortEl.value = params.get('sort') ?? 'signature';
+    if (matchMedia('(max-width: 1023px)').matches) document.querySelector('[data-filter-panel]')?.removeAttribute('open');
+
+    function apply() {
+      const d = new FormData(form);
+      const q = String(d.get('q') ?? '').trim().toLowerCase();
+      const surface = String(d.get('surface') ?? '');
+      const types = d.getAll('type') as string[];
+      const mats = d.getAll('material') as string[];
+      const nrc = Number(d.get('nrc') || 0);
+      // Type chips follow the chosen surface.
+      form.querySelectorAll<HTMLElement>('[data-group]').forEach((l) => {
+        const off = !!surface && l.dataset.group !== surface;
+        l.hidden = off;
+        if (off) l.querySelector('input')!.checked = false;
+      });
+      const activeTypes = types.filter((t) => !surface || groupOf[t] === surface);
+      let n = 0;
+      for (const li of items) {
+        const card = li.querySelector<HTMLElement>('[data-card]')!;
+        const cardTypes = card.dataset.types!.split(' ');
+        const ok =
+          (!q || li.dataset.search!.includes(q)) &&
+          (!surface || cardTypes.some((t) => groupOf[t] === surface)) &&
+          (!activeTypes.length || activeTypes.some((t) => cardTypes.includes(t))) &&
+          (!mats.length || mats.includes(card.dataset.material!)) &&
+          (!nrc || Number(card.dataset.nrc || 0) >= nrc);
+        li.hidden = !ok;
+        if (ok) n++;
+      }
+      const by = sortEl.value;
+      const key = (li: HTMLElement) => by === 'nrc' ? -Number(li.querySelector<HTMLElement>('[data-card]')!.dataset.nrc || -1) : by === 'name' ? 0 : Number(li.dataset.order);
+      [...items].sort((a, b) => key(a) - key(b) || (by === 'name' ? a.dataset.name!.localeCompare(b.dataset.name!) : 0)).forEach((li) => grid.append(li));
+      document.querySelector('[data-count]')!.textContent = String(n);
+      document.querySelector<HTMLElement>('[data-empty]')!.hidden = n > 0;
+      const active = activeTypes.length + mats.length + (surface ? 1 : 0) + (nrc ? 1 : 0) + (q ? 1 : 0);
+      document.querySelector('[data-active]')!.textContent = active ? `${active} active` : 'None';
+      const out = new URLSearchParams();
+      if (q) out.set('q', q);
+      if (surface) out.set('surface', surface);
+      activeTypes.forEach((t) => out.append('type', t));
+      mats.forEach((m) => out.append('material', m));
+      if (nrc) out.set('nrc', String(nrc));
+      if (by !== 'signature') out.set('sort', by);
+      history.replaceState(null, '', `${location.pathname}${out.size ? `?${out}` : ''}`);
+    }
+    form.addEventListener('input', apply);
+    form.addEventListener('change', apply);
+    form.addEventListener('reset', () => setTimeout(apply));
+    sortEl.addEventListener('change', apply);
+    document.querySelector('[data-clear]')!.addEventListener('click', () => form.reset());
+    apply();
+  </script>
+</Layout>
