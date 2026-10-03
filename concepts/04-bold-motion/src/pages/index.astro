@@ -56,14 +56,18 @@ const silkHero = silkProducts.find((p) => p.slug === 'silk-metal-grille') ?? sil
 
   <!-- Pinned horizontal materials -->
   <section id="materials" class="relative" data-pin aria-label="Materials">
-    <div class="sticky top-0 flex h-svh flex-col justify-center overflow-hidden" data-pin-viewport>
-      <h2 class="stage text-3xl font-bold uppercase tracking-tight">Four materials</h2>
-      <div class="mt-6 flex gap-6 overflow-x-auto px-4 pb-4 md:px-10" data-track>
+    <div class="top-0 flex flex-col justify-center overflow-hidden py-16" data-pin-viewport>
+      <div class="stage flex items-center justify-between gap-4">
+        <h2 class="text-3xl font-bold uppercase tracking-tight">Four materials</h2>
+        <a href="#after-materials" class="text-sm text-dim underline underline-offset-4 hover:text-bone" data-pin-skip>Skip to finishes</a>
+      </div>
+      <div class="stage mt-4" aria-hidden="true"><div class="h-px bg-edge"><div class="h-px origin-left scale-x-0 bg-sky" data-pin-progress></div></div></div>
+      <div class="mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-4 px-4 pb-4 sm:gap-6 md:scroll-px-10 md:px-10" data-track>
         {materials.map((m) => {
           const items = productsInMaterial(m.slug);
           const spec = specSummary(items);
           return (
-            <a href={url(`/products?material=${m.slug}`)} class="group relative h-[65svh] w-[85vw] shrink-0 overflow-hidden rounded-3xl sm:w-[60vw] lg:w-[45vw]">
+            <a href={url(`/products?material=${m.slug}`)} class="group relative h-[65svh] w-[85vw] shrink-0 snap-start overflow-hidden rounded-3xl sm:w-[60vw] lg:w-[45vw]">
               <Media src={items[0]?.images.gallery[1] ?? items[0]?.images.hero} class="absolute inset-0" imgClass="transition duration-700 group-hover:scale-105" />
               <div class="absolute inset-0 bg-gradient-to-t from-night via-night/30 to-transparent"></div>
               <div class="absolute inset-x-0 bottom-0 p-6 sm:p-10">
@@ -77,6 +81,8 @@ const silkHero = silkProducts.find((p) => p.slug === 'silk-metal-grille') ?? sil
       </div>
     </div>
   </section>
+
+  <div id="after-materials" tabindex="-1"></div>
 
   <!-- Silk Metal -->
   <section class="stage grid gap-12 py-32 lg:grid-cols-12" aria-labelledby="silk-h">
@@ -199,25 +205,39 @@ const silkHero = silkProducts.find((p) => p.slug === 'silk-metal-grille') ?? sil
 
     // Pinned horizontal scroll: the section is tall, the viewport sticks, and the track
     // translates with scroll progress. Reduced motion keeps a normal swipeable row.
+    // Pin only where it helps: a fine pointer, a wide screen, and motion allowed.
+    // Touch and narrow screens get a native swipe row with snap points.
     const pin = document.querySelector<HTMLElement>('[data-pin]')!;
     const track = pin.querySelector<HTMLElement>('[data-track]')!;
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+    const bar = pin.querySelector<HTMLElement>('[data-pin-progress]');
+    const viewport = pin.querySelector<HTMLElement>('[data-pin-viewport]')!;
+    const canPin = matchMedia('(prefers-reduced-motion: no-preference) and (pointer: fine) and (min-width: 1024px)');
     function setup() {
-      if (reduce.matches) { pin.style.height = ''; track.style.transform = ''; track.style.overflowX = 'auto'; return; }
+      if (!canPin.matches) {
+        pin.style.height = ''; track.style.transform = ''; track.style.overflowX = 'auto';
+        viewport.classList.remove('sticky', 'h-svh'); viewport.classList.add('py-16'); track.classList.add('snap-x');
+        return;
+      }
+      viewport.classList.add('sticky', 'h-svh'); viewport.classList.remove('py-16'); track.classList.remove('snap-x');
       track.style.overflowX = 'visible';
       const distance = track.scrollWidth - innerWidth;
       pin.style.height = `${innerHeight + Math.max(0, distance)}px`;
     }
-    function onScroll() {
-      if (reduce.matches) return;
+    function progressOf() {
+      if (!canPin.matches) return track.scrollLeft / Math.max(1, track.scrollWidth - track.clientWidth);
       const r = pin.getBoundingClientRect();
-      const total = pin.offsetHeight - innerHeight;
-      const progress = Math.min(1, Math.max(0, -r.top / (total || 1)));
+      return Math.min(1, Math.max(0, -r.top / ((pin.offsetHeight - innerHeight) || 1)));
+    }
+    function onScroll() {
+      const progress = progressOf();
+      if (bar) bar.style.transform = `scaleX(${progress})`;
+      if (!canPin.matches) return;
       track.style.transform = `translate3d(${-progress * (track.scrollWidth - innerWidth)}px,0,0)`;
     }
     setup(); onScroll();
     addEventListener('resize', () => { setup(); onScroll(); });
     addEventListener('scroll', () => requestAnimationFrame(onScroll), { passive: true });
-    reduce.addEventListener('change', () => { setup(); onScroll(); });
+    track.addEventListener('scroll', () => requestAnimationFrame(onScroll), { passive: true });
+    canPin.addEventListener('change', () => { setup(); onScroll(); });
   </script>
 </Layout>

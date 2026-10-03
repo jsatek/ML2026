@@ -52,7 +52,10 @@ const silkHero = silkProducts.find((p) => p.slug === 'silk-metal-grille') ?? sil
               <label class="chip cursor-pointer"><input type="checkbox" name="minNrc" value="1" class="sr-only" />NRC 1.00+</label>
             </div>
           </fieldset>
-          <a href={url('/products')} class="btn btn-primary w-full sm:w-auto" data-see-all>See all <span data-n>{products.length}</span> matches →</a>
+          <div class="sticky bottom-0 z-10 -mx-4 flex items-center gap-3 border-t border-line bg-panel/95 px-4 py-3 backdrop-blur lg:static lg:mx-0 lg:border-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
+            <a href={url('/products')} class="btn btn-primary flex-1 sm:flex-none" data-see-all>See all <span data-n>{products.length}</span> matches →</a>
+            <button type="button" class="text-sm text-green underline lg:hidden" data-reset>Reset</button>
+          </div>
         </form>
       </div>
       <div class="lg:col-span-7">
@@ -214,7 +217,7 @@ const silkHero = silkProducts.find((p) => p.slug === 'silk-metal-grille') ?? sil
     });
     cart.onChange(fillTray);
     form.addEventListener('change', update);
-    document.querySelector('[data-reset]')!.addEventListener('click', () => { form.reset(); update(); });
+    document.querySelectorAll('[data-reset]').forEach((b) => b.addEventListener('click', () => { form.reset(); update(); }));
     update();
   </script>
 </Layout>

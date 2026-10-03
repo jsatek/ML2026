@@ -48,3 +48,7 @@
 @media (prefers-reduced-motion: reduce) {
   .swatch, .swatch:hover { transition: none; transform: none; }
 }
+
+@media (pointer: coarse) {
+  .chip { min-height: 44px; padding-inline: .9rem; }
+}
