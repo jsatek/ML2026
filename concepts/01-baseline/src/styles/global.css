@@ -33,7 +33,6 @@
   .btn-outline { border: 1.5px solid currentColor; }
   .btn-outline:hover { background: color-mix(in srgb, currentColor 8%, transparent); }
   .btn-sm { padding: .5rem .9rem; font-size: .875rem; }
-  .eyebrow { font-size: .75rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--color-teal-ink); }
   .container-x { width: 100%; max-width: 80rem; margin-inline: auto; padding-inline: 1rem; }
   @media (min-width: 640px) { .container-x { padding-inline: 1.5rem; } }
   @media (min-width: 1024px) { .container-x { padding-inline: 2.5rem; } }

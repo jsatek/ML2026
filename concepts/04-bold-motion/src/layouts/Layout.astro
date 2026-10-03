@@ -58,8 +58,7 @@ const links = [...site.nav, { label: 'Samples', href: '/samples' }];
 
     <footer class="relative overflow-hidden border-t border-edge">
       <div class="stage py-20">
-        <p class="tag">Every project starts with a conversation</p>
-        <a href={`mailto:${site.contact.email}`} class="mega mt-6 block hover:text-sky">Let's talk</a>
+        <a href={`mailto:${site.contact.email}`} class="mega block hover:text-sky">Let's talk</a>
         <div class="mt-16 grid gap-6 text-sm text-dim sm:grid-cols-3">
           <address class="not-italic">{site.contact.address}</address>
           <p>{site.contact.phone}<br /><a href={`mailto:${site.contact.email}`} class="underline">{site.contact.email}</a></p>

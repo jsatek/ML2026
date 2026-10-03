@@ -10,8 +10,8 @@ const rows = [...resources].sort((a, b) => a.title.localeCompare(b.title)).map((
 ---
 <Layout title="Resources" description="Search every Material Logiq document.">
   <section class="stage pt-36">
-    <p class="tag">{resources.length} documents</p>
-    <h1 class="mega rise mt-4"><span><span>Resources</span></span></h1>
+    <h1 class="mega rise"><span><span>Resources</span></span></h1>
+    <p class="mt-4 text-lg text-dim">{resources.length} documents</p>
     <label for="r-q" class="sr-only">Search documents</label>
     <input id="r-q" type="search" autocomplete="off" placeholder="Type a product, file, or format…" class="mt-10 w-full border-0 border-b-2 border-edge bg-transparent pb-4 text-[clamp(1.75rem,5vw,4rem)] font-bold tracking-tight placeholder:text-edge focus:border-sky focus:outline-none" data-q />
     <div class="mt-6 flex flex-wrap gap-2" role="group" aria-label="Document type">

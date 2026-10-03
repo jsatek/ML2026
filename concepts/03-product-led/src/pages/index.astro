@@ -14,8 +14,7 @@ const feature = projects.find((p) => !p.placeholder)!;
   <section class="border-b border-line bg-panel">
     <div class="shell grid gap-10 py-10 lg:grid-cols-12 lg:py-14">
       <div class="lg:col-span-5">
-        <p class="label text-teal-ink">Acoustic product finder</p>
-        <h1 class="mt-3 text-4xl leading-tight sm:text-5xl">Find the right acoustic solution in four choices.</h1>
+        <h1 class="text-4xl leading-tight sm:text-5xl">Find the right acoustic solution in four choices.</h1>
         <p class="mt-4 text-lg text-muted">{products.length} systems in PET felt, Silk Metal, wood, and wood wool. Results update as you choose.</p>
         <form class="mt-8 space-y-6" data-finder>
           <fieldset><legend class="label">1 · Surface</legend>
@@ -71,25 +70,34 @@ const feature = projects.find((p) => !p.placeholder)!;
     </ul>
   </section>
 
-  <section class="shell grid gap-4 pb-6 md:grid-cols-3" aria-label="Shortcuts">
-    <a href={url('/resources')} class="card group p-6 hover:border-ink">
-      <p class="label">Documents</p>
-      <p class="mt-2 text-xl font-bold">Build a spec kit</p>
-      <p class="mt-1 text-sm text-muted">Pick products and file types from {resources.length} documents: data sheets, CSI, CAD/BIM, HPD.</p>
-    </a>
-    <a href={url('/samples')} class="card group p-6 hover:border-ink">
-      <p class="label">Samples</p>
-      <p class="mt-2 text-xl font-bold">Order up to {site.sampleLimit} samples</p>
-      <p class="mt-1 text-sm text-muted">Add finishes as you browse; they collect in your sample drawer.</p>
-    </a>
-    <a href={url(`/projects/${feature.slug}`)} class="card group flex overflow-hidden hover:border-ink">
-      <div class="flex-1 p-6"><p class="label">Custom work</p><p class="mt-2 text-xl font-bold">{site.materialize.title}</p><p class="mt-1 text-sm text-muted">See {feature.name}: custom PET felt clouds.</p></div>
-      <Media src={feature.images[0]} class="w-1/3" />
-    </a>
+  <section class="border-t border-line" aria-label="Documents and samples">
+    <div class="shell grid gap-12 py-12 md:grid-cols-2">
+      <div>
+        <h2 class="text-2xl">Build a spec kit</h2>
+        <p class="mt-1 text-muted">Data sheets, CSI specs, CAD/BIM and HPDs: {resources.length} documents, searchable by product.</p>
+        <form action={url('/resources')} method="get" role="search" class="mt-5 flex gap-2">
+          <label for="home-doc-q" class="sr-only">Search documents</label>
+          <input id="home-doc-q" name="q" type="search" placeholder="Product or document, e.g. COFFA CAD" class="field" />
+          <button class="btn btn-primary shrink-0">Search</button>
+        </form>
+      </div>
+      <div>
+        <h2 class="text-2xl">Your sample tray</h2>
+        <p class="mt-1 text-muted"><span data-cart-count>0</span> of {site.sampleLimit} chosen. Add finishes from any product as you browse.</p>
+        <ol class="mt-5 grid grid-cols-8 gap-2" data-tray aria-label="Sample slots">
+          {Array.from({ length: site.sampleLimit }, () => <li class="aspect-square rounded-md border border-dashed border-line"><span class="sr-only">Empty</span></li>)}
+        </ol>
+        <a href={url('/samples')} class="mt-4 inline-block font-semibold text-green underline underline-offset-4">Review and send request</a>
+      </div>
+    </div>
+    <p class="shell border-t border-line py-6 text-muted">
+      Need something outside the standard line? <a href={url(`/projects/${feature.slug}`)} class="font-semibold text-green underline underline-offset-4">See how {feature.name} was customized</a> through {site.materialize.title}.
+    </p>
   </section>
 
   <script type="application/json" id="records" set:html={JSON.stringify(records)}></script>
   <script>
+    import * as cart from '@ml/content/cart';
     import { matches, empty, toParams } from '../lib/explorer';
     import type { Rec } from '../lib/records';
     const recs: Rec[] = JSON.parse(document.getElementById('records')!.textContent!);
@@ -116,6 +124,16 @@ const feature = projects.find((p) => !p.placeholder)!;
       const p = toParams(s);
       seeAll.href = `${base}${p.size ? `?${p}` : ''}`;
     }
+    // Sample tray: one slot per cart item, from the shared cart.
+    const tray = [...document.querySelectorAll<HTMLElement>('[data-tray] > li')];
+    const names = new Map(recs.map((r) => [r.slug, r.name]));
+    const fillTray = (items: { product: string; finish: string }[]) => tray.forEach((slot, i) => {
+      const it = items[i];
+      slot.className = it ? 'aspect-square rounded-md bg-green' : 'aspect-square rounded-md border border-dashed border-line';
+      slot.title = it ? `${names.get(it.product) ?? it.product} · ${it.finish}` : '';
+      slot.innerHTML = `<span class="sr-only">${it ? slot.title.replace(/</g, '&lt;') : 'Empty'}</span>`;
+    });
+    cart.onChange(fillTray);
     form.addEventListener('change', update);
     document.querySelector('[data-reset]')!.addEventListener('click', () => { form.reset(); update(); });
     update();
