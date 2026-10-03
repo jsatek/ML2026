@@ -15,6 +15,7 @@ into the repo).
 | `resources.json` | `types[]` and `resources[]` (277 real documents) |
 | `index.js` | Named exports plus lookup helpers (`getProduct`, `resourcesForProduct`, ...) and `specSummary(products)` / `formatNrc(summary)` for NRC range, fire ratings and finishes of a product set |
 | `cart.js` | Browser sample cart (`add`, `remove`, `onChange`) persisted in localStorage |
+| `finish-wall.js` | `bindFinishWall()`: shared behavior for a finish wall built from `finishWall()` (pick a swatch, see which products offer it, add a sample). Concepts supply markup and styles. |
 
 ### Product shape
 `slug, name (e.g. "COFFA"), fullName, material, category (primary type), types[], tagline,

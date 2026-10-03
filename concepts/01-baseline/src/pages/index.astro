@@ -1,9 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Placeholder from '../components/Placeholder.astro';
-import ProductCard from '../components/ProductCard.astro';
+import SampleButton from '../components/SampleButton.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import { site, categories, materials, products, projects, productsInCategory, productsInMaterial, resources, getMaterial, specSummary, formatNrc } from '@ml/content';
+import { site, categories, materials, products, projects, productsInCategory, productsInMaterial, resources, getMaterial, specSummary, formatNrc, finishWall } from '@ml/content';
 import { url } from '../lib/utils';
 
 const featured = products.filter((p) => p.featured).slice(0, 4);
@@ -11,6 +11,9 @@ const featuredProjects = [...projects.filter((p) => p.featured), ...projects.fil
 const heroBands = featured.slice(0, 3).map((p, i) => ({ src: p.images.hero, color: ['#8BD3DD', '#2B8F92', '#00574F'][i] }));
 const groups = [...new Set(categories.map((c) => c.group))];
 const all = specSummary(products);
+const wall = finishWall();
+const wallTotal = wall.reduce((n, w) => n + w.count, 0);
+const wallProducts = Object.fromEntries(products.map((p) => [p.slug, { name: p.name, href: url(`/products/${p.slug}`) }]));
 const silk = getMaterial('silk-metal')!;
 const silkProducts = productsInMaterial(silk.slug);
 const silkSpec = specSummary(silkProducts);
@@ -147,12 +150,63 @@ const [taglineStart, lastWord] = [site.tagline.split(' ').slice(0, -1).join(' ')
     </div>
   </section>
 
-  <!-- Featured products -->
-  <section class="py-20" aria-labelledby="featured-heading">
+  <!-- Finish wall -->
+  <section class="py-20" aria-labelledby="wall-heading" data-finish-wall>
     <div class="container-x">
-      <h2 id="featured-heading" class="text-3xl sm:text-4xl">Featured products</h2>
-      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {featured.map((p, i) => <ProductCard product={p} index={i} />)}
+      <h2 id="wall-heading" class="text-3xl sm:text-4xl">Every finish, by material</h2>
+      <p class="mt-2 max-w-2xl text-muted">{wallTotal} finishes across {wall.length} materials. Pick one to see which products come in it and add a sample.</p>
+      <script type="application/json" data-wall-products set:html={JSON.stringify(wallProducts)}></script>
+      <div class="mt-10 grid gap-10 lg:grid-cols-12">
+        <div class="space-y-10 lg:col-span-8">
+          {wall.map((w) => (
+            <div>
+              <h3 class="flex items-baseline justify-between gap-4 border-b border-line pb-2 text-xl">
+                {w.material.name}
+                <a href={url(`/products?material=${w.material.slug}`)} class="text-sm font-semibold text-green hover:ml-underline">{w.count} finishes</a>
+              </h3>
+              {w.groups.map((g) => (
+                <div class="mt-4">
+                  <p class="text-sm text-muted">{g.name}</p>
+                  <ul class="mt-2 grid grid-cols-[repeat(auto-fill,minmax(2.25rem,1fr))] gap-1.5">
+                    {g.finishes.map((f) => (
+                      <li>
+                        <a
+                          href={url(`/products/${f.products[0]}`)}
+                          class="swatch block aspect-square rounded-md ring-1 ring-black/10 ring-inset"
+                          style={`background:${f.hex}`}
+                          title={f.name}
+                          data-swatch data-name={f.name} data-hex={f.hex} data-image={f.image ?? ''} data-group={g.name} data-material={w.material.name} data-products={f.products.join(' ')}
+                        ><span class="sr-only">{f.name}, {w.material.name}</span></a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+        <div class="lg:col-span-4">
+          <div data-wall-panel hidden aria-live="polite" class="fixed inset-x-0 bottom-0 z-40 max-h-[70svh] overflow-y-auto rounded-t-3xl bg-white p-6 shadow-[0_-8px_30px_rgb(0_0_0/0.15)] lg:sticky lg:top-24 lg:z-auto lg:max-h-none lg:rounded-2xl lg:border lg:border-line lg:shadow-none">
+            <div class="flex items-start gap-4">
+              <div data-wall-chip class="size-20 shrink-0 rounded-xl bg-cover bg-center ring-1 ring-black/10 ring-inset"></div>
+              <div class="min-w-0 flex-1">
+                <p data-wall-name class="text-xl font-bold"></p>
+                <p data-wall-meta class="text-sm text-muted"></p>
+                <p data-wall-count class="mt-1 text-sm font-semibold text-green"></p>
+              </div>
+              <button type="button" data-wall-close class="-mr-2 -mt-2 rounded-full p-2 text-muted hover:bg-paper hover:text-ink" aria-label="Close finish details">
+                <svg class="size-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" /></svg>
+              </button>
+            </div>
+            <ul data-wall-rows class="mt-5 divide-y divide-line border-t border-line"></ul>
+            <template data-wall-row>
+              <li class="flex items-center justify-between gap-3 py-3">
+                <a data-row-link data-row-name class="font-semibold hover:ml-underline"></a>
+                <SampleButton product="" name="" finish="" class="btn btn-outline btn-sm shrink-0 whitespace-nowrap text-green" />
+              </li>
+            </template>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -190,4 +244,8 @@ const [taglineStart, lastWord] = [site.tagline.split(' ').slice(0, -1).join(' ')
     </div>
   </section>
 
+  <script>
+    import { bindFinishWall } from '@ml/content/finish-wall';
+    bindFinishWall();
+  </script>
 </Layout>

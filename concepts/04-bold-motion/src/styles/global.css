@@ -35,6 +35,9 @@
   .field { width: 100%; background: var(--color-night-2); border: 1px solid var(--color-edge); border-radius: .75rem; padding: .8rem 1rem; color: var(--color-bone); }
   .field:focus { outline: 2px solid var(--ml-sky); outline-offset: -1px; }
   .field:user-invalid { border-color: var(--ml-orange); }
+  .swatch { transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+  .swatch:hover { transform: scaleY(1.12); }
+  .swatch[aria-current] { outline: 2px solid var(--color-bone); outline-offset: 3px; }
   .underline-o { text-decoration: underline; text-decoration-color: var(--ml-orange); text-decoration-thickness: .08em; text-underline-offset: .12em; }
 }
 
@@ -62,5 +65,6 @@
 @media (prefers-reduced-motion: reduce) {
   .motion .reveal, .motion .rise > span > span, .motion .band, .motion .drift { opacity: 1 !important; transform: none !important; translate: none !important; animation: none !important; transition: none !important; }
   .marquee { animation: none; }
+  .swatch, .swatch:hover { transition: none; transform: none; }
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
 }

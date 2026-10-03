@@ -39,7 +39,14 @@
   .chip { display: inline-flex; align-items: center; gap: .4rem; border: 1px solid var(--color-line); border-radius: 999px; padding: .4rem .85rem; font-size: .875rem; font-weight: 500; background: #fff; }
   .chip[aria-pressed="true"], .chip:has(input:checked) { background: var(--color-green); border-color: var(--color-green); color: #fff; }
   .field { width: 100%; border: 1px solid #c9c6be; border-radius: .6rem; padding: .7rem .9rem; background: #fff; }
+  .swatch { transition: transform .15s ease-out; }
+  .swatch:hover { transform: scale(1.08); }
+  .swatch[aria-current] { outline: 2px solid var(--color-ink); outline-offset: 2px; }
   .field::placeholder { color: var(--color-muted); }
   .field:focus { outline: 2px solid var(--ml-teal); outline-offset: 0; border-color: var(--ml-teal); }
   .field:user-invalid { border-color: #b3261e; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .swatch, .swatch:hover { transition: none; transform: none; }
 }

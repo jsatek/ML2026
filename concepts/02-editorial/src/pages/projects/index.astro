@@ -24,7 +24,7 @@ const usedSectors = sectors.filter((s) => projects.some((p) => p.sector === s));
     {ordered.map((p, i) => (
       <li data-item data-sector={p.sector} class="group grid items-center gap-8 md:grid-cols-12">
         <a href={url(`/projects/${p.slug}`)} class:list={['block md:col-span-7', i % 2 && 'md:order-2']} tabindex="-1" aria-hidden="true">
-          <Media src={p.images[0]} class="aspect-[4/3]" eager={i < 2} />
+          <Media src={p.images[0]} color={getProduct(p.products[0] ?? '')?.finishes[0]?.hex} class="aspect-[4/3]" eager={i < 2} />
         </a>
         <div class:list={['md:col-span-5', i % 2 && 'md:order-1']}>
           <h2 class="headline"><a href={url(`/projects/${p.slug}`)} class="group-hover:underline group-hover:decoration-orange">{p.name}</a></h2>

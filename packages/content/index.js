@@ -44,6 +44,29 @@ export function specSummary(list) {
   };
 }
 
+/**
+ * Finishes grouped by material, then by finish group, each with the slugs of
+ * the products that offer it. Feeds the finish wall (see finish-wall.js).
+ */
+export function finishWall() {
+  return materials.map((material) => {
+    const byName = new Map();
+    for (const p of productsInMaterial(material.slug)) {
+      for (const f of p.finishes) {
+        const entry = byName.get(f.name) ?? { ...f, products: [] };
+        entry.products.push(p.slug);
+        byName.set(f.name, entry);
+      }
+    }
+    const groups = new Map();
+    for (const f of byName.values()) {
+      const g = f.group ?? 'Finishes';
+      groups.set(g, [...(groups.get(g) ?? []), f]);
+    }
+    return { material, count: byName.size, groups: [...groups].map(([name, finishes]) => ({ name, finishes })) };
+  });
+}
+
 /** "0.70–1.15", "0.80", or null when no product in the set has an NRC value. */
 export function formatNrc(summary) {
   if (!summary.nrc) return null;
