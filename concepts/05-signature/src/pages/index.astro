@@ -121,7 +121,7 @@ const docTypes = resourceTypes.map((t) => ({ ...t, n: resources.filter((r) => r.
             <div>
               <div class="flex items-baseline justify-between gap-4 border-b border-ink pb-2">
                 <h3 class="text-xl">{w.material.name}</h3>
-                <a href={url(`/products?material=${w.material.slug}`)} class="num text-sm text-muted hover:text-ink">{w.count} finishes</a>
+                <a href={url(`/products?material=${w.material.slug}`)} class="num inline-flex min-h-6 items-center text-sm text-muted hover:text-ink">{w.count} finishes</a>
               </div>
               {w.groups.map((g) => (
                 <div class="mt-4">

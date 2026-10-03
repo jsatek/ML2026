@@ -14,7 +14,7 @@ colors:
 typography:
   mega:
     fontFamily: "Indivisible, Inter Tight, Inter, system-ui, sans-serif"
-    fontSize: "clamp(3.25rem, 11vw, 12rem)"
+    fontSize: "clamp(2.5rem, 10.5vw, 12rem)"
     fontWeight: 700
     lineHeight: 0.92
     letterSpacing: "-0.04em"
@@ -88,7 +88,7 @@ The palette is nearly black with warm bone-white type and the brand colors used 
 - Uppercase mega type up to 12rem, tracked tight (-0.04em) and set at 0.92.
 - The logo's three diagonal bands as the hero's structure and motion.
 - Pill controls with thin `edge` borders; large rounded panels (1.5rem).
-- Scroll-driven reveals, staggered entrances, a marquee, and stacked cards, all off under reduced motion.
+- Two authored motion moments on home (the logo bands and the pinned material row, which pins only for a fine pointer on wide screens), plus reveals on inner pages; all off under reduced motion.
 
 ## Colors
 
@@ -122,7 +122,7 @@ A night stage where the brand colors act as light sources.
 **Character:** Announcements are uppercase, enormous, and tightly packed, like a stage banner. Information returns to quiet sentence case so specs stay easy to read.
 
 ### Hierarchy
-- **Mega** (700, clamp(3.25rem, 11vw, 12rem), 0.92, -0.04em, uppercase): hero headline and footer "Let's talk".
+- **Mega** (700, clamp(2.5rem, 10.5vw, 12rem), 0.92, -0.04em, uppercase): hero headline and footer "Let's talk".
 - **Big** (700, clamp(2.25rem, 6vw, 6rem), 0.92, uppercase): section openers and product names.
 - **Title** (700, 1.5rem, 1.1): card and chapter titles.
 - **Body** (400, 1rem, 1.6): descriptions and specs, in bone or dim.
@@ -167,7 +167,6 @@ Rounded and soft on a hard, dark field. Pills (999px) for every button and contr
 - **Reveal:** fade and 40px rise over 0.9s, eased `cubic-bezier(.2,.7,.2,1)`, staggered 90ms per item.
 - **Rise:** headline lines slide up from a clipped mask over 1s, staggered 120ms after a 250ms delay.
 - **Bands:** the three logo bands slide in over 1.2s, staggered 150ms, then drift apart with scroll (scroll-timeline where supported).
-- **Marquee:** 40s linear loop, pauses on hover.
 - **Page transitions:** same-origin view transitions where supported.
 - **Gating:** motion classes only apply once JS adds `.motion` to `<html>`; `prefers-reduced-motion` disables every animation and transition and shows the final state.
 

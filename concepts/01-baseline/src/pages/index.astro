@@ -162,7 +162,7 @@ const [taglineStart, lastWord] = [site.tagline.split(' ').slice(0, -1).join(' ')
             <div>
               <h3 class="flex items-baseline justify-between gap-4 border-b border-line pb-2 text-xl">
                 {w.material.name}
-                <a href={url(`/products?material=${w.material.slug}`)} class="text-sm font-semibold text-green hover:ml-underline">{w.count} finishes</a>
+                <a href={url(`/products?material=${w.material.slug}`)} class="inline-flex min-h-6 items-center text-sm font-semibold text-green hover:ml-underline">{w.count} finishes</a>
               </h3>
               {w.groups.map((g) => (
                 <div class="mt-4">

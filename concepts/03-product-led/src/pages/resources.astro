@@ -49,7 +49,7 @@ const rows = resources.map((r) => ({
           <tbody>
             {rows.map((r) => (
               <tr class="border-t border-line hover:bg-panel/60" data-row data-products={r.products.join('|')} data-type={r.type} data-title={r.title.toLowerCase()}>
-                <td class="p-3"><input type="checkbox" class="size-4 accent-(--ml-deep-green)" data-pick value={r.href} data-title={r.title} aria-label={`Select ${r.title}`} /></td>
+                <td class="p-0"><label class="grid size-11 cursor-pointer place-items-center"><input type="checkbox" class="size-4 accent-(--ml-deep-green)" data-pick value={r.href} data-title={r.title} aria-label={`Select ${r.title}`} /></label></td>
                 <td class="p-3"><a href={r.href} target="_blank" rel="noopener" class="font-medium hover:underline">{r.title}</a></td>
                 <td class="hidden p-3 text-muted sm:table-cell">{r.typeName}</td>
                 <td class="hidden p-3 text-muted md:table-cell">{r.applies}</td>

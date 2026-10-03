@@ -226,7 +226,7 @@
     "overview": "A beautifully set specimen book of materials. Each product is presented the way a type foundry presents a typeface: named in very large type, measured precisely, and shown in full as large swatch plates and full-bleed photographs. The catalog is an index, not a wall of cards; documents are an A–Z appendix.\n\nWarm paper, black ink, and thin black rules do almost all the work. There are no rounded corners, no shadows on surfaces, and no decorative color. Color comes from the materials themselves (photos and finish swatches) and from one orange accent used as a single underline. The pace is unhurried and confident, but the facts (NRC, fire class, documents) are always set alongside the imagery so a returning specifier can scan them.",
     "keyCharacteristics": [
       "Warm specimen paper, black ink, 1px black hairline rules.",
-      "Display type up to 10rem, tightly tracked and set solid (0.95 line height).",
+      "Display type up to 6rem, tightly tracked and set solid (0.95 line height).",
       "Square corners everywhere; buttons are outlined boxes that invert on hover.",
       "Orange appears only as the single underline (active nav, links, emphasis).",
       "Text indexes and tables instead of card grids."

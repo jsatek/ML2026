@@ -14,7 +14,7 @@ colors:
 typography:
   display:
     fontFamily: "Indivisible, Inter Tight, Inter, system-ui, sans-serif"
-    fontSize: "clamp(3rem, 10vw, 10rem)"
+    fontSize: "clamp(3rem, 8vw, 6rem)"
     fontWeight: 700
     lineHeight: 0.95
     letterSpacing: "-0.035em"
@@ -83,7 +83,7 @@ Warm paper, black ink, and thin black rules do almost all the work. There are no
 
 **Key Characteristics:**
 - Warm specimen paper, black ink, 1px black hairline rules.
-- Display type up to 10rem, tightly tracked and set solid (0.95 line height).
+- Display type up to 6rem, tightly tracked and set solid (0.95 line height).
 - Square corners everywhere; buttons are outlined boxes that invert on hover.
 - Orange appears only as the single underline (active nav, links, emphasis).
 - Text indexes and tables instead of card grids.
@@ -121,7 +121,7 @@ Ink on warm paper; the materials supply the color, and orange marks the one thin
 **Character:** One grotesque used at extreme contrast: enormous, tightly tracked bold headlines against calm, comfortably leaded body text. The scale jump is the design.
 
 ### Hierarchy
-- **Display** (700, clamp(3rem, 10vw, 10rem), 0.95, -0.035em): product names and the home cover headline.
+- **Display** (700, clamp(3rem, 8vw, 6rem), 0.95, -0.035em): product names and the home cover headline.
 - **Headline** (700, clamp(2.25rem, 6vw, 5.5rem), 0.95): section openers and the footer "Let's talk."
 - **Lede** (400, clamp(1.25rem, 2.2vw, 1.75rem), 1.35, -0.01em): the opening paragraph of product and project pages.
 - **Body** (400, 1rem, 1.6): long-form text; keep lines to about 65–75 characters.

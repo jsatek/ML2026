@@ -179,11 +179,6 @@
         "name": "ease-out-rise",
         "value": "cubic-bezier(.2,.8,.2,1)",
         "purpose": "Headline rise (1s) and band entrance (1.2s)."
-      },
-      {
-        "name": "marquee",
-        "value": "40s linear infinite",
-        "purpose": "Material marquee; paused on hover and under reduced motion."
       }
     ],
     "breakpoints": [
@@ -231,7 +226,7 @@
       "Uppercase mega type up to 12rem, tracked tight (-0.04em) and set at 0.92.",
       "The logo's three diagonal bands as the hero's structure and motion.",
       "Pill controls with thin `edge` borders; large rounded panels (1.5rem).",
-      "Scroll-driven reveals, staggered entrances, a marquee, and stacked cards, all off under reduced motion."
+      "Two authored motion moments on home (the logo bands and the pinned material row, which pins only for a fine pointer on wide screens), plus reveals on inner pages; all off under reduced motion."
     ],
     "rules": [
       {

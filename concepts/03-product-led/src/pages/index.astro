@@ -54,14 +54,14 @@ const silkHero = silkProducts.find((p) => p.slug === 'silk-metal-grille') ?? sil
           </fieldset>
           <div class="sticky bottom-0 z-10 -mx-4 flex items-center gap-3 border-t border-line bg-panel/95 px-4 py-3 backdrop-blur lg:static lg:mx-0 lg:border-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
             <a href={url('/products')} class="btn btn-primary flex-1 sm:flex-none" data-see-all>See all <span data-n>{products.length}</span> matches →</a>
-            <button type="button" class="text-sm text-green underline lg:hidden" data-reset>Reset</button>
+            <button type="button" class="inline-flex min-h-11 items-center px-1 text-sm text-green underline lg:hidden" data-reset>Reset</button>
           </div>
         </form>
       </div>
       <div class="lg:col-span-7">
         <div class="flex items-center justify-between">
           <p class="font-semibold" aria-live="polite"><span data-n>{products.length}</span> matching products</p>
-          <button type="button" class="text-sm text-green underline" data-reset>Reset</button>
+          <button type="button" class="inline-flex min-h-6 items-center text-sm text-green underline" data-reset>Reset</button>
         </div>
         <div class="mt-3 grid gap-4 sm:grid-cols-2" data-results>
           {ordered.map((p, i) => <div data-slot={p.slug} hidden={i >= 4}><ProductCard product={p} eager={i < 4} /></div>)}

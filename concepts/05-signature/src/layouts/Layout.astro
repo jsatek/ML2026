@@ -38,7 +38,7 @@ const catalog = Object.fromEntries(products.map((p) => [p.slug, {
         </a>
         <nav aria-label="Main" class="ml-auto hidden items-center gap-7 md:flex">
           {nav.map((n) => (
-            <a href={url(n.href)} class:list={['text-[0.9375rem] hover:text-green', isActive(n.href) && 'underline decoration-teal decoration-2 underline-offset-[1.35rem]']} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a>
+            <a href={url(n.href)} class:list={['text-base hover:text-green', isActive(n.href) && 'underline decoration-teal decoration-2 underline-offset-[1.35rem]']} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a>
           ))}
         </nav>
         <a href={url('/samples')} class="btn btn-primary ml-auto !min-h-10 !px-4 !py-2 md:ml-0" data-drawer-open aria-haspopup="dialog" aria-controls="sample-drawer">
